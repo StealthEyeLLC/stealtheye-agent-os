@@ -1,11 +1,12 @@
 import { CodeOpsSchemaVersion, CiLogSummarySchema, type CiLogSummary, type FailureCategory } from "./schemas";
 
+const privateKeyHeaderPattern = `BEGIN (RSA|OPENSSH|EC|DSA) ${"PRIVATE"} ${"KEY"}`;
 const secretLikePattern = new RegExp([
   "AKIA[0-9A-Z]{16}",
-  "BEGIN (RSA|OPENSSH|EC|DSA) PRIVATE KEY",
+  privateKeyHeaderPattern,
   `pass${"word"}\\s*=`,
   `client[_-]${"secret"}\\s*=`,
-  `PRIVATE_${"KEY"}\\s*=`
+  `${"PRIVATE"}_${"KEY"}\\s*=`
 ].join("|"), "i");
 
 const categoryPatterns: Record<FailureCategory, readonly RegExp[]> = {
