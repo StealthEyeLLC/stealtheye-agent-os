@@ -2,16 +2,16 @@ import { type MissionLanguage, MissionOsSchemaVersion, type MissionPlanStep } fr
 
 export const PUBLIC_MISSION_OS_FIXTURE_NOTICE = "Public-safe Mission OS fixtures only. No real secrets, credentials, production endpoints, customer data, OAuth clients, cloud account identifiers, production tokens, money movement, or sensitive runbooks.";
 
-const baseAuthority = {
-  allowed_effects: ["read_repo", "write_branch_files", "commit_branch", "open_pr", "read_ci", "write_receipt", "generate_final_report"] as const,
-  denied_effects: [] as const,
-  forbidden_effects: ["raw_secret_access", "money_movement", "production_deploy", "production_data_mutation", "force_push", "history_rewrite", "weaken_ci", "delete_test_to_pass"] as const,
-  hard_stops: ["raw_secrets_credentials", "money_billing_subscriptions", "production_deploy_or_data_mutation", "protected_branch_mutation", "force_push_history_rewrite", "weaken_ci_tests_security", "platform_required_confirmation"] as const,
+const baseAuthority: MissionLanguage["mission"]["authority"] = {
+  allowed_effects: ["read_repo", "write_branch_files", "commit_branch", "open_pr", "read_ci", "write_receipt", "generate_final_report"],
+  denied_effects: [],
+  forbidden_effects: ["raw_secret_access", "money_movement", "production_deploy", "production_data_mutation", "force_push", "history_rewrite", "weaken_ci", "delete_test_to_pass"],
+  hard_stops: ["raw_secrets_credentials", "money_billing_subscriptions", "production_deploy_or_data_mutation", "protected_branch_mutation", "force_push_history_rewrite", "weaken_ci_tests_security", "platform_required_confirmation"],
   tool_manifest_constraints: {
     allowed_agent_ids: ["agent:mission-os-fixture"],
     allowed_manifest_ids: ["tool-manifest:codeops-fixture"],
     pinned_digests: [],
-    required_trust_status: "trusted_and_approved" as const
+    required_trust_status: "trusted_and_approved"
   },
   usage_constraints: { max_uses: 100, max_attempts: 100, max_commits: 20, max_cost_cents: 0, uses: 0, attempts: 0, commits: 0, cost_cents: 0 },
   evidence_requirements: ["diff", "tests", "ci_status"],
@@ -108,7 +108,7 @@ export const hardStopMoneyMovementMission: MissionLanguage = {
   }
 };
 
-export const invalidTargetConstraintsMission = {
+export const invalidTargetConstraintsMission: MissionLanguage = {
   ...normalRepoFeatureMission,
   mission: {
     ...normalRepoFeatureMission.mission,
@@ -118,7 +118,7 @@ export const invalidTargetConstraintsMission = {
   }
 };
 
-export const missingVerificationPlanMission = {
+export const missingVerificationPlanMission: MissionLanguage = {
   ...normalRepoFeatureMission,
   mission: {
     ...normalRepoFeatureMission.mission,
