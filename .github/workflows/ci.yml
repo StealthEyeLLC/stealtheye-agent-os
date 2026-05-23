@@ -19,7 +19,7 @@ jobs:
 
       - name: Report CI scope
         run: |
-          echo "Build 3 CI: scaffold checks plus real TypeScript package install, typecheck, and tests."
+          echo "Build 4 CI: scaffold checks plus real TypeScript package install, typecheck, and tests."
           echo "This workflow does not claim production security scanning, full supply-chain attestation, or deployment readiness yet."
 
       - name: Set up pnpm
@@ -75,10 +75,23 @@ jobs:
             packages/guard/src/receipts.ts
             packages/guard/src/fixtures.ts
             packages/guard/test/guard.test.ts
+            packages/mission-os/package.json
+            packages/mission-os/tsconfig.json
+            packages/mission-os/src/index.ts
+            packages/mission-os/src/schemas.ts
+            packages/mission-os/src/mission-language.ts
+            packages/mission-os/src/mission.ts
+            packages/mission-os/src/planning.ts
+            packages/mission-os/src/authority-envelope.ts
+            packages/mission-os/src/status.ts
+            packages/mission-os/src/receipts.ts
+            packages/mission-os/src/fixtures.ts
+            packages/mission-os/test/mission-os.test.ts
             docs/ARCHITECTURE.md
             docs/AUTONOMY_MODEL.md
             docs/CUSTOM_APPS.md
             docs/AGENT_REGISTRY.md
+            docs/MISSION_OS.md
             docs/SECURITY.md
             docs/WORKFLOWS.md
             docs/EVALS.md
@@ -99,6 +112,7 @@ jobs:
             docs/DECISIONS/0003-high-autonomy-mission-scoped-authority.md
             docs/DECISIONS/0004-agent-registry-signed-manifests.md
             docs/DECISIONS/0005-guard-capability-tokens.md
+            docs/DECISIONS/0006-mission-os-language.md
             .github/PULL_REQUEST_TEMPLATE.md
             .github/ISSUE_TEMPLATE/feature_request.md
             .github/ISSUE_TEMPLATE/bug_report.md
