@@ -1,8 +1,5 @@
-import { GuardSchemaVersion, type CapabilityToken, type RequestedAction, type TargetConstraintsSchema } from "@stealtheye/guard";
-import { z } from "zod";
+import { GuardSchemaVersion, type CapabilityToken, type RequestedAction } from "@stealtheye/guard";
 import { AuthorityEnvelopeSchema, MissionOsSchemaVersion, type AuthorityEnvelope, type Mission, type MissionPlanStep } from "./schemas";
-
-type TargetConstraints = z.infer<typeof TargetConstraintsSchema>;
 
 export interface AuthorityEnvelopeInput {
   mission: Mission;
@@ -12,7 +9,7 @@ export interface AuthorityEnvelopeInput {
   authority_origin?: AuthorityEnvelope["authority_origin"];
   issued_at?: string;
   valid_until?: string;
-  target_constraints?: TargetConstraints;
+  target_constraints?: AuthorityEnvelope["target_constraints"];
 }
 
 export function createAuthorityEnvelope(input: AuthorityEnvelopeInput): AuthorityEnvelope {
