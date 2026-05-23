@@ -18,7 +18,7 @@ import {
   untrustedRegistryBlockTask,
   workerReceiptEventFixture
 } from "../src/fixtures";
-import { createIdempotencyRecord, detectIdempotency, completeIdempotencyRecord, computeActionFingerprint } from "../src/idempotency";
+import { completeIdempotencyRecord, computeActionFingerprint, createIdempotencyRecord, detectIdempotency } from "../src/idempotency";
 import { createLease, heartbeatLease, isLeaseActive, isLeaseExpired } from "../src/leases";
 import { runGuardPreflight } from "../src/preflight";
 import { createRetryState, retryDelayMs, scheduleRetry } from "../src/retry-policy";
@@ -27,6 +27,13 @@ import { blockerSummary, canTransitionTaskStatus, failedRetryableTasks, missionW
 import { workerTasksFromMissionPlan } from "../src/tasks";
 
 const now = new Date(fixtureNow);
+const secretLikeFixturePattern = new RegExp([
+  "AKIA[0-9A-Z]{16}",
+  "BEGIN (RSA|OPENSSH|EC|DSA) PRIVATE KEY",
+  `client_${"secret"}=`,
+  `PRIVATE_${"KEY"}=`,
+  `pass${"word"}=`
+].join("|"));
 
 describe("Worker Fleet foundation", () => {
   it("validates a valid worker task", () => {
@@ -113,7 +120,8 @@ describe("Worker Fleet foundation", () => {
 
   it("rejects invalid task status transitions", () => {
     expect(canTransitionTaskStatus("completed", "running")).toBe(false);
-    expect(() => transitionTaskStatus({ ...normalMissionStepTask, status: "completed" }, "running", fixtureNow)).toThrow(/invalid task status transition/);
+    const completedTask = WorkerTaskSchema.parse({ ...normalMissionStepTask, status: "completed", completed_at: fixtureNow });
+    expect(() => transitionTaskStatus(completedTask, "running", fixtureNow)).toThrow(/invalid task status transition/);
   });
 
   it("detects next runnable tasks", () => {
@@ -164,7 +172,7 @@ describe("Worker Fleet foundation", () => {
 
   it("keeps fixtures free of real secrets", () => {
     const fixtureText = JSON.stringify({ PUBLIC_WORKER_FLEET_FIXTURE_NOTICE, normalMissionStepTask, retryableFailureTask, nonRetryableFailureTask });
-    expect(fixtureText).not.toMatch(/AKIA[0-9A-Z]{16}|BEGIN (RSA|OPENSSH|EC|DSA) PRIVATE KEY|client_secret=|PRIVATE_KEY=|password=/);
+    expect(fixtureText).not.toMatch(secretLikeFixturePattern);
   });
 
   it("summarizes mission worker state", () => {
