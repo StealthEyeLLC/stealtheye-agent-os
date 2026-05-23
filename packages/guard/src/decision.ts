@@ -1,12 +1,11 @@
-import type { RegistryDecision } from "@stealtheye/agent-registry";
 import { matchCapabilityTokenToAction } from "./capability-token";
 import { evaluateHardStops, hardStopOutcome, hardStopReasonCode } from "./hard-stops";
-import { evaluateRegistryTrustRequirement, missingEffectCheck, summarizeRegistryTrust } from "./policy";
-import { GuardDecisionSchema, GuardSchemaVersion, type CapabilityToken, type GuardDecision, type PolicyCheck, type RegistryTrustSummary, type RequestedAction } from "./schemas";
+import { evaluateRegistryTrustRequirement, missingEffectCheck, summarizeRegistryTrust, type RegistryTrustInput } from "./policy";
+import { GuardDecisionSchema, GuardSchemaVersion, type CapabilityToken, type GuardDecision, type PolicyCheck, type RequestedAction } from "./schemas";
 
 export interface EvaluateGuardOptions {
   now?: Date;
-  registryTrust?: RegistryTrustSummary | (Partial<RegistryDecision> & { trust_status?: RegistryTrustSummary["trust_status"]; revoked?: boolean });
+  registryTrust?: RegistryTrustInput;
   decisionId?: string;
 }
 
