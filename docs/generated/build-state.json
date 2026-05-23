@@ -1,0 +1,10 @@
+{
+  "schema_version": "stealtheye-build-state.v1",
+  "build": 8,
+  "title": "BrowserOps Foundations + Minimal Build Automation Engine",
+  "branch": "agent/browserops-foundation",
+  "generated_artifacts_current": true,
+  "safety_scanner_scope": ["docs/generated", "packages/browserops/src/fixtures.ts"],
+  "next_target": "Build 9 — Receipts + Replay",
+  "generated_at": "2026-01-01T00:00:00.000Z"
+}

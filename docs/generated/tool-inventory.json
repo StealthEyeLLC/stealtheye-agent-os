@@ -1,0 +1,10 @@
+{
+  "schema_version": "stealtheye-tool-inventory.v1",
+  "build": 8,
+  "tools": [
+    { "name": "BrowserOps schemas", "package": "@stealtheye/browserops", "mode": "fixture_only", "live_external_effects": false },
+    { "name": "BrowserOps action policy", "package": "@stealtheye/browserops", "mode": "deterministic_helper", "live_external_effects": false },
+    { "name": "BrowserOps Guard preflight adapter", "package": "@stealtheye/browserops", "mode": "deterministic_helper", "live_external_effects": false },
+    { "name": "Build automation engine", "path": "scripts/stealtheye-build.mjs", "mode": "local_file_generator", "live_external_effects": false }
+  ]
+}

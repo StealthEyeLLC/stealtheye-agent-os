@@ -1,0 +1,9 @@
+{
+  "schema_version": "stealtheye-project-memory.v1",
+  "current_build": 8,
+  "current_title": "BrowserOps Foundations + Minimal Build Automation Engine",
+  "current_branch": "agent/browserops-foundation",
+  "foundation_packages": ["@stealtheye/agent-registry", "@stealtheye/guard", "@stealtheye/mission-os", "@stealtheye/app-host", "@stealtheye/worker-fleet", "@stealtheye/codeops", "@stealtheye/browserops"],
+  "build_8_summary": "BrowserOps contracts and deterministic build-state generation were added without live browser runtime capability.",
+  "next_target": "Build 9 — Receipts + Replay"
+}

@@ -1,0 +1,10 @@
+{
+  "schema_version": "stealtheye-known-gaps.v1",
+  "build": 8,
+  "gaps": [
+    { "gap_id": "build-008-gap-01", "summary": "Live BrowserOps runtime, Playwright integration, browser isolation infrastructure, and credential broker flows remain future work.", "status": "open" },
+    { "gap_id": "build-008-gap-02", "summary": "Build automation is a minimal deterministic generator/checker, not a full workflow compiler or provenance system.", "status": "open" },
+    { "gap_id": "build-008-gap-03", "summary": "Worker Fleet handoff remains task-template modeling only; no queue, executor, or browser worker is created.", "status": "open" }
+  ],
+  "next_target": "Build 9 — Receipts + Replay"
+}
