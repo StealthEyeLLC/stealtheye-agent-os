@@ -19,7 +19,7 @@ jobs:
 
       - name: Report CI scope
         run: |
-          echo "Build 2 CI: scaffold checks plus real TypeScript package install, typecheck, and tests."
+          echo "Build 3 CI: scaffold checks plus real TypeScript package install, typecheck, and tests."
           echo "This workflow does not claim production security scanning, full supply-chain attestation, or deployment readiness yet."
 
       - name: Set up pnpm
@@ -64,6 +64,17 @@ jobs:
             packages/agent-registry/src/registry.ts
             packages/agent-registry/src/revocation.ts
             packages/agent-registry/src/fixtures.ts
+            packages/guard/package.json
+            packages/guard/tsconfig.json
+            packages/guard/src/index.ts
+            packages/guard/src/schemas.ts
+            packages/guard/src/capability-token.ts
+            packages/guard/src/policy.ts
+            packages/guard/src/hard-stops.ts
+            packages/guard/src/decision.ts
+            packages/guard/src/receipts.ts
+            packages/guard/src/fixtures.ts
+            packages/guard/test/guard.test.ts
             docs/ARCHITECTURE.md
             docs/AUTONOMY_MODEL.md
             docs/CUSTOM_APPS.md
@@ -87,6 +98,7 @@ jobs:
             docs/DECISIONS/0002-default-technical-stack.md
             docs/DECISIONS/0003-high-autonomy-mission-scoped-authority.md
             docs/DECISIONS/0004-agent-registry-signed-manifests.md
+            docs/DECISIONS/0005-guard-capability-tokens.md
             .github/PULL_REQUEST_TEMPLATE.md
             .github/ISSUE_TEMPLATE/feature_request.md
             .github/ISSUE_TEMPLATE/bug_report.md

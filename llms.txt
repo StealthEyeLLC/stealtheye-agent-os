@@ -1,12 +1,12 @@
 # llms.txt
 
-StealthEye Agent OS is a public-visible, locked-down build repo for a high-autonomy agent operating system: mission-scoped authority, durable workers, MCP/custom apps, signed manifests, receipts, evals, and compliance-ready evidence for authorized online tasks beyond code automation. Build 2 adds the `@stealtheye/agent-registry` TypeScript package for signed agent cards, signed tool manifests, canonicalization, digesting, verification, diffing, trust registry, revocation, and eval-style tests.
+StealthEye Agent OS is a public-visible, locked-down build repo for a high-autonomy agent operating system: mission-scoped authority, durable workers, MCP/custom apps, signed manifests, Guard decisions, receipts, evals, and compliance-ready evidence for authorized online tasks beyond code automation. Build 2 adds the `@stealtheye/agent-registry` TypeScript package. Build 3 adds the `@stealtheye/guard` TypeScript package for capability tokens, requested actions, hard-stop evaluation, registry trust checks, Guard decision receipts, fixtures, and Vitest eval-style tests.
 
 ## Orient quickly
 
 1. Read `AGENTS.md` for operational rules, commands, and hard stops.
 2. Read `docs/ARCHITECTURE.md`, `docs/AUTONOMY_MODEL.md`, `docs/AGENT_REGISTRY.md`, `docs/CUSTOM_APPS.md`, `docs/SECURITY.md`, `docs/WORKFLOWS.md`, `docs/EVALS.md`, and `docs/RECEIPTS.md`.
-3. Inspect `packages/agent-registry/src/*` and `packages/agent-registry/test/*` for Build 2 implementation.
+3. Inspect `packages/agent-registry/src/*`, `packages/agent-registry/test/*`, `packages/guard/src/*`, and `packages/guard/test/*` for Build 2 and Build 3 implementation.
 4. Treat issue #1 as canonical planning context.
 5. Keep public/private boundaries intact. Never add secrets, production endpoints, customer data, private OAuth clients, cloud/account details, or sensitive runbooks.
 
@@ -16,7 +16,7 @@ Mission OS, CodeOps, CI Repair, BrowserOps, Worker Fleet, Guard, Secrets Broker,
 
 ## Autonomy boundary
 
-Agents may act broadly inside approved mission envelopes. They must stop for destructive deletion, raw secrets, money movement, production deployment/data mutation, production-impacting migrations, auth/security-critical changes, protected branch mutation, force push/history rewrite, CI/test weakening, material external sends, legal commitments, and platform-required confirmations.
+Agents may act broadly inside approved mission envelopes. Guard must deny or escalate destructive deletion, raw secrets, money movement, production deployment/data mutation, production-impacting migrations, auth/security-critical changes, protected branch mutation, force push/history rewrite, CI/test weakening, material external sends, legal commitments, and platform-required confirmations.
 
 ## Verification commands
 
@@ -25,3 +25,7 @@ pnpm install --no-frozen-lockfile
 pnpm typecheck
 pnpm test
 ```
+
+## Next target
+
+Build 4: Mission OS + StealthEye Mission Language.

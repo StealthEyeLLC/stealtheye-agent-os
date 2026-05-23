@@ -15,6 +15,8 @@ A mission authority envelope should define:
 - escalation conditions;
 - final reporting expectations.
 
+Build 3 represents this delegated authority as capability-token primitives in `@stealtheye/guard`. Capability tokens are mission-scoped authority records, not production auth credentials and not secret storage.
+
 ## Broad autonomy inside the envelope
 
 Once a mission is approved, the agent should proceed through ordinary delegated actions without repeatedly asking for approval. Examples include creating a feature branch, editing allowed files, adding documentation, running safe checks, collecting non-sensitive logs, opening a PR, and producing receipts.
@@ -22,6 +24,12 @@ Once a mission is approved, the agent should proceed through ordinary delegated 
 ## No repeated approval for ordinary delegated actions
 
 Approval fatigue weakens the operating model. The system should ask again only when authority is missing, scope is unclear, a hard stop is reached, external platform confirmation is required, or risk materially changes.
+
+## Guard decision model
+
+Guard evaluates a requested action against active capability tokens, target constraints, tool/manifest constraints, registry trust summaries, usage/time constraints, and hard-stop rules. It returns a structured decision: `allow`, `deny`, `escalate`, or `warn`, plus deterministic reason codes, matched token ids, matched hard stops, policy checks, and receipt/evidence obligations.
+
+An action may be allowed only when a valid active token applies, the effect is allowed, scope constraints match, registry trust requirements are satisfied, pinned digests match when required, and no hard stop is triggered.
 
 ## Hard stops
 
@@ -40,4 +48,4 @@ Approval fatigue weakens the operating model. The system should ask again only w
 
 ## Escalation behavior
 
-When a hard stop is encountered, the agent must stop, preserve current evidence, explain the blocked action, describe the required authority or safer alternative, and wait for an explicit new authorization path.
+When a hard stop is encountered, the agent must stop, preserve current evidence, explain the blocked action, describe the required authority or safer alternative, and wait for an explicit new authorization path. Build 3 hard-stop evaluation maps protected branch mutation, force push/history rewrite, and CI/test weakening to denial by default, while money movement, raw secret access, production actions, legal commitments, material external sends, and platform-required confirmations escalate by default.

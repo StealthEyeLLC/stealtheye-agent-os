@@ -4,9 +4,9 @@ StealthEye Agent OS is the foundation for a max-leverage autonomous-agent operat
 
 ## Current status
 
-This repository is at **Build 2: Agent Registry + Signed Manifests**. The repo now includes the first concrete TypeScript package foundation for signed agent cards, signed tool manifests, deterministic canonicalization, SHA-256 digesting, Ed25519 verification primitives, manifest diffing, an in-memory trust registry, revocation checks, public test fixtures, and Vitest coverage.
+This repository is at **Build 3: Guard + Capability Tokens**. The repo includes the Build 2 Agent Registry package plus the first Guard foundation package for mission-scoped capability tokens, requested-action schemas, deterministic policy checks, hard-stop evaluation, registry trust enforcement, lifecycle helpers, receipt shapes, public fixtures, and Vitest eval-style coverage.
 
-This is still foundation work. It does not implement production app servers, production workers, persistent Postgres state, Redis queues, production endpoints, real credential handling, deployment automation, or customer-data workflows.
+This is still foundation work. It does not implement production app servers, production workers, persistent Postgres state, Redis queues, production endpoints, real credential handling, deployment automation, customer-data workflows, money movement, production deploys, or private infrastructure.
 
 ## Repo posture
 
@@ -31,6 +31,17 @@ Major subsystems are Mission OS, Agent Registry, Guard, Capability Tokens, Worke
 - In-memory trust registry and revocation model.
 - Public test fixtures with generated local test keys only; no real private keys are committed.
 
+## Guard package
+
+`packages/guard` provides:
+
+- Zod schemas and JSON Schema exports for capability tokens, requested actions, Guard decisions, and Guard decision receipts.
+- Mission-scoped capability-token lifecycle helpers for active, expired, revoked, suspended, and exhausted states.
+- Deterministic token-to-action matching across effects, repo, branch, path, environment, system, account, agent, manifest, and pinned digest constraints.
+- Hard-stop evaluation for deletion/destruction, raw secrets, money/billing, production deployment/data mutation, production-impacting migrations, auth/security-critical changes, protected branch mutation, force push/history rewrite, CI/test/security weakening, material external sends, legal commitments, and platform-required confirmations.
+- Registry trust summary enforcement for trusted and approved signed agent/tool metadata.
+- Receipt-friendly Guard decision and receipt shapes.
+
 ## Local verification
 
 ```bash
@@ -48,4 +59,4 @@ pnpm test
 
 ## Next build target
 
-Build 3 should implement **Guard + Capability Tokens**: authority token schemas, policy checks, hard-stop evaluation, Guard decision receipts, and integration points for Agent Registry verification.
+Build 4 should implement **Mission OS + StealthEye Mission Language**: mission schema, mission DSL/CML primitives, authority-envelope production, lifecycle state, status inspection, plan/receipt references, and integration with Guard decisions.

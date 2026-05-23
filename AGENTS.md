@@ -2,7 +2,7 @@
 
 ## Purpose
 
-Build StealthEye Agent OS: a high-autonomy, mission-scoped operating system for authorized online tasks, code operations, browser work, worker execution, signed manifests, receipts, evals, and compliance-ready evidence.
+Build StealthEye Agent OS: a high-autonomy, mission-scoped operating system for authorized online tasks, code operations, browser work, worker execution, signed manifests, Guard decisions, receipts, evals, and compliance-ready evidence.
 
 ## Build posture
 
@@ -11,6 +11,8 @@ This repo is public-visible but locked down. Work on feature branches and pull r
 ## High-autonomy policy
 
 Inside an approved mission envelope, proceed without repeated approval for ordinary delegated actions. Preserve durable evidence, use idempotent operations, and escalate only when a hard stop or unclear authority boundary is reached.
+
+Build 3 adds `@stealtheye/guard` as the foundation for converting authority envelopes and registry trust decisions into deterministic allow, deny, escalate, or warn decisions. Guard is schema/policy foundation only; it is not production auth, secret storage, deployment automation, billing automation, or a live runtime service.
 
 ## Hard stops
 
@@ -27,6 +29,8 @@ Inside an approved mission envelope, proceed without repeated approval for ordin
 - legal commitments/contracts
 - platform/OpenAI-required confirmations
 
+Hard-stop actions must result in deny or escalation. They must not be silently allowed by capability-token matching.
+
 ## Verification
 
 Before final reporting, verify required files/changes exist, no secrets were introduced, docs remain coherent, CI is truthful, and receipt/eval expectations were updated where applicable.
@@ -41,7 +45,7 @@ pnpm test
 
 ## Docs, evals, and receipts
 
-Update relevant docs with behavior changes. Add or update eval expectations when a failure mode or safety condition is discovered. Ensure receipts can capture mission timeline, tool calls, approvals, denied actions, diffs, logs, artifacts, screenshots, CI, browser QA, manifest digests, registry decisions, and final reports.
+Update relevant docs with behavior changes. Add or update eval expectations when a failure mode or safety condition is discovered. Ensure receipts can capture mission timeline, tool calls, approvals, denied actions, diffs, logs, artifacts, screenshots, CI, browser QA, manifest digests, registry decisions, Guard decisions, policy checks, hard stops, and final reports.
 
 ## Deeper docs
 
