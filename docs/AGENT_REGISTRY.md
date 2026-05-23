@@ -17,6 +17,12 @@ The Agent Registry is the trust and discovery layer for agents, tools, and subag
 - revocation by agent id, manifest id, key id, or digest;
 - public test fixtures and Vitest tests that serve as initial eval-style cases.
 
+## Build 3 Guard integration
+
+`packages/guard` consumes registry trust summaries rather than re-verifying signatures. Guard enforces capability-token requirements such as allowed agent ids, allowed manifest ids, pinned manifest digests, trusted status, approved review status, and revoked/invalid registry outcomes.
+
+A registry decision is necessary trust evidence, but it is not sufficient action authority. Guard still requires an active mission-scoped capability token, matching target/tool constraints, matching effect scope, valid lifecycle state, and no hard-stop trigger before returning `allow`.
+
 ## Signed agent cards
 
 Agent cards identify an agent, version, publisher, public verification keys, supported protocols, capabilities, risk tier, allowed effects, hard stops, auth requirements, receipt requirements, linked manifests, validity window, revocation references, and signatures. Signatures are computed over canonical unsigned payloads, not over the mutable `signatures` array.
@@ -27,7 +33,7 @@ Tool manifests describe tool families, schema metadata, scopes, side effects, au
 
 ## Manifest pinning and diffing
 
-Missions should pin exact manifest digests. Registry review should compare old and new signed payloads and highlight capability, tool, side-effect, auth/scope, risk-tier, hard-stop, schema, publisher/key, expiry, and revocation changes.
+Missions should pin exact manifest digests. Registry review should compare old and new signed payloads and highlight capability, tool, side-effect, auth/scope, risk-tier, hard-stop, schema, publisher/key, expiry, and revocation changes. Guard can deny a requested action when the requested manifest digest does not match the token-pinned digest.
 
 ## Trust registry
 
@@ -35,7 +41,7 @@ The current trust registry is in-memory. It can represent trusted publishers, tr
 
 ## Revocation
 
-The revocation model supports revoking by `agent_id`, `manifest_id`, `key_id`, or digest. Verification fails when a relevant revoked identifier is present. Future builds should persist revocations and propagate them to workers before job execution.
+The revocation model supports revoking by `agent_id`, `manifest_id`, `key_id`, or digest. Verification fails when a relevant revoked identifier is present. Guard treats revoked or invalid registry summaries as denial reasons when a capability token requires registry trust.
 
 ## Agent identity
 
@@ -51,4 +57,4 @@ Remote tool descriptions, browser content, repo files, logs, documents, and unve
 
 ## Next step
 
-Build 3 should connect registry results to Guard + Capability Tokens so trust decisions can become enforceable authority decisions.
+Build 4 should implement Mission OS + StealthEye Mission Language so mission plans can produce capability-token authority envelopes and requested-action evaluations.
