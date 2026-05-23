@@ -1,21 +1,31 @@
-import type { RegistryDecision } from "@stealtheye/agent-registry";
 import type { CapabilityToken, PolicyCheck, RegistryTrustSummary, RequestedAction } from "./schemas";
 
-export function summarizeRegistryTrust(input?: Partial<RegistryDecision> & { trust_status?: RegistryTrustSummary["trust_status"]; revoked?: boolean }): RegistryTrustSummary | undefined {
+export interface RegistryTrustInput {
+  trusted?: boolean;
+  valid?: boolean;
+  trust_status?: RegistryTrustSummary["trust_status"];
+  review_status?: RegistryTrustSummary["review_status"];
+  digest?: string | undefined;
+  errors?: string[] | undefined;
+  warnings?: string[] | undefined;
+  revoked?: boolean | undefined;
+}
+
+export function summarizeRegistryTrust(input?: RegistryTrustInput): RegistryTrustSummary | undefined {
   if (!input) return undefined;
   const errors = input.errors ?? [];
   const warnings = input.warnings ?? [];
   const revoked = Boolean(input.revoked || errors.some((error) => error.toLowerCase().includes("revoked")));
-  return {
+  const base = {
     trusted: Boolean(input.trusted),
     valid: Boolean(input.valid),
     trust_status: input.trust_status ?? (input.trusted ? "trusted" : "untrusted"),
     review_status: input.review_status ?? "missing",
-    digest: input.digest,
     errors,
     warnings,
     revoked
-  };
+  } satisfies Omit<RegistryTrustSummary, "digest">;
+  return input.digest === undefined ? base : { ...base, digest: input.digest };
 }
 
 export function evaluateRegistryTrustRequirement(token: CapabilityToken, registry?: RegistryTrustSummary): PolicyCheck {
