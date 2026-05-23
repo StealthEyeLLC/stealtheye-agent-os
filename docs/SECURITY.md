@@ -41,17 +41,23 @@ Worker Fleet defines durable execution contracts for worker tasks, leases, fenci
 
 Action-bearing worker tasks must pass Guard preflight before any future executor can run them. Deny decisions block the task; escalate decisions wait/block for escalation; allowed decisions only move the task toward readiness. Worker fixtures are fake, local, public-safe, and include no live queue credentials, storage buckets, production endpoints, or real account identifiers.
 
+## Build 7 CodeOps and CI Repair posture
+
+CodeOps and CI Repair define contracts and deterministic helpers only. CodeOps models repository targets, branch/path policy, patch plans, file-change contracts, verification plans, PR evidence, Guard requested actions, and Worker Fleet task templates. CI Repair models CI/check summaries, short public-safe log excerpts, failure categories, repair plans, rerun eligibility, and verification loops.
+
+Build 7 must not create branches, write commits, open PRs through a live adapter, mutate protected branches, force push, rewrite history, weaken CI/tests/security, fetch raw secrets, rerun live jobs, dispatch workflows, deploy, access customer data, move money, or perform production mutations. Protected branch mutation, force push/history rewrite, and CI/test/security weakening are deny paths. Destructive delete is blocked or escalated and not performed.
+
 ## Secrets broker
 
 Secrets must remain in private systems. A Secrets Broker may provide brokered operations, scoped environment injection, or signing/delegation without returning raw secret values to agents, logs, receipts, or public repo files.
 
 ## Semantic firewall
 
-The Semantic Firewall treats repo content, logs, browser pages, documents, issue comments, model outputs, Mission Language input, app-host input, worker artifacts/receipts, and tool outputs as potentially malicious. It detects prompt injection, data exfiltration attempts, authority confusion, and instruction smuggling.
+The Semantic Firewall treats repo content, logs, browser pages, documents, issue comments, model outputs, Mission Language input, app-host input, worker artifacts/receipts, CodeOps diffs, CI logs, and tool outputs as potentially malicious. It detects prompt injection, data exfiltration attempts, authority confusion, and instruction smuggling.
 
 ## Prompt injection and tool poisoning
 
-Threats include malicious README files, CI logs, web pages, browser DOM content, issue comments, generated manifests, Mission Language documents, app-host tool inputs, worker artifacts/receipts, and remote MCP tool descriptions. Tool outputs must not override system, developer, repo, mission, worker, or Guard policy.
+Threats include malicious README files, CI logs, web pages, browser DOM content, issue comments, generated manifests, Mission Language documents, app-host tool inputs, worker artifacts/receipts, CodeOps file-change summaries, CI repair excerpts, and remote MCP tool descriptions. Tool outputs must not override system, developer, repo, mission, worker, CodeOps, CI Repair, or Guard policy.
 
 Signed manifests reduce tool poisoning risk but do not remove the need for Guard checks. A valid signature proves provenance and integrity for a signed payload; it does not prove a tool call is authorized for a mission.
 
@@ -59,12 +65,12 @@ Signed manifests reduce tool poisoning risk but do not remove the need for Guard
 
 Protected HTTP MCP servers should align toward OAuth 2.1 practices: protected resource metadata, authorization server metadata discovery, controlled client registration, auth discovery, audience-bound tokens, scope enforcement per tool and mission, no token passthrough, exact redirect URI validation, PKCE where relevant, and confused-deputy defense.
 
-Build 5 does not implement OAuth or production MCP authorization. Build 6 does not implement production worker authorization or live queue credentials.
+Build 5 does not implement OAuth or production MCP authorization. Build 6 does not implement production worker authorization or live queue credentials. Build 7 does not implement production GitHub App writes or live CI rerun credentials.
 
 ## Public/private boundary
 
-Public repo content may contain architecture, public specs, schemas, mock data, eval templates, app-host descriptors, worker-fleet contracts, preview fixtures, and governance docs. Private systems contain secrets, credentials, production endpoints, customer data, internal OAuth clients, cloud/account details, sensitive runbooks, production signing keys, production capability issuance systems, production Mission OS state, deployed app-host runtime configuration, live queue credentials, and worker infrastructure.
+Public repo content may contain architecture, public specs, schemas, mock data, eval templates, app-host descriptors, worker-fleet contracts, CodeOps/CI Repair contracts, preview fixtures, and governance docs. Private systems contain secrets, credentials, production endpoints, customer data, internal OAuth clients, cloud/account details, sensitive runbooks, production signing keys, production capability issuance systems, production Mission OS state, deployed app-host runtime configuration, live queue credentials, live GitHub App credentials, CI write credentials, and worker infrastructure.
 
 ## Security evidence
 
-Receipts should capture denials, approvals, policy decisions, mission ids, authority envelopes, app-host previews, worker task events, leases, retries, idempotency records, manifest identities, manifest digests, registry decisions, Guard decisions, matched capability tokens, policy checks, hard stops, tool calls, redactions, auth scopes, CI/security check results, and incident-relevant artifacts.
+Receipts should capture denials, approvals, policy decisions, mission ids, authority envelopes, app-host previews, worker task events, leases, retries, idempotency records, CodeOps patch plans, file-change contracts, verification plans, CI summaries, CI repair plans, PR evidence, manifest identities, manifest digests, registry decisions, Guard decisions, matched capability tokens, policy checks, hard stops, tool calls, redactions, auth scopes, CI/security check results, and incident-relevant artifacts.
