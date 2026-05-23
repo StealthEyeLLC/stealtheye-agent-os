@@ -6,45 +6,33 @@ Every significant behavior should be measurable through evals. Failures become r
 
 ## Build 2 initial eval-style tests
 
-`packages/agent-registry/test/*` currently covers:
-
-- valid signed agent card validation;
-- invalid agent card validation;
-- valid signed tool manifest validation;
-- invalid tool manifest validation;
-- deterministic canonicalization;
-- digest stability;
-- signature verification;
-- manifest diff detection for capability/risk/auth/tool/side-effect changes;
-- trusted fixture acceptance;
-- untrusted fixture rejection;
-- revoked fixture rejection;
-- no obvious real-secret material in fixtures.
-
-These tests are the initial eval substrate. Future builds should register them in a dedicated eval runner with fixture metadata, expected receipts, and regression dashboards.
+`packages/agent-registry/test/*` covers signed agent/tool manifest validation, canonicalization, digest stability, signature verification, manifest diffing, trust decisions, revocation, and no obvious real-secret material in fixtures.
 
 ## Build 3 Guard eval-style tests
 
-`packages/guard/test/*` currently covers:
+`packages/guard/test/*` covers delegated repo actions, missing tokens, scope mismatch, production deploy, money movement, raw secret access, protected branch mutation, force push/history rewrite, CI/test weakening, untrusted registry decisions, digest mismatch, token lifecycle failures, trusted registry allow, receipt fields, and deterministic reason codes.
 
-- normal delegated repo action allowed inside mission-scoped authority;
-- denied action with no capability token;
-- denied action outside repo, path, or branch scope;
-- production deployment escalated;
-- money movement escalated;
-- raw secret access escalated;
-- direct protected branch mutation denied;
-- force push/history rewrite denied;
-- CI/test weakening denied;
-- untrusted manifest/agent denied;
-- pinned digest mismatch denied;
-- expired token denied;
-- revoked or suspended token denied;
-- trusted registry decision allowed;
-- Guard receipt fields populated;
-- deterministic reason codes for important denials.
+## Build 4 Mission OS eval-style tests
 
-These tests are the initial Guard eval substrate. Future dedicated eval runners should add fixture metadata, scenario ids, expected receipts, and regression dashboards, but the current tests intentionally keep fixtures public-safe and local.
+`packages/mission-os/test/*` covers:
+
+- valid Mission Language object validation;
+- invalid Mission Language object validation;
+- compiling Mission Language to normalized mission objects;
+- compiling Mission Language to authority envelopes;
+- authority-envelope output compatible with Guard capability-token fields;
+- mission plan step dependency preservation;
+- requested repo write action generation from plan steps;
+- Guard allowing a safe planned action with matching authority;
+- Guard escalating or denying hard-stop planned action;
+- mission status transition happy path;
+- invalid mission status transition rejection;
+- mission status summaries including blockers and next actions;
+- receipt/evidence reference preservation;
+- fixture coverage for invalid target constraints and missing verification plans;
+- no obvious real-secret material in fixtures.
+
+Build 4 fixtures include normal repo feature mission, CI repair mission, browser QA mission, hard-stop production deploy mission, hard-stop money movement mission, invalid target constraints mission, and missing verification plan mission.
 
 ## Failure-to-eval loop
 
@@ -54,6 +42,7 @@ When the system fails, add an eval that reproduces the failure, documents expect
 
 - Regression evals for known failure modes.
 - Mission success evals for end-to-end task completion.
+- Mission Language evals for compilation, authority envelopes, status, and receipt references.
 - Tool selection evals for correct routing and refusal.
 - Registry trust evals for signed card/manifest verification, revocation, and diff review.
 - Guard policy evals for capability-token matching, registry trust enforcement, hard stops, receipts, and lifecycle states.
@@ -65,4 +54,4 @@ When the system fails, add an eval that reproduces the failure, documents expect
 
 ## Evidence
 
-Each eval should declare fixtures, allowed tools, expected receipts, success criteria, and forbidden shortcuts.
+Each eval should declare fixtures, allowed tools, expected receipts, success criteria, and forbidden shortcuts. Future eval runners should add scenario ids, fixture metadata, expected receipt artifacts, and dashboards.

@@ -15,7 +15,7 @@ A mission authority envelope should define:
 - escalation conditions;
 - final reporting expectations.
 
-Build 3 represents this delegated authority as capability-token primitives in `@stealtheye/guard`. Capability tokens are mission-scoped authority records, not production auth credentials and not secret storage.
+Build 4 represents this upstream of Guard through Mission OS. Mission Language expresses user intent, targets, authority, verification, evidence, receipts, stop conditions, and final-report expectations. Mission OS compiles that into normalized missions, authority envelopes, lightweight plans, status snapshots, and Guard-compatible templates.
 
 ## Broad autonomy inside the envelope
 
@@ -25,9 +25,9 @@ Once a mission is approved, the agent should proceed through ordinary delegated 
 
 Approval fatigue weakens the operating model. The system should ask again only when authority is missing, scope is unclear, a hard stop is reached, external platform confirmation is required, or risk materially changes.
 
-## Guard decision model
+## Mission OS and Guard decision model
 
-Guard evaluates a requested action against active capability tokens, target constraints, tool/manifest constraints, registry trust summaries, usage/time constraints, and hard-stop rules. It returns a structured decision: `allow`, `deny`, `escalate`, or `warn`, plus deterministic reason codes, matched token ids, matched hard stops, policy checks, and receipt/evidence obligations.
+Mission OS structures intent and produces authority envelopes. Guard evaluates requested actions against active capability tokens, target constraints, tool/manifest constraints, registry trust summaries, usage/time constraints, and hard-stop rules. Mission OS does not duplicate Guard policy logic.
 
 An action may be allowed only when a valid active token applies, the effect is allowed, scope constraints match, registry trust requirements are satisfied, pinned digests match when required, and no hard stop is triggered.
 
@@ -48,4 +48,4 @@ An action may be allowed only when a valid active token applies, the effect is a
 
 ## Escalation behavior
 
-When a hard stop is encountered, the agent must stop, preserve current evidence, explain the blocked action, describe the required authority or safer alternative, and wait for an explicit new authorization path. Build 3 hard-stop evaluation maps protected branch mutation, force push/history rewrite, and CI/test weakening to denial by default, while money movement, raw secret access, production actions, legal commitments, material external sends, and platform-required confirmations escalate by default.
+When a hard stop is encountered, the agent must stop, preserve current evidence, explain the blocked action, describe the required authority or safer alternative, and wait for an explicit new authorization path. Mission OS may model hard-stop scenarios for evals, but Guard remains the enforcement layer that denies or escalates actual requested actions.

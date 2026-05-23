@@ -27,17 +27,21 @@ Guard capability tokens are delegated-authority records, not credential storage 
 
 Guard policy evaluation must never silently allow hard stops. Build 3 maps hard stops to deny or escalate decisions and records matched hard stops and reason codes in Guard decision receipts. Registry trust summaries are consumed as enforcement input; a valid signed manifest is necessary for trusted operation but is not sufficient authority by itself.
 
+## Build 4 Mission OS posture
+
+Mission OS turns user intent into typed mission structures, authority envelopes, plan steps, status summaries, receipt references, and Guard-compatible action templates. Mission OS does not issue production credentials, store secrets, bypass Guard, or execute workers. Hard-stop missions may appear as fixtures to verify escalation behavior, not as enabled production actions.
+
 ## Secrets broker
 
 Secrets must remain in private systems. A Secrets Broker may provide brokered operations, scoped environment injection, or signing/delegation without returning raw secret values to agents, logs, receipts, or public repo files.
 
 ## Semantic firewall
 
-The Semantic Firewall treats repo content, logs, browser pages, documents, issue comments, model outputs, and tool outputs as potentially malicious. It detects prompt injection, data exfiltration attempts, authority confusion, and instruction smuggling.
+The Semantic Firewall treats repo content, logs, browser pages, documents, issue comments, model outputs, Mission Language input, and tool outputs as potentially malicious. It detects prompt injection, data exfiltration attempts, authority confusion, and instruction smuggling.
 
 ## Prompt injection and tool poisoning
 
-Threats include malicious README files, CI logs, web pages, browser DOM content, issue comments, generated manifests, and remote MCP tool descriptions. Tool outputs must not override system, developer, repo, mission, or Guard policy.
+Threats include malicious README files, CI logs, web pages, browser DOM content, issue comments, generated manifests, Mission Language documents, and remote MCP tool descriptions. Tool outputs must not override system, developer, repo, mission, or Guard policy.
 
 Signed manifests reduce tool poisoning risk but do not remove the need for Guard checks. A valid signature proves provenance and integrity for a signed payload; it does not prove a tool call is authorized for a mission.
 
@@ -58,8 +62,8 @@ Protected HTTP MCP servers should align toward OAuth 2.1 practices:
 
 ## Public/private boundary
 
-Public repo content may contain architecture, public specs, schemas, mock data, eval templates, and governance docs. Private systems contain secrets, credentials, production endpoints, customer data, internal OAuth clients, cloud/account details, sensitive runbooks, production signing keys, and production capability issuance systems.
+Public repo content may contain architecture, public specs, schemas, mock data, eval templates, and governance docs. Private systems contain secrets, credentials, production endpoints, customer data, internal OAuth clients, cloud/account details, sensitive runbooks, production signing keys, production capability issuance systems, and production Mission OS state.
 
 ## Security evidence
 
-Receipts should capture denials, approvals, policy decisions, manifest identities, manifest digests, registry decisions, Guard decisions, matched capability tokens, policy checks, hard stops, tool calls, redactions, auth scopes, CI/security check results, and incident-relevant artifacts.
+Receipts should capture denials, approvals, policy decisions, mission ids, authority envelopes, manifest identities, manifest digests, registry decisions, Guard decisions, matched capability tokens, policy checks, hard stops, tool calls, redactions, auth scopes, CI/security check results, and incident-relevant artifacts.

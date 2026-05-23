@@ -2,7 +2,7 @@
 
 ## Purpose
 
-Build StealthEye Agent OS: a high-autonomy, mission-scoped operating system for authorized online tasks, code operations, browser work, worker execution, signed manifests, Guard decisions, receipts, evals, and compliance-ready evidence.
+Build StealthEye Agent OS: a high-autonomy, mission-scoped operating system for authorized online tasks, code operations, browser work, worker execution, signed manifests, Mission OS, Guard decisions, receipts, evals, and compliance-ready evidence.
 
 ## Build posture
 
@@ -12,7 +12,7 @@ This repo is public-visible but locked down. Work on feature branches and pull r
 
 Inside an approved mission envelope, proceed without repeated approval for ordinary delegated actions. Preserve durable evidence, use idempotent operations, and escalate only when a hard stop or unclear authority boundary is reached.
 
-Build 3 adds `@stealtheye/guard` as the foundation for converting authority envelopes and registry trust decisions into deterministic allow, deny, escalate, or warn decisions. Guard is schema/policy foundation only; it is not production auth, secret storage, deployment automation, billing automation, or a live runtime service.
+Build 4 adds `@stealtheye/mission-os` as the foundation for converting broad goals into typed Mission Language, normalized missions, authority envelopes, plans, status summaries, receipt references, and Guard-compatible action templates. Mission OS is package-level foundation only; it is not a production app server, live worker fleet, secret store, deployment automation, billing automation, or durable ledger.
 
 ## Hard stops
 
@@ -29,13 +29,13 @@ Build 3 adds `@stealtheye/guard` as the foundation for converting authority enve
 - legal commitments/contracts
 - platform/OpenAI-required confirmations
 
-Hard-stop actions must result in deny or escalation. They must not be silently allowed by capability-token matching.
+Hard-stop actions must result in deny or escalation. Mission OS may model hard-stop missions for evals, but it must not enable real execution of those actions.
 
 ## Verification
 
 Before final reporting, verify required files/changes exist, no secrets were introduced, docs remain coherent, CI is truthful, and receipt/eval expectations were updated where applicable.
 
-For package work, run or verify:
+For package work, run or verify through CI:
 
 ```bash
 pnpm install --no-frozen-lockfile
@@ -45,8 +45,8 @@ pnpm test
 
 ## Docs, evals, and receipts
 
-Update relevant docs with behavior changes. Add or update eval expectations when a failure mode or safety condition is discovered. Ensure receipts can capture mission timeline, tool calls, approvals, denied actions, diffs, logs, artifacts, screenshots, CI, browser QA, manifest digests, registry decisions, Guard decisions, policy checks, hard stops, and final reports.
+Update relevant docs with behavior changes. Add or update eval expectations when a failure mode or safety condition is discovered. Ensure receipts can capture mission timeline, mission status, authority envelopes, tool calls, approvals, denied actions, diffs, logs, artifacts, screenshots, CI, browser QA, manifest digests, registry decisions, Guard decisions, policy checks, hard stops, and final reports.
 
 ## Deeper docs
 
-Read `docs/ARCHITECTURE.md`, `docs/AUTONOMY_MODEL.md`, `docs/AGENT_REGISTRY.md`, `docs/SECURITY.md`, `docs/WORKFLOWS.md`, `docs/EVALS.md`, `docs/RECEIPTS.md`, and `docs/BUILD_PROMPTS.md`.
+Read `docs/ARCHITECTURE.md`, `docs/AUTONOMY_MODEL.md`, `docs/MISSION_OS.md`, `docs/AGENT_REGISTRY.md`, `docs/SECURITY.md`, `docs/WORKFLOWS.md`, `docs/EVALS.md`, `docs/RECEIPTS.md`, and `docs/BUILD_PROMPTS.md`.
