@@ -1,0 +1,83 @@
+name: CI
+
+on:
+  pull_request:
+  push:
+    branches:
+      - main
+
+permissions:
+  contents: read
+
+jobs:
+  docs-safe-checks:
+    name: Documentation-safe checks
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v4
+
+      - name: Report scaffold status
+        run: |
+          echo "Build 1 scaffold CI: documentation/governance checks only."
+          echo "This workflow does not claim application code is linted, typed, tested, or security-scanned yet."
+
+      - name: Verify required scaffold files exist
+        shell: bash
+        run: |
+          set -euo pipefail
+          required=(
+            README.md
+            AGENTS.md
+            llms.txt
+            llms-full.txt
+            docs/ARCHITECTURE.md
+            docs/AUTONOMY_MODEL.md
+            docs/CUSTOM_APPS.md
+            docs/AGENT_REGISTRY.md
+            docs/SECURITY.md
+            docs/WORKFLOWS.md
+            docs/EVALS.md
+            docs/RECEIPTS.md
+            docs/BUILD_PROMPTS.md
+            docs/COMPLIANCE.md
+            docs/CONTROL_MATRIX.md
+            docs/RISK_REGISTER.md
+            docs/DATA_GOVERNANCE.md
+            docs/PRIVACY.md
+            docs/INCIDENT_RESPONSE.md
+            docs/SECURE_SDLC.md
+            docs/SUPPLY_CHAIN.md
+            docs/AI_GOVERNANCE.md
+            docs/EVIDENCE_MODEL.md
+            docs/DECISIONS/0001-public-locked-down-repo-posture.md
+            docs/DECISIONS/0002-default-technical-stack.md
+            docs/DECISIONS/0003-high-autonomy-mission-scoped-authority.md
+            .github/PULL_REQUEST_TEMPLATE.md
+            .github/ISSUE_TEMPLATE/feature_request.md
+            .github/ISSUE_TEMPLATE/bug_report.md
+            .github/ISSUE_TEMPLATE/security_task.md
+            .github/ISSUE_TEMPLATE/eval_task.md
+            .github/ISSUE_TEMPLATE/architecture_decision.md
+            .github/workflows/ci.yml
+            .github/CODEOWNERS
+            SECURITY.md
+          )
+          for path in "${required[@]}"; do
+            test -f "$path" || { echo "Missing required file: $path"; exit 1; }
+          done
+
+      - name: Basic secret-string guard
+        shell: bash
+        run: |
+          set -euo pipefail
+          guard_file="./.github/workflows/ci.yml"
+          secret_like_patterns='(AKIA[0-9A-Z]{16}|BEGIN (RSA|OPENSSH|EC|DSA) PRIVATE KEY|password=|client_secret=|PRIVATE_KEY=)'
+          if find . \
+            -path './.git' -prune -o \
+            -type f \
+            ! -path "$guard_file" \
+            -print0 | xargs -0 grep -InE "$secret_like_patterns"; then
+            echo "Potential secret-like string found."
+            exit 1
+          fi
