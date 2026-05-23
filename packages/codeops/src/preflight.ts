@@ -11,11 +11,18 @@ export interface CodeOpsActionOptions {
   requested_at?: string | undefined;
 }
 
+interface NormalizedCodeOpsActionOptions {
+  actor_id: string;
+  agent_id: string;
+  manifest_id: string;
+  requested_at: string;
+}
+
 function targetAccount(repoFullName: string): string {
   return repoFullName.split("/")[0] ?? "unknown";
 }
 
-function requestedAction(plan: PatchPlan, actionIdSuffix: string, effect: RequestedAction["effect"], options: Required<CodeOpsActionOptions>, path?: string): RequestedAction {
+function requestedAction(plan: PatchPlan, actionIdSuffix: string, effect: RequestedAction["effect"], options: NormalizedCodeOpsActionOptions, path?: string): RequestedAction {
   return {
     schema_version: GuardSchemaVersion.RequestedAction,
     action_id: `codeops-action:${plan.patch_plan_id}:${actionIdSuffix}`,
@@ -46,7 +53,7 @@ function requestedAction(plan: PatchPlan, actionIdSuffix: string, effect: Reques
   };
 }
 
-function normalizeOptions(options: CodeOpsActionOptions = {}): Required<CodeOpsActionOptions> {
+function normalizeOptions(options: CodeOpsActionOptions = {}): NormalizedCodeOpsActionOptions {
   return {
     actor_id: options.actor_id ?? "agent:codeops-fixture",
     agent_id: options.agent_id ?? "agent:codeops-fixture",
