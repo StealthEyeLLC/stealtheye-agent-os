@@ -1,0 +1,85 @@
+# llms-full.txt
+
+## Project summary
+
+StealthEye Agent OS is a foundation for broad delegated autonomy: authorized online-task agents operating through ChatGPT custom apps/MCP, durable workers, mission-scoped authority, signed manifests, evals, receipts, replayable evidence, and compliance-ready controls. This public repo contains non-secret architecture, specs, governance, scaffolding, eval templates, and compliance planning only.
+
+## Architecture overview
+
+The default stack is TypeScript monorepo, Node.js MCP servers, Postgres for durable mission/control/evidence state, Redis + BullMQ for initial worker queues, Temporal as future workflow orchestration, S3/R2-compatible artifact storage, GitHub App auth, Playwright BrowserOps, OpenAI Responses API + Apps SDK integration, and Zod + JSON Schema for mission/tool/workflow/receipt/authority/agent-card schemas.
+
+Key systems: Mission OS, Agent Registry, Guard, Capability Tokens, Worker Fleet, CodeOps, CI Repair, BrowserOps, Receipts + Replay, Memory Graph, Evals, Workflow Compiler, Semantic Firewall, A2A Subagent Network, Agent Arena, StagingOps/Observability, and domain ops apps.
+
+## Custom app inventory
+
+- **StealthEye Mission OS**: mission intake, planning, authority envelopes, status, final reports.
+- **StealthEye CodeOps**: repository change execution.
+- **StealthEye CI Repair**: diagnose and repair failing checks.
+- **StealthEye BrowserOps**: browser QA and online task observation.
+- **StealthEye Worker Fleet**: durable background execution.
+- **StealthEye Guard**: policy gate and decision engine.
+- **StealthEye Secrets Broker**: controlled secret access without raw exposure.
+- **StealthEye Memory Graph**: durable project and mission memory.
+- **StealthEye Tool Router**: tool discovery and routing.
+- **StealthEye Evals**: quality and safety regression system.
+- **StealthEye StagingOps**: safe staging deployment and validation.
+- **StealthEye InfraOps**: non-secret infrastructure planning/execution.
+- **StealthEye Observability**: mission/runtime observability.
+- **StealthEye ProductOps**: product planning and backlog operations.
+- **StealthEye InboxOps**: inbox triage and drafting.
+- **StealthEye CustomerOps**: customer support workflows.
+- **StealthEye ResearchOps**: research and synthesis.
+- **StealthEye CommerceOps**: commerce-related task assistance.
+- **StealthEye Agent Registry**: trusted agent/tool catalog.
+- **StealthEye Semantic Firewall**: content and prompt boundary layer.
+- **StealthEye Workflow Compiler**: mission-to-DAG compiler.
+- **StealthEye Agent Arena**: agent eval and competition harness.
+
+## Autonomy model
+
+Mission-scoped delegated authority defines what the agent may do, with what tools, against which targets, for what time window, and under what evidence requirements. Broad autonomy is expected inside the approved envelope; ordinary delegated actions should not require repeated approval.
+
+## Hard stops
+
+- deletion/destruction
+- raw secrets/credentials
+- money/refunds/purchases/billing/subscriptions
+- production deployment or production data mutation
+- production-impacting DB migrations
+- auth/security-critical changes
+- direct protected branch mutation
+- force push/history rewrite
+- weakening CI/tests/security controls to pass
+- material external sends as Jamie/company
+- legal commitments/contracts
+- platform/OpenAI-required confirmations
+
+## Mission/build workflow
+
+1. Jamie opens a new ChatGPT tab for the next build prompt.
+2. Builder completes focused repo work on a branch.
+3. Builder updates docs, AGENTS.md, llms files, eval expectations, receipt/evidence expectations, and verification checklist where applicable.
+4. Jamie returns to verifier chat with PR/branch/commit.
+5. Verifier checks implementation against issue #1 and docs.
+6. Verifier updates issue #1.
+7. Verifier provides the next prompt.
+
+## Docs map
+
+- `docs/ARCHITECTURE.md`: system components and data/control flow.
+- `docs/AUTONOMY_MODEL.md`: authority, autonomy, and hard stops.
+- `docs/CUSTOM_APPS.md`: app inventory and responsibilities.
+- `docs/AGENT_REGISTRY.md`: signed cards/manifests, trust, revocation.
+- `docs/SECURITY.md`: MCP/OAuth/security boundaries.
+- `docs/WORKFLOWS.md`: mission lifecycle, DAGs, retries, idempotency.
+- `docs/EVALS.md`: eval philosophy and suites.
+- `docs/RECEIPTS.md` and `docs/EVIDENCE_MODEL.md`: evidence and replay.
+- Compliance/security/governance docs map controls to readiness, not certification.
+
+## Compliance and evidence summary
+
+The project intends to align evidence with NIST AI RMF, EU AI Act readiness, ISO/IEC 42001 readiness, NIST CSF 2.0, NIST SSDF, OWASP LLM/Agentic threats, SOC 2 readiness, ISO 27001/27002/27701 readiness, GDPR/CCPA readiness, SLSA/SBOM/provenance, and sector-triggered frameworks. No certification is claimed.
+
+## Public/private boundary
+
+Public: architecture, public specs, non-secret schemas, app/tool scaffolding, examples/mock data, eval templates, governance and compliance docs. Private: secrets, credentials, production endpoints, customer data, internal OAuth clients, cloud/account details, sensitive runbooks.
