@@ -47,22 +47,25 @@ export const guardPreflightHardStopTask = createWorkerTask({
 });
 
 export const untrustedRegistryBlockTask = createWorkerTask({
-  mission_id: guardEvalFixtures.untrustedManifestDenied.mission_id,
+  mission_id: guardEvalFixtures.normalDelegatedRepoActionAllowed.mission_id,
   plan_id: "plan:fixture:untrusted-registry",
   step_id: "step:untrusted-registry",
   title: "Check untrusted registry summary",
   description: "Fixture task that should be blocked by Guard when registry trust is untrusted.",
-  requested_action: guardEvalFixtures.untrustedManifestDenied,
+  requested_action: guardEvalFixtures.normalDelegatedRepoActionAllowed,
   capability_token_refs: [trustedCapabilityToken.token_id],
   now: fixtureNow
 });
 
-export const retryableFailureTask = transitionTaskStatus(normalMissionStepTask, "failed", fixtureNow, {
+const leasedFailureTask = transitionTaskStatus(normalMissionStepTask, "leased", fixtureNow);
+const runningFailureTask = transitionTaskStatus(leasedFailureTask, "running", fixtureNow);
+
+export const retryableFailureTask = transitionTaskStatus(runningFailureTask, "failed", fixtureNow, {
   error_summary: { code: "temporary_failure", message: "Temporary fixture failure.", retryable: true },
   retry_state: scheduleRetry(normalMissionStepTask.retry_state!, "temporary_failure", new Date(fixtureNow))
 });
 
-export const nonRetryableFailureTask = transitionTaskStatus(normalMissionStepTask, "failed", fixtureNow, {
+export const nonRetryableFailureTask = transitionTaskStatus(runningFailureTask, "failed", fixtureNow, {
   error_summary: { code: "guard_denied", message: "Guard denied fixture work.", retryable: false },
   retry_state: scheduleRetry(normalMissionStepTask.retry_state!, "guard_denied", new Date(fixtureNow))
 });
