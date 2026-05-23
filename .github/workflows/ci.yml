@@ -19,8 +19,8 @@ jobs:
 
       - name: Report CI scope
         run: |
-          echo "Build 5 CI: scaffold checks plus real TypeScript package install, typecheck, and tests."
-          echo "This workflow does not claim production security scanning, full supply-chain attestation, or deployment readiness yet."
+          echo "Build 6 CI: scaffold checks plus real TypeScript package install, typecheck, and tests."
+          echo "This workflow does not claim production security scanning, full supply-chain attestation, deployment readiness, live queue testing, Redis/BullMQ runtime testing, or worker runtime readiness yet."
 
       - name: Set up pnpm
         uses: pnpm/action-setup@v4
@@ -97,12 +97,27 @@ jobs:
             packages/app-host/src/app-metadata.ts
             packages/app-host/src/fixtures.ts
             packages/app-host/test/app-host.test.ts
+            packages/worker-fleet/package.json
+            packages/worker-fleet/tsconfig.json
+            packages/worker-fleet/src/index.ts
+            packages/worker-fleet/src/schemas.ts
+            packages/worker-fleet/src/tasks.ts
+            packages/worker-fleet/src/leases.ts
+            packages/worker-fleet/src/idempotency.ts
+            packages/worker-fleet/src/retry-policy.ts
+            packages/worker-fleet/src/status.ts
+            packages/worker-fleet/src/artifacts.ts
+            packages/worker-fleet/src/receipts.ts
+            packages/worker-fleet/src/preflight.ts
+            packages/worker-fleet/src/fixtures.ts
+            packages/worker-fleet/test/worker-fleet.test.ts
             docs/ARCHITECTURE.md
             docs/AUTONOMY_MODEL.md
             docs/CUSTOM_APPS.md
             docs/AGENT_REGISTRY.md
             docs/MISSION_OS.md
             docs/APP_HOST.md
+            docs/WORKER_FLEET.md
             docs/SECURITY.md
             docs/WORKFLOWS.md
             docs/EVALS.md
@@ -125,6 +140,7 @@ jobs:
             docs/DECISIONS/0005-guard-capability-tokens.md
             docs/DECISIONS/0006-mission-os-language.md
             docs/DECISIONS/0007-chatgpt-app-mcp-host-shell.md
+            docs/DECISIONS/0008-worker-fleet-foundation.md
             .github/PULL_REQUEST_TEMPLATE.md
             .github/ISSUE_TEMPLATE/feature_request.md
             .github/ISSUE_TEMPLATE/bug_report.md

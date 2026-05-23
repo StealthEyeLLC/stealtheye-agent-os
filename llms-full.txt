@@ -2,7 +2,7 @@
 
 ## Project summary
 
-StealthEye Agent OS is a foundation for broad delegated autonomy: authorized online-task agents operating through ChatGPT custom apps/MCP, durable workers, Mission OS, app-host surfaces, mission-scoped authority, signed manifests, Guard decisions, evals, receipts, replayable evidence, and compliance-ready controls. This public repo contains non-secret architecture, specs, governance, scaffolding, eval templates, and compliance planning only.
+StealthEye Agent OS is a foundation for broad delegated autonomy: authorized online-task agents operating through ChatGPT custom apps/MCP, durable workers, Mission OS, app-host surfaces, mission-scoped authority, signed manifests, Guard decisions, evals, receipts, replayable evidence, and compliance-ready controls. This public repo contains non-sensitive architecture, specs, governance, scaffolding, eval templates, and compliance planning only.
 
 ## Current build state
 
@@ -14,40 +14,33 @@ Build 4 adds `@stealtheye/mission-os`: StealthEye Mission Language, normalized m
 
 Build 5 adds `@stealtheye/app-host`: app metadata, MCP-style preview tool descriptors, input/output schemas, resource descriptors, fixture-backed handlers, and Vitest eval-style tests for host, mission, Guard, registry, and policy tool families. All Build 5 tools are read-only, fixture-only, or preview-only.
 
+Build 6 adds `@stealtheye/worker-fleet`: typed worker task schemas, task types/statuses, lease schemas with fencing tokens, idempotency records and stable action fingerprints, retry policy/state helpers, task status summaries, artifact references, worker receipt events, Guard preflight helpers, Mission OS plan-to-worker-task conversion, fixtures, and Vitest eval-style tests.
+
 ## Architecture overview
 
-The default stack is TypeScript monorepo, Node.js MCP servers, Postgres for durable mission/control/evidence state, Redis + BullMQ for initial worker queues, Temporal as future workflow orchestration, S3/R2-compatible artifact storage, GitHub App auth, Playwright BrowserOps, OpenAI Responses API + Apps SDK integration, and Zod + JSON Schema for mission/tool/workflow/receipt/authority/agent-card schemas.
+The default stack is TypeScript monorepo, Node.js MCP servers, Postgres for durable mission/control/evidence state, Redis + BullMQ for initial worker queues, Temporal as future workflow orchestration, S3/R2-compatible artifact storage, GitHub App auth, Playwright BrowserOps, OpenAI Responses API + Apps SDK integration, and Zod + JSON Schema for mission/tool/workflow/receipt/authority/agent-card/worker schemas.
 
 Key systems: Mission OS, App Host, Agent Registry, Guard, Capability Tokens, Worker Fleet, CodeOps, CI Repair, BrowserOps, Receipts + Replay, Memory Graph, Evals, Workflow Compiler, Semantic Firewall, A2A Subagent Network, Agent Arena, StagingOps/Observability, and domain ops apps.
 
 ## App Host model
 
-App Host is the first ChatGPT App / MCP Server Host Shell foundation. It models tool/resource descriptors and fixture-backed handlers that can later be wired to an official MCP or ChatGPT Apps runtime. Build 5 does not expose live repo mutation, worker execution, browser automation, deployments, secrets, money movement, customer data, remote trust discovery, or production credentials.
+App Host is the first ChatGPT App / MCP Server Host Shell foundation. It models tool/resource descriptors and fixture-backed handlers that can later be wired to an official MCP or ChatGPT Apps runtime. Build 5 does not expose live repo mutation, worker execution, browser automation, deployments, money movement, customer data, remote trust discovery, or production-grade credential flows.
 
 ## Mission OS model
 
-Mission OS converts broad goals into typed Mission Language, normalized mission objects, authority envelopes, plan/DAG structures, status summaries, receipt references, and Guard-compatible requested actions. It does not issue production credentials, run workers, mutate production systems, or build the full receipt ledger.
+Mission OS converts broad goals into typed Mission Language, normalized mission objects, authority envelopes, plan/DAG structures, status summaries, receipt references, and Guard-compatible requested actions. Build 6 Worker Fleet consumes Mission OS plans and preserves mission, plan, step, dependency, receipt, capability-token, and requested-action context when creating worker tasks.
+
+## Worker Fleet model
+
+Worker Fleet is the durable execution substrate contract for future mission-step execution. Build 6 defines package-level schemas and deterministic helpers for worker tasks, leases, idempotency, retries, status transitions, summaries, artifacts, receipts, Guard preflight, and Mission OS handoff.
+
+Build 6 intentionally does not add a live Redis/BullMQ queue, production worker runtime, distributed locking service, live tool execution, repo mutation, browser automation, production deployment, customer-data workflows, money movement, live queue configuration, or real artifact storage.
 
 ## Agent Registry and Guard model
 
 Signed payloads are verified over canonical unsigned payloads. Guard consumes registry trust summaries and enforces capability-token constraints, pinned digests, hard stops, lifecycle state, and mission-scoped target/effect boundaries.
 
-Capability tokens are delegated-authority records, not credential storage. Authority envelopes produced by Mission OS are templates/structures that can later feed Guard-capability issuance.
-
-## Hard-stop boundaries
-
-- deletion/destruction
-- raw secrets/credentials
-- money/refunds/purchases/billing/subscriptions
-- production deployment or production data mutation
-- production-impacting DB migrations
-- auth/security-critical changes
-- direct protected branch mutation
-- force push/history rewrite
-- weakening CI/tests/security controls to pass
-- material external sends as Jamie/company
-- legal commitments/contracts
-- platform/OpenAI-required confirmations
+Capability tokens are delegated-authority records. Authority envelopes produced by Mission OS are templates/structures that can later feed Guard-capability issuance. Worker Fleet calls Guard preflight for action-bearing tasks and records receipt/status suggestions without executing actions.
 
 ## Mission/build workflow
 
@@ -63,12 +56,13 @@ Capability tokens are delegated-authority records, not credential storage. Autho
 
 - `docs/ARCHITECTURE.md`: system components and data/control flow.
 - `docs/AUTONOMY_MODEL.md`: authority, autonomy, and hard stops.
+- `docs/WORKER_FLEET.md`: Build 6 task, lease, idempotency, retry, receipt, artifact, Guard preflight, and Mission OS handoff contracts.
 - `docs/APP_HOST.md`: Build 5 app-host tool/resource surface and boundaries.
-- `docs/MISSION_OS.md`: Mission Language, mission schemas, compiler, status, receipts, and Guard integration.
+- `docs/MISSION_OS.md`: Mission Language, mission schemas, compiler, status, receipts, Guard integration, and Worker Fleet handoff.
 - `docs/CUSTOM_APPS.md`: app inventory and responsibilities.
 - `docs/AGENT_REGISTRY.md`: signed cards/manifests, trust, revocation, Guard integration assumptions.
-- `docs/SECURITY.md`: MCP/OAuth/security boundaries and hard stops.
-- `docs/WORKFLOWS.md`: mission lifecycle, DAGs, retries, idempotency.
+- `docs/SECURITY.md`: MCP/OAuth/security boundaries, Worker Fleet no-runtime boundary, and hard stops.
+- `docs/WORKFLOWS.md`: mission lifecycle, worker handoff, DAGs, retries, idempotency.
 - `docs/EVALS.md`: eval philosophy and suites.
 - `docs/RECEIPTS.md` and `docs/EVIDENCE_MODEL.md`: evidence and replay.
 - Compliance/security/governance docs map controls to readiness, not certification.
@@ -79,7 +73,7 @@ The project intends to align evidence with NIST AI RMF, EU AI Act readiness, ISO
 
 ## Public/private boundary
 
-Public: architecture, public specs, non-secret schemas, app/tool scaffolding, examples/mock data, eval templates, governance and compliance docs. Private: secrets, credentials, production endpoints, customer data, internal OAuth clients, cloud/account details, production tokens, live deployment targets, live write APIs, and sensitive runbooks.
+Public: architecture, public specs, non-sensitive schemas, app/tool scaffolding, worker-fleet contracts, examples/mock data, eval templates, governance and compliance docs. Private: sensitive operational material, production infrastructure, customer data, deployed runtime configuration, and internal accounts.
 
 ## Verification commands
 
@@ -91,4 +85,4 @@ pnpm test
 
 ## Next target
 
-Build 6: Worker Fleet.
+Build 7: CodeOps + CI Repair foundations.
