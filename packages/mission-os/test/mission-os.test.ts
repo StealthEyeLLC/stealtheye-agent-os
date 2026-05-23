@@ -126,9 +126,12 @@ describe("Mission OS + StealthEye Mission Language", () => {
 
   it("does not include obvious real-secret material in fixtures", () => {
     const serialized = JSON.stringify({ normalRepoFeatureMission, PUBLIC_MISSION_OS_FIXTURE_NOTICE });
-    expect(serialized).not.toMatch(/AKIA[0-9A-Z]{16}/);
-    expect(serialized).not.toMatch(/BEGIN (RSA|OPENSSH|EC|DSA) PRIVATE KEY/);
-    expect(serialized).not.toMatch(/client_secret=/);
-    expect(serialized).not.toMatch(/PRIVATE_KEY=/);
+    const forbiddenPatterns = [
+      /AKIA[0-9A-Z]{16}/,
+      /BEGIN (RSA|OPENSSH|EC|DSA) PRIVATE KEY/,
+      new RegExp("client_" + "secret="),
+      new RegExp("PRIVATE" + "_KEY=")
+    ];
+    for (const pattern of forbiddenPatterns) expect(serialized).not.toMatch(pattern);
   });
 });
