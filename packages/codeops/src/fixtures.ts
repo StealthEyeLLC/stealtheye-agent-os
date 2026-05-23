@@ -247,7 +247,7 @@ export const trustedCodeOpsCapabilityToken: CapabilityToken = createCapabilityTo
     repositories: [safeRepoTarget.repo_full_name],
     branches: [],
     branch_prefixes: ["agent/"],
-    paths: safeRepoTarget.allowed_paths,
+    paths: [],
     systems: ["github"],
     environments: ["development", "test"],
     domains: [],
