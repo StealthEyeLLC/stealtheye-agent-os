@@ -1,4 +1,4 @@
-import { guardEvalFixtures, trustedCapabilityToken, trustedRegistryDecisionFixture } from "@stealtheye/guard";
+import { guardEvalFixtures, trustedCapabilityToken } from "@stealtheye/guard";
 import { compileMissionLanguage, normalRepoFeatureMission } from "@stealtheye/mission-os";
 import { createArtifactReference } from "./artifacts";
 import { createIdempotencyRecord } from "./idempotency";
@@ -106,13 +106,13 @@ export const workerReceiptEventFixture = createWorkerReceiptEvent({
   evidence_refs: ["test://worker-fleet/receipt"]
 });
 
-const trustedRegistryFixture = trustedRegistryDecisionFixture();
 export const trustedWorkerRegistrySummary: WorkerRegistryTrustSummary = {
-  trusted: trustedRegistryFixture.trusted,
-  valid: trustedRegistryFixture.valid,
-  trust_status: trustedRegistryFixture.trust_status,
-  review_status: trustedRegistryFixture.review_status,
-  errors: trustedRegistryFixture.errors,
-  revoked: trustedRegistryFixture.revoked
+  valid: true,
+  trust_status: "trusted",
+  trusted: true,
+  revoked: false,
+  review_status: "approved",
+  errors: [],
+  warnings: []
 };
 export { trustedCapabilityToken, defaultRetryPolicy };
