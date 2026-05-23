@@ -24,9 +24,19 @@ export const normalMissionStepTask = workerTasksFromMissionPlan({
   now: fixtureNow
 })[0]!;
 
-export const guardPreflightAllowTask = normalMissionStepTask;
+export const guardPreflightAllowTask = createWorkerTask({
+  mission_id: guardEvalFixtures.normalDelegatedRepoActionAllowed.mission_id,
+  plan_id: "plan:fixture:guard-preflight-allow",
+  step_id: "step:guard-preflight-allow",
+  title: "Guard preflight allow fixture",
+  description: "Fixture task that Guard should allow inside mission-scoped authority.",
+  requested_action: guardEvalFixtures.normalDelegatedRepoActionAllowed,
+  capability_token_refs: [trustedCapabilityToken.token_id],
+  now: fixtureNow
+});
+
 export const guardPreflightHardStopTask = createWorkerTask({
-  mission_id: "mission:fixture:worker-fleet-hard-stop",
+  mission_id: guardEvalFixtures.productionDeployEscalated.mission_id,
   plan_id: "plan:fixture:worker-fleet-hard-stop",
   step_id: "step:production-deploy",
   title: "Attempt production deploy preflight",
@@ -37,8 +47,8 @@ export const guardPreflightHardStopTask = createWorkerTask({
 });
 
 export const untrustedRegistryBlockTask = createWorkerTask({
-  mission_id: normalMissionStepTask.mission_id,
-  plan_id: normalMissionStepTask.plan_id,
+  mission_id: guardEvalFixtures.untrustedManifestDenied.mission_id,
+  plan_id: "plan:fixture:untrusted-registry",
   step_id: "step:untrusted-registry",
   title: "Check untrusted registry summary",
   description: "Fixture task that should be blocked by Guard when registry trust is untrusted.",
