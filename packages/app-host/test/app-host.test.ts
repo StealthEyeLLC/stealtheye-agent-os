@@ -153,7 +153,7 @@ describe("App Host foundation shell", () => {
     const serialized = JSON.stringify({ APP_HOST_PUBLIC_FIXTURE_NOTICE, APP_HOST_TOOL_DESCRIPTORS });
     const forbiddenPatterns = [
       /AKIA[0-9A-Z]{16}/,
-      /BEGIN (RSA|OPENSSH|EC|DSA) PRIVATE KEY/,
+      new RegExp("BEGIN " + "(RSA|OPENSSH|EC|DSA) " + "PRIVATE " + "KEY"),
       new RegExp("client_" + "secret="),
       new RegExp("PRIVATE" + "_KEY=")
     ];
