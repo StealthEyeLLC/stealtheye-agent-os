@@ -12,7 +12,7 @@ This repo is public-visible but locked down. Work on feature branches and pull r
 
 Inside an approved mission envelope, proceed without repeated approval for ordinary delegated actions. Preserve durable evidence, use idempotent operations, and escalate only when a hard stop or unclear authority boundary is reached.
 
-Build 6 adds `@stealtheye/worker-fleet` as the Worker Fleet foundation. It defines typed worker tasks, leases, idempotency, retry policy, status summaries, artifact references, worker receipt events, Guard preflight boundaries, and Mission OS plan-to-task handoff. It is not a production worker runtime, live queue, repo mutation tool, browser automation layer, secret store, deployment automation, billing automation, customer-data workflow, or durable ledger.
+Build 7 adds `@stealtheye/codeops` as the CodeOps + CI Repair foundation. It defines typed repository targets, branch/path safety helpers, patch plans, file-change contracts, verification obligations, CI log classification, repair plans, rerun eligibility, PR evidence, and Guard/Worker Fleet preflight adapters. It is not a live GitHub client, branch creator, commit writer, PR creator, CI rerunner, protected-branch writer, browser automation layer, secret store, deployment automation, billing automation, customer-data workflow, or production runtime.
 
 ## Hard stops
 
@@ -29,7 +29,7 @@ Build 6 adds `@stealtheye/worker-fleet` as the Worker Fleet foundation. It defin
 - legal commitments/contracts
 - platform/OpenAI-required confirmations
 
-Hard-stop actions must result in deny or escalation. Worker Fleet may model tasks and Guard preflight outcomes for evals, but it must not execute real actions or bypass Guard.
+Hard-stop actions must result in deny or escalation. CodeOps and CI Repair may model patch plans, requested actions, worker tasks, and Guard preflight outcomes for evals, but they must not execute live actions or bypass Guard.
 
 ## Verification
 
@@ -45,8 +45,8 @@ pnpm test
 
 ## Docs, evals, and receipts
 
-Update relevant docs with behavior changes. Add or update eval expectations when a failure mode or safety condition is discovered. Ensure receipts can capture mission timeline, mission status, authority envelopes, app-host tool previews, worker task lifecycle, leases, retries, idempotency records, tool calls, approvals, denied actions, diffs, logs, artifacts, screenshots, CI, browser QA, manifest digests, registry decisions, Guard decisions, policy checks, hard stops, and final reports.
+Update relevant docs with behavior changes. Add or update eval expectations when a failure mode or safety condition is discovered. Ensure receipts can capture mission timeline, mission status, authority envelopes, app-host tool previews, worker task lifecycle, leases, retries, idempotency records, CodeOps patch plans, file-change contracts, verification plans, CI summaries, repair plans, PR evidence, tool calls, approvals, denied actions, diffs, logs, artifacts, screenshots, CI, browser QA, manifest digests, registry decisions, Guard decisions, policy checks, hard stops, and final reports.
 
 ## Deeper docs
 
-Read `docs/ARCHITECTURE.md`, `docs/AUTONOMY_MODEL.md`, `docs/WORKER_FLEET.md`, `docs/APP_HOST.md`, `docs/MISSION_OS.md`, `docs/AGENT_REGISTRY.md`, `docs/SECURITY.md`, `docs/WORKFLOWS.md`, `docs/EVALS.md`, `docs/RECEIPTS.md`, and `docs/BUILD_PROMPTS.md`.
+Read `docs/ARCHITECTURE.md`, `docs/AUTONOMY_MODEL.md`, `docs/CODEOPS.md`, `docs/CI_REPAIR.md`, `docs/WORKER_FLEET.md`, `docs/APP_HOST.md`, `docs/MISSION_OS.md`, `docs/AGENT_REGISTRY.md`, `docs/SECURITY.md`, `docs/WORKFLOWS.md`, `docs/EVALS.md`, `docs/RECEIPTS.md`, and `docs/BUILD_PROMPTS.md`.
