@@ -1,22 +1,22 @@
 # llms.txt
 
-StealthEye Agent OS is a public-visible, locked-down build repo for a high-autonomy agent operating system: Mission OS, mission-scoped authority, durable workers, MCP/custom apps, signed manifests, Guard decisions, receipts, evals, and compliance-ready evidence for authorized online tasks beyond code automation. Build 2 adds `@stealtheye/agent-registry`. Build 3 adds `@stealtheye/guard`. Build 4 adds `@stealtheye/mission-os` for StealthEye Mission Language, normalized missions, authority envelopes, plans, status snapshots, receipt refs, Guard capability-token templates, requested-action generation, fixtures, and Vitest eval-style tests.
+StealthEye Agent OS is a public-visible, locked-down build repo for a high-autonomy agent operating system: Mission OS, app-host surfaces, mission-scoped authority, durable workers, MCP/custom apps, signed manifests, Guard decisions, receipts, evals, and compliance-ready evidence for authorized online tasks beyond code automation. Build 2 adds `@stealtheye/agent-registry`. Build 3 adds `@stealtheye/guard`. Build 4 adds `@stealtheye/mission-os`. Build 5 adds `@stealtheye/app-host` for preview-only MCP-style host tools/resources over Registry, Guard, Mission OS, and policy primitives.
 
 ## Orient quickly
 
 1. Read `AGENTS.md` for operational rules, commands, and hard stops.
-2. Read `docs/ARCHITECTURE.md`, `docs/AUTONOMY_MODEL.md`, `docs/MISSION_OS.md`, `docs/AGENT_REGISTRY.md`, `docs/CUSTOM_APPS.md`, `docs/SECURITY.md`, `docs/WORKFLOWS.md`, `docs/EVALS.md`, and `docs/RECEIPTS.md`.
-3. Inspect `packages/agent-registry/src/*`, `packages/guard/src/*`, `packages/mission-os/src/*`, and package tests for Build 2-4 implementation.
+2. Read `docs/ARCHITECTURE.md`, `docs/AUTONOMY_MODEL.md`, `docs/APP_HOST.md`, `docs/MISSION_OS.md`, `docs/AGENT_REGISTRY.md`, `docs/CUSTOM_APPS.md`, `docs/SECURITY.md`, `docs/WORKFLOWS.md`, `docs/EVALS.md`, and `docs/RECEIPTS.md`.
+3. Inspect `packages/agent-registry/src/*`, `packages/guard/src/*`, `packages/mission-os/src/*`, `packages/app-host/src/*`, and package tests for Build 2-5 implementation.
 4. Treat issue #1 as canonical planning context.
-5. Keep public/private boundaries intact. Never add secrets, production endpoints, customer data, private OAuth clients, cloud/account details, production tokens, money movement, production deploy automation, or sensitive runbooks.
+5. Keep public/private boundaries intact. Never add secrets, production endpoints, customer data, private OAuth clients, cloud/account details, production tokens, live write APIs, money movement, production deploy automation, or sensitive runbooks.
 
 ## Core app suite
 
-Mission OS, CodeOps, CI Repair, BrowserOps, Worker Fleet, Guard, Secrets Broker, Memory Graph, Tool Router, Evals, StagingOps, InfraOps, Observability, ProductOps, InboxOps, CustomerOps, ResearchOps, CommerceOps, Agent Registry, Semantic Firewall, Workflow Compiler, Agent Arena.
+Mission OS, App Host, CodeOps, CI Repair, BrowserOps, Worker Fleet, Guard, Secrets Broker, Memory Graph, Tool Router, Evals, StagingOps, InfraOps, Observability, ProductOps, InboxOps, CustomerOps, ResearchOps, CommerceOps, Agent Registry, Semantic Firewall, Workflow Compiler, Agent Arena.
 
 ## Autonomy boundary
 
-Agents may act broadly inside approved mission envelopes. Mission OS structures that authority; Guard must deny or escalate destructive deletion, raw secrets, money movement, production deployment/data mutation, production-impacting migrations, auth/security-critical changes, protected branch mutation, force push/history rewrite, CI/test weakening, material external sends, legal commitments, and platform-required confirmations.
+Agents may act broadly inside approved mission envelopes. Mission OS structures that authority; App Host exposes only preview/read-only shell tools in Build 5; Guard must deny or escalate destructive deletion, raw secrets, money movement, production deployment/data mutation, production-impacting migrations, auth/security-critical changes, protected branch mutation, force push/history rewrite, CI/test weakening, material external sends, legal commitments, and platform-required confirmations.
 
 ## Verification commands
 
@@ -28,4 +28,4 @@ pnpm test
 
 ## Next target
 
-Build 5: ChatGPT App / MCP Server Host Shell.
+Build 6: Worker Fleet.
