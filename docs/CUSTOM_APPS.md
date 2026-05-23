@@ -4,6 +4,7 @@ Each app contributes a bounded capability surface to the agent OS. Tool descript
 
 | App | Purpose | Major tool families | Autonomy contribution | Hard-stop considerations |
 |---|---|---|---|---|
+| StealthEye App Host | ChatGPT App / MCP Server Host Shell foundation | host health/capabilities, mission previews, Guard previews, registry previews, policy summaries | exposes existing foundations through safe preview-only tools | no live writes, browser actions, workers, deployments, secrets, money movement, or customer data |
 | StealthEye Mission OS | mission intake, planning, authority envelopes, status, final reports | mission CRUD, approval capture, state inspection, receipt routing | turns delegated goals into durable, bounded missions | stops at missing authority, production impact, money movement, legal commitments |
 | StealthEye CodeOps | repository change execution | branching, patching, commits, PRs, diff review | lets agents safely change code/docs within scoped branches | no protected-branch writes, force push, CI weakening, secrets |
 | StealthEye CI Repair | diagnose and repair failing checks | workflow/log read, failure classification, repair patches | keeps delivery loops moving without repeated approval | may not delete tests or weaken checks to pass |
