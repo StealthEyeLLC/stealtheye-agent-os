@@ -1,5 +1,5 @@
 import { guardEvalFixtures, trustedCapabilityToken, trustedRegistryDecisionFixture } from "@stealtheye/guard";
-import { compileMissionLanguage, missionLanguageFixtures } from "@stealtheye/mission-os";
+import { compileMissionLanguage, normalRepoFeatureMission } from "@stealtheye/mission-os";
 import { createArtifactReference } from "./artifacts";
 import { createIdempotencyRecord } from "./idempotency";
 import { createLease } from "./leases";
@@ -11,7 +11,7 @@ import { createWorkerTask, workerTasksFromMissionPlan } from "./tasks";
 export const PUBLIC_WORKER_FLEET_FIXTURE_NOTICE = "Public-safe Worker Fleet fixtures only. No real secrets, credentials, production endpoints, customer data, OAuth clients, cloud account identifiers, queue URLs, storage buckets, or live write APIs.";
 export const fixtureNow = "2026-01-01T00:00:00.000Z";
 
-export const compiledWorkerMission = compileMissionLanguage(missionLanguageFixtures.normalRepoFeature, {
+export const compiledWorkerMission = compileMissionLanguage(normalRepoFeatureMission, {
   now: fixtureNow,
   issued_to: "agent:worker-fleet-fixture"
 });
