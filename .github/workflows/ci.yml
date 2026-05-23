@@ -71,8 +71,13 @@ jobs:
         shell: bash
         run: |
           set -euo pipefail
-          if grep -RInE '(AKIA[0-9A-Z]{16}|BEGIN (RSA|OPENSSH|EC|DSA) PRIVATE KEY|password=|client_secret=|PRIVATE_KEY=)' . \
-            --exclude-dir=.git; then
+          guard_file="./.github/workflows/ci.yml"
+          secret_like_patterns='(AKIA[0-9A-Z]{16}|BEGIN (RSA|OPENSSH|EC|DSA) PRIVATE KEY|password=|client_secret=|PRIVATE_KEY=)'
+          if find . \
+            -path './.git' -prune -o \
+            -type f \
+            ! -path "$guard_file" \
+            -print0 | xargs -0 grep -InE "$secret_like_patterns"; then
             echo "Potential secret-like string found."
             exit 1
           fi
