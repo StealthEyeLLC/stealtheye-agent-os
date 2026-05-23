@@ -31,17 +31,21 @@ Guard policy evaluation must never silently allow hard stops. Build 3 maps hard 
 
 Mission OS turns user intent into typed mission structures, authority envelopes, plan steps, status summaries, receipt references, and Guard-compatible action templates. Mission OS does not issue production credentials, store secrets, bypass Guard, or execute workers. Hard-stop missions may appear as fixtures to verify escalation behavior, not as enabled production actions.
 
+## Build 5 App Host posture
+
+App Host exposes only read-only, fixture-only, or preview-only tools. It can validate, compile, preview, summarize, and produce fixture-backed Guard/Registry/Mission outputs, but it cannot mutate repositories, create branches, commit, open PRs, rerun CI, automate browsers, deploy, delete, access secrets, move money, send external messages, access customer data, or execute workers.
+
 ## Secrets broker
 
 Secrets must remain in private systems. A Secrets Broker may provide brokered operations, scoped environment injection, or signing/delegation without returning raw secret values to agents, logs, receipts, or public repo files.
 
 ## Semantic firewall
 
-The Semantic Firewall treats repo content, logs, browser pages, documents, issue comments, model outputs, Mission Language input, and tool outputs as potentially malicious. It detects prompt injection, data exfiltration attempts, authority confusion, and instruction smuggling.
+The Semantic Firewall treats repo content, logs, browser pages, documents, issue comments, model outputs, Mission Language input, app-host input, and tool outputs as potentially malicious. It detects prompt injection, data exfiltration attempts, authority confusion, and instruction smuggling.
 
 ## Prompt injection and tool poisoning
 
-Threats include malicious README files, CI logs, web pages, browser DOM content, issue comments, generated manifests, Mission Language documents, and remote MCP tool descriptions. Tool outputs must not override system, developer, repo, mission, or Guard policy.
+Threats include malicious README files, CI logs, web pages, browser DOM content, issue comments, generated manifests, Mission Language documents, app-host tool inputs, and remote MCP tool descriptions. Tool outputs must not override system, developer, repo, mission, or Guard policy.
 
 Signed manifests reduce tool poisoning risk but do not remove the need for Guard checks. A valid signature proves provenance and integrity for a signed payload; it does not prove a tool call is authorized for a mission.
 
@@ -60,10 +64,12 @@ Protected HTTP MCP servers should align toward OAuth 2.1 practices:
 - PKCE where relevant;
 - confused-deputy defense through audience, issuer, subject, scope, and resource checks.
 
+Build 5 does not implement OAuth or production MCP authorization. It models a local package-level host shell only.
+
 ## Public/private boundary
 
-Public repo content may contain architecture, public specs, schemas, mock data, eval templates, and governance docs. Private systems contain secrets, credentials, production endpoints, customer data, internal OAuth clients, cloud/account details, sensitive runbooks, production signing keys, production capability issuance systems, and production Mission OS state.
+Public repo content may contain architecture, public specs, schemas, mock data, eval templates, app-host descriptors, preview fixtures, and governance docs. Private systems contain secrets, credentials, production endpoints, customer data, internal OAuth clients, cloud/account details, sensitive runbooks, production signing keys, production capability issuance systems, production Mission OS state, and deployed app-host runtime configuration.
 
 ## Security evidence
 
-Receipts should capture denials, approvals, policy decisions, mission ids, authority envelopes, manifest identities, manifest digests, registry decisions, Guard decisions, matched capability tokens, policy checks, hard stops, tool calls, redactions, auth scopes, CI/security check results, and incident-relevant artifacts.
+Receipts should capture denials, approvals, policy decisions, mission ids, authority envelopes, app-host previews, manifest identities, manifest digests, registry decisions, Guard decisions, matched capability tokens, policy checks, hard stops, tool calls, redactions, auth scopes, CI/security check results, and incident-relevant artifacts.

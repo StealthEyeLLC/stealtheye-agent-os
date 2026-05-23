@@ -26,9 +26,9 @@ pnpm test
 
 CI should be truthful about what is actually checked. Do not claim full security scanning, production readiness, SBOM generation, or supply-chain attestation until those workflows exist.
 
-## Build 4 prompt outcome
+## Build 5 prompt outcome
 
-Build 4 implements Mission OS + StealthEye Mission Language as package-level foundation work: Mission Language schema, normalized mission schema, authority envelopes, lightweight plan structures, status inspection, receipt references, Guard capability-token templates, requested-action generation, fixtures, and Vitest cases. It does not add production app servers, live worker queues, real credentials, production endpoints, money movement, production deploys, customer data, private OAuth clients, or sensitive infrastructure.
+Build 5 implements ChatGPT App / MCP Server Host Shell as package-level foundation work: app metadata, MCP-style tool descriptors, input/output schemas, static resource descriptors, fixture-backed preview handlers, and Vitest eval-style cases for host, Mission OS, Guard, Agent Registry, and policy families. It does not add production app servers, deployed MCP runtime, live repository mutation, worker queues, browser automation, real credentials, production endpoints, money movement, production deploys, customer data, private OAuth clients, or sensitive infrastructure.
 
 ## Discipline
 
@@ -36,4 +36,4 @@ Do not mix unrelated features. Do not add secrets or private infrastructure. Do 
 
 ## Next target
 
-Build 5 should implement ChatGPT App / MCP Server Host Shell.
+Build 6 should implement Worker Fleet foundations.

@@ -1,6 +1,6 @@
 # Mission OS
 
-Mission OS turns broad user goals into structured, validated, authority-aware mission objects. It is the foundation for later ChatGPT App and MCP Server Host Shell surfaces.
+Mission OS turns broad user goals into structured, validated, authority-aware mission objects. Build 5 exposes those objects through the preview-only App Host shell.
 
 ## Build 4 implementation
 
@@ -15,6 +15,17 @@ Mission OS turns broad user goals into structured, validated, authority-aware mi
 - mission status transition, blocker, next-action, and completion-readiness helpers;
 - mission-level receipt and artifact reference helpers;
 - public-safe fixtures and Vitest eval-style cases.
+
+## Build 5 App Host exposure
+
+`packages/app-host` uses Mission OS through preview-only tools:
+
+- `mission.validate` validates Mission Language;
+- `mission.compile` compiles Mission Language into normalized mission structures;
+- `mission.preview` previews authority envelope, plan, status, receipt expectations, and requested-action templates;
+- `mission.status.preview` previews status summaries, blockers, next actions, and completion readiness.
+
+These tools do not execute missions, issue credentials, run workers, create branches, mutate repositories, automate browsers, deploy software, or access secrets/customer data.
 
 ## StealthEye Mission Language
 
@@ -45,7 +56,7 @@ Mission statuses include draft, planned, awaiting_authority, authorized, running
 
 ## Receipt references
 
-Build 4 stores mission-level references to Guard decisions, registry decisions, pull requests, CI runs, artifacts, and final reports. It does not implement the full receipt ledger yet.
+Build 4 stores mission-level references to Guard decisions, registry decisions, pull requests, CI runs, artifacts, and final reports. Build 5 can preview those structures through App Host resources and tools. It does not implement the full receipt ledger yet.
 
 ## Public/private boundary
 
@@ -53,4 +64,4 @@ Fixtures are fake and public-safe. This package does not include real secrets, p
 
 ## Next step
 
-Build 5 should implement the ChatGPT App / MCP Server Host Shell so Mission OS can be exposed through an app/server interface without weakening Guard, registry, or public/private boundaries.
+Build 6 should implement Worker Fleet foundations while preserving Mission OS authority boundaries and Guard-gated execution.
