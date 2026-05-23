@@ -1,6 +1,6 @@
 import { type RequestedAction } from "@stealtheye/guard";
 import { createAuthorityEnvelope, authorityEnvelopeToCapabilityTokenTemplate, requestedActionFromPlanStep } from "./authority-envelope";
-import { missionLanguageToMission, normalizeMissionLanguage } from "./mission-language";
+import { missionLanguageToMission, normalizeMissionLanguage, type NormalizeMissionOptions } from "./mission-language";
 import { createMissionPlan, defaultPlanSteps } from "./planning";
 import { createMissionReceiptRefs } from "./receipts";
 import { summarizeMissionStatus } from "./status";
@@ -15,7 +15,9 @@ export interface CompileMissionOptions {
 
 export function compileMissionLanguage(input: MissionLanguage | unknown, options: CompileMissionOptions = {}): MissionCompileResult {
   const language = normalizeMissionLanguage(input);
-  let mission = missionLanguageToMission(language, { now: options.now, status: "planned" });
+  const normalizeOptions: NormalizeMissionOptions = { status: "planned" };
+  if (options.now !== undefined) normalizeOptions.now = options.now;
+  let mission = missionLanguageToMission(language, normalizeOptions);
   const issuedTo = options.issued_to ?? "agent:mission-os-fixture";
   const authorityEnvelope = createAuthorityEnvelope({
     mission,
