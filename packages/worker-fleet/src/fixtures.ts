@@ -5,6 +5,7 @@ import { createIdempotencyRecord } from "./idempotency";
 import { createLease } from "./leases";
 import { createWorkerReceiptEvent } from "./receipts";
 import { defaultRetryPolicy, scheduleRetry } from "./retry-policy";
+import type { WorkerRegistryTrustSummary } from "./schemas";
 import { transitionTaskStatus } from "./status";
 import { createWorkerTask, workerTasksFromMissionPlan } from "./tasks";
 
@@ -105,5 +106,13 @@ export const workerReceiptEventFixture = createWorkerReceiptEvent({
   evidence_refs: ["test://worker-fleet/receipt"]
 });
 
-export const trustedWorkerRegistrySummary = trustedRegistryDecisionFixture();
+const trustedRegistryFixture = trustedRegistryDecisionFixture();
+export const trustedWorkerRegistrySummary: WorkerRegistryTrustSummary = {
+  trusted: trustedRegistryFixture.trusted,
+  valid: trustedRegistryFixture.valid,
+  trust_status: trustedRegistryFixture.trust_status,
+  review_status: trustedRegistryFixture.review_status,
+  errors: trustedRegistryFixture.errors,
+  revoked: trustedRegistryFixture.revoked
+};
 export { trustedCapabilityToken, defaultRetryPolicy };
