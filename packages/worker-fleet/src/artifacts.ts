@@ -8,9 +8,9 @@ export interface CreateArtifactReferenceInput {
   uri: string;
   summary: string;
   created_at: string;
-  sensitivity?: WorkerArtifactReference["sensitivity"];
-  retention_hint?: string;
-  digest?: string;
+  sensitivity?: WorkerArtifactReference["sensitivity"] | undefined;
+  retention_hint?: string | undefined;
+  digest?: string | undefined;
 }
 
 export function createArtifactReference(input: CreateArtifactReferenceInput): WorkerArtifactReference {
@@ -21,7 +21,7 @@ export function createArtifactReference(input: CreateArtifactReferenceInput): Wo
     mission_id: input.mission_id,
     kind: input.kind,
     uri: input.uri,
-    digest: input.digest,
+    ...(input.digest ? { digest: input.digest } : {}),
     summary: input.summary,
     created_at: input.created_at,
     sensitivity: input.sensitivity ?? "public",
