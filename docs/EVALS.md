@@ -14,25 +14,30 @@ Every significant behavior should be measurable through evals. Failures become r
 
 ## Build 4 Mission OS eval-style tests
 
-`packages/mission-os/test/*` covers:
+`packages/mission-os/test/*` covers Mission Language validation, mission compilation, authority envelopes, Guard-compatible outputs, plan dependencies, status transitions, receipt preservation, hard-stop previews, and public-safe fixtures.
 
-- valid Mission Language object validation;
-- invalid Mission Language object validation;
-- compiling Mission Language to normalized mission objects;
-- compiling Mission Language to authority envelopes;
-- authority-envelope output compatible with Guard capability-token fields;
-- mission plan step dependency preservation;
-- requested repo write action generation from plan steps;
-- Guard allowing a safe planned action with matching authority;
-- Guard escalating or denying hard-stop planned action;
-- mission status transition happy path;
-- invalid mission status transition rejection;
-- mission status summaries including blockers and next actions;
-- receipt/evidence reference preservation;
-- fixture coverage for invalid target constraints and missing verification plans;
-- no obvious real-secret material in fixtures.
+## Build 5 App Host eval-style tests
 
-Build 4 fixtures include normal repo feature mission, CI repair mission, browser QA mission, hard-stop production deploy mission, hard-stop money movement mission, invalid target constraints mission, and missing verification plan mission.
+`packages/app-host/test/*` covers:
+
+- host health returning foundation-shell status;
+- host capabilities listing expected tool families;
+- valid Mission Language fixture accepted;
+- invalid Mission Language fixture rejected;
+- mission compile preview returning mission, authority envelope, plan, status, receipt expectations, capability-token template, and requested-action templates;
+- hard-stop mission preview marked appropriately;
+- Guard preview allowing safe fixture action;
+- Guard preview escalating or denying hard-stop fixture action;
+- Guard receipt preview returning receipt-friendly fields;
+- Registry agent-card validation accepting trusted fixture;
+- Registry tool-manifest validation accepting trusted fixture;
+- risky manifest diff preview requiring review;
+- trusted registry preview returning trusted/approved decision;
+- hard-stop policy summary returning required categories;
+- every Build 5 descriptor being read-only or preview-only;
+- no live write/destructive tool exposure;
+- resource descriptors exposing static app-host content;
+- no obvious real-secret material in app-host fixtures or descriptors.
 
 ## Failure-to-eval loop
 
@@ -43,6 +48,7 @@ When the system fails, add an eval that reproduces the failure, documents expect
 - Regression evals for known failure modes.
 - Mission success evals for end-to-end task completion.
 - Mission Language evals for compilation, authority envelopes, status, and receipt references.
+- App Host evals for descriptor safety, schema conformance, preview outputs, resource metadata, and no-live-write exposure.
 - Tool selection evals for correct routing and refusal.
 - Registry trust evals for signed card/manifest verification, revocation, and diff review.
 - Guard policy evals for capability-token matching, registry trust enforcement, hard stops, receipts, and lifecycle states.
