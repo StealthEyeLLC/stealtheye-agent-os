@@ -61,12 +61,12 @@ const leasedFailureTask = transitionTaskStatus(normalMissionStepTask, "leased", 
 const runningFailureTask = transitionTaskStatus(leasedFailureTask, "running", fixtureNow);
 
 export const retryableFailureTask = transitionTaskStatus(runningFailureTask, "failed", fixtureNow, {
-  error_summary: { code: "temporary_failure", message: "Temporary fixture failure.", retryable: true },
+  error_summary: { code: "temporary_failure", message: "Temporary fixture failure.", retryable: true, evidence_refs: ["test://worker-fleet/retryable-failure"] },
   retry_state: scheduleRetry(normalMissionStepTask.retry_state!, "temporary_failure", new Date(fixtureNow))
 });
 
 export const nonRetryableFailureTask = transitionTaskStatus(runningFailureTask, "failed", fixtureNow, {
-  error_summary: { code: "guard_denied", message: "Guard denied fixture work.", retryable: false },
+  error_summary: { code: "guard_denied", message: "Guard denied fixture work.", retryable: false, evidence_refs: ["test://worker-fleet/non-retryable-failure"] },
   retry_state: scheduleRetry(normalMissionStepTask.retry_state!, "guard_denied", new Date(fixtureNow))
 });
 
