@@ -1,4 +1,4 @@
-import { type WorkerTask, type WorkerTaskStatus } from "./schemas";
+import { WorkerTaskSchema, type WorkerTask, type WorkerTaskStatus } from "./schemas";
 
 const allowedTransitions: Record<WorkerTaskStatus, WorkerTaskStatus[]> = {
   queued: ["leased", "blocked", "canceled"],
@@ -18,7 +18,7 @@ export function canTransitionTaskStatus(from: WorkerTaskStatus, to: WorkerTaskSt
 
 export function transitionTaskStatus(task: WorkerTask, to: WorkerTaskStatus, now: string, patch: Partial<WorkerTask> = {}): WorkerTask {
   if (!canTransitionTaskStatus(task.status, to)) throw new Error(`invalid task status transition: ${task.status} -> ${to}`);
-  return {
+  return WorkerTaskSchema.parse({
     ...task,
     ...patch,
     status: to,
@@ -26,7 +26,7 @@ export function transitionTaskStatus(task: WorkerTask, to: WorkerTaskStatus, now
     started_at: to === "running" ? (task.started_at ?? now) : task.started_at,
     completed_at: to === "completed" ? now : task.completed_at,
     failed_at: to === "failed" ? now : task.failed_at
-  };
+  });
 }
 
 export interface WorkerMissionSummary {
