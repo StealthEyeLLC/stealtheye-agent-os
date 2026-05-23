@@ -2,6 +2,7 @@ import { createHash } from "node:crypto";
 import { IdempotencyRecordSchema, WorkerFleetSchemaVersion, type IdempotencyRecord, type WorkerTask } from "./schemas";
 
 function stableJson(value: unknown): string {
+  if (value === undefined) return "undefined";
   if (value === null || typeof value !== "object") return JSON.stringify(value);
   if (Array.isArray(value)) return `[${value.map(stableJson).join(",")}]`;
   const record = value as Record<string, unknown>;
@@ -65,7 +66,9 @@ export function detectIdempotency(existing: IdempotencyRecord | undefined, task:
       collision_summary: `Idempotency key ${task.idempotency_key} reused for a different action fingerprint.`
     };
   }
-  return { kind: "duplicate", record: IdempotencyRecordSchema.parse({ ...existing, last_seen_at: now }), result_ref: existing.status === "completed" ? existing.result_ref : undefined };
+  const duplicateRecord = IdempotencyRecordSchema.parse({ ...existing, last_seen_at: now });
+  if (existing.status === "completed" && existing.result_ref) return { kind: "duplicate", record: duplicateRecord, result_ref: existing.result_ref };
+  return { kind: "duplicate", record: duplicateRecord };
 }
 
 export function completeIdempotencyRecord(record: IdempotencyRecord, resultRef: string, now: string): IdempotencyRecord {
