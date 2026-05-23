@@ -1,52 +1,28 @@
 # AGENTS.md
 
-## Purpose
+This repo is the public-safe build root for StealthEye Agent OS. Work on feature branches and PRs only. Do not push directly to `main`.
 
-Build StealthEye Agent OS: a high-autonomy, mission-scoped operating system for authorized online tasks, code operations, browser work, worker execution, signed manifests, Mission OS, app-host surfaces, Guard decisions, receipts, evals, and compliance-ready evidence.
+## Current build context
 
-## Build posture
+Build 8 adds `@stealtheye/browserops` and a minimal build automation engine. BrowserOps is fixture-only: it models sessions, page observations, evidence refs, action policies, action plans, Guard preflight, and Worker Fleet handoff templates. It does not run Playwright, launch browsers, visit real websites, use credentials, submit forms, send material externally, make purchases, mutate production, or perform destructive actions.
 
-This repo is public-visible but locked down. Work on feature branches and pull requests. Do not push directly to protected branches. Do not add secrets, private endpoints, production credentials, customer data, internal OAuth clients, cloud/account details, production tokens, live deployment targets, live write APIs, live queue credentials, or sensitive operational runbooks.
+The build automation engine lives at `scripts/stealtheye-build.mjs` with phase specs under `scripts/phases/`. It generates public-safe state under `docs/generated/` and supports `--check` for CI.
 
-## High-autonomy policy
+## Autonomy model
 
-Inside an approved mission envelope, proceed without repeated approval for ordinary delegated actions. Preserve durable evidence, use idempotent operations, and escalate only when a hard stop or unclear authority boundary is reached.
-
-Build 7 adds `@stealtheye/codeops` as the CodeOps + CI Repair foundation. It defines typed repository targets, branch/path safety helpers, patch plans, file-change contracts, verification obligations, CI log classification, repair plans, rerun eligibility, PR evidence, and Guard/Worker Fleet preflight adapters. It is not a live GitHub client, branch creator, commit writer, PR creator, CI rerunner, protected-branch writer, browser automation layer, secret store, deployment automation, billing automation, customer-data workflow, or production runtime.
+Inside an approved mission envelope, proceed without repeated approval for ordinary delegated actions: reading public/authorized repo content, creating non-protected branches, writing scoped branch files, committing branch work, opening PRs, reading CI, rerunning allowed failed CI where scoped, and writing public-safe receipts/artifacts. Stop or escalate at hard boundaries.
 
 ## Hard stops
 
-- deletion/destruction
-- raw secrets/credentials
-- money/refunds/purchases/billing/subscriptions
-- production deployment or production data mutation
-- production-impacting DB migrations
-- auth/security-critical changes
-- direct protected branch mutation
-- force push/history rewrite
-- weakening CI/tests/security controls to pass
-- material external sends as Jamie/company
-- legal commitments/contracts
-- platform/OpenAI-required confirmations
-
-Hard-stop actions must result in deny or escalation. CodeOps and CI Repair may model patch plans, requested actions, worker tasks, and Guard preflight outcomes for evals, but they must not execute live actions or bypass Guard.
+Do not implement or perform actions that enable deletion/destruction, raw secret exposure, money movement, purchases/payments, billing/subscription changes, production deploys, production data mutation, production-impacting migrations, auth/security-critical changes, protected branch mutation, force push/history rewrite, CI/test/security weakening, material external sends, legal commitments, live credentialed browsing, or platform-required confirmations.
 
 ## Verification
-
-Before final reporting, verify required files/changes exist, no secrets were introduced, docs remain coherent, CI is truthful, and receipt/eval expectations were updated where applicable.
-
-For package work, run or verify through CI:
 
 ```bash
 pnpm install --no-frozen-lockfile
 pnpm typecheck
 pnpm test
+node scripts/stealtheye-build.mjs scripts/phases/build-008-browserops.mjs --check
 ```
 
-## Docs, evals, and receipts
-
-Update relevant docs with behavior changes. Add or update eval expectations when a failure mode or safety condition is discovered. Ensure receipts can capture mission timeline, mission status, authority envelopes, app-host tool previews, worker task lifecycle, leases, retries, idempotency records, CodeOps patch plans, file-change contracts, verification plans, CI summaries, repair plans, PR evidence, tool calls, approvals, denied actions, diffs, logs, artifacts, screenshots, CI, browser QA, manifest digests, registry decisions, Guard decisions, policy checks, hard stops, and final reports.
-
-## Deeper docs
-
-Read `docs/ARCHITECTURE.md`, `docs/AUTONOMY_MODEL.md`, `docs/CODEOPS.md`, `docs/CI_REPAIR.md`, `docs/WORKER_FLEET.md`, `docs/APP_HOST.md`, `docs/MISSION_OS.md`, `docs/AGENT_REGISTRY.md`, `docs/SECURITY.md`, `docs/WORKFLOWS.md`, `docs/EVALS.md`, `docs/RECEIPTS.md`, and `docs/BUILD_PROMPTS.md`.
+CI must stay truthful. Do not claim full security scanning, SBOM/provenance, deployment readiness, live browser testing, credentialed browsing testing, live queue readiness, live repo-write testing, or Playwright runtime readiness until those workflows exist.
