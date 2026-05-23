@@ -16,9 +16,9 @@ export function taskRequiresGuardPreflight(task: WorkerTask): boolean {
 export interface GuardPreflightInput {
   task: WorkerTask;
   capability_tokens: CapabilityToken[];
-  registry_trust_summary?: RegistryTrustInput;
+  registry_trust_summary?: RegistryTrustInput | undefined;
   worker_id: string;
-  now?: Date;
+  now?: Date | undefined;
 }
 
 export function runGuardPreflight(input: GuardPreflightInput): WorkerPreflightResult {
@@ -27,8 +27,8 @@ export function runGuardPreflight(input: GuardPreflightInput): WorkerPreflightRe
   const now = input.now ?? new Date();
   const guardDecision = evaluateGuardDecision(input.task.requested_action, input.capability_tokens, {
     now,
-    registryTrust: input.registry_trust_summary,
-    decisionId: `guard-decision:${input.task.task_id}`
+    decisionId: `guard-decision:${input.task.task_id}`,
+    ...(input.registry_trust_summary ? { registryTrust: input.registry_trust_summary } : {})
   });
   const outcome = guardDecision.decision === "allow" ? "allow" : guardDecision.decision === "escalate" ? "escalate" : "block";
   const updatedStatus = outcome === "allow" ? "leased" : outcome === "escalate" ? "waiting" : "blocked";
