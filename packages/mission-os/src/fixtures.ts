@@ -141,6 +141,7 @@ export const repoWritePlanStep: MissionPlanStep = {
     path: "packages/mission-os/src/index.ts",
     environment: "development",
     system: "github",
+    account: "StealthEyeLLC",
     manifest_id: "tool-manifest:codeops-fixture"
   },
   verification_refs: ["verification:pnpm-typecheck", "verification:pnpm-test"],
@@ -153,6 +154,6 @@ export const productionDeployPlanStep: MissionPlanStep = {
   step_id: "plan-step:fixture-prod-deploy",
   title: "Attempt production deploy fixture",
   expected_effects: ["production_deploy"],
-  target_summary: { environment: "production", system: "github", resource_id: "fixture-production-deploy" },
+  target_summary: { environment: "production", system: "github", account: "StealthEyeLLC", resource_id: "fixture-production-deploy" },
   risk_indicators: ["production deploy"]
 };
