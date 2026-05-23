@@ -4,6 +4,10 @@
 
 StealthEye Agent OS is a foundation for broad delegated autonomy: authorized online-task agents operating through ChatGPT custom apps/MCP, durable workers, mission-scoped authority, signed manifests, evals, receipts, replayable evidence, and compliance-ready controls. This public repo contains non-secret architecture, specs, governance, scaffolding, eval templates, and compliance planning only.
 
+## Current build state
+
+Build 2 adds the first concrete technical package: `@stealtheye/agent-registry`. It implements Zod schemas for signed agent cards and signed tool manifests, JSON Schema export, deterministic canonicalization, SHA-256 digesting, Ed25519 signing/verification helpers, risk-relevant diffing, an in-memory trust registry, revocation lists, public test fixtures, and Vitest tests that function as initial eval-style cases.
+
 ## Architecture overview
 
 The default stack is TypeScript monorepo, Node.js MCP servers, Postgres for durable mission/control/evidence state, Redis + BullMQ for initial worker queues, Temporal as future workflow orchestration, S3/R2-compatible artifact storage, GitHub App auth, Playwright BrowserOps, OpenAI Responses API + Apps SDK integration, and Zod + JSON Schema for mission/tool/workflow/receipt/authority/agent-card schemas.
@@ -30,7 +34,7 @@ Key systems: Mission OS, Agent Registry, Guard, Capability Tokens, Worker Fleet,
 - **StealthEye CustomerOps**: customer support workflows.
 - **StealthEye ResearchOps**: research and synthesis.
 - **StealthEye CommerceOps**: commerce-related task assistance.
-- **StealthEye Agent Registry**: trusted agent/tool catalog.
+- **StealthEye Agent Registry**: trusted agent/tool catalog using signed cards/manifests.
 - **StealthEye Semantic Firewall**: content and prompt boundary layer.
 - **StealthEye Workflow Compiler**: mission-to-DAG compiler.
 - **StealthEye Agent Arena**: agent eval and competition harness.
@@ -39,7 +43,7 @@ Key systems: Mission OS, Agent Registry, Guard, Capability Tokens, Worker Fleet,
 
 Mission-scoped delegated authority defines what the agent may do, with what tools, against which targets, for what time window, and under what evidence requirements. Broad autonomy is expected inside the approved envelope; ordinary delegated actions should not require repeated approval.
 
-## Hard stops
+## Hard-stop boundaries
 
 - deletion/destruction
 - raw secrets/credentials
@@ -53,6 +57,10 @@ Mission-scoped delegated authority defines what the agent may do, with what tool
 - material external sends as Jamie/company
 - legal commitments/contracts
 - platform/OpenAI-required confirmations
+
+## Agent Registry model
+
+Signed payloads are verified over canonical unsigned payloads. Mutable signature arrays are excluded before digesting/signing. Trust decisions combine schema validation, digest verification, Ed25519 signature verification, publisher/key trust, pinned digest checks, allowed agent/manifest lists, and revocation checks. Test fixtures generate local test keys at runtime and do not commit private keys.
 
 ## Mission/build workflow
 
@@ -83,3 +91,15 @@ The project intends to align evidence with NIST AI RMF, EU AI Act readiness, ISO
 ## Public/private boundary
 
 Public: architecture, public specs, non-secret schemas, app/tool scaffolding, examples/mock data, eval templates, governance and compliance docs. Private: secrets, credentials, production endpoints, customer data, internal OAuth clients, cloud/account details, sensitive runbooks.
+
+## Verification commands
+
+```bash
+pnpm install --no-frozen-lockfile
+pnpm typecheck
+pnpm test
+```
+
+## Next target
+
+Build 3: Guard + Capability Tokens.

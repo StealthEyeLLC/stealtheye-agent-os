@@ -4,7 +4,9 @@ StealthEye Agent OS is the foundation for a max-leverage autonomous-agent operat
 
 ## Current status
 
-This repository is at **Build 1: Foundation Scaffold**. The current branch establishes public architecture, governance, autonomy, evidence, security, compliance, and build-process documentation. It does not yet implement production app code, production workers, production endpoints, or real credential handling.
+This repository is at **Build 2: Agent Registry + Signed Manifests**. The repo now includes the first concrete TypeScript package foundation for signed agent cards, signed tool manifests, deterministic canonicalization, SHA-256 digesting, Ed25519 verification primitives, manifest diffing, an in-memory trust registry, revocation checks, public test fixtures, and Vitest coverage.
+
+This is still foundation work. It does not implement production app servers, production workers, persistent Postgres state, Redis queues, production endpoints, real credential handling, deployment automation, or customer-data workflows.
 
 ## Repo posture
 
@@ -18,13 +20,32 @@ The default direction is a TypeScript monorepo with Node.js MCP servers, Postgre
 
 Major subsystems are Mission OS, Agent Registry, Guard, Capability Tokens, Worker Fleet, CodeOps, CI Repair, BrowserOps, Receipts + Replay, Memory Graph, Evals, Workflow Compiler, Semantic Firewall, A2A Subagent Network, Agent Arena, StagingOps, Observability, and the domain ops apps.
 
+## Agent Registry package
+
+`packages/agent-registry` provides:
+
+- Zod schemas and JSON Schema exports for signed agent cards, signed tool manifests, and trust registry snapshots.
+- Deterministic canonical JSON and SHA-256 digests for unsigned payloads.
+- Ed25519 signing/verification helpers using Node crypto.
+- Risk-relevant diff output for review and future Guard UI.
+- In-memory trust registry and revocation model.
+- Public test fixtures with generated local test keys only; no real private keys are committed.
+
+## Local verification
+
+```bash
+pnpm install --no-frozen-lockfile
+pnpm typecheck
+pnpm test
+```
+
 ## Orientation
 
 - Start with [AGENTS.md](AGENTS.md) for operational rules.
 - Use [llms.txt](llms.txt) for a concise LLM index and [llms-full.txt](llms-full.txt) for expanded non-secret project context.
-- Read [docs/ARCHITECTURE.md](docs/ARCHITECTURE.md), [docs/AUTONOMY_MODEL.md](docs/AUTONOMY_MODEL.md), and [docs/CUSTOM_APPS.md](docs/CUSTOM_APPS.md) before implementation work.
+- Read [docs/ARCHITECTURE.md](docs/ARCHITECTURE.md), [docs/AUTONOMY_MODEL.md](docs/AUTONOMY_MODEL.md), [docs/AGENT_REGISTRY.md](docs/AGENT_REGISTRY.md), and [docs/CUSTOM_APPS.md](docs/CUSTOM_APPS.md) before implementation work.
 - Treat GitHub issue #1, “Master plan: StealthEye Agent OS max-leverage app suite,” as the canonical planning anchor.
 
 ## Next build target
 
-Build 2 should implement the **Agent Registry + Signed Manifests** foundation: schemas, signature model, manifest pinning/diffing, trust registry, revocation model, and initial eval fixtures.
+Build 3 should implement **Guard + Capability Tokens**: authority token schemas, policy checks, hard-stop evaluation, Guard decision receipts, and integration points for Agent Registry verification.

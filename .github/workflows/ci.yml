@@ -10,17 +10,36 @@ permissions:
   contents: read
 
 jobs:
-  docs-safe-checks:
-    name: Documentation-safe checks
+  checks:
+    name: Scaffold and package checks
     runs-on: ubuntu-latest
     steps:
       - name: Check out repository
         uses: actions/checkout@v4
 
-      - name: Report scaffold status
+      - name: Report CI scope
         run: |
-          echo "Build 1 scaffold CI: documentation/governance checks only."
-          echo "This workflow does not claim application code is linted, typed, tested, or security-scanned yet."
+          echo "Build 2 CI: scaffold checks plus real TypeScript package install, typecheck, and tests."
+          echo "This workflow does not claim production security scanning, full supply-chain attestation, or deployment readiness yet."
+
+      - name: Set up pnpm
+        uses: pnpm/action-setup@v4
+        with:
+          version: 9.15.4
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 22
+
+      - name: Install dependencies
+        run: pnpm install --no-frozen-lockfile
+
+      - name: Typecheck packages
+        run: pnpm typecheck
+
+      - name: Run tests
+        run: pnpm test
 
       - name: Verify required scaffold files exist
         shell: bash
@@ -31,6 +50,20 @@ jobs:
             AGENTS.md
             llms.txt
             llms-full.txt
+            package.json
+            pnpm-workspace.yaml
+            tsconfig.base.json
+            packages/agent-registry/package.json
+            packages/agent-registry/tsconfig.json
+            packages/agent-registry/src/index.ts
+            packages/agent-registry/src/schemas.ts
+            packages/agent-registry/src/canonicalize.ts
+            packages/agent-registry/src/digest.ts
+            packages/agent-registry/src/signing.ts
+            packages/agent-registry/src/diff.ts
+            packages/agent-registry/src/registry.ts
+            packages/agent-registry/src/revocation.ts
+            packages/agent-registry/src/fixtures.ts
             docs/ARCHITECTURE.md
             docs/AUTONOMY_MODEL.md
             docs/CUSTOM_APPS.md
@@ -53,6 +86,7 @@ jobs:
             docs/DECISIONS/0001-public-locked-down-repo-posture.md
             docs/DECISIONS/0002-default-technical-stack.md
             docs/DECISIONS/0003-high-autonomy-mission-scoped-authority.md
+            docs/DECISIONS/0004-agent-registry-signed-manifests.md
             .github/PULL_REQUEST_TEMPLATE.md
             .github/ISSUE_TEMPLATE/feature_request.md
             .github/ISSUE_TEMPLATE/bug_report.md
@@ -75,6 +109,7 @@ jobs:
           secret_like_patterns='(AKIA[0-9A-Z]{16}|BEGIN (RSA|OPENSSH|EC|DSA) PRIVATE KEY|password=|client_secret=|PRIVATE_KEY=)'
           if find . \
             -path './.git' -prune -o \
+            -path './node_modules' -prune -o \
             -type f \
             ! -path "$guard_file" \
             -print0 | xargs -0 grep -InE "$secret_like_patterns"; then
