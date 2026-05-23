@@ -4,7 +4,7 @@ StealthEye Agent OS is the foundation for a max-leverage autonomous-agent operat
 
 ## Current status
 
-This repository is at **Build 3: Guard + Capability Tokens**. The repo includes the Build 2 Agent Registry package plus the first Guard foundation package for mission-scoped capability tokens, requested-action schemas, deterministic policy checks, hard-stop evaluation, registry trust enforcement, lifecycle helpers, receipt shapes, public fixtures, and Vitest eval-style coverage.
+This repository is at **Build 4: Mission OS + StealthEye Mission Language**. The repo includes the Build 2 Agent Registry package, Build 3 Guard package, and the first Mission OS foundation package for typed mission-language objects, normalized mission schemas, authority-envelope production, mission plans, status inspection, receipt references, Guard capability-token templates, requested-action generation, public fixtures, and Vitest eval-style coverage.
 
 This is still foundation work. It does not implement production app servers, production workers, persistent Postgres state, Redis queues, production endpoints, real credential handling, deployment automation, customer-data workflows, money movement, production deploys, or private infrastructure.
 
@@ -22,25 +22,22 @@ Major subsystems are Mission OS, Agent Registry, Guard, Capability Tokens, Worke
 
 ## Agent Registry package
 
-`packages/agent-registry` provides:
-
-- Zod schemas and JSON Schema exports for signed agent cards, signed tool manifests, and trust registry snapshots.
-- Deterministic canonical JSON and SHA-256 digests for unsigned payloads.
-- Ed25519 signing/verification helpers using Node crypto.
-- Risk-relevant diff output for review and future Guard UI.
-- In-memory trust registry and revocation model.
-- Public test fixtures with generated local test keys only; no real private keys are committed.
+`packages/agent-registry` provides signed agent/tool manifest primitives, canonical JSON and SHA-256 digests, Ed25519 helpers, manifest diffing, in-memory trust registry, revocation, fixtures, and tests.
 
 ## Guard package
 
-`packages/guard` provides:
+`packages/guard` provides capability-token, requested-action, Guard decision, and Guard decision receipt primitives, deterministic policy checks, hard-stop evaluation, registry trust enforcement, fixtures, and tests.
 
-- Zod schemas and JSON Schema exports for capability tokens, requested actions, Guard decisions, and Guard decision receipts.
-- Mission-scoped capability-token lifecycle helpers for active, expired, revoked, suspended, and exhausted states.
-- Deterministic token-to-action matching across effects, repo, branch, path, environment, system, account, agent, manifest, and pinned digest constraints.
-- Hard-stop evaluation for deletion/destruction, raw secrets, money/billing, production deployment/data mutation, production-impacting migrations, auth/security-critical changes, protected branch mutation, force push/history rewrite, CI/test/security weakening, material external sends, legal commitments, and platform-required confirmations.
-- Registry trust summary enforcement for trusted and approved signed agent/tool metadata.
-- Receipt-friendly Guard decision and receipt shapes.
+## Mission OS package
+
+`packages/mission-os` provides:
+
+- StealthEye Mission Language schema and JSON Schema exports.
+- Normalized mission, authority-envelope, plan, status, and receipt-reference schemas.
+- Compiler from Mission Language into missions, authority envelopes, plans, status snapshots, receipt expectations, Guard capability-token templates, and Guard requested-action templates.
+- Lightweight plan/DAG primitives with dependencies and expected effects.
+- Status transition, blocker, next-action, and completion-readiness helpers.
+- Public-safe fixtures for repo feature, CI repair, browser QA, hard-stop production deploy, hard-stop money movement, invalid target constraints, and missing verification plan scenarios.
 
 ## Local verification
 
@@ -54,9 +51,9 @@ pnpm test
 
 - Start with [AGENTS.md](AGENTS.md) for operational rules.
 - Use [llms.txt](llms.txt) for a concise LLM index and [llms-full.txt](llms-full.txt) for expanded non-secret project context.
-- Read [docs/ARCHITECTURE.md](docs/ARCHITECTURE.md), [docs/AUTONOMY_MODEL.md](docs/AUTONOMY_MODEL.md), [docs/AGENT_REGISTRY.md](docs/AGENT_REGISTRY.md), and [docs/CUSTOM_APPS.md](docs/CUSTOM_APPS.md) before implementation work.
+- Read [docs/ARCHITECTURE.md](docs/ARCHITECTURE.md), [docs/AUTONOMY_MODEL.md](docs/AUTONOMY_MODEL.md), [docs/MISSION_OS.md](docs/MISSION_OS.md), [docs/AGENT_REGISTRY.md](docs/AGENT_REGISTRY.md), and [docs/CUSTOM_APPS.md](docs/CUSTOM_APPS.md) before implementation work.
 - Treat GitHub issue #1, “Master plan: StealthEye Agent OS max-leverage app suite,” as the canonical planning anchor.
 
 ## Next build target
 
-Build 4 should implement **Mission OS + StealthEye Mission Language**: mission schema, mission DSL/CML primitives, authority-envelope production, lifecycle state, status inspection, plan/receipt references, and integration with Guard decisions.
+Build 5 should implement **ChatGPT App / MCP Server Host Shell** so Mission OS can be exposed through an app/server interface while preserving Guard, registry, receipt, and public/private boundaries.
