@@ -16,7 +16,7 @@ A build prompt should state the branch, scope, allowed paths, forbidden paths, h
 
 ## Package verification commands
 
-For TypeScript package builds, require:
+For TypeScript package builds, require CI verification of:
 
 ```bash
 pnpm install --no-frozen-lockfile
@@ -26,9 +26,9 @@ pnpm test
 
 CI should be truthful about what is actually checked. Do not claim full security scanning, production readiness, SBOM generation, or supply-chain attestation until those workflows exist.
 
-## Build 3 prompt outcome
+## Build 4 prompt outcome
 
-Build 3 implemented Guard + Capability Tokens as foundation work: capability-token schemas, requested-action schemas, Guard decisions, hard-stop evaluation, registry trust checks, decision receipts, fixtures, and Vitest cases. It did not add production deployment, real secrets, money movement, customer data, private OAuth clients, or sensitive infrastructure.
+Build 4 implements Mission OS + StealthEye Mission Language as package-level foundation work: Mission Language schema, normalized mission schema, authority envelopes, lightweight plan structures, status inspection, receipt references, Guard capability-token templates, requested-action generation, fixtures, and Vitest cases. It does not add production app servers, live worker queues, real credentials, production endpoints, money movement, production deploys, customer data, private OAuth clients, or sensitive infrastructure.
 
 ## Discipline
 
@@ -36,4 +36,4 @@ Do not mix unrelated features. Do not add secrets or private infrastructure. Do 
 
 ## Next target
 
-Build 4 should implement Mission OS + StealthEye Mission Language.
+Build 5 should implement ChatGPT App / MCP Server Host Shell.
