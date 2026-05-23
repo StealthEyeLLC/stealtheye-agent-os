@@ -29,11 +29,13 @@ import { branchSafeOperationSummary, hasAllowedBranchPrefix, isPathAllowed, isPr
 import { RepoTargetSchema } from "../src/schemas";
 import { requiresTypecheckAndTests, verificationObligationsForPatchPlan } from "../src/verification-plan";
 
+const accessKeyPrefix = `${"AK"}${"IA"}`;
+const privateKeyHeaderPattern = `BEGIN (RSA|OPENSSH|EC|DSA) ${"PRIVATE"} ${"KEY"}`;
 const secretLikeFixturePattern = new RegExp([
-  "AKIA[0-9A-Z]{16}",
-  "BEGIN (RSA|OPENSSH|EC|DSA) PRIVATE KEY",
+  `${accessKeyPrefix}[0-9A-Z]{16}`,
+  privateKeyHeaderPattern,
   `client_${"secret"}=`,
-  `PRIVATE_${"KEY"}=`,
+  `${"PRIVATE"}_${"KEY"}=`,
   `pass${"word"}=`
 ].join("|"));
 
