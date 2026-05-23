@@ -31,10 +31,18 @@ Inside an approved mission envelope, proceed without repeated approval for ordin
 
 Before final reporting, verify required files/changes exist, no secrets were introduced, docs remain coherent, CI is truthful, and receipt/eval expectations were updated where applicable.
 
+For package work, run or verify:
+
+```bash
+pnpm install --no-frozen-lockfile
+pnpm typecheck
+pnpm test
+```
+
 ## Docs, evals, and receipts
 
-Update relevant docs with behavior changes. Add or update eval expectations when a failure mode or safety condition is discovered. Ensure receipts can capture mission timeline, tool calls, approvals, denied actions, diffs, logs, artifacts, screenshots, CI, browser QA, and final reports.
+Update relevant docs with behavior changes. Add or update eval expectations when a failure mode or safety condition is discovered. Ensure receipts can capture mission timeline, tool calls, approvals, denied actions, diffs, logs, artifacts, screenshots, CI, browser QA, manifest digests, registry decisions, and final reports.
 
 ## Deeper docs
 
-Read `docs/ARCHITECTURE.md`, `docs/AUTONOMY_MODEL.md`, `docs/SECURITY.md`, `docs/WORKFLOWS.md`, `docs/EVALS.md`, `docs/RECEIPTS.md`, and `docs/BUILD_PROMPTS.md`.
+Read `docs/ARCHITECTURE.md`, `docs/AUTONOMY_MODEL.md`, `docs/AGENT_REGISTRY.md`, `docs/SECURITY.md`, `docs/WORKFLOWS.md`, `docs/EVALS.md`, `docs/RECEIPTS.md`, and `docs/BUILD_PROMPTS.md`.

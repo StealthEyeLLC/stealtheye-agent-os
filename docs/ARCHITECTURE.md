@@ -21,13 +21,13 @@ StealthEye Agent OS is organized as a set of mission, control, tool, worker, evi
 Owns mission intake, planning, approval capture, authority envelope creation, status inspection, timeline assembly, and final reporting.
 
 ### Agent Registry
-Stores signed agent cards and signed tool manifests. It supports manifest pinning, manifest diffing, trust registry decisions, revocation, agent identity, and MCP + A2A hybrid discovery.
+Stores and verifies signed agent cards and signed tool manifests. Build 2 implements package-level schemas, canonicalization, SHA-256 digesting, Ed25519 verification, diffing, in-memory trust records, and revocation primitives. Durable registry storage and remote MCP discovery are deferred.
 
 ### Guard
-Enforces hard stops, mission authority, semantic firewall decisions, and policy checks before tool execution.
+Enforces hard stops, mission authority, semantic firewall decisions, registry trust decisions, and policy checks before tool execution.
 
 ### Capability Tokens
-Represent scoped authority for tools/workers. Tokens should encode mission, actor, capability, target, scope, expiry, and evidence requirements.
+Represent scoped authority for tools/workers. Tokens should encode mission, actor, capability, target, scope, expiry, and evidence requirements. Build 3 should implement this layer.
 
 ### Worker Fleet
 Runs durable tasks through queues, leases, retries, idempotency keys, status reporting, and receipt emission. Redis + BullMQ is the initial queue path; Temporal is a future orchestration upgrade.
@@ -42,13 +42,13 @@ Reads workflow logs, diagnoses failures, patches branches, reruns allowed checks
 Uses Playwright to observe and validate web flows, collect screenshots, traces, console logs, and browser QA evidence. It stops before money movement, destructive actions, auth/security-critical changes, and material external sends.
 
 ### Receipts + Replay
-Every mission emits a durable evidence ledger: timeline, tool calls, inputs/outputs, approvals, denials, diffs, logs, screenshots, artifacts, CI, browser QA, and final report references.
+Every mission emits a durable evidence ledger: timeline, tool calls, inputs/outputs, approvals, denials, diffs, logs, screenshots, artifacts, CI, browser QA, manifest digests, registry decisions, and final report references.
 
 ### Memory Graph
 Persists non-secret project memory, decisions, entities, dependencies, preferences, issue/PR links, and evidence references.
 
 ### Evals
-Turns expected behavior and failures into regression suites: mission success, tool selection, receipt accuracy, CI repair, browser QA, security, prompt injection, and tool poisoning.
+Turns expected behavior and failures into regression suites: mission success, tool selection, receipt accuracy, CI repair, browser QA, security, prompt injection, tool poisoning, registry verification, revocation, and manifest diffing.
 
 ### Workflow Compiler
 Compiles mission intent into executable DAGs with authority gates, retries, idempotency, artifact expectations, and receipt requirements.
@@ -70,8 +70,8 @@ ProductOps, InboxOps, CustomerOps, ResearchOps, and CommerceOps translate domain
 
 ## Control flow
 
-Mission request -> Mission OS -> Guard authority evaluation -> Workflow Compiler -> Tool Router/Agent Registry -> Worker Fleet/app tools -> receipts/artifacts -> eval and final report.
+Mission request -> Mission OS -> Guard authority evaluation -> Agent Registry trust check -> Workflow Compiler -> Tool Router -> Worker Fleet/app tools -> receipts/artifacts -> eval and final report.
 
 ## Next architecture build
 
-Implement Agent Registry + Signed Manifests as the next concrete foundation.
+Build 3 should implement Guard + Capability Tokens.
