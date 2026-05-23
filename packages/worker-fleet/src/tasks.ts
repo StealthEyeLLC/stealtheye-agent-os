@@ -1,6 +1,6 @@
 import { requestedActionFromPlanStep, type Mission, type MissionPlan, type MissionPlanStep } from "@stealtheye/mission-os";
 import { WorkerFleetSchemaVersion, WorkerTaskSchema, type RetryPolicy, type WorkerPriority, type WorkerTask, type WorkerTaskType } from "./schemas";
-import { defaultRetryPolicy, createRetryState } from "./retry-policy";
+import { createRetryState, defaultRetryPolicy } from "./retry-policy";
 
 export interface CreateWorkerTaskInput {
   mission_id: string;
@@ -8,13 +8,13 @@ export interface CreateWorkerTaskInput {
   step_id: string;
   title: string;
   description: string;
-  task_type?: WorkerTaskType;
-  priority?: WorkerPriority;
-  requested_action?: WorkerTask["requested_action"];
-  capability_token_refs?: string[];
-  dependencies?: string[];
-  receipt_refs?: string[];
-  retry_policy?: RetryPolicy;
+  task_type?: WorkerTaskType | undefined;
+  priority?: WorkerPriority | undefined;
+  requested_action?: WorkerTask["requested_action"] | undefined;
+  capability_token_refs?: string[] | undefined;
+  dependencies?: string[] | undefined;
+  receipt_refs?: string[] | undefined;
+  retry_policy?: RetryPolicy | undefined;
   now: string;
 }
 
@@ -32,7 +32,7 @@ export function createWorkerTask(input: CreateWorkerTaskInput): WorkerTask {
     task_type: input.task_type ?? "mission_step",
     priority: input.priority ?? "normal",
     status: "queued",
-    requested_action: input.requested_action,
+    ...(input.requested_action ? { requested_action: input.requested_action } : {}),
     capability_token_refs: input.capability_token_refs ?? [],
     idempotency_key: input.requested_action?.idempotency_key ?? `idem:${input.mission_id}:${input.step_id}`,
     retry_policy: retryPolicy,
@@ -49,10 +49,10 @@ export function createWorkerTask(input: CreateWorkerTaskInput): WorkerTask {
 export interface WorkerTasksFromMissionPlanOptions {
   mission: Mission;
   plan: MissionPlan;
-  actor_id?: string;
-  capability_token_refs?: string[];
-  now?: string;
-  retry_policy?: RetryPolicy;
+  actor_id?: string | undefined;
+  capability_token_refs?: string[] | undefined;
+  now?: string | undefined;
+  retry_policy?: RetryPolicy | undefined;
 }
 
 export function workerTaskFromPlanStep(step: MissionPlanStep, options: WorkerTasksFromMissionPlanOptions): WorkerTask {
@@ -67,11 +67,11 @@ export function workerTaskFromPlanStep(step: MissionPlanStep, options: WorkerTas
     description: step.description,
     task_type: "mission_step",
     priority: options.mission.priority,
-    requested_action: requestedAction,
+    ...(requestedAction ? { requested_action: requestedAction } : {}),
     capability_token_refs: options.capability_token_refs ?? [options.mission.authority_envelope_ref ?? `authority-envelope:${options.mission.mission_id}`],
     dependencies: step.depends_on.map((dependency) => `worker-task:${options.plan.mission_id}:${dependency}`),
     receipt_refs: step.receipt_refs,
-    retry_policy: options.retry_policy,
+    ...(options.retry_policy ? { retry_policy: options.retry_policy } : {}),
     now: options.now ?? options.plan.created_at
   });
 }
