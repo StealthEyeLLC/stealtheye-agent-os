@@ -85,7 +85,7 @@ describe("Worker Fleet foundation", () => {
   it("detects duplicate idempotency and returns completed result refs", () => {
     const completed = completeIdempotencyRecord(idempotencyDuplicateFixture, "receipt:existing-result", fixtureNow);
     const detected = detectIdempotency(completed, normalMissionStepTask, fixtureNow);
-    expect(detected.kind).toBe("duplicate");
+    if (detected.kind !== "duplicate") throw new Error(`expected duplicate idempotency result, got ${detected.kind}`);
     expect(detected.result_ref).toBe("receipt:existing-result");
   });
 
