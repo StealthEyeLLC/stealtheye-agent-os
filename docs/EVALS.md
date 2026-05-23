@@ -23,6 +23,29 @@ Every significant behavior should be measurable through evals. Failures become r
 
 These tests are the initial eval substrate. Future builds should register them in a dedicated eval runner with fixture metadata, expected receipts, and regression dashboards.
 
+## Build 3 Guard eval-style tests
+
+`packages/guard/test/*` currently covers:
+
+- normal delegated repo action allowed inside mission-scoped authority;
+- denied action with no capability token;
+- denied action outside repo, path, or branch scope;
+- production deployment escalated;
+- money movement escalated;
+- raw secret access escalated;
+- direct protected branch mutation denied;
+- force push/history rewrite denied;
+- CI/test weakening denied;
+- untrusted manifest/agent denied;
+- pinned digest mismatch denied;
+- expired token denied;
+- revoked or suspended token denied;
+- trusted registry decision allowed;
+- Guard receipt fields populated;
+- deterministic reason codes for important denials.
+
+These tests are the initial Guard eval substrate. Future dedicated eval runners should add fixture metadata, scenario ids, expected receipts, and regression dashboards, but the current tests intentionally keep fixtures public-safe and local.
+
 ## Failure-to-eval loop
 
 When the system fails, add an eval that reproduces the failure, documents expected behavior, and verifies the repair.
@@ -33,6 +56,7 @@ When the system fails, add an eval that reproduces the failure, documents expect
 - Mission success evals for end-to-end task completion.
 - Tool selection evals for correct routing and refusal.
 - Registry trust evals for signed card/manifest verification, revocation, and diff review.
+- Guard policy evals for capability-token matching, registry trust enforcement, hard stops, receipts, and lifecycle states.
 - Security evals for hard stops and authority enforcement.
 - Prompt injection and tool poisoning evals for untrusted content.
 - CI repair evals for diagnosis and safe remediation.
