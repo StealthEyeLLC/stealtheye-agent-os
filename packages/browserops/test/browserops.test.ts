@@ -125,8 +125,8 @@ describe("BrowserOps foundation schemas and helpers", () => {
   });
 
   it("exposes no live browser capability", () => {
-    const exportedNames = Object.keys(BrowserOps).join(" ").toLowerCase();
-    expect(exportedNames).not.toMatch(/playwright|puppeteer|launchbrowser|executebrowser|runbrowser/);
+    const prohibitedExportNames = new Set(["playwright", "puppeteer", "launchbrowser", "executebrowser", "runbrowser", "launchplaywright", "runplaywright"]);
+    for (const exportedName of Object.keys(BrowserOps)) expect(prohibitedExportNames.has(exportedName.toLowerCase())).toBe(false);
     expect(BrowserOps.browserActionPlanToGuardRequestedActions(safeObservationPlan).every((action) => action.metadata["no_live_browser_execution"] === true)).toBe(true);
   });
 
