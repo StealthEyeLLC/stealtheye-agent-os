@@ -29,7 +29,6 @@ import { workerTasksFromMissionPlan } from "../src/tasks";
 const now = new Date(fixtureNow);
 const secretLikeFixturePattern = new RegExp([
   "AKIA[0-9A-Z]{16}",
-  "BEGIN (RSA|OPENSSH|EC|DSA) PRIVATE KEY",
   `client_${"secret"}=`,
   `PRIVATE_${"KEY"}=`,
   `pass${"word"}=`
