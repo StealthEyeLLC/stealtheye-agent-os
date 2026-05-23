@@ -19,8 +19,8 @@ jobs:
 
       - name: Report CI scope
         run: |
-          echo "Build 6 CI: scaffold checks plus real TypeScript package install, typecheck, and tests."
-          echo "This workflow does not claim production security scanning, full supply-chain attestation, deployment readiness, live queue testing, Redis/BullMQ runtime testing, or worker runtime readiness yet."
+          echo "Build 7 CI: scaffold checks plus real TypeScript package install, typecheck, and tests."
+          echo "This workflow does not claim production security scanning, full supply-chain attestation, deployment readiness, live repo-write testing, live CI rerun testing, live queue testing, Redis/BullMQ runtime testing, worker runtime readiness, BrowserOps readiness, or live GitHub mutation testing yet."
 
       - name: Set up pnpm
         uses: pnpm/action-setup@v4
@@ -111,6 +111,20 @@ jobs:
             packages/worker-fleet/src/preflight.ts
             packages/worker-fleet/src/fixtures.ts
             packages/worker-fleet/test/worker-fleet.test.ts
+            packages/codeops/package.json
+            packages/codeops/tsconfig.json
+            packages/codeops/src/index.ts
+            packages/codeops/src/schemas.ts
+            packages/codeops/src/repo-targets.ts
+            packages/codeops/src/patch-plan.ts
+            packages/codeops/src/file-changes.ts
+            packages/codeops/src/verification-plan.ts
+            packages/codeops/src/ci-log.ts
+            packages/codeops/src/ci-repair.ts
+            packages/codeops/src/pr-evidence.ts
+            packages/codeops/src/preflight.ts
+            packages/codeops/src/fixtures.ts
+            packages/codeops/test/codeops.test.ts
             docs/ARCHITECTURE.md
             docs/AUTONOMY_MODEL.md
             docs/CUSTOM_APPS.md
@@ -118,6 +132,8 @@ jobs:
             docs/MISSION_OS.md
             docs/APP_HOST.md
             docs/WORKER_FLEET.md
+            docs/CODEOPS.md
+            docs/CI_REPAIR.md
             docs/SECURITY.md
             docs/WORKFLOWS.md
             docs/EVALS.md
@@ -141,6 +157,7 @@ jobs:
             docs/DECISIONS/0006-mission-os-language.md
             docs/DECISIONS/0007-chatgpt-app-mcp-host-shell.md
             docs/DECISIONS/0008-worker-fleet-foundation.md
+            docs/DECISIONS/0009-codeops-ci-repair-foundations.md
             .github/PULL_REQUEST_TEMPLATE.md
             .github/ISSUE_TEMPLATE/feature_request.md
             .github/ISSUE_TEMPLATE/bug_report.md
@@ -160,7 +177,13 @@ jobs:
         run: |
           set -euo pipefail
           guard_file="./.github/workflows/ci.yml"
-          secret_like_patterns='(AKIA[0-9A-Z]{16}|BEGIN (RSA|OPENSSH|EC|DSA) PRIVATE KEY|password=|client_secret=|PRIVATE_KEY=)'
+          aws_prefix="$(printf '\x41\x4b\x49\x41')"
+          begin_word="$(printf '\x42\x45\x47\x49\x4e')"
+          private_word="$(printf '\x50\x52\x49\x56\x41\x54\x45')"
+          key_word="$(printf '\x4b\x45\x59')"
+          secret_word="$(printf '\x73\x65\x63\x72\x65\x74')"
+          pass_word="$(printf '\x70\x61\x73\x73\x77\x6f\x72\x64')"
+          secret_like_patterns="(${aws_prefix}[0-9A-Z]{16}|${begin_word} (RSA|OPENSSH|EC|DSA) ${private_word} ${key_word}|${pass_word}=|client_${secret_word}=|${private_word}_${key_word}=)"
           if find . \
             -path './.git' -prune -o \
             -path './node_modules' -prune -o \

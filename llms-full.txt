@@ -2,7 +2,7 @@
 
 ## Project summary
 
-StealthEye Agent OS is a foundation for broad delegated autonomy: authorized online-task agents operating through ChatGPT custom apps/MCP, durable workers, Mission OS, app-host surfaces, mission-scoped authority, signed manifests, Guard decisions, evals, receipts, replayable evidence, and compliance-ready controls. This public repo contains non-sensitive architecture, specs, governance, scaffolding, eval templates, and compliance planning only.
+StealthEye Agent OS is a foundation for broad delegated autonomy: authorized online-task agents operating through ChatGPT custom apps/MCP, durable workers, Mission OS, app-host surfaces, mission-scoped authority, signed manifests, Guard decisions, CodeOps, CI Repair, evals, receipts, replayable evidence, and compliance-ready controls. This public repo contains non-sensitive architecture, specs, governance, scaffolding, eval templates, and compliance planning only.
 
 ## Current build state
 
@@ -16,31 +16,37 @@ Build 5 adds `@stealtheye/app-host`: app metadata, MCP-style preview tool descri
 
 Build 6 adds `@stealtheye/worker-fleet`: typed worker task schemas, task types/statuses, lease schemas with fencing tokens, idempotency records and stable action fingerprints, retry policy/state helpers, task status summaries, artifact references, worker receipt events, Guard preflight helpers, Mission OS plan-to-worker-task conversion, fixtures, and Vitest eval-style tests.
 
+Build 7 adds `@stealtheye/codeops`: CodeOps + CI Repair schemas, repository targets, branch/path safety helpers, patch plans, file-change contracts, verification plans, CI log summaries/classifiers, repair plans, rerun eligibility policy, PR evidence packets, Guard requested-action adapters, Worker Fleet task templates, fixtures, and Vitest eval-style tests. It is foundation-only and does not perform live GitHub mutation or CI reruns.
+
 ## Architecture overview
 
-The default stack is TypeScript monorepo, Node.js MCP servers, Postgres for durable mission/control/evidence state, Redis + BullMQ for initial worker queues, Temporal as future workflow orchestration, S3/R2-compatible artifact storage, GitHub App auth, Playwright BrowserOps, OpenAI Responses API + Apps SDK integration, and Zod + JSON Schema for mission/tool/workflow/receipt/authority/agent-card/worker schemas.
+The default stack is TypeScript monorepo, Node.js MCP servers, Postgres for durable mission/control/evidence state, Redis + BullMQ for initial worker queues, Temporal as future workflow orchestration, S3/R2-compatible artifact storage, GitHub App auth, Playwright BrowserOps, OpenAI Responses API + Apps SDK integration, and Zod + JSON Schema for mission/tool/workflow/receipt/authority/agent-card/worker/codeops schemas.
 
 Key systems: Mission OS, App Host, Agent Registry, Guard, Capability Tokens, Worker Fleet, CodeOps, CI Repair, BrowserOps, Receipts + Replay, Memory Graph, Evals, Workflow Compiler, Semantic Firewall, A2A Subagent Network, Agent Arena, StagingOps/Observability, and domain ops apps.
 
 ## App Host model
 
-App Host is the first ChatGPT App / MCP Server Host Shell foundation. It models tool/resource descriptors and fixture-backed handlers that can later be wired to an official MCP or ChatGPT Apps runtime. Build 5 does not expose live repo mutation, worker execution, browser automation, deployments, money movement, customer data, remote trust discovery, or production-grade credential flows.
+App Host is the first ChatGPT App / MCP Server Host Shell foundation. It models tool/resource descriptors and fixture-backed handlers that can later be wired to an official MCP or ChatGPT Apps runtime. Build 5 does not expose live repo mutation, worker execution, browser automation, deployments, money movement, customer data, remote trust discovery, or production-grade credential flows. Build 7 does not change App Host runtime behavior.
 
 ## Mission OS model
 
-Mission OS converts broad goals into typed Mission Language, normalized mission objects, authority envelopes, plan/DAG structures, status summaries, receipt references, and Guard-compatible requested actions. Build 6 Worker Fleet consumes Mission OS plans and preserves mission, plan, step, dependency, receipt, capability-token, and requested-action context when creating worker tasks.
+Mission OS converts broad goals into typed Mission Language, normalized mission objects, authority envelopes, plan/DAG structures, status summaries, receipt references, and Guard-compatible requested actions. Build 6 Worker Fleet consumes Mission OS plans and preserves mission, plan, step, dependency, receipt, capability-token, and requested-action context when creating worker tasks. Build 7 CodeOps patch plans can be associated with mission and task IDs for future mission-to-code handoff.
 
 ## Worker Fleet model
 
-Worker Fleet is the durable execution substrate contract for future mission-step execution. Build 6 defines package-level schemas and deterministic helpers for worker tasks, leases, idempotency, retries, status transitions, summaries, artifacts, receipts, Guard preflight, and Mission OS handoff.
+Worker Fleet is the durable execution substrate contract for future mission-step execution. Build 6 defines package-level schemas and deterministic helpers for worker tasks, leases, idempotency, retries, status transitions, summaries, artifacts, receipts, Guard preflight, and Mission OS handoff. Build 7 CodeOps creates Worker Fleet task templates for future CodeOps and CI Repair steps without executing live actions.
 
-Build 6 intentionally does not add a live Redis/BullMQ queue, production worker runtime, distributed locking service, live tool execution, repo mutation, browser automation, production deployment, customer-data workflows, money movement, live queue configuration, or real artifact storage.
+## CodeOps and CI Repair model
+
+CodeOps owns branch-safe repository operation contracts: repo targets, branch-prefix rules, protected branch detection, path allow/deny matching, patch plans, file-change contracts, verification plans, PR evidence, and Guard/Worker Fleet preflight adapters. CI Repair owns CI/check summary interpretation, deterministic fixture-log classification, repair planning, rerun eligibility, and verification loop contracts.
+
+Both are foundation-only in Build 7. There is no live branch creation, commit write, PR creation, log scraping, workflow dispatch, failed-job rerun, protected branch mutation, force push, CI weakening, deployment, secret access, or customer-data mutation.
 
 ## Agent Registry and Guard model
 
 Signed payloads are verified over canonical unsigned payloads. Guard consumes registry trust summaries and enforces capability-token constraints, pinned digests, hard stops, lifecycle state, and mission-scoped target/effect boundaries.
 
-Capability tokens are delegated-authority records. Authority envelopes produced by Mission OS are templates/structures that can later feed Guard-capability issuance. Worker Fleet calls Guard preflight for action-bearing tasks and records receipt/status suggestions without executing actions.
+Capability tokens are delegated-authority records. Authority envelopes produced by Mission OS are templates/structures that can later feed Guard-capability issuance. Worker Fleet calls Guard preflight for action-bearing tasks and records receipt/status suggestions without executing actions. Build 7 CodeOps produces Guard requested actions for future repo/CI operations and blocks hard-stop paths before execution exists.
 
 ## Mission/build workflow
 
@@ -49,20 +55,22 @@ Capability tokens are delegated-authority records. Authority envelopes produced 
 3. Builder updates docs, AGENTS.md, llms files, eval expectations, receipt/evidence expectations, and verification checklist where applicable.
 4. Jamie returns to verifier chat with PR/branch/commit.
 5. Verifier checks implementation against issue #1 and docs.
-6. Verifier updates issue #1.
+6. Verifier merges accepted green PRs and updates issue #1.
 7. Verifier provides the next prompt.
 
 ## Docs map
 
 - `docs/ARCHITECTURE.md`: system components and data/control flow.
 - `docs/AUTONOMY_MODEL.md`: authority, autonomy, and hard stops.
-- `docs/WORKER_FLEET.md`: Build 6 task, lease, idempotency, retry, receipt, artifact, Guard preflight, and Mission OS handoff contracts.
+- `docs/CODEOPS.md`: Build 7 branch-safe CodeOps contracts and boundaries.
+- `docs/CI_REPAIR.md`: Build 7 CI classification, repair planning, rerun policy, and boundaries.
+- `docs/WORKER_FLEET.md`: task, lease, idempotency, retry, receipt, artifact, Guard preflight, Mission OS handoff, and CodeOps task-template relationship.
 - `docs/APP_HOST.md`: Build 5 app-host tool/resource surface and boundaries.
-- `docs/MISSION_OS.md`: Mission Language, mission schemas, compiler, status, receipts, Guard integration, and Worker Fleet handoff.
+- `docs/MISSION_OS.md`: Mission Language, mission schemas, compiler, status, receipts, Guard integration, Worker Fleet handoff, and future CodeOps handoff.
 - `docs/CUSTOM_APPS.md`: app inventory and responsibilities.
 - `docs/AGENT_REGISTRY.md`: signed cards/manifests, trust, revocation, Guard integration assumptions.
-- `docs/SECURITY.md`: MCP/OAuth/security boundaries, Worker Fleet no-runtime boundary, and hard stops.
-- `docs/WORKFLOWS.md`: mission lifecycle, worker handoff, DAGs, retries, idempotency.
+- `docs/SECURITY.md`: MCP/OAuth/security boundaries, Worker Fleet and CodeOps no-runtime boundaries, and hard stops.
+- `docs/WORKFLOWS.md`: mission lifecycle, worker handoff, CodeOps/CI Repair loops, DAGs, retries, idempotency.
 - `docs/EVALS.md`: eval philosophy and suites.
 - `docs/RECEIPTS.md` and `docs/EVIDENCE_MODEL.md`: evidence and replay.
 - Compliance/security/governance docs map controls to readiness, not certification.
@@ -73,7 +81,7 @@ The project intends to align evidence with NIST AI RMF, EU AI Act readiness, ISO
 
 ## Public/private boundary
 
-Public: architecture, public specs, non-sensitive schemas, app/tool scaffolding, worker-fleet contracts, examples/mock data, eval templates, governance and compliance docs. Private: sensitive operational material, production infrastructure, customer data, deployed runtime configuration, and internal accounts.
+Public: architecture, public specs, non-sensitive schemas, app/tool scaffolding, worker-fleet contracts, CodeOps/CI Repair contracts, examples/mock data, eval templates, governance and compliance docs. Private: sensitive operational material, production infrastructure, customer data, deployed runtime configuration, and internal accounts.
 
 ## Verification commands
 
@@ -85,4 +93,4 @@ pnpm test
 
 ## Next target
 
-Build 7: CodeOps + CI Repair foundations.
+Build 8: BrowserOps foundations.
