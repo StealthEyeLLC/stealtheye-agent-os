@@ -24,16 +24,18 @@ pnpm typecheck
 pnpm test
 ```
 
-CI should be truthful about what is actually checked. Do not claim full security scanning, production readiness, SBOM generation, or supply-chain attestation until those workflows exist.
+CI should be truthful about what is actually checked. Do not claim full security scanning, production readiness, SBOM generation, supply-chain attestation, live queue testing, or production worker readiness until those workflows exist.
 
-## Build 5 prompt outcome
+## Build 6 prompt outcome
 
-Build 5 implements ChatGPT App / MCP Server Host Shell as package-level foundation work: app metadata, MCP-style tool descriptors, input/output schemas, static resource descriptors, fixture-backed preview handlers, and Vitest eval-style cases for host, Mission OS, Guard, Agent Registry, and policy families. It does not add production app servers, deployed MCP runtime, live repository mutation, worker queues, browser automation, real credentials, production endpoints, money movement, production deploys, customer data, private OAuth clients, or sensitive infrastructure.
+Build 6 implements Worker Fleet Foundation as package-level foundation work: typed worker tasks, task statuses and types, leases with fencing tokens, idempotency records, stable action fingerprints, retry policies, task status summaries, artifact references, worker receipt events, Guard preflight integration, Mission OS plan-to-worker-task conversion, public-safe fixtures, and Vitest eval-style cases.
+
+It does not add a live Redis/BullMQ queue, production worker runtime, distributed lock service, live tool execution, repo mutation, browser automation, production deployment, customer-data workflows, money movement, live queue configuration, or private infrastructure.
 
 ## Discipline
 
-Do not mix unrelated features. Do not add secrets or private infrastructure. Do not claim certification or open-source status without the required artifacts. Keep AGENTS.md concise and push detail into docs.
+Do not mix unrelated features. Do not add sensitive operational material or private infrastructure. Do not claim certification, production readiness, runtime worker readiness, or open-source status without the required artifacts. Keep AGENTS.md concise and push detail into docs.
 
 ## Next target
 
-Build 6 should implement Worker Fleet foundations.
+Build 7 should implement CodeOps + CI Repair foundations.
