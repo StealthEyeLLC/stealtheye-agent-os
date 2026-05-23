@@ -27,22 +27,26 @@ Mission Language encodes goal, authority, allowed effects, hard stops, targets, 
 
 Mission OS compiles Mission Language into normalized missions, authority envelopes, plan/DAG structures, status snapshots, receipt expectations, capability-token-compatible templates, and Guard requested-action templates.
 
+## Worker Fleet task handoff
+
+Build 6 Worker Fleet consumes Mission OS plans and converts plan steps into worker task contracts. It preserves mission id, plan id, step id, title, description, dependencies, receipt refs, capability-token refs, and requested-action context. This handoff defines the shape future durable workers will persist; it does not execute the steps.
+
 ## Workflow blueprints
 
-Blueprints define repeatable patterns such as repo feature missions, CI repair missions, browser QA missions, dependency updates, research dossiers, and support triage. Build 4 includes public-safe fixtures for repo feature, CI repair, browser QA, production-deploy hard stop, money-movement hard stop, invalid target constraints, and missing verification plan scenarios. Build 5 adds app-host eval-style fixtures for mission compile preview, invalid mission rejection, safe Guard preview allow, hard-stop Guard preview escalation/denial, trusted registry preview, risky manifest diff preview, policy boundary summary, and no live write tool exposure.
+Blueprints define repeatable patterns such as repo feature missions, CI repair missions, browser QA missions, dependency updates, research dossiers, and support triage. Build 4 includes public-safe fixtures for repo feature, CI repair, browser QA, production-deploy hard stop, money-movement hard stop, invalid target constraints, and missing verification plan scenarios. Build 5 adds app-host eval-style fixtures for mission compile preview, invalid mission rejection, safe Guard preview allow, hard-stop Guard preview escalation/denial, trusted registry preview, risky manifest diff preview, policy boundary summary, and no live write tool exposure. Build 6 adds Worker Fleet eval-style fixtures for task validation, plan-step conversion, leases, idempotency, retries, status transitions, Guard preflight, untrusted registry blocking, artifact refs, receipt events, and no-secret fixture checks.
 
 ## DAGs, retries, and idempotency
 
-Compiled workflows should be DAGs with retry policies, idempotency keys, durable state transitions, and evidence emission at each node. Build 4 provides lightweight plan-step structures with dependencies and expected effects only. Build 5 provides app-host preview handlers only. It does not implement Worker Fleet execution, queues, leases, retries, or durable orchestration.
+Compiled workflows should be DAGs with retry policies, idempotency keys, durable state transitions, and evidence emission at each node. Build 6 provides deterministic helpers for worker task dependencies, fixed/linear/exponential backoff, retry exhaustion, stable action fingerprints, duplicate idempotency detection, collision detection, and completed-result references. Live queue scheduling and durable orchestration are still deferred.
 
 ## Background workers
 
-Workers claim jobs, validate authority, execute allowed actions, emit receipts, refresh leases, and stop cleanly when authority expires or revocation occurs. Worker Fleet remains deferred.
+Future workers will claim jobs, validate authority, execute allowed actions, emit receipts, refresh leases, and stop cleanly when authority expires or revocation occurs. Build 6 defines the package-level contracts for task leases, fencing tokens, Guard preflight, status updates, artifacts, and receipts, but does not add a live Redis/BullMQ runtime or production worker process.
 
 ## Next build sequence
 
-1. Worker Fleet foundations.
+1. CodeOps + CI Repair foundations.
 2. Durable Mission OS storage and receipt ledger.
 3. Workflow Compiler execution layer.
-4. BrowserOps and CodeOps runtime integration.
+4. BrowserOps runtime integration.
 5. Official MCP/App runtime integration.
