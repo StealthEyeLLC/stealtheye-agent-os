@@ -26,10 +26,14 @@ pnpm test
 
 CI should be truthful about what is actually checked. Do not claim full security scanning, production readiness, SBOM generation, or supply-chain attestation until those workflows exist.
 
+## Build 3 prompt outcome
+
+Build 3 implemented Guard + Capability Tokens as foundation work: capability-token schemas, requested-action schemas, Guard decisions, hard-stop evaluation, registry trust checks, decision receipts, fixtures, and Vitest cases. It did not add production deployment, real secrets, money movement, customer data, private OAuth clients, or sensitive infrastructure.
+
 ## Discipline
 
 Do not mix unrelated features. Do not add secrets or private infrastructure. Do not claim certification or open-source status without the required artifacts. Keep AGENTS.md concise and push detail into docs.
 
 ## Next target
 
-Build 3 should implement Guard + Capability Tokens.
+Build 4 should implement Mission OS + StealthEye Mission Language.
