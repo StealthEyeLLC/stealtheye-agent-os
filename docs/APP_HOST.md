@@ -46,13 +46,15 @@ The shell includes static resource descriptors:
 
 These resources are in-memory/static and intended to map cleanly to future MCP resources.
 
-## Worker Fleet relationship
+## Worker Fleet and CodeOps relationship
 
-Build 6 adds `@stealtheye/worker-fleet` downstream of App Host and Mission OS. App Host may eventually expose worker-task previews or mission execution status, but Build 5 host tools remain preview-only and Build 6 Worker Fleet does not add live execution. Neither package grants authority or bypasses Guard.
+Build 6 adds `@stealtheye/worker-fleet` downstream of App Host and Mission OS. Build 7 adds `@stealtheye/codeops` downstream of Guard and Worker Fleet for CodeOps and CI Repair contracts.
+
+App Host may eventually expose worker-task previews, CodeOps patch-plan previews, CI Repair evidence previews, or mission execution status. Build 5 host tools remain preview-only, Build 6 Worker Fleet does not add live execution, and Build 7 CodeOps/CI Repair does not add live GitHub mutation or live CI reruns. None of these packages grant authority or bypass Guard.
 
 ## Public/private boundary
 
-Build 5 does not add real secrets, production endpoints, customer data, private OAuth clients, real cloud/account identifiers, sensitive runbooks, production tokens, live deployment targets, live write APIs, money movement, browser automation, CI reruns, branch creation, commits, PR creation, or worker execution. Build 6 still does not add live worker runtime, live queue credentials, repo mutation, or browser automation.
+Build 5 does not add real secrets, production endpoints, customer data, private OAuth clients, real cloud/account identifiers, sensitive runbooks, production tokens, live deployment targets, live write APIs, money movement, browser automation, CI reruns, branch creation, commits, PR creation, or worker execution. Build 6 still does not add live worker runtime, live queue credentials, repo mutation, or browser automation. Build 7 still does not add live repo mutation, protected-branch writes, force pushes, live CI reruns, CI/test weakening, secret access, or production/customer-data workflows.
 
 ## MCP direction
 
@@ -60,4 +62,4 @@ The package models an MCP-style server surface through descriptors, resource def
 
 ## Next step
 
-Build 7 should implement CodeOps + CI Repair foundations while preserving App Host preview boundaries, Worker Fleet task contracts, and Guard-gated execution.
+Build 8 should implement BrowserOps foundations while preserving App Host preview boundaries, Worker Fleet task contracts, CodeOps/CI Repair evidence boundaries, and Guard-gated execution.
