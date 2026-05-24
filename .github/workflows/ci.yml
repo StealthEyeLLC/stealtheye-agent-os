@@ -19,8 +19,8 @@ jobs:
 
       - name: Report CI scope
         run: |
-          echo "Build 10 CI: install, typecheck, tests, generated-state checks, required-file checks, and basic secret-string guard."
-          echo "This workflow does not claim production deployment, public app submission, OAuth production readiness, durable ledger readiness, live repo-write testing, live browser testing, live worker testing, live replay readiness, or full security scanning."
+          echo "Build 10 CI: install, typecheck, tests, broad accumulated required-file checks, basic secret-string guard, and Build 8/9/10 generated-state checks."
+          echo "This workflow does not claim full security scanning, SBOM/provenance, deployment readiness, public app submission, OAuth production readiness, durable ledger readiness, live replay execution, production artifact storage, live browser testing, credentialed browsing testing, Playwright runtime readiness, live queue testing, worker runtime readiness, live repo-write testing, or live GitHub mutation testing."
 
       - name: Set up pnpm
         uses: pnpm/action-setup@v4
@@ -51,15 +51,201 @@ jobs:
         shell: bash
         run: |
           set -euo pipefail
+          # Future builds may move this into a generated manifest-driven inventory,
+          # but that transition must be monotonic and include all prior foundation files.
           required=(
-            README.md AGENTS.md llms.txt llms-full.txt package.json pnpm-workspace.yaml tsconfig.base.json
-            packages/app-host/src/index.ts packages/app-host/src/tools.ts packages/app-host/src/resources.ts packages/app-host/test/app-host.test.ts
-            packages/receipts-replay/src/index.ts packages/receipts-replay/src/events.ts packages/receipts-replay/test/receipts-replay.test.ts
-            packages/mcp-runtime/package.json packages/mcp-runtime/tsconfig.json packages/mcp-runtime/src/index.ts packages/mcp-runtime/src/schemas.ts packages/mcp-runtime/src/server.ts packages/mcp-runtime/src/transport.ts packages/mcp-runtime/src/app-host-adapter.ts packages/mcp-runtime/src/tool-router.ts packages/mcp-runtime/src/resources.ts packages/mcp-runtime/src/receipts.ts packages/mcp-runtime/src/dev-mode.ts packages/mcp-runtime/src/fixtures.ts packages/mcp-runtime/test/mcp-runtime.test.ts
-            scripts/stealtheye-build.mjs scripts/phases/build-008-browserops.mjs scripts/phases/build-009-receipts-replay.mjs scripts/phases/build-010-mcp-runtime-devmode.mjs
-            docs/MCP_RUNTIME.md docs/DEV_MODE_CONNECTION.md docs/DECISIONS/0012-mcp-runtime-devmode-connection.md docs/BUILD_AUTOMATION.md docs/REPLAY.md docs/generated/build-010-manifest.json docs/generated/build-010-acceptance.md docs/generated/build-010-handoff.md docs/generated/build-010-receipt.json docs/generated/project-memory.json docs/generated/known-gaps.json docs/generated/safety-capability-matrix.json docs/generated/eval-registry.json docs/generated/tool-inventory.json docs/generated/build-state.json
+            README.md
+            AGENTS.md
+            llms.txt
+            llms-full.txt
+            package.json
+            pnpm-workspace.yaml
+            tsconfig.base.json
+            packages/agent-registry/package.json
+            packages/agent-registry/tsconfig.json
+            packages/agent-registry/src/index.ts
+            packages/agent-registry/src/schemas.ts
+            packages/agent-registry/src/canonicalize.ts
+            packages/agent-registry/src/digest.ts
+            packages/agent-registry/src/signing.ts
+            packages/agent-registry/src/diff.ts
+            packages/agent-registry/src/registry.ts
+            packages/agent-registry/src/revocation.ts
+            packages/agent-registry/src/fixtures.ts
+            packages/guard/package.json
+            packages/guard/tsconfig.json
+            packages/guard/src/index.ts
+            packages/guard/src/schemas.ts
+            packages/guard/src/capability-token.ts
+            packages/guard/src/policy.ts
+            packages/guard/src/hard-stops.ts
+            packages/guard/src/decision.ts
+            packages/guard/src/receipts.ts
+            packages/guard/src/fixtures.ts
+            packages/guard/test/guard.test.ts
+            packages/mission-os/package.json
+            packages/mission-os/tsconfig.json
+            packages/mission-os/src/index.ts
+            packages/mission-os/src/schemas.ts
+            packages/mission-os/src/mission-language.ts
+            packages/mission-os/src/mission.ts
+            packages/mission-os/src/planning.ts
+            packages/mission-os/src/authority-envelope.ts
+            packages/mission-os/src/status.ts
+            packages/mission-os/src/receipts.ts
+            packages/mission-os/src/fixtures.ts
+            packages/mission-os/test/mission-os.test.ts
+            packages/app-host/package.json
+            packages/app-host/tsconfig.json
+            packages/app-host/src/index.ts
+            packages/app-host/src/server.ts
+            packages/app-host/src/tools.ts
+            packages/app-host/src/tool-schemas.ts
+            packages/app-host/src/resources.ts
+            packages/app-host/src/app-metadata.ts
+            packages/app-host/src/fixtures.ts
+            packages/app-host/test/app-host.test.ts
+            packages/worker-fleet/package.json
+            packages/worker-fleet/tsconfig.json
+            packages/worker-fleet/src/index.ts
+            packages/worker-fleet/src/schemas.ts
+            packages/worker-fleet/src/tasks.ts
+            packages/worker-fleet/src/leases.ts
+            packages/worker-fleet/src/idempotency.ts
+            packages/worker-fleet/src/retry-policy.ts
+            packages/worker-fleet/src/status.ts
+            packages/worker-fleet/src/artifacts.ts
+            packages/worker-fleet/src/receipts.ts
+            packages/worker-fleet/src/preflight.ts
+            packages/worker-fleet/src/fixtures.ts
+            packages/worker-fleet/test/worker-fleet.test.ts
+            packages/codeops/package.json
+            packages/codeops/tsconfig.json
+            packages/codeops/src/index.ts
+            packages/codeops/src/schemas.ts
+            packages/codeops/src/repo-targets.ts
+            packages/codeops/src/patch-plan.ts
+            packages/codeops/src/file-changes.ts
+            packages/codeops/src/verification-plan.ts
+            packages/codeops/src/ci-log.ts
+            packages/codeops/src/ci-repair.ts
+            packages/codeops/src/pr-evidence.ts
+            packages/codeops/src/preflight.ts
+            packages/codeops/src/fixtures.ts
+            packages/codeops/test/codeops.test.ts
+            packages/browserops/package.json
+            packages/browserops/tsconfig.json
+            packages/browserops/src/index.ts
+            packages/browserops/src/schemas.ts
+            packages/browserops/src/session.ts
+            packages/browserops/src/page-state.ts
+            packages/browserops/src/evidence.ts
+            packages/browserops/src/action-policy.ts
+            packages/browserops/src/action-plan.ts
+            packages/browserops/src/preflight.ts
+            packages/browserops/src/fixtures.ts
+            packages/browserops/test/browserops.test.ts
+            packages/receipts-replay/package.json
+            packages/receipts-replay/tsconfig.json
+            packages/receipts-replay/src/index.ts
+            packages/receipts-replay/src/schemas.ts
+            packages/receipts-replay/src/evidence.ts
+            packages/receipts-replay/src/events.ts
+            packages/receipts-replay/src/timeline.ts
+            packages/receipts-replay/src/replay.ts
+            packages/receipts-replay/src/final-report.ts
+            packages/receipts-replay/src/verification.ts
+            packages/receipts-replay/src/fixtures.ts
+            packages/receipts-replay/test/receipts-replay.test.ts
+            packages/mcp-runtime/package.json
+            packages/mcp-runtime/tsconfig.json
+            packages/mcp-runtime/src/index.ts
+            packages/mcp-runtime/src/schemas.ts
+            packages/mcp-runtime/src/server.ts
+            packages/mcp-runtime/src/transport.ts
+            packages/mcp-runtime/src/app-host-adapter.ts
+            packages/mcp-runtime/src/tool-router.ts
+            packages/mcp-runtime/src/resources.ts
+            packages/mcp-runtime/src/receipts.ts
+            packages/mcp-runtime/src/dev-mode.ts
+            packages/mcp-runtime/src/fixtures.ts
+            packages/mcp-runtime/test/mcp-runtime.test.ts
+            scripts/stealtheye-build.mjs
+            scripts/phases/build-008-browserops.mjs
+            scripts/phases/build-009-receipts-replay.mjs
+            scripts/phases/build-010-mcp-runtime-devmode.mjs
+            docs/ARCHITECTURE.md
+            docs/AUTONOMY_MODEL.md
+            docs/CUSTOM_APPS.md
+            docs/AGENT_REGISTRY.md
+            docs/MISSION_OS.md
+            docs/APP_HOST.md
+            docs/WORKER_FLEET.md
+            docs/CODEOPS.md
+            docs/CI_REPAIR.md
+            docs/BROWSEROPS.md
+            docs/BUILD_AUTOMATION.md
+            docs/REPLAY.md
+            docs/SECURITY.md
+            docs/WORKFLOWS.md
+            docs/EVALS.md
+            docs/RECEIPTS.md
+            docs/BUILD_PROMPTS.md
+            docs/COMPLIANCE.md
+            docs/CONTROL_MATRIX.md
+            docs/RISK_REGISTER.md
+            docs/DATA_GOVERNANCE.md
+            docs/PRIVACY.md
+            docs/INCIDENT_RESPONSE.md
+            docs/SECURE_SDLC.md
+            docs/SUPPLY_CHAIN.md
+            docs/AI_GOVERNANCE.md
+            docs/EVIDENCE_MODEL.md
+            docs/MCP_RUNTIME.md
+            docs/DEV_MODE_CONNECTION.md
+            docs/generated/build-008-manifest.json
+            docs/generated/build-008-acceptance.md
+            docs/generated/build-008-handoff.md
+            docs/generated/build-008-receipt.json
+            docs/generated/build-009-manifest.json
+            docs/generated/build-009-acceptance.md
+            docs/generated/build-009-handoff.md
+            docs/generated/build-009-receipt.json
+            docs/generated/build-010-manifest.json
+            docs/generated/build-010-acceptance.md
+            docs/generated/build-010-handoff.md
+            docs/generated/build-010-receipt.json
+            docs/generated/project-memory.json
+            docs/generated/known-gaps.json
+            docs/generated/safety-capability-matrix.json
+            docs/generated/eval-registry.json
+            docs/generated/tool-inventory.json
+            docs/generated/build-state.json
+            docs/DECISIONS/0001-public-locked-down-repo-posture.md
+            docs/DECISIONS/0002-default-technical-stack.md
+            docs/DECISIONS/0003-high-autonomy-mission-scoped-authority.md
+            docs/DECISIONS/0004-agent-registry-signed-manifests.md
+            docs/DECISIONS/0005-guard-capability-tokens.md
+            docs/DECISIONS/0006-mission-os-language.md
+            docs/DECISIONS/0007-chatgpt-app-mcp-host-shell.md
+            docs/DECISIONS/0008-worker-fleet-foundation.md
+            docs/DECISIONS/0009-codeops-ci-repair-foundations.md
+            docs/DECISIONS/0010-browserops-build-automation.md
+            docs/DECISIONS/0011-receipts-replay-foundation.md
+            docs/DECISIONS/0012-mcp-runtime-devmode-connection.md
+            .github/PULL_REQUEST_TEMPLATE.md
+            .github/ISSUE_TEMPLATE/feature_request.md
+            .github/ISSUE_TEMPLATE/bug_report.md
+            .github/ISSUE_TEMPLATE/security_task.md
+            .github/ISSUE_TEMPLATE/eval_task.md
+            .github/ISSUE_TEMPLATE/architecture_decision.md
+            .github/workflows/ci.yml
+            .github/CODEOWNERS
+            SECURITY.md
           )
-          for path in "${required[@]}"; do test -f "$path" || { echo "Missing required file: $path"; exit 1; }; done
+          for path in "${required[@]}"; do
+            test -f "$path" || { echo "Missing required file: $path"; exit 1; }
+          done
 
       - name: Basic secret-string guard
         shell: bash
@@ -73,7 +259,12 @@ jobs:
           secret_word="$(printf '\x73\x65\x63\x72\x65\x74')"
           pass_word="$(printf '\x70\x61\x73\x73\x77\x6f\x72\x64')"
           secret_like_patterns="(${aws_prefix}[0-9A-Z]{16}|${begin_word} (RSA|OPENSSH|EC|DSA) ${private_word} ${key_word}|${pass_word}=|client_${secret_word}=|${private_word}_${key_word}=)"
-          if find . -path './.git' -prune -o -path './node_modules' -prune -o -type f ! -path "$guard_file" -print0 | xargs -0 grep -InE "$secret_like_patterns"; then
+          if find . \
+            -path './.git' -prune -o \
+            -path './node_modules' -prune -o \
+            -type f \
+            ! -path "$guard_file" \
+            -print0 | xargs -0 grep -InE "$secret_like_patterns"; then
             echo "Potential secret-like string found."
             exit 1
           fi
