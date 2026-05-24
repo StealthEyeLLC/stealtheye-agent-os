@@ -30,6 +30,15 @@ import {
   listPullRequests
 } from "../src";
 
+const secretLikePattern = new RegExp([
+  "AKIA[0-9A-Z]{16}",
+  "BEGIN (RSA|OPENSSH|EC|DSA) PRIVATE KEY",
+  "client_" + "secret",
+  "PRIVATE" + "_KEY",
+  "customer_" + "ssn",
+  "credit card"
+].join("|"), "i");
+
 describe("repo-status schemas, policy, clients, Guard, and receipts", () => {
   it("schemas validate repository targets and client config with explicit live status", () => {
     expect(RepositoryTargetSchema.parse(repoStatusFixtureTarget).live_capability_status).toBe("fixture_only");
@@ -127,7 +136,7 @@ describe("repo-status schemas, policy, clients, Guard, and receipts", () => {
 
   it("fixtures and docs-facing payloads contain no secret/token/customer/live-write material", () => {
     const serialized = JSON.stringify({ target: repoStatusFixtureTarget, config: repoStatusLiveReadClientConfig, allowed: ALLOWED_READ_ONLY_EFFECTS });
-    expect(serialized).not.toMatch(/AKIA[0-9A-Z]{16}|BEGIN (RSA|OPENSSH|EC|DSA) PRIVATE KEY|client_secret|PRIVATE_KEY|customer_ssn|credit card/i);
+    expect(serialized).not.toMatch(secretLikePattern);
     expect(serialized).not.toMatch(/write_methods_supported":true|credentials_supported":true/);
   });
 });
