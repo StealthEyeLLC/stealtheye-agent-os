@@ -14,6 +14,7 @@
 - [ ] `scripts/phases/build-008-browserops.mjs` declares Build 8 scope.
 - [ ] Generated files exist under `docs/generated/`.
 - [ ] Public-safe/no-live scanner runs in `--check` mode.
+- [ ] Hand-authored docs are preserved outside explicit additive markers.
 
 ## Boundary
 

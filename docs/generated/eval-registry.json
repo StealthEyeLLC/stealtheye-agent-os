@@ -3,6 +3,7 @@
   "build": 8,
   "evals": [
     { "eval_id": "browserops-build-008-01", "name": "BrowserOps validation and policy tests", "location": "packages/browserops/test/browserops.test.ts" },
-    { "eval_id": "browserops-build-008-02", "name": "Build automation generated-state check", "location": "scripts/stealtheye-build.mjs" }
+    { "eval_id": "browserops-build-008-02", "name": "Build automation generated-state check", "location": "scripts/stealtheye-build.mjs" },
+    { "eval_id": "browserops-build-008-03", "name": "Hand-authored docs preserve additive update markers", "location": "scripts/stealtheye-build.mjs" }
   ]
 }

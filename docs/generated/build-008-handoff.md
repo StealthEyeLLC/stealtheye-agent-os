@@ -24,6 +24,10 @@ Build 8 adds BrowserOps contracts and a minimal build automation engine as separ
 - `docs/generated/tool-inventory.json`
 - `docs/generated/build-state.json`
 
+## Hand-authored docs policy
+
+Preserve accumulated hand-authored docs. Generated sync may write `docs/generated/` files and may update hand-authored docs only inside explicit `BEGIN/END BUILD 8 ADDITIVE UPDATE` markers.
+
 ## Carried-forward gaps
 
 - Live BrowserOps runtime, Playwright integration, browser isolation infrastructure, and credential broker flows remain future work.

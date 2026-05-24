@@ -5,5 +5,6 @@
   "current_branch": "agent/browserops-foundation",
   "foundation_packages": ["@stealtheye/agent-registry", "@stealtheye/guard", "@stealtheye/mission-os", "@stealtheye/app-host", "@stealtheye/worker-fleet", "@stealtheye/codeops", "@stealtheye/browserops"],
   "build_8_summary": "BrowserOps contracts and deterministic build-state generation were added without live browser runtime capability.",
+  "hand_authored_doc_policy": "Preserve accumulated hand-authored docs. Generated sync may write docs/generated files and may update hand-authored docs only inside explicit BEGIN/END BUILD 8 ADDITIVE UPDATE markers.",
   "next_target": "Build 9 — Receipts + Replay"
 }
