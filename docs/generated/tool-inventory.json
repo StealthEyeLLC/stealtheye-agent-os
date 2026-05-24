@@ -1,10 +1,11 @@
 {
   "schema_version": "stealtheye-tool-inventory.v1",
-  "build": 8,
+  "build": 9,
   "tools": [
-    { "name": "BrowserOps schemas", "package": "@stealtheye/browserops", "mode": "fixture_only", "live_external_effects": false },
-    { "name": "BrowserOps action policy", "package": "@stealtheye/browserops", "mode": "deterministic_helper", "live_external_effects": false },
-    { "name": "BrowserOps Guard preflight adapter", "package": "@stealtheye/browserops", "mode": "deterministic_helper", "live_external_effects": false },
+    { "name": "Receipts + Replay schemas", "package": "@stealtheye/receipts-replay", "mode": "foundation_contracts", "live_external_effects": false },
+    { "name": "Timeline helpers", "package": "@stealtheye/receipts-replay", "mode": "deterministic_helper", "live_external_effects": false },
+    { "name": "Replay packet builder", "package": "@stealtheye/receipts-replay", "mode": "descriptive_only", "live_external_effects": false },
+    { "name": "Verification and final report builders", "package": "@stealtheye/receipts-replay", "mode": "deterministic_helper", "live_external_effects": false },
     { "name": "Build automation engine", "path": "scripts/stealtheye-build.mjs", "mode": "local_file_generator", "live_external_effects": false }
   ]
 }

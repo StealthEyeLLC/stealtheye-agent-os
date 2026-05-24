@@ -66,3 +66,19 @@ node scripts/stealtheye-build.mjs scripts/phases/build-008-browserops.mjs --chec
 ```
 
 <!-- END BUILD 8 ADDITIVE UPDATE -->
+
+<!-- BEGIN BUILD 9 ADDITIVE UPDATE -->
+
+## Build 9 additive update
+
+Build 9 adds `@stealtheye/receipts-replay` for public-safe receipt events, evidence references, receipt bundles, mission timeline assembly, replay packets, verification packets, final-report packets, and deterministic integrity digests.
+
+Replay remains descriptive and side-effect-free. Do not implement live replay execution, live tool calls, durable receipt databases, production artifact storage, live BrowserOps execution, live CodeOps mutation, CI reruns, production mutation, money movement, secrets access, or customer-data workflows in Build 9.
+
+Additional Build 9 CI check:
+
+```bash
+node scripts/stealtheye-build.mjs scripts/phases/build-009-receipts-replay.mjs --check
+```
+
+<!-- END BUILD 9 ADDITIVE UPDATE -->

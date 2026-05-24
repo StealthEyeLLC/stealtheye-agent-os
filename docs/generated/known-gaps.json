@@ -1,10 +1,12 @@
 {
   "schema_version": "stealtheye-known-gaps.v1",
-  "build": 8,
+  "build": 9,
   "gaps": [
-    { "gap_id": "build-008-gap-01", "summary": "Live BrowserOps runtime, Playwright integration, browser isolation infrastructure, and credential broker flows remain future work.", "status": "open" },
-    { "gap_id": "build-008-gap-02", "summary": "Build automation is a minimal deterministic generator/checker, not a full workflow compiler or provenance system.", "status": "open" },
-    { "gap_id": "build-008-gap-03", "summary": "Worker Fleet handoff remains task-template modeling only; no queue, executor, or browser worker is created.", "status": "open" }
+    { "gap_id": "build-009-gap-01", "summary": "Durable receipt database, production ledger, and replay service remain future work.", "status": "open" },
+    { "gap_id": "build-009-gap-02", "summary": "Artifact storage is reference-only; no live cloud bucket, object store, or retention workflow exists.", "status": "open" },
+    { "gap_id": "build-009-gap-03", "summary": "Replay packets are descriptive only and cannot execute tools, browsers, CI reruns, or production workflows.", "status": "open" },
+    { "gap_id": "build-009-gap-04", "summary": "Integrity digests are unsigned SHA-256 checks; signing and provenance are deferred.", "status": "open" },
+    { "gap_id": "build-009-gap-05", "summary": "Memory Graph integration is not built until Build 10.", "status": "open" }
   ],
-  "next_target": "Build 9 — Receipts + Replay"
+  "next_target": "Build 10 — Memory Graph"
 }

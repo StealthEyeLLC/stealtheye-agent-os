@@ -1,0 +1,16 @@
+{
+  "schema_version": "stealtheye-build-receipt.v1",
+  "build": 9,
+  "title": "Receipts + Replay Foundations",
+  "branch": "agent/receipts-replay-foundation",
+  "package_name": "@stealtheye/receipts-replay",
+  "generated_artifacts": ["docs/generated/build-009-manifest.json", "docs/generated/build-009-acceptance.md", "docs/generated/build-009-handoff.md", "docs/generated/build-009-receipt.json", "docs/generated/project-memory.json", "docs/generated/known-gaps.json", "docs/generated/safety-capability-matrix.json", "docs/generated/eval-registry.json", "docs/generated/tool-inventory.json", "docs/generated/build-state.json"],
+  "checks_expected": ["pnpm install --no-frozen-lockfile", "pnpm typecheck", "pnpm test", "node scripts/stealtheye-build.mjs scripts/phases/build-009-receipts-replay.mjs --check"],
+  "hand_authored_doc_policy": "Preserve accumulated hand-authored docs. Generated sync may write docs/generated files and may update hand-authored docs only inside explicit BEGIN/END BUILD 9 ADDITIVE UPDATE markers.",
+  "generated_at": "2026-01-01T00:00:00.000Z",
+  "live_execution_enabled": false,
+  "durable_database_enabled": false,
+  "production_artifact_storage_enabled": false,
+  "production_mutation_enabled": false,
+  "money_movement_enabled": false
+}

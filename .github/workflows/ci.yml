@@ -19,8 +19,8 @@ jobs:
 
       - name: Report CI scope
         run: |
-          echo "Build 8 CI: install, typecheck, tests, broad required-file checks, basic secret-string guard, and generated build-state check."
-          echo "This workflow does not claim full security scanning, SBOM/provenance, deployment readiness, live browser testing, credentialed browsing testing, Playwright runtime readiness, live queue testing, worker runtime readiness, or live GitHub mutation testing."
+          echo "Build 9 CI: install, typecheck, tests, broad required-file checks, basic secret-string guard, and generated build-state checks."
+          echo "This workflow does not claim full security scanning, SBOM/provenance, deployment readiness, durable ledger readiness, database-backed receipt storage, live replay execution, production artifact storage, live browser testing, credentialed browsing testing, Playwright runtime readiness, live queue testing, worker runtime readiness, or live GitHub mutation testing."
 
       - name: Set up pnpm
         uses: pnpm/action-setup@v4
@@ -42,7 +42,9 @@ jobs:
         run: pnpm test
 
       - name: Check generated build state
-        run: node scripts/stealtheye-build.mjs scripts/phases/build-008-browserops.mjs --check
+        run: |
+          node scripts/stealtheye-build.mjs scripts/phases/build-008-browserops.mjs --check
+          node scripts/stealtheye-build.mjs scripts/phases/build-009-receipts-replay.mjs --check
 
       - name: Verify required scaffold files exist
         shell: bash
@@ -140,8 +142,21 @@ jobs:
             packages/browserops/src/preflight.ts
             packages/browserops/src/fixtures.ts
             packages/browserops/test/browserops.test.ts
+            packages/receipts-replay/package.json
+            packages/receipts-replay/tsconfig.json
+            packages/receipts-replay/src/index.ts
+            packages/receipts-replay/src/schemas.ts
+            packages/receipts-replay/src/evidence.ts
+            packages/receipts-replay/src/events.ts
+            packages/receipts-replay/src/timeline.ts
+            packages/receipts-replay/src/replay.ts
+            packages/receipts-replay/src/final-report.ts
+            packages/receipts-replay/src/verification.ts
+            packages/receipts-replay/src/fixtures.ts
+            packages/receipts-replay/test/receipts-replay.test.ts
             scripts/stealtheye-build.mjs
             scripts/phases/build-008-browserops.mjs
+            scripts/phases/build-009-receipts-replay.mjs
             docs/ARCHITECTURE.md
             docs/AUTONOMY_MODEL.md
             docs/CUSTOM_APPS.md
@@ -153,6 +168,7 @@ jobs:
             docs/CI_REPAIR.md
             docs/BROWSEROPS.md
             docs/BUILD_AUTOMATION.md
+            docs/REPLAY.md
             docs/SECURITY.md
             docs/WORKFLOWS.md
             docs/EVALS.md
@@ -172,6 +188,10 @@ jobs:
             docs/generated/build-008-acceptance.md
             docs/generated/build-008-handoff.md
             docs/generated/build-008-receipt.json
+            docs/generated/build-009-manifest.json
+            docs/generated/build-009-acceptance.md
+            docs/generated/build-009-handoff.md
+            docs/generated/build-009-receipt.json
             docs/generated/project-memory.json
             docs/generated/known-gaps.json
             docs/generated/safety-capability-matrix.json
@@ -188,6 +208,7 @@ jobs:
             docs/DECISIONS/0008-worker-fleet-foundation.md
             docs/DECISIONS/0009-codeops-ci-repair-foundations.md
             docs/DECISIONS/0010-browserops-build-automation.md
+            docs/DECISIONS/0011-receipts-replay-foundation.md
             .github/PULL_REQUEST_TEMPLATE.md
             .github/ISSUE_TEMPLATE/feature_request.md
             .github/ISSUE_TEMPLATE/bug_report.md

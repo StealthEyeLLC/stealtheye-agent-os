@@ -1,0 +1,21 @@
+{
+  "schema_version": "stealtheye-build-manifest.v1",
+  "build": 9,
+  "build_title": "Receipts + Replay Foundations",
+  "branch": "agent/receipts-replay-foundation",
+  "package_name": "@stealtheye/receipts-replay",
+  "files_created_or_updated": ["packages/receipts-replay", "scripts/phases/build-009-receipts-replay.mjs", "scripts/stealtheye-build.mjs", "docs/generated", "docs/REPLAY.md", "docs/DECISIONS/0011-receipts-replay-foundation.md"],
+  "docs_updated": ["README.md", "AGENTS.md", "llms.txt", "llms-full.txt", "docs/ARCHITECTURE.md", "docs/WORKFLOWS.md", "docs/RECEIPTS.md", "docs/EVALS.md", "docs/CONTROL_MATRIX.md", "docs/BUILD_PROMPTS.md", "docs/SECURITY.md", "docs/WORKER_FLEET.md", "docs/APP_HOST.md", "docs/MISSION_OS.md", "docs/CODEOPS.md", "docs/CI_REPAIR.md", "docs/BROWSEROPS.md", "docs/BUILD_AUTOMATION.md", "docs/REPLAY.md"],
+  "tests_evals_added": ["packages/receipts-replay/test/receipts-replay.test.ts", "Hand-authored docs preserve additive update markers"],
+  "adr_added": "docs/DECISIONS/0011-receipts-replay-foundation.md",
+  "ci_required_files": [".github/workflows/ci.yml", "pnpm install --no-frozen-lockfile", "pnpm typecheck", "pnpm test", "node scripts/stealtheye-build.mjs scripts/phases/build-009-receipts-replay.mjs --check"],
+  "safety_boundaries": ["no durable database", "no production receipt ledger", "no live replay execution", "no production artifact storage", "public-safe evidence references only"],
+  "generated_artifacts": ["docs/generated/build-009-manifest.json", "docs/generated/build-009-acceptance.md", "docs/generated/build-009-handoff.md", "docs/generated/build-009-receipt.json", "docs/generated/project-memory.json", "docs/generated/known-gaps.json", "docs/generated/safety-capability-matrix.json", "docs/generated/eval-registry.json", "docs/generated/tool-inventory.json", "docs/generated/build-state.json"],
+  "hand_authored_doc_policy": "Preserve accumulated hand-authored docs. Generated sync may write docs/generated files and may update hand-authored docs only inside explicit BEGIN/END BUILD 9 ADDITIVE UPDATE markers.",
+  "marker_bounded_hand_authored_docs": ["README.md", "AGENTS.md", "docs/ARCHITECTURE.md", "docs/RECEIPTS.md", "docs/WORKFLOWS.md"],
+  "known_gaps": ["Durable receipt database, production ledger, and replay service remain future work.", "Artifact storage is reference-only.", "Replay packets are descriptive only.", "Integrity digests are unsigned SHA-256 checks.", "Memory Graph integration is not built until Build 10."],
+  "next_target": "Build 10 — Memory Graph",
+  "generated_at": "2026-01-01T00:00:00.000Z",
+  "public_safe": true,
+  "live_execution_enabled": false
+}
