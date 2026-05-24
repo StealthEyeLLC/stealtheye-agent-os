@@ -78,3 +78,15 @@ Mission request -> App Host preview/intake surface -> Mission OS Mission Languag
 ## Next architecture build
 
 Build 8 should implement BrowserOps foundations on top of Guard, Worker Fleet, CodeOps evidence, and receipt boundaries.
+
+<!-- BEGIN BUILD 8 ADDITIVE UPDATE -->
+
+## Build 8 additive update: fixture-only BrowserOps and generated build state
+
+Build 8 implements the BrowserOps foundation as contracts and deterministic helpers only. `@stealtheye/browserops` models browser sessions, page observations, browser evidence refs, action categories/kinds, action plans, Guard requested-action conversion, Guard preflight summaries, and Worker Fleet `future_browserops` task templates. It deliberately stops before Playwright/runtime execution.
+
+Build 8 also adds a minimal build automation engine for generated state. The engine writes machine-readable and checklist artifacts under `docs/generated/` and must not replace hand-authored architecture text outside explicit marker-bounded sections.
+
+The next architecture target is **Build 9 — Receipts + Replay**.
+
+<!-- END BUILD 8 ADDITIVE UPDATE -->

@@ -50,3 +50,19 @@ Update relevant docs with behavior changes. Add or update eval expectations when
 ## Deeper docs
 
 Read `docs/ARCHITECTURE.md`, `docs/AUTONOMY_MODEL.md`, `docs/CODEOPS.md`, `docs/CI_REPAIR.md`, `docs/WORKER_FLEET.md`, `docs/APP_HOST.md`, `docs/MISSION_OS.md`, `docs/AGENT_REGISTRY.md`, `docs/SECURITY.md`, `docs/WORKFLOWS.md`, `docs/EVALS.md`, `docs/RECEIPTS.md`, and `docs/BUILD_PROMPTS.md`.
+
+<!-- BEGIN BUILD 8 ADDITIVE UPDATE -->
+
+## Build 8 additive update
+
+Build 8 adds `@stealtheye/browserops` and a minimal generated-state engine. BrowserOps is fixture-only: it models browser sessions, page observations, evidence refs, action policies, action plans, Guard preflight, and Worker Fleet handoff templates, but it does not run Playwright, launch browsers, visit real websites, use credentials, submit forms, send material externally, make purchases, mutate production, or perform destructive actions.
+
+The build automation engine must preserve hand-authored docs. It writes generated state under `docs/generated/` and may only update hand-authored docs inside explicit marker-bounded sections such as this one.
+
+Additional Build 8 CI check:
+
+```bash
+node scripts/stealtheye-build.mjs scripts/phases/build-008-browserops.mjs --check
+```
+
+<!-- END BUILD 8 ADDITIVE UPDATE -->

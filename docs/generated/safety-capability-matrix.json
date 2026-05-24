@@ -1,0 +1,17 @@
+{
+  "schema_version": "stealtheye-safety-capability-matrix.v1",
+  "build": 8,
+  "capabilities": [
+    { "capability": "fixture_browser_observation_contracts", "status": "modeled", "guard_required": true, "live_enabled": false },
+    { "capability": "browser_page_observation_refs", "status": "modeled", "guard_required": true, "live_enabled": false },
+    { "capability": "browser_evidence_refs", "status": "modeled", "guard_required": true, "live_enabled": false },
+    { "capability": "browser_action_plans", "status": "modeled", "guard_required": true, "live_enabled": false },
+    { "capability": "guard_preflight_for_browser_plans", "status": "modeled", "guard_required": true, "live_enabled": false },
+    { "capability": "worker_fleet_browser_task_templates", "status": "modeled", "guard_required": true, "live_enabled": false },
+    { "capability": "live_browser_automation", "status": "blocked", "guard_required": true, "live_enabled": false },
+    { "capability": "credentialed_browsing", "status": "blocked", "guard_required": true, "live_enabled": false },
+    { "capability": "material_external_send", "status": "escalate_or_block", "guard_required": true, "live_enabled": false },
+    { "capability": "money_movement", "status": "escalate_or_block", "guard_required": true, "live_enabled": false },
+    { "capability": "production_mutation", "status": "escalate_or_block", "guard_required": true, "live_enabled": false }
+  ]
+}

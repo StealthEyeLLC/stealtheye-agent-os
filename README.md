@@ -47,3 +47,23 @@ pnpm test
 ## Next build target
 
 Build 8 should implement **BrowserOps** foundations: isolated browser observation contracts, page/action policy schemas, screenshot/DOM/console/network evidence references, Guard-gated browser action models, and Worker Fleet handoff without money movement, destructive actions, production mutation, or material external sends.
+
+<!-- BEGIN BUILD 8 ADDITIVE UPDATE -->
+
+## Build 8 additive update: BrowserOps and build automation
+
+This branch advances the repository to **Build 8 — BrowserOps Foundations + Minimal Build Automation Engine** while preserving the accumulated Build 1–7 architecture and operating rules above.
+
+Build 8 adds `@stealtheye/browserops` as a fixture-only package for browser sessions, page observations, browser evidence references, action policies, action plans, Guard preflight, and Worker Fleet `future_browserops` task templates. It also adds `scripts/stealtheye-build.mjs` with `scripts/phases/build-008-browserops.mjs` to generate/check public-safe build state under `docs/generated/`.
+
+Additional verification for Build 8:
+
+```bash
+node scripts/stealtheye-build.mjs scripts/phases/build-008-browserops.mjs --check
+```
+
+The Build 8 implementation still does not add live browser automation, Playwright runtime execution, credentialed browsing, real website interaction, material external sends, purchases/payments, destructive actions, production mutation, secret access, private endpoints, customer-data workflows, or private infrastructure.
+
+Next target after Build 8: **Build 9 — Receipts + Replay**.
+
+<!-- END BUILD 8 ADDITIVE UPDATE -->

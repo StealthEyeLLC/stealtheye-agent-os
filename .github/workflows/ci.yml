@@ -19,8 +19,8 @@ jobs:
 
       - name: Report CI scope
         run: |
-          echo "Build 7 CI: scaffold checks plus real TypeScript package install, typecheck, and tests."
-          echo "This workflow does not claim production security scanning, full supply-chain attestation, deployment readiness, live repo-write testing, live CI rerun testing, live queue testing, Redis/BullMQ runtime testing, worker runtime readiness, BrowserOps readiness, or live GitHub mutation testing yet."
+          echo "Build 8 CI: install, typecheck, tests, broad required-file checks, basic secret-string guard, and generated build-state check."
+          echo "This workflow does not claim full security scanning, SBOM/provenance, deployment readiness, live browser testing, credentialed browsing testing, Playwright runtime readiness, live queue testing, worker runtime readiness, or live GitHub mutation testing."
 
       - name: Set up pnpm
         uses: pnpm/action-setup@v4
@@ -40,6 +40,9 @@ jobs:
 
       - name: Run tests
         run: pnpm test
+
+      - name: Check generated build state
+        run: node scripts/stealtheye-build.mjs scripts/phases/build-008-browserops.mjs --check
 
       - name: Verify required scaffold files exist
         shell: bash
@@ -125,6 +128,20 @@ jobs:
             packages/codeops/src/preflight.ts
             packages/codeops/src/fixtures.ts
             packages/codeops/test/codeops.test.ts
+            packages/browserops/package.json
+            packages/browserops/tsconfig.json
+            packages/browserops/src/index.ts
+            packages/browserops/src/schemas.ts
+            packages/browserops/src/session.ts
+            packages/browserops/src/page-state.ts
+            packages/browserops/src/evidence.ts
+            packages/browserops/src/action-policy.ts
+            packages/browserops/src/action-plan.ts
+            packages/browserops/src/preflight.ts
+            packages/browserops/src/fixtures.ts
+            packages/browserops/test/browserops.test.ts
+            scripts/stealtheye-build.mjs
+            scripts/phases/build-008-browserops.mjs
             docs/ARCHITECTURE.md
             docs/AUTONOMY_MODEL.md
             docs/CUSTOM_APPS.md
@@ -134,6 +151,8 @@ jobs:
             docs/WORKER_FLEET.md
             docs/CODEOPS.md
             docs/CI_REPAIR.md
+            docs/BROWSEROPS.md
+            docs/BUILD_AUTOMATION.md
             docs/SECURITY.md
             docs/WORKFLOWS.md
             docs/EVALS.md
@@ -149,6 +168,16 @@ jobs:
             docs/SUPPLY_CHAIN.md
             docs/AI_GOVERNANCE.md
             docs/EVIDENCE_MODEL.md
+            docs/generated/build-008-manifest.json
+            docs/generated/build-008-acceptance.md
+            docs/generated/build-008-handoff.md
+            docs/generated/build-008-receipt.json
+            docs/generated/project-memory.json
+            docs/generated/known-gaps.json
+            docs/generated/safety-capability-matrix.json
+            docs/generated/eval-registry.json
+            docs/generated/tool-inventory.json
+            docs/generated/build-state.json
             docs/DECISIONS/0001-public-locked-down-repo-posture.md
             docs/DECISIONS/0002-default-technical-stack.md
             docs/DECISIONS/0003-high-autonomy-mission-scoped-authority.md
@@ -158,6 +187,7 @@ jobs:
             docs/DECISIONS/0007-chatgpt-app-mcp-host-shell.md
             docs/DECISIONS/0008-worker-fleet-foundation.md
             docs/DECISIONS/0009-codeops-ci-repair-foundations.md
+            docs/DECISIONS/0010-browserops-build-automation.md
             .github/PULL_REQUEST_TEMPLATE.md
             .github/ISSUE_TEMPLATE/feature_request.md
             .github/ISSUE_TEMPLATE/bug_report.md

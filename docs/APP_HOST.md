@@ -63,3 +63,13 @@ The package models an MCP-style server surface through descriptors, resource def
 ## Next step
 
 Build 8 should implement BrowserOps foundations while preserving App Host preview boundaries, Worker Fleet task contracts, CodeOps/CI Repair evidence boundaries, and Guard-gated execution.
+
+<!-- BEGIN BUILD 8 ADDITIVE UPDATE -->
+
+## Build 8 additive update
+
+Build 8 does not change App Host runtime behavior. Future App Host surfaces may preview BrowserOps sessions, page observations, action plans, Guard preflight summaries, Worker Fleet task templates, and generated build-state packets, but those surfaces must remain preview-only until live runtime authority, isolation, receipts, and credential boundaries are implemented.
+
+The new BrowserOps and build-automation docs are additive references: see `docs/BROWSEROPS.md` and `docs/BUILD_AUTOMATION.md`.
+
+<!-- END BUILD 8 ADDITIVE UPDATE -->

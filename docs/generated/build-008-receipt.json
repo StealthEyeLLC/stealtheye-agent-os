@@ -1,0 +1,15 @@
+{
+  "schema_version": "stealtheye-build-receipt.v1",
+  "build": 8,
+  "title": "BrowserOps Foundations + Minimal Build Automation Engine",
+  "branch": "agent/browserops-foundation",
+  "package_name": "@stealtheye/browserops",
+  "generated_artifacts": ["docs/generated/build-008-manifest.json", "docs/generated/build-008-acceptance.md", "docs/generated/build-008-handoff.md", "docs/generated/build-008-receipt.json", "docs/generated/project-memory.json", "docs/generated/known-gaps.json", "docs/generated/safety-capability-matrix.json", "docs/generated/eval-registry.json", "docs/generated/tool-inventory.json", "docs/generated/build-state.json"],
+  "checks_expected": ["pnpm install --no-frozen-lockfile", "pnpm typecheck", "pnpm test", "node scripts/stealtheye-build.mjs scripts/phases/build-008-browserops.mjs --check"],
+  "hand_authored_doc_policy": "Preserve accumulated hand-authored docs. Generated sync may write docs/generated files and may update hand-authored docs only inside explicit BEGIN/END BUILD 8 ADDITIVE UPDATE markers.",
+  "generated_at": "2026-01-01T00:00:00.000Z",
+  "live_execution_enabled": false,
+  "credentialed_browsing_enabled": false,
+  "production_mutation_enabled": false,
+  "money_movement_enabled": false
+}
