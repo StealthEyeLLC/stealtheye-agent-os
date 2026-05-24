@@ -1,0 +1,15 @@
+{
+  "schema_version": "stealtheye-build-manifest.v1",
+  "build": 10,
+  "build_title": "MCP Runtime + ChatGPT App Dev-Mode Connection",
+  "branch": "agent/mcp-runtime-devmode-connection",
+  "package_name": "@stealtheye/mcp-runtime",
+  "files_created_or_updated": ["packages/mcp-runtime", "scripts/phases/build-010-mcp-runtime-devmode.mjs", "docs/MCP_RUNTIME.md", "docs/DEV_MODE_CONNECTION.md", "docs/DECISIONS/0012-mcp-runtime-devmode-connection.md"],
+  "docs_updated": ["docs/MCP_RUNTIME.md", "docs/DEV_MODE_CONNECTION.md"],
+  "tests_evals_added": ["packages/mcp-runtime/test/mcp-runtime.test.ts"],
+  "adr_added": "docs/DECISIONS/0012-mcp-runtime-devmode-connection.md",
+  "safety_boundaries": ["preview/read-only/fixture-only runtime tools", "no live write or production side effects"],
+  "next_target": "Build 11 — Live Read-Only Repo/Status Tools through Guard + Receipts",
+  "public_safe": true,
+  "live_execution_enabled": false
+}

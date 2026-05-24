@@ -1,0 +1,12 @@
+{
+  "schema_version": "stealtheye-build-receipt.v1",
+  "build": 10,
+  "title": "MCP Runtime + ChatGPT App Dev-Mode Connection",
+  "branch": "agent/mcp-runtime-devmode-connection",
+  "package_name": "@stealtheye/mcp-runtime",
+  "generated_artifacts": ["docs/generated/build-010-manifest.json", "docs/generated/build-010-acceptance.md", "docs/generated/build-010-handoff.md", "docs/generated/build-010-receipt.json"],
+  "live_execution_enabled": false,
+  "production_mutation_enabled": false,
+  "money_movement_enabled": false,
+  "public_safe": true
+}

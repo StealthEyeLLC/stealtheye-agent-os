@@ -1,12 +1,10 @@
 {
   "schema_version": "stealtheye-build-state.v1",
-  "build": 9,
-  "title": "Receipts + Replay Foundations",
-  "branch": "agent/receipts-replay-foundation",
+  "build": 10,
+  "title": "MCP Runtime + ChatGPT App Dev-Mode Connection",
+  "branch": "agent/mcp-runtime-devmode-connection",
   "generated_artifacts_current": true,
-  "safety_scanner_scope": ["docs/generated", "packages/receipts-replay/src/fixtures.ts"],
-  "hand_authored_doc_policy": "Preserve accumulated hand-authored docs. Generated sync may write docs/generated files and may update hand-authored docs only inside explicit BEGIN/END BUILD 9 ADDITIVE UPDATE markers.",
-  "marker_bounded_hand_authored_docs": ["README.md", "AGENTS.md", "docs/ARCHITECTURE.md", "docs/RECEIPTS.md", "docs/WORKFLOWS.md"],
-  "next_target": "Build 10 — Memory Graph",
+  "safety_scanner_scope": ["docs/generated", "packages/mcp-runtime/src/fixtures.ts", "packages/mcp-runtime/test/mcp-runtime.test.ts"],
+  "next_target": "Build 11 — Live Read-Only Repo/Status Tools through Guard + Receipts",
   "generated_at": "2026-01-01T00:00:00.000Z"
 }

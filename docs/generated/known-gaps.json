@@ -1,12 +1,10 @@
 {
   "schema_version": "stealtheye-known-gaps.v1",
-  "build": 9,
+  "build": 10,
   "gaps": [
-    { "gap_id": "build-009-gap-01", "summary": "Durable receipt database, production ledger, and replay service remain future work.", "status": "open" },
-    { "gap_id": "build-009-gap-02", "summary": "Artifact storage is reference-only; no live cloud bucket, object store, or retention workflow exists.", "status": "open" },
-    { "gap_id": "build-009-gap-03", "summary": "Replay packets are descriptive only and cannot execute tools, browsers, CI reruns, or production workflows.", "status": "open" },
-    { "gap_id": "build-009-gap-04", "summary": "Integrity digests are unsigned SHA-256 checks; signing and provenance are deferred.", "status": "open" },
-    { "gap_id": "build-009-gap-05", "summary": "Memory Graph integration is not built until Build 10.", "status": "open" }
+    { "gap_id": "build-010-gap-01", "summary": "Official MCP SDK transport wiring is deferred.", "status": "open" },
+    { "gap_id": "build-010-gap-02", "summary": "No public app submission, production deployment, or OAuth production credential exists.", "status": "open" },
+    { "gap_id": "build-010-gap-03", "summary": "Live read-only repo/status tools are deferred to Build 11.", "status": "open" }
   ],
-  "next_target": "Build 10 — Memory Graph"
+  "next_target": "Build 11 — Live Read-Only Repo/Status Tools through Guard + Receipts"
 }
