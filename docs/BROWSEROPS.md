@@ -26,6 +26,10 @@ Policy helpers enforce allowed-domain matching, denied-domain override, allowed/
 
 Browser action plans convert to Guard requested actions and Worker Fleet `future_browserops` task templates. Build 8 never executes browser actions.
 
+## Build 9 receipt relationship
+
+Build 9 Receipts + Replay can record BrowserOps preflight summaries, browser action-plan refs, and browser evidence refs as public-safe receipt events and replay steps. It still stores references only and does not execute browser actions or capture real browser artifacts.
+
 ## Explicit non-goals
 
-Build 8 does not add live browser automation, Playwright runtime execution, browser launch, website navigation, credentialed browsing, cookie/storage-state handling, real screenshots, real DOM capture, real HAR/video/trace capture, real downloaded files, external sends, purchases/payments, destructive actions, production mutations, customer-data workflows, or secret access.
+Build 8 and Build 9 do not add live browser automation, Playwright runtime execution, browser launch, website navigation, credentialed browsing, cookie/storage-state handling, real screenshots, real DOM capture, real HAR/video/trace capture, real downloaded files, external sends, purchases/payments, destructive actions, production mutations, customer-data workflows, or secret access.
