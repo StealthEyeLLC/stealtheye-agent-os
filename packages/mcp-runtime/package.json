@@ -12,6 +12,7 @@
   "dependencies": {
     "@stealtheye/app-host": "workspace:*",
     "@stealtheye/receipts-replay": "workspace:*",
+    "@stealtheye/repo-status": "workspace:*",
     "zod": "^3.24.1"
   }
 }
