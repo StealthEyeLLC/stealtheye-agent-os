@@ -2,13 +2,17 @@ import { createHash } from "node:crypto";
 import { MissionTimelineSchema, ReceiptBundleSchema, ReceiptsReplaySchemaVersion, type MissionTimeline, type ReceiptBundle, type ReceiptEvent, type ReceiptEventType, type SourceSubsystem } from "./schemas";
 
 export const defaultRequiredEventTypes: ReceiptEventType[] = ["mission_created", "mission_compiled", "guard_decision_created", "verification_recorded", "final_report_created"];
+const allSourceSubsystems: SourceSubsystem[] = ["mission_os", "agent_registry", "guard", "worker_fleet", "app_host", "codeops", "ci_repair", "browserops", "build_automation", "workflow_compiler_future", "tool_router_future", "domain_apps_future"];
 
 export function sortReceiptEvents(events: ReceiptEvent[]): ReceiptEvent[] {
   return [...events].sort((a, b) => a.timestamp.localeCompare(b.timestamp) || a.event_id.localeCompare(b.event_id));
 }
 
 export function groupEventsBySubsystem(events: ReceiptEvent[]): Record<SourceSubsystem, ReceiptEvent[]> {
-  const grouped = Object.fromEntries(["mission_os", "agent_registry", "guard", "worker_fleet", "app_host", "codeops", "ci_repair", "browserops", "build_automation", "workflow_compiler_future", "tool_router_future", "domain_apps_future"].map((key) => [key, []])) as Record<SourceSubsystem, ReceiptEvent[]>;
+  const grouped = allSourceSubsystems.reduce((accumulator, subsystem) => {
+    accumulator[subsystem] = [];
+    return accumulator;
+  }, {} as Record<SourceSubsystem, ReceiptEvent[]>);
   for (const event of events) grouped[event.source_subsystem].push(event);
   for (const key of Object.keys(grouped) as SourceSubsystem[]) grouped[key] = sortReceiptEvents(grouped[key]);
   return grouped;
