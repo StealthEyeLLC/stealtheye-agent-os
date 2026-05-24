@@ -1,10 +1,10 @@
 {
   "schema_version": "stealtheye-project-memory.v1",
-  "current_build": 8,
-  "current_title": "BrowserOps Foundations + Minimal Build Automation Engine",
-  "current_branch": "agent/browserops-foundation",
-  "foundation_packages": ["@stealtheye/agent-registry", "@stealtheye/guard", "@stealtheye/mission-os", "@stealtheye/app-host", "@stealtheye/worker-fleet", "@stealtheye/codeops", "@stealtheye/browserops"],
-  "build_8_summary": "BrowserOps contracts and deterministic build-state generation were added without live browser runtime capability.",
-  "hand_authored_doc_policy": "Preserve accumulated hand-authored docs. Generated sync may write docs/generated files and may update hand-authored docs only inside explicit BEGIN/END BUILD 8 ADDITIVE UPDATE markers.",
-  "next_target": "Build 9 — Receipts + Replay"
+  "current_build": 9,
+  "current_title": "Receipts + Replay Foundations",
+  "current_branch": "agent/receipts-replay-foundation",
+  "foundation_packages": ["@stealtheye/agent-registry", "@stealtheye/guard", "@stealtheye/mission-os", "@stealtheye/app-host", "@stealtheye/worker-fleet", "@stealtheye/codeops", "@stealtheye/browserops", "@stealtheye/receipts-replay"],
+  "build_summary": "Build 9 adds Receipts + Replay foundations for public-safe evidence references, replay packets, verification packets, final reports, and deterministic receipt bundle digests without a durable database or live storage backend.",
+  "hand_authored_doc_policy": "Preserve accumulated hand-authored docs. Generated sync may write docs/generated files and may update hand-authored docs only inside explicit BEGIN/END BUILD 9 ADDITIVE UPDATE markers.",
+  "next_target": "Build 10 — Memory Graph"
 }

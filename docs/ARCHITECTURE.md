@@ -90,3 +90,15 @@ Build 8 also adds a minimal build automation engine for generated state. The eng
 The next architecture target is **Build 9 — Receipts + Replay**.
 
 <!-- END BUILD 8 ADDITIVE UPDATE -->
+
+<!-- BEGIN BUILD 9 ADDITIVE UPDATE -->
+
+## Build 9 additive update: receipts, replay, and final reports
+
+Build 9 implements `@stealtheye/receipts-replay` as the foundation evidence layer. It adds typed receipt events, evidence refs, receipt bundles, deterministic mission timeline assembly, side-effect-free replay packets, verification packets, final-report packets, subsystem adapters, and receipt-bundle integrity digests.
+
+Replay in Build 9 is descriptive only. It reconstructs mission narratives from references and never executes tools, mutates state, calls APIs, reruns CI, launches browsers, writes to production systems, or accesses artifact storage.
+
+The next architecture target is **Build 10 — Memory Graph**.
+
+<!-- END BUILD 9 ADDITIVE UPDATE -->

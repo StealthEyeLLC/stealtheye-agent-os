@@ -44,6 +44,17 @@ The build engine must not clobber hand-authored docs. Normal generation is limit
 
 `--check` verifies the declared marker-bounded docs still contain one balanced marker pair. This lightweight check is intended to catch accidental wholesale replacement/compression of accumulated docs; it is not a full semantic diff tool.
 
+## Build 9 phase support
+
+Build 9 generalizes the engine so phase specs can drive generated output for different packages and capability matrices. Build 9 uses:
+
+```bash
+node scripts/stealtheye-build.mjs scripts/phases/build-009-receipts-replay.mjs
+node scripts/stealtheye-build.mjs scripts/phases/build-009-receipts-replay.mjs --check
+```
+
+Generated state remains under `docs/generated/`. Build 9 also preserves marker-bounded hand-authored docs and scans Receipts + Replay fixtures for public-safe/no-live boundaries.
+
 ## Safety boundary
 
 Generated files must remain public-safe. The scanner is conservative and does not replace full security scanning, dependency review, SBOM/provenance, SAST, DAST, or manual security review.

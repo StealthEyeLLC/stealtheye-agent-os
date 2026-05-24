@@ -49,6 +49,10 @@ Every significant behavior should be measurable through evals. Failures become r
 
 These are package-level eval fixtures. Future builds should promote them into broader runtime evals before enabling live branch creation, commits, PR creation, CI log fetching, CI reruns, or GitHub App write scopes.
 
+## Build 9 Receipts + Replay eval-style tests
+
+`packages/receipts-replay/test/*` covers valid and invalid receipt events, public-safe evidence URI validation, receipt bundle validation, deterministic timeline sort/group/gap detection, denial and escalation summaries, mission progress summaries, side-effect-free replay packets, verification packets, final report packets, integrity digest stability/mismatch detection, adapters from Guard/Worker Fleet/CodeOps/BrowserOps/generated state, and public-safe fixture references.
+
 ## Failure-to-eval loop
 
 When the system fails, add an eval that reproduces the failure, documents expected behavior, and verifies the repair.
@@ -62,6 +66,7 @@ When the system fails, add an eval that reproduces the failure, documents expect
 - Worker Fleet evals for task schemas, leases, fencing, idempotency, retries, status summaries, Guard preflight, artifacts, and receipt events.
 - CodeOps evals for branch/path safety, patch plans, file-change contracts, verification obligations, PR evidence, and hard-stop denials.
 - CI Repair evals for log classification, repair planning, rerun policy, and receipt-backed verification loops.
+- Receipts + Replay evals for event completeness, replay order, side-effect-free reconstruction, integrity digests, verification packets, and final reports.
 - Tool selection evals for correct routing and refusal.
 - Registry trust evals for signed card/manifest verification, revocation, and diff review.
 - Guard policy evals for capability-token matching, registry trust enforcement, hard stops, receipts, and lifecycle states.
@@ -72,4 +77,4 @@ When the system fails, add an eval that reproduces the failure, documents expect
 
 ## Evidence
 
-Each eval should declare fixtures, allowed tools, expected receipts, success criteria, and forbidden shortcuts. Future eval runners should add scenario ids, fixture metadata, expected receipt artifacts, worker event expectations, CodeOps/CI Repair evidence expectations, and dashboards.
+Each eval should declare fixtures, allowed tools, expected receipts, success criteria, and forbidden shortcuts. Future eval runners should add scenario ids, fixture metadata, expected receipt artifacts, worker event expectations, CodeOps/CI Repair evidence expectations, replay expectations, and dashboards.

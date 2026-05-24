@@ -62,3 +62,20 @@ Future workers will claim jobs, validate authority, execute allowed actions, emi
 3. Workflow Compiler execution layer.
 4. Live CodeOps/CI Repair adapters behind Guard and Worker Fleet.
 5. Official MCP/App runtime integration.
+
+<!-- BEGIN BUILD 9 ADDITIVE UPDATE -->
+
+## Build 9 additive update: receipt and replay workflow
+
+Build 9 adds a foundation-only evidence workflow:
+
+1. Create public-safe receipt events from subsystem outputs.
+2. Collect evidence refs and artifact refs without storing real artifact bytes.
+3. Assemble a receipt bundle and compute a deterministic integrity digest.
+4. Build a mission timeline sorted by timestamp and event id.
+5. Create a replay packet that reconstructs the mission narrative without side effects.
+6. Create a verification packet and final report packet for verifier handoff.
+
+Build 9 does not add a durable receipt database, production ledger, live replay runner, live tool calls, browser execution, CodeOps mutation, CI reruns, or production artifact storage.
+
+<!-- END BUILD 9 ADDITIVE UPDATE -->

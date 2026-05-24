@@ -1,0 +1,41 @@
+export default {
+  build: 9,
+  title: "Receipts + Replay Foundations",
+  branch: "agent/receipts-replay-foundation",
+  packageName: "@stealtheye/receipts-replay",
+  packageSummary: "`@stealtheye/receipts-replay` models receipt events, evidence refs, receipt bundles, mission timelines, replay packets, verification packets, final report packets, deterministic integrity digests, and fixture-only adapters across existing subsystems.",
+  projectMemorySummary: "Build 9 adds Receipts + Replay foundations for public-safe evidence references, replay packets, verification packets, final reports, and deterministic receipt bundle digests without a durable database or live storage backend.",
+  foundationPackages: ["@stealtheye/agent-registry", "@stealtheye/guard", "@stealtheye/mission-os", "@stealtheye/app-host", "@stealtheye/worker-fleet", "@stealtheye/codeops", "@stealtheye/browserops", "@stealtheye/receipts-replay"],
+  importantFiles: ["packages/receipts-replay/package.json", "packages/receipts-replay/tsconfig.json", "packages/receipts-replay/src/index.ts", "packages/receipts-replay/src/schemas.ts", "packages/receipts-replay/src/evidence.ts", "packages/receipts-replay/src/events.ts", "packages/receipts-replay/src/timeline.ts", "packages/receipts-replay/src/replay.ts", "packages/receipts-replay/src/final-report.ts", "packages/receipts-replay/src/verification.ts", "packages/receipts-replay/src/fixtures.ts", "packages/receipts-replay/test/receipts-replay.test.ts", "scripts/stealtheye-build.mjs", "scripts/phases/build-009-receipts-replay.mjs"],
+  docsUpdated: ["README.md", "AGENTS.md", "llms.txt", "llms-full.txt", "docs/ARCHITECTURE.md", "docs/WORKFLOWS.md", "docs/RECEIPTS.md", "docs/EVALS.md", "docs/CONTROL_MATRIX.md", "docs/BUILD_PROMPTS.md", "docs/SECURITY.md", "docs/WORKER_FLEET.md", "docs/APP_HOST.md", "docs/MISSION_OS.md", "docs/CODEOPS.md", "docs/CI_REPAIR.md", "docs/BROWSEROPS.md", "docs/BUILD_AUTOMATION.md", "docs/REPLAY.md"],
+  markerBoundedHandAuthoredDocs: ["README.md", "AGENTS.md", "docs/ARCHITECTURE.md", "docs/RECEIPTS.md", "docs/WORKFLOWS.md"],
+  handAuthoredDocPolicy: "Preserve accumulated hand-authored docs. Generated sync may write docs/generated files and may update hand-authored docs only inside explicit BEGIN/END BUILD 9 ADDITIVE UPDATE markers.",
+  adr: "docs/DECISIONS/0011-receipts-replay-foundation.md",
+  testsAndEvals: ["packages/receipts-replay/test/receipts-replay.test.ts", "valid receipt event validation", "invalid receipt event validation", "fixture URI evidence validation", "receipt bundle validation", "timeline sort/group/gap detection", "denial and escalation summaries", "mission progress summaries", "public-safe side-effect-free replay packet", "verification and final report packet validation", "integrity digest stability and mismatch detection", "Guard Worker CodeOps BrowserOps adapter coverage", "generated build-state evidence reference coverage", "Hand-authored docs preserve additive update markers"],
+  defaultEvalLocation: "packages/receipts-replay/test/receipts-replay.test.ts",
+  ciRequiredFiles: [".github/workflows/ci.yml", "pnpm install --no-frozen-lockfile", "pnpm typecheck", "pnpm test", "node scripts/stealtheye-build.mjs scripts/phases/build-009-receipts-replay.mjs --check"],
+  generatedArtifacts: ["docs/generated/build-009-manifest.json", "docs/generated/build-009-acceptance.md", "docs/generated/build-009-handoff.md", "docs/generated/build-009-receipt.json", "docs/generated/project-memory.json", "docs/generated/known-gaps.json", "docs/generated/safety-capability-matrix.json", "docs/generated/eval-registry.json", "docs/generated/tool-inventory.json", "docs/generated/build-state.json"],
+  scannerExtraPaths: ["packages/receipts-replay/src/fixtures.ts"],
+  acceptanceItems: ["Receipt event, evidence ref, receipt bundle, timeline, replay packet, verification packet, and final report schemas validate.", "Timeline helpers sort, group, detect missing events, and summarize denials/escalations and mission progress.", "Replay packets preserve event order and remain descriptive/side-effect-free.", "Integrity digest helpers are stable and detect mismatch.", "Adapters create receipt events from Guard, Worker Fleet, CodeOps, BrowserOps, and generated build-state fixtures."],
+  safetyBoundaries: ["No durable database or production receipt ledger is added.", "No live replay execution, live tool execution, browser execution, CodeOps mutation, CI rerun, production mutation, money movement, or artifact storage backend is added.", "Evidence refs are fixture/public-safe references only and contain no real logs, screenshots, DOM, customer data, secrets, or production incidents.", "Final reports and replay packets are descriptive and side-effect-free."],
+  capabilityMatrix: [
+    { capability: "receipt_event_contracts", status: "modeled", guard_required: true, live_enabled: false },
+    { capability: "evidence_reference_contracts", status: "modeled", guard_required: true, live_enabled: false },
+    { capability: "receipt_bundle_integrity_digest", status: "modeled", guard_required: false, live_enabled: false },
+    { capability: "mission_timeline_assembly", status: "modeled", guard_required: false, live_enabled: false },
+    { capability: "descriptive_replay_packets", status: "modeled", guard_required: true, live_enabled: false },
+    { capability: "verification_final_report_packets", status: "modeled", guard_required: false, live_enabled: false },
+    { capability: "durable_receipt_database", status: "blocked", guard_required: true, live_enabled: false },
+    { capability: "live_replay_execution", status: "blocked", guard_required: true, live_enabled: false },
+    { capability: "production_artifact_storage", status: "blocked", guard_required: true, live_enabled: false }
+  ],
+  toolInventory: [
+    { name: "Receipts + Replay schemas", package: "@stealtheye/receipts-replay", mode: "foundation_contracts", live_external_effects: false },
+    { name: "Timeline helpers", package: "@stealtheye/receipts-replay", mode: "deterministic_helper", live_external_effects: false },
+    { name: "Replay packet builder", package: "@stealtheye/receipts-replay", mode: "descriptive_only", live_external_effects: false },
+    { name: "Verification and final report builders", package: "@stealtheye/receipts-replay", mode: "deterministic_helper", live_external_effects: false },
+    { name: "Build automation engine", path: "scripts/stealtheye-build.mjs", mode: "local_file_generator", live_external_effects: false }
+  ],
+  knownGaps: ["Durable receipt database, production ledger, and replay service remain future work.", "Artifact storage is reference-only; no live cloud bucket, object store, or retention workflow exists.", "Replay packets are descriptive only and cannot execute tools, browsers, CI reruns, or production workflows.", "Integrity digests are unsigned SHA-256 checks; signing and provenance are deferred.", "Memory Graph integration is not built until Build 10."],
+  nextTarget: "Build 10 — Memory Graph"
+};

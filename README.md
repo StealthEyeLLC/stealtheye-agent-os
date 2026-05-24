@@ -67,3 +67,23 @@ The Build 8 implementation still does not add live browser automation, Playwrigh
 Next target after Build 8: **Build 9 — Receipts + Replay**.
 
 <!-- END BUILD 8 ADDITIVE UPDATE -->
+
+<!-- BEGIN BUILD 9 ADDITIVE UPDATE -->
+
+## Build 9 additive update: Receipts + Replay
+
+Build 9 adds `@stealtheye/receipts-replay` as a foundation package for receipt events, evidence references, receipt bundles, deterministic mission timelines, descriptive replay packets, verification packets, final-report packets, and receipt-bundle integrity digests.
+
+Build 9 also generalizes the build automation engine so phase specs drive generated-state output. The Build 9 phase spec is `scripts/phases/build-009-receipts-replay.mjs`, and generated state remains under `docs/generated/`.
+
+Additional verification for Build 9:
+
+```bash
+node scripts/stealtheye-build.mjs scripts/phases/build-009-receipts-replay.mjs --check
+```
+
+Build 9 remains foundation-only. It does not add a durable database, production receipt ledger, live replay execution, live tool execution, production artifact storage, real logs, real screenshots, customer data, secrets, production mutation, money movement, or private infrastructure.
+
+Next target after Build 9: **Build 10 — Memory Graph**.
+
+<!-- END BUILD 9 ADDITIVE UPDATE -->

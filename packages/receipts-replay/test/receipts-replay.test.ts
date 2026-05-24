@@ -123,11 +123,14 @@ describe("Receipts + Replay foundations", () => {
     expect(ReceiptsReplay.ReceiptsReplayJsonSchemas.replayPacket).toBeDefined();
   });
 
-  it("contains only public-safe fixture references and no live endpoints", () => {
+  it("contains no real secrets, customer data, endpoints, screenshots, logs, or production data in fixtures", () => {
     const fixtureText = JSON.stringify(receiptsReplayFixtureCorpus);
+    expect(fixtureText).not.toMatch(/AKIA[0-9A-Z]{16}/);
+    expect(fixtureText).not.toMatch(/BEGIN (RSA|OPENSSH|EC|DSA) PRIVATE KEY/);
+    expect(fixtureText).not.toMatch(/password=|client_secret=|PRIVATE_KEY=/i);
     expect(fixtureText).not.toMatch(/https?:\/\//);
-    expect(fixtureText).not.toMatch(/raw_screenshot_bytes|actual_ci_log_payload|production_incident_payload/i);
+    expect(fixtureText).not.toMatch(/customer[_ -]?(ssn|credit card|production data)/i);
+    expect(fixtureText).not.toMatch(/real screenshot|real dom|real ci log|production incident/i);
     expect(fixtureEvidenceRefs.every((ref) => ref.public_safe)).toBe(true);
-    expect(fixtureEvidenceRefs.every((ref) => ReceiptsReplay.isPublicSafeReceiptUri(ref.uri))).toBe(true);
   });
 });

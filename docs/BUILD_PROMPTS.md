@@ -23,7 +23,7 @@ pnpm typecheck
 pnpm test
 ```
 
-CI should be truthful about what is actually checked. Do not claim full security scanning, production readiness, SBOM generation, supply-chain attestation, live queue testing, live repo-write testing, live CI rerun testing, or production worker readiness until those workflows exist.
+CI should be truthful about what is actually checked. Do not claim full security scanning, production readiness, SBOM generation, supply-chain attestation, live queue testing, live repo-write testing, live CI rerun testing, durable ledger readiness, live replay readiness, or production worker readiness until those workflows exist.
 
 ## Build 6 prompt outcome
 
@@ -37,10 +37,20 @@ Build 7 implements CodeOps + CI Repair Foundations in `@stealtheye/codeops`: rep
 
 It does not add live GitHub mutation, branch creation, commits, PR creation, live CI log fetching, live CI reruns, protected-branch writes, force pushes, CI/test/security weakening, browser automation, production deployment, customer-data workflows, money movement, secrets access, or private infrastructure.
 
+## Build 8 prompt outcome
+
+Build 8 implements BrowserOps Foundations + Minimal Build Automation Engine: fixture-only browser sessions, page observations, evidence refs, action policies, action plans, Guard preflight, Worker Fleet handoff templates, generated build-state files, and marker-bounded hand-authored doc updates.
+
+## Build 9 prompt outcome
+
+Build 9 implements Receipts + Replay Foundations in `@stealtheye/receipts-replay`: receipt events, evidence refs, receipt bundles, mission timelines, replay packets, verification packets, final report packets, integrity digests, subsystem adapters, public-safe fixtures, and generated build-state files.
+
+It does not add a durable database, production ledger, live replay execution, live tool execution, browser execution, CodeOps mutation, CI rerun, production mutation, money movement, artifact storage backend, secrets, customer data, or private infrastructure.
+
 ## Discipline
 
-Do not mix unrelated features. Do not add sensitive operational material or private infrastructure. Do not claim certification, production readiness, runtime worker readiness, live CodeOps readiness, live CI Repair readiness, or open-source status without the required artifacts. Keep AGENTS.md concise and push detail into docs.
+Do not mix unrelated features. Do not add sensitive operational material or private infrastructure. Do not claim certification, production readiness, durable ledger readiness, live replay readiness, runtime worker readiness, live CodeOps readiness, live CI Repair readiness, or open-source status without the required artifacts. Keep AGENTS.md concise and push detail into docs.
 
 ## Next target
 
-Build 8 should implement BrowserOps foundations.
+Build 10 should implement Memory Graph foundations.

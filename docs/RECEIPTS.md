@@ -57,3 +57,15 @@ Build 3 introduces the Guard decision receipt shape in `@stealtheye/guard`. A Gu
 ## Replay model
 
 Replay should answer what happened, why it was authorized, what mission/plan/status applied, which worker task and lease applied, what app-host preview was shown, what patch plan was proposed, whether branch/path policy allowed it, what changed, what verification was required, what CI failure was classified, whether repair required a patch or rerun-only path, what PR evidence exists, what was trusted, what Guard preflight decided, what evidence supports the result, what was denied or escalated, what was retried or deduplicated, and what remains incomplete. Replay does not require exposing secrets or raw sensitive data.
+
+<!-- BEGIN BUILD 9 ADDITIVE UPDATE -->
+
+## Build 9 additive update: receipt bundle and replay foundations
+
+Build 9 adds `@stealtheye/receipts-replay`, which turns the receipt expectations in this document into typed foundation contracts. It models receipt events for Mission OS, Agent Registry, Guard, Worker Fleet, App Host, CodeOps, CI Repair, BrowserOps, Build Automation, and future workflow/tool/domain systems.
+
+Build 9 evidence refs are reference-only and public-safe. They use fixture/generated URI schemes and do not include real logs, screenshots, DOM, customer data, secrets, private endpoints, production incidents, or production artifacts.
+
+Build 9 replay packets are descriptive. They preserve event order, index public-safe evidence refs, identify omitted sensitive refs, and explicitly mark replay steps as side-effect-free.
+
+<!-- END BUILD 9 ADDITIVE UPDATE -->
