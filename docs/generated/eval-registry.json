@@ -1,8 +1,9 @@
 {
   "schema_version": "stealtheye-eval-registry.v1",
-  "build": 9,
+  "build": 10,
   "evals": [
-    { "eval_id": "build-009-eval-01", "name": "Receipts + Replay validation and helper tests", "location": "packages/receipts-replay/test/receipts-replay.test.ts" },
-    { "eval_id": "build-009-eval-02", "name": "Build automation generated-state and marker check", "location": "scripts/stealtheye-build.mjs" }
+    { "eval_id": "build-010-eval-01", "name": "MCP runtime local/dev surface", "location": "packages/mcp-runtime/test/mcp-runtime.test.ts" },
+    { "eval_id": "build-010-eval-02", "name": "Tool descriptor safety invariants", "location": "packages/mcp-runtime/test/mcp-runtime.test.ts" },
+    { "eval_id": "build-010-eval-03", "name": "Receipt preview generation", "location": "packages/mcp-runtime/test/mcp-runtime.test.ts" }
   ]
 }

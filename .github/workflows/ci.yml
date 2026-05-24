@@ -19,8 +19,8 @@ jobs:
 
       - name: Report CI scope
         run: |
-          echo "Build 9 CI: install, typecheck, tests, broad required-file checks, basic secret-string guard, and generated build-state checks."
-          echo "This workflow does not claim full security scanning, SBOM/provenance, deployment readiness, durable ledger readiness, database-backed receipt storage, live replay execution, production artifact storage, live browser testing, credentialed browsing testing, Playwright runtime readiness, live queue testing, worker runtime readiness, or live GitHub mutation testing."
+          echo "Build 10 CI: install, typecheck, tests, broad accumulated required-file checks, basic secret-string guard, and Build 8/9/10 generated-state checks."
+          echo "This workflow does not claim full security scanning, SBOM/provenance, deployment readiness, public app submission, OAuth production readiness, durable ledger readiness, live replay execution, production artifact storage, live browser testing, credentialed browsing testing, Playwright runtime readiness, live queue testing, worker runtime readiness, live repo-write testing, or live GitHub mutation testing."
 
       - name: Set up pnpm
         uses: pnpm/action-setup@v4
@@ -45,11 +45,14 @@ jobs:
         run: |
           node scripts/stealtheye-build.mjs scripts/phases/build-008-browserops.mjs --check
           node scripts/stealtheye-build.mjs scripts/phases/build-009-receipts-replay.mjs --check
+          node scripts/stealtheye-build.mjs scripts/phases/build-010-mcp-runtime-devmode.mjs --check
 
       - name: Verify required scaffold files exist
         shell: bash
         run: |
           set -euo pipefail
+          # Future builds may move this into a generated manifest-driven inventory,
+          # but that transition must be monotonic and include all prior foundation files.
           required=(
             README.md
             AGENTS.md
@@ -154,9 +157,23 @@ jobs:
             packages/receipts-replay/src/verification.ts
             packages/receipts-replay/src/fixtures.ts
             packages/receipts-replay/test/receipts-replay.test.ts
+            packages/mcp-runtime/package.json
+            packages/mcp-runtime/tsconfig.json
+            packages/mcp-runtime/src/index.ts
+            packages/mcp-runtime/src/schemas.ts
+            packages/mcp-runtime/src/server.ts
+            packages/mcp-runtime/src/transport.ts
+            packages/mcp-runtime/src/app-host-adapter.ts
+            packages/mcp-runtime/src/tool-router.ts
+            packages/mcp-runtime/src/resources.ts
+            packages/mcp-runtime/src/receipts.ts
+            packages/mcp-runtime/src/dev-mode.ts
+            packages/mcp-runtime/src/fixtures.ts
+            packages/mcp-runtime/test/mcp-runtime.test.ts
             scripts/stealtheye-build.mjs
             scripts/phases/build-008-browserops.mjs
             scripts/phases/build-009-receipts-replay.mjs
+            scripts/phases/build-010-mcp-runtime-devmode.mjs
             docs/ARCHITECTURE.md
             docs/AUTONOMY_MODEL.md
             docs/CUSTOM_APPS.md
@@ -184,6 +201,8 @@ jobs:
             docs/SUPPLY_CHAIN.md
             docs/AI_GOVERNANCE.md
             docs/EVIDENCE_MODEL.md
+            docs/MCP_RUNTIME.md
+            docs/DEV_MODE_CONNECTION.md
             docs/generated/build-008-manifest.json
             docs/generated/build-008-acceptance.md
             docs/generated/build-008-handoff.md
@@ -192,6 +211,10 @@ jobs:
             docs/generated/build-009-acceptance.md
             docs/generated/build-009-handoff.md
             docs/generated/build-009-receipt.json
+            docs/generated/build-010-manifest.json
+            docs/generated/build-010-acceptance.md
+            docs/generated/build-010-handoff.md
+            docs/generated/build-010-receipt.json
             docs/generated/project-memory.json
             docs/generated/known-gaps.json
             docs/generated/safety-capability-matrix.json
@@ -209,6 +232,7 @@ jobs:
             docs/DECISIONS/0009-codeops-ci-repair-foundations.md
             docs/DECISIONS/0010-browserops-build-automation.md
             docs/DECISIONS/0011-receipts-replay-foundation.md
+            docs/DECISIONS/0012-mcp-runtime-devmode-connection.md
             .github/PULL_REQUEST_TEMPLATE.md
             .github/ISSUE_TEMPLATE/feature_request.md
             .github/ISSUE_TEMPLATE/bug_report.md
