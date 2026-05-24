@@ -114,7 +114,7 @@ describe("repo-status schemas, policy, clients, Guard, and receipts", () => {
   it("real public REST client uses GET only and api.github.com only with mocked fetch", async () => {
     const fetchCalls: Array<{ input: string | URL; method?: string }> = [];
     const fetchMock = async (input: string | URL, init?: { method?: string; headers?: Record<string, string> }) => {
-      fetchCalls.push({ input, method: init?.method });
+      fetchCalls.push(init?.method ? { input, method: init.method } : { input });
       return { ok: true, status: 200, headers: { get: () => "10" }, async json() { return { default_branch: "main", description: "fixture", archived: false, disabled: false, fork: false, open_issues_count: 1, visibility: "public", html_url: "https://github.com/StealthEyeLLC/stealtheye-agent-os", pushed_at: "2026-01-01T00:00:00.000Z", updated_at: "2026-01-01T00:00:00.000Z" }; } };
     };
     const client = new PublicUnauthenticatedGitHubRestClient(repoStatusLiveReadClientConfig, fetchMock);
