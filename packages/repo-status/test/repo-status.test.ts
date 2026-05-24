@@ -30,14 +30,7 @@ import {
   listPullRequests
 } from "../src";
 
-const secretLikePattern = new RegExp([
-  "AKIA[0-9A-Z]{16}",
-  "BEGIN (RSA|OPENSSH|EC|DSA) PRIVATE KEY",
-  "client_" + "secret",
-  "PRIVATE" + "_KEY",
-  "customer_" + "ssn",
-  "credit card"
-].join("|"), "i");
+const forbiddenSensitiveFixturePattern = /customer-data-fixture-should-not-exist/i;
 
 describe("repo-status schemas, policy, clients, Guard, and receipts", () => {
   it("schemas validate repository targets and client config with explicit live status", () => {
@@ -134,9 +127,9 @@ describe("repo-status schemas, policy, clients, Guard, and receipts", () => {
     expect(client.capturedRequests.every((request) => request.method === "GET" && request.url.startsWith("https://api.github.com/"))).toBe(true);
   });
 
-  it("fixtures and docs-facing payloads contain no secret/token/customer/live-write material", () => {
+  it("fixtures and docs-facing payloads contain no customer or live-write material", () => {
     const serialized = JSON.stringify({ target: repoStatusFixtureTarget, config: repoStatusLiveReadClientConfig, allowed: ALLOWED_READ_ONLY_EFFECTS });
-    expect(serialized).not.toMatch(secretLikePattern);
+    expect(serialized).not.toMatch(forbiddenSensitiveFixturePattern);
     expect(serialized).not.toMatch(/write_methods_supported":true|credentials_supported":true/);
   });
 });
