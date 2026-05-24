@@ -20,8 +20,10 @@ export default {
     "scripts/phases/build-008-browserops.mjs"
   ],
   docsUpdated: ["README.md", "AGENTS.md", "llms.txt", "llms-full.txt", "docs/ARCHITECTURE.md", "docs/WORKFLOWS.md", "docs/RECEIPTS.md", "docs/EVALS.md", "docs/CONTROL_MATRIX.md", "docs/BUILD_PROMPTS.md", "docs/SECURITY.md", "docs/WORKER_FLEET.md", "docs/APP_HOST.md", "docs/MISSION_OS.md", "docs/BROWSEROPS.md", "docs/BUILD_AUTOMATION.md"],
+  markerBoundedHandAuthoredDocs: ["README.md", "AGENTS.md", "docs/ARCHITECTURE.md", "docs/APP_HOST.md"],
+  handAuthoredDocPolicy: "Preserve accumulated hand-authored docs. Generated sync may write docs/generated files and may update hand-authored docs only inside explicit BEGIN/END BUILD 8 ADDITIVE UPDATE markers.",
   adr: "docs/DECISIONS/0010-browserops-build-automation.md",
-  testsAndEvals: ["packages/browserops/test/browserops.test.ts", "Browser session validation", "Page observation risky-control detection", "Evidence reference validation", "Browser action policy decisions", "Guard requested-action conversion", "Worker Fleet task-template conversion", "Guard preflight allow/block/escalate coverage", "Fixture public-safety checks"],
+  testsAndEvals: ["packages/browserops/test/browserops.test.ts", "Browser session validation", "Page observation risky-control detection", "Evidence reference validation", "Browser action policy decisions", "Guard requested-action conversion", "Worker Fleet task-template conversion", "Guard preflight allow/block/escalate coverage", "Fixture public-safety checks", "Hand-authored docs preserve additive update markers"],
   ciRequiredFiles: [".github/workflows/ci.yml", "pnpm install --no-frozen-lockfile", "pnpm typecheck", "pnpm test", "node scripts/stealtheye-build.mjs scripts/phases/build-008-browserops.mjs --check"],
   generatedArtifacts: ["docs/generated/build-008-manifest.json", "docs/generated/build-008-acceptance.md", "docs/generated/build-008-handoff.md", "docs/generated/build-008-receipt.json", "docs/generated/project-memory.json", "docs/generated/known-gaps.json", "docs/generated/safety-capability-matrix.json", "docs/generated/eval-registry.json", "docs/generated/tool-inventory.json", "docs/generated/build-state.json"],
   safetyBoundaries: [

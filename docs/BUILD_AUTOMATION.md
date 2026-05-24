@@ -32,6 +32,18 @@ node scripts/stealtheye-build.mjs scripts/phases/build-008-browserops.mjs --chec
 - `docs/generated/tool-inventory.json`
 - `docs/generated/build-state.json`
 
+## Hand-authored document preservation
+
+The build engine must not clobber hand-authored docs. Normal generation is limited to `docs/generated/`. A phase spec may declare hand-authored docs that contain generated or synchronized notes, but updates to those docs must be additive and bounded by explicit markers such as:
+
+```md
+<!-- BEGIN BUILD 8 ADDITIVE UPDATE -->
+...
+<!-- END BUILD 8 ADDITIVE UPDATE -->
+```
+
+`--check` verifies the declared marker-bounded docs still contain one balanced marker pair. This lightweight check is intended to catch accidental wholesale replacement/compression of accumulated docs; it is not a full semantic diff tool.
+
 ## Safety boundary
 
 Generated files must remain public-safe. The scanner is conservative and does not replace full security scanning, dependency review, SBOM/provenance, SAST, DAST, or manual security review.
