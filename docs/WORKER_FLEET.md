@@ -1,13 +1,65 @@
 # Worker Fleet
 
-Worker Fleet owns durable execution contracts for future workers. It models tasks, leases, idempotency, retry policy/state, status, artifacts, receipts, and Guard preflight. It does not run a live queue or executor in current builds.
+Worker Fleet is the durable execution substrate for StealthEye Agent OS. Build 6 adds the package-level foundation only: typed schemas, deterministic helpers, fixtures, and eval-style tests for worker tasks, leases, idempotency, retry policy, status summaries, artifact references, receipt events, Guard preflight boundaries, and Mission OS plan handoff.
 
-## Build 8 BrowserOps handoff
+## Build 6 package
 
-`@stealtheye/browserops` creates Worker Fleet task templates for browser action plans. These templates use task type `future_browserops`, include Guard requested actions, preserve mission/plan/action identity, and remain queued model objects only.
+`packages/worker-fleet` provides:
 
-BrowserOps task templates must not launch browsers, execute Playwright, submit forms, send material externally, make purchases, mutate production, perform destructive actions, use credentials, or touch real websites.
+- `WorkerTask` schemas for mission-step and system tasks;
+- task statuses for queued, leased, running, waiting, blocked, completed, failed, retry scheduled, and canceled work;
+- task types for mission steps, Guard preflight, registry checks, receipt writes, status updates, app-host previews, and future CodeOps/BrowserOps/CI Repair lanes;
+- lease schemas and deterministic helpers for create, active/expired checks, heartbeat, release, complete, and stale/fenced update rejection;
+- idempotency records, stable action fingerprints, duplicate detection, collision detection, and completed-result references;
+- retry policy/state helpers for fixed, linear, and exponential backoff without live queues;
+- task status transition validation, next-runnable detection, blocker summaries, mission worker summaries, and retryable-failure summaries;
+- artifact reference schemas for worker outputs without storing real artifacts;
+- worker receipt event schemas for replayable task lifecycle events;
+- Guard preflight helper that evaluates requested actions before execution and returns a worker receipt event plus updated status suggestion;
+- Mission OS helpers that convert plan steps into worker tasks while preserving mission, plan, step, dependencies, and requested-action templates.
 
-## Deferred runtime work
+## Build 7 CodeOps handoff
 
-Durable queue backend, worker runtime, browser worker isolation, artifact storage integration, lease persistence, and runtime Tool Router integration remain future work.
+Build 7 `@stealtheye/codeops` uses Worker Fleet contracts to create task templates for future CodeOps and CI Repair steps. Those templates use `future_codeops` and `future_ci_repair` task types, carry Guard requested actions, preserve capability-token refs and receipt refs, and can be passed through Worker Fleet Guard preflight.
+
+This is still modeling only. CodeOps-created Worker Fleet tasks do not create branches, write files, commit, open PRs, fetch live logs, rerun CI jobs, run browsers, deploy, access secrets, touch customer data, or perform production mutations.
+
+## Execution boundary
+
+Build 6 and Build 7 do not add a live Redis/BullMQ queue, production worker runtime, live tool execution, browser automation, repo mutation, production deployment, secret access, money movement, customer-data workflows, private infrastructure, cloud storage, or live queue credentials.
+
+The package models the durable execution contract that future runtime workers will persist and enforce. It is safe foundation code, not an executor.
+
+## Guard preflight rule
+
+Any task type that carries action authority must pass Guard preflight before execution. The helper accepts a worker task, capability tokens, and registry trust summary, then calls Guard evaluation. Allowed decisions can move a task toward leased/running readiness. Deny decisions block the task. Escalate decisions mark the task as waiting or blocked for escalation. No helper executes the requested action.
+
+Build 7 CodeOps preflight uses this rule for branch-safe patch planning and CI repair planning. Protected branch mutation, force push/history rewrite, CI/test/security weakening, and destructive delete remain denied or escalated by Guard and CodeOps before execution exists.
+
+## Mission OS handoff
+
+Worker Fleet consumes Mission OS plans and converts each plan step into a worker task. It preserves:
+
+- `mission_id`
+- `plan_id`
+- `step_id`
+- title and description
+- dependencies mapped to worker task ids
+- requested-action templates where the plan step has an expected effect
+- receipt refs and capability-token refs
+
+Build 7 patch plans and repair plans also preserve mission and task identity so future Mission OS steps can hand off into CodeOps and CI Repair lanes.
+
+## Receipts and artifacts
+
+Worker receipt events represent queue, lease, start, preflight, block, completion, failure, retry, cancel, artifact, and receipt lifecycle events. Artifact references include kind, URI, optional digest, summary, sensitivity classification, and retention hint. Build 6 records references only; it does not persist real artifact bytes.
+
+Build 7 adds CodeOps and CI Repair evidence refs to this model through patch plans, file-change contracts, verification plans, CI summaries, repair plans, PR evidence packets, and preflight summaries.
+
+## Evals
+
+`packages/worker-fleet/test/worker-fleet.test.ts` covers normal mission-step tasks, Guard allow/block paths, untrusted registry blocking, retryable/non-retryable failures, stale lease rejection, idempotency duplicate/collision behavior, receipt events, artifact references, status transitions, dependencies, runnable detection, blocker summaries, and no-secret fixture checks.
+
+`packages/codeops/test/codeops.test.ts` covers Worker Fleet task-template generation for safe CodeOps plans and Guard preflight over action-bearing future CodeOps/CI Repair tasks.
+
+These tests are initial eval-style fixtures. Future builds should promote them into a broader Worker Fleet eval suite once a live runtime and durable store exist.
