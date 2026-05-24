@@ -1,0 +1,111 @@
+export default {
+  build: 11,
+  title: "Live Read-Only Repo/Status Tools through Guard + Receipts",
+  branch: "agent/live-readonly-repo-status-tools",
+  packageName: "@stealtheye/repo-status",
+  packageSummary: "`@stealtheye/repo-status` adds the first live-capable read-only public GitHub observation surface with deterministic policy checks, Guard decisions, receipt previews, fixture tests, and an optional unauthenticated REST client constrained to GET calls against the public GitHub API for an explicit allowlist.",
+  projectMemorySummary: "Build 11 crosses from fixture-only previews into limited live read-only public GitHub repository/status observation. It adds repo/status tools to the MCP runtime while preserving no-write, no-secret, no-private-repo, no-browser, no-production, no-money, and no-customer-data boundaries.",
+  foundationPackages: ["@stealtheye/agent-registry", "@stealtheye/guard", "@stealtheye/mission-os", "@stealtheye/app-host", "@stealtheye/worker-fleet", "@stealtheye/codeops", "@stealtheye/browserops", "@stealtheye/receipts-replay", "@stealtheye/mcp-runtime", "@stealtheye/repo-status"],
+  importantFiles: [
+    "packages/repo-status/package.json",
+    "packages/repo-status/tsconfig.json",
+    "packages/repo-status/src/index.ts",
+    "packages/repo-status/src/schemas.ts",
+    "packages/repo-status/src/github-client.ts",
+    "packages/repo-status/src/read-policy.ts",
+    "packages/repo-status/src/status-summary.ts",
+    "packages/repo-status/src/guard-adapter.ts",
+    "packages/repo-status/src/receipts.ts",
+    "packages/repo-status/src/fixtures.ts",
+    "packages/repo-status/test/repo-status.test.ts",
+    "packages/mcp-runtime/package.json",
+    "packages/mcp-runtime/src/repo-status-adapter.ts",
+    "packages/mcp-runtime/src/schemas.ts",
+    "packages/mcp-runtime/src/tool-router.ts",
+    "packages/mcp-runtime/src/server.ts",
+    "packages/mcp-runtime/src/transport.ts",
+    "packages/mcp-runtime/src/fixtures.ts",
+    "packages/mcp-runtime/test/mcp-runtime.test.ts",
+    "scripts/phases/build-011-live-readonly-repo-status.mjs"
+  ],
+  docsUpdated: ["docs/REPO_STATUS.md", "docs/DECISIONS/0013-live-readonly-repo-status-tools.md", "README.md", "AGENTS.md", "llms.txt", "llms-full.txt", "docs/ARCHITECTURE.md", "docs/MCP_RUNTIME.md", "docs/CUSTOM_APPS.md", "docs/WORKFLOWS.md", "docs/RECEIPTS.md", "docs/REPLAY.md", "docs/EVALS.md", "docs/CONTROL_MATRIX.md", "docs/BUILD_PROMPTS.md", "docs/BUILD_AUTOMATION.md", "docs/SECURITY.md"],
+  markerBoundedHandAuthoredDocs: ["README.md", "AGENTS.md", "docs/ARCHITECTURE.md", "docs/MCP_RUNTIME.md", "docs/CUSTOM_APPS.md", "docs/SECURITY.md", "docs/RECEIPTS.md", "docs/BUILD_PROMPTS.md"],
+  handAuthoredDocPolicy: "Preserve accumulated hand-authored docs. Generated sync may write docs/generated files and Build 11 hand-authored updates must be additive and bounded by explicit Build 11 markers.",
+  adr: "docs/DECISIONS/0013-live-readonly-repo-status-tools.md",
+  testsAndEvals: [
+    "packages/repo-status/test/repo-status.test.ts",
+    "repo/status schemas validate live capability status",
+    "read-only policy allows public repo and PR/status reads",
+    "read-only policy denies write mutation secret and private repo effects",
+    "fixture client returns repo branch PR issue workflow file metadata and content",
+    "Guard adapter allows public reads and denies write mutation private secret and untrusted registry requests",
+    "receipt previews are generated for each read category",
+    "repo status packet summarizes current public-safe fixture status",
+    "runtime lists repo read-only tools",
+    "runtime repo.status.summary succeeds",
+    "runtime repo.metadata.read succeeds",
+    "runtime repo.pr.list succeeds",
+    "runtime repo.workflow.status.read succeeds",
+    "runtime rejects repo write commit and PR mutation tool names",
+    "mocked live REST client uses GET only and api.github.com only",
+    "public-safe fixture and docs-facing scanner checks"
+  ],
+  defaultEvalLocation: "packages/repo-status/test/repo-status.test.ts",
+  ciRequiredFiles: [
+    "pnpm install --no-frozen-lockfile",
+    "pnpm typecheck",
+    "pnpm test",
+    "node scripts/stealtheye-build.mjs scripts/phases/build-008-browserops.mjs --check",
+    "node scripts/stealtheye-build.mjs scripts/phases/build-009-receipts-replay.mjs --check",
+    "node scripts/stealtheye-build.mjs scripts/phases/build-010-mcp-runtime-devmode.mjs --check",
+    "node scripts/stealtheye-build.mjs scripts/phases/build-011-live-readonly-repo-status.mjs --check"
+  ],
+  generatedArtifacts: [
+    "docs/generated/build-011-manifest.json",
+    "docs/generated/build-011-acceptance.md",
+    "docs/generated/build-011-handoff.md",
+    "docs/generated/build-011-receipt.json",
+    "docs/generated/project-memory.json",
+    "docs/generated/known-gaps.json",
+    "docs/generated/safety-capability-matrix.json",
+    "docs/generated/eval-registry.json",
+    "docs/generated/tool-inventory.json",
+    "docs/generated/build-state.json"
+  ],
+  scannerExtraPaths: ["packages/repo-status/src/fixtures.ts", "packages/repo-status/test/repo-status.test.ts", "packages/mcp-runtime/src/repo-status-adapter.ts", "packages/mcp-runtime/test/mcp-runtime.test.ts", "docs/REPO_STATUS.md"],
+  acceptanceItems: [
+    "`@stealtheye/repo-status` defines schemas for targets, client config, summaries, status packets, policy results, and receipt previews with explicit live capability status.",
+    "Policy helpers allow only public read effects and deny write, mutation, private repo, secret, deployment, external-send, and money effects.",
+    "Guard integration evaluates repo/status reads against a read-only capability token and denies untrusted registry summaries.",
+    "Every read category produces a public-safe receipt preview with target, timestamp, Guard or policy reference, input/output summaries, and no-write statement.",
+    "Fixture client covers deterministic CI tests; optional public unauthenticated REST client uses no credentials, GET only, api.github.com only, and an explicit public repository allowlist.",
+    "MCP runtime lists and calls repo/status read-only tools without exposing write tools."
+  ],
+  safetyBoundaries: [
+    "No branch creation, file writes, commits, PR creation or mutation, issue mutation, CI reruns, workflow dispatch, repository settings mutation, deployment, money movement, browser execution, private repo access, secret access, customer-data workflow, production mutation, or material external send is added.",
+    "Live GitHub behavior, when configured, is read-only public observation using unauthenticated GET requests against the official public GitHub REST API host for an explicit repository allowlist.",
+    "CI tests remain fixture-backed or mocked and do not require credentials or live network stability.",
+    "No durable ledger or production runtime deployment is included."
+  ],
+  capabilityMatrix: [
+    { capability: "public_repo_metadata_read", status: "implemented_read_only_live_capable", guard_required: true, live_enabled: true },
+    { capability: "public_branch_metadata_read", status: "implemented_read_only_live_capable", guard_required: true, live_enabled: true },
+    { capability: "public_pr_issue_metadata_read", status: "implemented_read_only_live_capable", guard_required: true, live_enabled: true },
+    { capability: "public_workflow_status_read", status: "implemented_read_only_live_capable", guard_required: true, live_enabled: true },
+    { capability: "public_file_metadata_content_read", status: "implemented_read_only_live_capable", guard_required: true, live_enabled: true },
+    { capability: "repo_write_or_mutation", status: "blocked", guard_required: true, live_enabled: false }
+  ],
+  toolInventory: [
+    { name: "Repo Status read-only tools", package: "@stealtheye/repo-status", mode: "public_read_only_guarded", live_external_effects: false },
+    { name: "MCP Runtime repo/status adapter", package: "@stealtheye/mcp-runtime", mode: "read_only_live_capable", live_external_effects: false },
+    { name: "App Host safe tools", package: "@stealtheye/app-host", mode: "read_only_preview_fixture", live_external_effects: false }
+  ],
+  knownGaps: [
+    "CI uses fixture clients and mocked fetch for stability; live public REST reads are optional configuration, not required for tests.",
+    "No durable ledger is included for repo/status receipts; receipts are returned with in-memory tool results.",
+    "No official MCP SDK transport, public endpoint, public ChatGPT app submission, or production deployment is included.",
+    "No private repository, credentialed GitHub, GitHub App installation, OAuth, or write workflow is included.",
+    "Memory Graph remains future work."
+  ],
+  nextTarget: "Build 12 — Memory Graph"
+};
