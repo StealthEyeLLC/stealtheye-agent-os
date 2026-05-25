@@ -54,3 +54,23 @@ Do not mix unrelated features. Do not add sensitive operational material or priv
 ## Next target
 
 Build 10 should implement Memory Graph foundations.
+
+<!-- BEGIN BUILD 11 ADDITIVE UPDATE -->
+
+## Build 11 prompt outcome
+
+Build 11 implements Live Read-Only Repo/Status Tools through Guard + Receipts in `@stealtheye/repo-status` and integrates them into `@stealtheye/mcp-runtime`.
+
+The accepted Build 11 scope is public GitHub repository/status observation only: public repo metadata, branch metadata, PR/issue metadata, workflow/check summaries, and public-safe file metadata/content. The optional live client uses no credentials, GET only, `https://api.github.com` only, and an explicit public repository allowlist. CI remains fixture-backed or mocked.
+
+Build 11 does not add repo mutation, branch creation, commits, PR or issue mutation, CI reruns, workflow dispatch, private repo access, credential use, browser execution, deployment, money movement, production mutation, or customer-data workflows.
+
+Additional Build 11 generated-state check:
+
+```bash
+node scripts/stealtheye-build.mjs scripts/phases/build-011-live-readonly-repo-status.mjs --check
+```
+
+Next target: **Build 12 — Memory Graph**.
+
+<!-- END BUILD 11 ADDITIVE UPDATE -->
