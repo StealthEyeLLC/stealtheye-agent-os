@@ -95,7 +95,7 @@
     "Hosted/public ChatGPT app deployment, public app submission, production OAuth clients, and production domains remain future work.",
     "No durable receipt ledger is added."
   ],
-  "next_target": "Build 15 \u2014 Reachable Dev Deployment / Tunnel / Endpoint",
+  "next_target": "Build 15 — Reachable Dev Deployment / Tunnel / Endpoint",
   "hand_authored_doc_policy": "Build 14 preserves README.md, AGENTS.md, and docs/ARCHITECTURE.md unchanged. Generated sync writes only declared generated files and standalone Build 14 docs.",
   "marker_bounded_hand_authored_docs": [],
   "generated_at": "2026-01-01T00:00:00.000Z",
