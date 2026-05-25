@@ -1,6 +1,7 @@
 export * from "./app-host-adapter";
 export * from "./dev-mode";
 export * from "./fixtures";
+export * from "./memory-graph-adapter";
 export * from "./receipts";
 export * from "./repo-status-adapter";
 export * from "./resources";
