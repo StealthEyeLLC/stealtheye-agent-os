@@ -1,13 +1,22 @@
 {
   "schema_version": "stealtheye-project-memory.v1",
-  "current_build": 12,
-  "current_title": "Memory Graph Foundations",
-  "current_branch": "agent/memory-graph-foundation-v2",
+  "current_build": 13,
+  "current_title": "Live CodeOps Branch-Write Path through Guard + Receipts",
+  "current_branch": "agent/live-codeops-branch-write",
   "foundation_packages": [
-    "@stealtheye/memory-graph",
-    "@stealtheye/mcp-runtime"
+    "@stealtheye/agent-registry",
+    "@stealtheye/guard",
+    "@stealtheye/mission-os",
+    "@stealtheye/app-host",
+    "@stealtheye/worker-fleet",
+    "@stealtheye/codeops",
+    "@stealtheye/browserops",
+    "@stealtheye/receipts-replay",
+    "@stealtheye/mcp-runtime",
+    "@stealtheye/repo-status",
+    "@stealtheye/memory-graph"
   ],
-  "build_summary": "Build 12 adds fixture-only Memory Graph foundations without durable storage, embeddings, live writes, private ingestion, or secret storage.",
-  "hand_authored_doc_policy": "Build 12 preserves README.md, AGENTS.md, and docs/ARCHITECTURE.md unchanged. Generated sync writes only declared generated files and standalone Build 12 docs.",
-  "next_target": "Build 13 — Live CodeOps Branch-Write Path through Guard + Receipts"
+  "build_summary": "Build 13 adds the first guarded branch-write foundation for CodeOps through policy, Guard requested actions, receipt previews, fixture-only execution, and config-required optional GitHub writer modeling. CI remains fixture-backed and no protected branch, workflow, credential, production, or customer-data write path is exposed.",
+  "hand_authored_doc_policy": "Build 13 preserves README.md, AGENTS.md, and docs/ARCHITECTURE.md unchanged. Generated sync writes only declared generated files and standalone Build 13 docs.",
+  "next_target": "Build 14 — Official MCP Server Transport / SDK Alignment"
 }
