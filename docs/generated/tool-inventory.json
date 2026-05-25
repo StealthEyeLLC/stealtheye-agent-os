@@ -1,23 +1,11 @@
 {
   "schema_version": "stealtheye-tool-inventory.v1",
-  "build": 11,
+  "build": 12,
   "tools": [
     {
-      "name": "Repo Status read-only tools",
-      "package": "@stealtheye/repo-status",
-      "mode": "public_read_only_guarded",
-      "live_external_effects": false
-    },
-    {
-      "name": "MCP Runtime repo/status adapter",
-      "package": "@stealtheye/mcp-runtime",
-      "mode": "read_only_live_capable",
-      "live_external_effects": false
-    },
-    {
-      "name": "App Host safe tools",
-      "package": "@stealtheye/app-host",
-      "mode": "read_only_preview_fixture",
+      "name": "Memory Graph preview tools",
+      "package": "@stealtheye/memory-graph",
+      "mode": "fixture_only_preview",
       "live_external_effects": false
     }
   ]

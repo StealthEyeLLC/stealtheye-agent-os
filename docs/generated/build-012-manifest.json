@@ -1,0 +1,66 @@
+{
+  "schema_version": "stealtheye-build-manifest.v1",
+  "build": 12,
+  "build_title": "Memory Graph Foundations",
+  "branch": "agent/memory-graph-foundation",
+  "package_name": "@stealtheye/memory-graph",
+  "files_created_or_updated": [
+    "packages/memory-graph/src/schemas.ts",
+    "packages/memory-graph/src/query.ts",
+    "packages/memory-graph/src/compaction.ts",
+    "packages/memory-graph/src/retention.ts",
+    "packages/memory-graph/src/receipts.ts",
+    "packages/memory-graph/test/memory-graph.test.ts",
+    "packages/mcp-runtime/src/memory-graph-adapter.ts",
+    "scripts/phases/build-012-memory-graph.mjs"
+  ],
+  "docs_updated": [
+    "llms.txt",
+    "llms-full.txt",
+    "docs/MEMORY_GRAPH.md",
+    "docs/DECISIONS/0014-memory-graph-foundation.md"
+  ],
+  "tests_evals_added": [
+    "memory graph package tests",
+    "runtime memory preview tools tests",
+    "strict generated sync check"
+  ],
+  "adr_added": "docs/DECISIONS/0014-memory-graph-foundation.md",
+  "ci_required_files": [
+    "pnpm install --no-frozen-lockfile",
+    "pnpm typecheck",
+    "pnpm test",
+    "node scripts/stealtheye-build.mjs scripts/phases/build-008-browserops.mjs --check",
+    "node scripts/stealtheye-build.mjs scripts/phases/build-009-receipts-replay.mjs --check",
+    "node scripts/stealtheye-build.mjs scripts/phases/build-010-mcp-runtime-devmode.mjs --check",
+    "node scripts/stealtheye-build.mjs scripts/phases/build-011-live-readonly-repo-status.mjs --check",
+    "node scripts/stealtheye-build.mjs scripts/phases/build-012-memory-graph.mjs --check"
+  ],
+  "safety_boundaries": [
+    "Fixture-only and in-memory.",
+    "No production database, vector DB, embeddings, cloud storage, private/customer data ingestion, durable personal memory, live memory service, or secret storage.",
+    "Retention and compaction helpers report/model only and delete nothing."
+  ],
+  "generated_artifacts": [
+    "docs/generated/build-012-manifest.json",
+    "docs/generated/build-012-acceptance.md",
+    "docs/generated/build-012-handoff.md",
+    "docs/generated/build-012-receipt.json",
+    "docs/generated/project-memory.json",
+    "docs/generated/known-gaps.json",
+    "docs/generated/safety-capability-matrix.json",
+    "docs/generated/eval-registry.json",
+    "docs/generated/tool-inventory.json",
+    "docs/generated/build-state.json"
+  ],
+  "known_gaps": [
+    "No durable memory storage, vector search, embeddings, private/customer data ingestion, or live memory service.",
+    "Runtime memory tools are fixture-only previews."
+  ],
+  "next_target": "Build 13 — Live CodeOps Branch-Write Path through Guard + Receipts",
+  "hand_authored_doc_policy": "Preserve hand-authored docs. Build 12 predictable standalone docs, LLM context, and generated state are declared in this phase spec.",
+  "marker_bounded_hand_authored_docs": [],
+  "generated_at": "2026-01-01T00:00:00.000Z",
+  "public_safe": true,
+  "live_execution_enabled": false
+}
