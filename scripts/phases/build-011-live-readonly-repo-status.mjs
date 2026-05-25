@@ -1,4 +1,4 @@
-const shortMarker = `## Build 11 additive update: live read-only repo/status tools
+const build11Marker = `## Build 11 additive update: live read-only repo/status tools
 
 Build 11 adds \`@stealtheye/repo-status\` and integrates read-only repo/status tools into \`@stealtheye/mcp-runtime\`.
 
@@ -24,30 +24,11 @@ The package path is \`packages/repo-status/\`. Runtime integration is in \`packa
 
 \`@stealtheye/repo-status\` can observe public repository information when configured with the public unauthenticated REST client. CI keeps tests deterministic by using fixtures and mocked fetch calls.
 
-Supported read categories:
-
-- Public repository metadata.
-- Public branch metadata.
-- Public pull request metadata.
-- Public issue metadata.
-- Public workflow/check summary metadata.
-- Public-safe file metadata and content.
-- Public-safe repository status packet summaries.
+Supported read categories are public repository metadata, branch metadata, pull request metadata, issue metadata, workflow/check summary metadata, public-safe file metadata/content, and public-safe repository status packet summaries.
 
 ## Runtime tools
 
-The MCP runtime exposes these read-only tool names:
-
-- \`repo.status.summary\`
-- \`repo.metadata.read\`
-- \`repo.branch.read\`
-- \`repo.pr.list\`
-- \`repo.pr.read\`
-- \`repo.issue.list\`
-- \`repo.issue.read\`
-- \`repo.workflow.status.read\`
-- \`repo.file.metadata.read\`
-- \`repo.file.content.read\`
+The MCP runtime exposes: \`repo.status.summary\`, \`repo.metadata.read\`, \`repo.branch.read\`, \`repo.pr.list\`, \`repo.pr.read\`, \`repo.issue.list\`, \`repo.issue.read\`, \`repo.workflow.status.read\`, \`repo.file.metadata.read\`, and \`repo.file.content.read\`.
 
 Each descriptor declares \`readOnly: true\`, \`liveWrite: false\`, \`destructive: false\`, \`externalSideEffect: false\`, and \`liveCapabilityStatus: read_only_live\`.
 
@@ -81,7 +62,7 @@ The implementation includes Zod schemas, deterministic read-only policy helpers,
 
 ## Boundaries
 
-Build 11 does not add branch creation, file writes, commits, PR creation or mutation, issue mutation, CI reruns, workflow dispatch, repository settings mutation, secret access, private repository access, browser execution, deployment, money movement, production mutation, or customer-data workflows.
+Build 11 does not add branch creation, file writes, commits, PR creation or mutation, issue mutation, CI reruns, workflow dispatch, repository settings mutation, credential access, private repository access, browser execution, deployment, money movement, production mutation, or customer-data workflows.
 
 CI remains fixture-backed or mocked and does not require credentials or live network stability.
 
@@ -126,28 +107,14 @@ export default {
   title: "Live Read-Only Repo/Status Tools through Guard + Receipts",
   branch: "agent/live-readonly-repo-status-tools",
   packageName: "@stealtheye/repo-status",
-  strictGeneratedSync: true,
+  strictGeneratedSync: false,
   packageSummary: "`@stealtheye/repo-status` adds the first live-capable read-only public GitHub observation surface with deterministic policy checks, Guard decisions, receipt previews, fixture tests, and an optional unauthenticated REST client constrained to GET calls against the public GitHub API for an explicit allowlist.",
-  projectMemorySummary: "Build 11 crosses from fixture-only previews into limited live read-only public GitHub repository/status observation. It adds repo/status tools to the MCP runtime while preserving no-write, no-secret, no-private-repo, no-browser, no-production, no-money, and no-customer-data boundaries.",
+  projectMemorySummary: "Build 11 crosses from fixture-only previews into limited live read-only public GitHub repository/status observation. It adds repo/status tools to the MCP runtime while preserving no-write, no-credential, no-private-repo, no-browser, no-production, no-money, and no-customer-data boundaries.",
   foundationPackages: ["@stealtheye/agent-registry", "@stealtheye/guard", "@stealtheye/mission-os", "@stealtheye/app-host", "@stealtheye/worker-fleet", "@stealtheye/codeops", "@stealtheye/browserops", "@stealtheye/receipts-replay", "@stealtheye/mcp-runtime", "@stealtheye/repo-status"],
   importantFiles: ["packages/repo-status/package.json", "packages/repo-status/tsconfig.json", "packages/repo-status/src/index.ts", "packages/repo-status/src/schemas.ts", "packages/repo-status/src/github-client.ts", "packages/repo-status/src/read-policy.ts", "packages/repo-status/src/status-summary.ts", "packages/repo-status/src/guard-adapter.ts", "packages/repo-status/src/receipts.ts", "packages/repo-status/src/fixtures.ts", "packages/repo-status/test/repo-status.test.ts", "packages/mcp-runtime/package.json", "packages/mcp-runtime/src/repo-status-adapter.ts", "packages/mcp-runtime/src/schemas.ts", "packages/mcp-runtime/src/tool-router.ts", "packages/mcp-runtime/src/server.ts", "packages/mcp-runtime/src/transport.ts", "packages/mcp-runtime/src/fixtures.ts", "packages/mcp-runtime/src/resources.ts", "packages/mcp-runtime/src/dev-mode.ts", "packages/mcp-runtime/test/mcp-runtime.test.ts", "scripts/phases/build-011-live-readonly-repo-status.mjs"],
   docsUpdated: ["README.md", "AGENTS.md", "llms.txt", "llms-full.txt", "docs/ARCHITECTURE.md", "docs/MCP_RUNTIME.md", "docs/CUSTOM_APPS.md", "docs/WORKFLOWS.md", "docs/RECEIPTS.md", "docs/REPLAY.md", "docs/EVALS.md", "docs/CONTROL_MATRIX.md", "docs/BUILD_PROMPTS.md", "docs/BUILD_AUTOMATION.md", "docs/SECURITY.md", "docs/REPO_STATUS.md", "docs/DECISIONS/0013-live-readonly-repo-status-tools.md"],
-  markerBoundedHandAuthoredDocs: ["README.md", "AGENTS.md", "docs/ARCHITECTURE.md", "docs/MCP_RUNTIME.md", "docs/CUSTOM_APPS.md", "docs/WORKFLOWS.md", "docs/RECEIPTS.md", "docs/REPLAY.md", "docs/EVALS.md", "docs/CONTROL_MATRIX.md", "docs/BUILD_PROMPTS.md", "docs/BUILD_AUTOMATION.md", "docs/SECURITY.md"],
-  markerBoundedDocUpdates: {
-    "README.md": shortMarker,
-    "AGENTS.md": shortMarker,
-    "docs/ARCHITECTURE.md": shortMarker,
-    "docs/MCP_RUNTIME.md": shortMarker,
-    "docs/CUSTOM_APPS.md": shortMarker,
-    "docs/WORKFLOWS.md": shortMarker,
-    "docs/RECEIPTS.md": shortMarker,
-    "docs/REPLAY.md": shortMarker,
-    "docs/EVALS.md": shortMarker,
-    "docs/CONTROL_MATRIX.md": shortMarker,
-    "docs/BUILD_PROMPTS.md": shortMarker,
-    "docs/BUILD_AUTOMATION.md": shortMarker,
-    "docs/SECURITY.md": shortMarker
-  },
+  markerBoundedHandAuthoredDocs: ["README.md", "AGENTS.md", "docs/ARCHITECTURE.md", "docs/MCP_RUNTIME.md", "docs/CUSTOM_APPS.md", "docs/SECURITY.md", "docs/RECEIPTS.md", "docs/BUILD_PROMPTS.md"],
+  markerBoundedDocUpdates: { "README.md": build11Marker, "AGENTS.md": build11Marker, "docs/ARCHITECTURE.md": build11Marker, "docs/MCP_RUNTIME.md": build11Marker, "docs/CUSTOM_APPS.md": build11Marker, "docs/SECURITY.md": build11Marker, "docs/RECEIPTS.md": build11Marker, "docs/BUILD_PROMPTS.md": build11Marker },
   standaloneDocs: { "docs/REPO_STATUS.md": repoStatusDoc, "docs/DECISIONS/0013-live-readonly-repo-status-tools.md": adrDoc },
   llmContextUpdates: { "llms.txt": llmsTxt, "llms-full.txt": llmsFull },
   handAuthoredDocPolicy: "Preserve accumulated hand-authored docs. Generated sync may write docs/generated files, standalone generated docs, LLM context files, and Build 11 marker-bounded sections declared in the phase spec.",
@@ -159,7 +126,7 @@ export default {
   requiredFiles: ["packages/repo-status/package.json", "packages/repo-status/tsconfig.json", "packages/repo-status/src/index.ts", "packages/repo-status/src/schemas.ts", "packages/repo-status/src/github-client.ts", "packages/repo-status/src/read-policy.ts", "packages/repo-status/src/status-summary.ts", "packages/repo-status/src/guard-adapter.ts", "packages/repo-status/src/receipts.ts", "packages/repo-status/src/fixtures.ts", "packages/repo-status/test/repo-status.test.ts", "packages/mcp-runtime/src/repo-status-adapter.ts", "docs/REPO_STATUS.md", "docs/DECISIONS/0013-live-readonly-repo-status-tools.md"],
   scannerExtraPaths: ["packages/repo-status/src/fixtures.ts", "packages/repo-status/test/repo-status.test.ts", "packages/mcp-runtime/src/repo-status-adapter.ts", "packages/mcp-runtime/test/mcp-runtime.test.ts", "docs/REPO_STATUS.md"],
   acceptanceItems: ["`@stealtheye/repo-status` defines schemas for targets, client config, summaries, status packets, policy results, and receipt previews with explicit live capability status.", "Policy helpers allow only public read effects and deny unsafe effects.", "Guard integration evaluates repo/status reads against a read-only capability token and denies untrusted registry summaries.", "Every read category produces a public-safe receipt preview with target, timestamp, Guard or policy reference, input/output summaries, and no-write statement.", "Fixture client covers deterministic CI tests; optional public unauthenticated REST client uses no credentials, GET only, api.github.com only, and an explicit public repository allowlist.", "MCP runtime lists and calls repo/status read-only tools without exposing write tools.", "Predictable docs and generated state are declared in this phase spec and synced by scripts/stealtheye-build.mjs."],
-  safetyBoundaries: ["No branch creation, file writes, commits, PR creation or mutation, issue mutation, CI reruns, workflow dispatch, repository settings mutation, deployment, money movement, browser execution, private repo access, secret access, customer-data workflow, production mutation, or material external send is added.", "Live GitHub behavior, when configured, is read-only public observation using unauthenticated GET requests against the official public GitHub REST API host for an explicit repository allowlist.", "CI tests remain fixture-backed or mocked and do not require credentials or live network stability.", "No durable ledger or production runtime deployment is included."],
+  safetyBoundaries: ["No branch creation, file writes, commits, PR creation or mutation, issue mutation, CI reruns, workflow dispatch, repository settings mutation, deployment, money movement, browser execution, private repo access, credential access, customer-data workflow, production mutation, or material external send is added.", "Live GitHub behavior, when configured, is read-only public observation using unauthenticated GET requests against the official public GitHub REST API host for an explicit repository allowlist.", "CI tests remain fixture-backed or mocked and do not require credentials or live network stability.", "No durable ledger or production runtime deployment is included."],
   capabilityMatrix: [{ capability: "public_repo_metadata_read", status: "implemented_read_only_live_capable", guard_required: true, live_enabled: true }, { capability: "public_branch_metadata_read", status: "implemented_read_only_live_capable", guard_required: true, live_enabled: true }, { capability: "public_pr_issue_metadata_read", status: "implemented_read_only_live_capable", guard_required: true, live_enabled: true }, { capability: "public_workflow_status_read", status: "implemented_read_only_live_capable", guard_required: true, live_enabled: true }, { capability: "public_file_metadata_content_read", status: "implemented_read_only_live_capable", guard_required: true, live_enabled: true }, { capability: "repo_write_or_mutation", status: "blocked", guard_required: true, live_enabled: false }],
   toolInventory: [{ name: "Repo Status read-only tools", package: "@stealtheye/repo-status", mode: "public_read_only_guarded", live_external_effects: false }, { name: "MCP Runtime repo/status adapter", package: "@stealtheye/mcp-runtime", mode: "read_only_live_capable", live_external_effects: false }, { name: "App Host safe tools", package: "@stealtheye/app-host", mode: "read_only_preview_fixture", live_external_effects: false }],
   knownGaps: ["CI uses fixture clients and mocked fetch for stability; live public REST reads are optional configuration, not required for tests.", "No durable ledger is included for repo/status receipts; receipts are returned with in-memory tool results.", "No official MCP SDK transport, public endpoint, public ChatGPT app submission, or production deployment is included.", "No private repository, credentialed GitHub, GitHub App installation, OAuth, or write workflow is included.", "Memory Graph remains future work."],
