@@ -1,27 +1,27 @@
 {
   "schema_version": "stealtheye-known-gaps.v1",
-  "build": 13,
+  "build": 14,
   "gaps": [
     {
-      "gap_id": "build-013-gap-01",
-      "summary": "Optional live GitHub writer remains config-required and is not exercised in CI.",
+      "gap_id": "build-014-gap-01",
+      "summary": "Official SDK package was not added in Build 14; the package implements an SDK-aligned adapter boundary pending dependency compatibility verification.",
       "status": "open"
     },
     {
-      "gap_id": "build-013-gap-02",
-      "summary": "No durable receipt ledger is included.",
+      "gap_id": "build-014-gap-02",
+      "summary": "HTTP/dev preview transport is modeled but not bound to a public endpoint.",
       "status": "open"
     },
     {
-      "gap_id": "build-013-gap-03",
-      "summary": "Pull request opening is modeled as preview/future behavior and not exposed as an unrestricted live runtime tool.",
+      "gap_id": "build-014-gap-03",
+      "summary": "Hosted/public ChatGPT app deployment, public app submission, production OAuth clients, and production domains remain future work.",
       "status": "open"
     },
     {
-      "gap_id": "build-013-gap-04",
-      "summary": "Official MCP SDK/server transport alignment remains future work.",
+      "gap_id": "build-014-gap-04",
+      "summary": "No durable receipt ledger is added.",
       "status": "open"
     }
   ],
-  "next_target": "Build 14 — Official MCP Server Transport / SDK Alignment"
+  "next_target": "Build 15 \u2014 Reachable Dev Deployment / Tunnel / Endpoint"
 }
