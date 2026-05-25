@@ -27,6 +27,7 @@ const acceptanceItems = phase.acceptanceItems ?? [`${phase.packageName} schemas,
 const toolInventory = phase.toolInventory ?? [{ name: phase.packageName, package: phase.packageName, mode: "foundation", live_external_effects: false }];
 const capabilityMatrix = phase.capabilityMatrix ?? [{ capability: "foundation_contracts", status: "modeled", guard_required: true, live_enabled: false }];
 const strictGeneratedSync = phase.strictGeneratedSync === true;
+const sharedGeneratedFiles = new Set(["docs/generated/project-memory.json", "docs/generated/known-gaps.json", "docs/generated/safety-capability-matrix.json", "docs/generated/eval-registry.json", "docs/generated/tool-inventory.json", "docs/generated/build-state.json"]);
 
 const outputs = new Map([
   [`docs/generated/build-${buildPadded}-manifest.json`, json({ schema_version: "stealtheye-build-manifest.v1", build: phase.build, build_title: phase.title, branch: phase.branch, package_name: phase.packageName, files_created_or_updated: phase.importantFiles, docs_updated: phase.docsUpdated, tests_evals_added: phase.testsAndEvals, adr_added: phase.adr, ci_required_files: phase.ciRequiredFiles, safety_boundaries: phase.safetyBoundaries, generated_artifacts: phase.generatedArtifacts, known_gaps: phase.knownGaps, next_target: phase.nextTarget, hand_authored_doc_policy: docPolicy, marker_bounded_hand_authored_docs: phase.markerBoundedHandAuthoredDocs ?? [], generated_at: generatedAt, public_safe: true, live_execution_enabled: false })],
@@ -40,7 +41,6 @@ const outputs = new Map([
   ["docs/generated/tool-inventory.json", json({ schema_version: "stealtheye-tool-inventory.v1", build: phase.build, tools: toolInventory })],
   ["docs/generated/build-state.json", json({ schema_version: "stealtheye-build-state.v1", build: phase.build, title: phase.title, branch: phase.branch, generated_artifacts_current: true, safety_scanner_scope: ["docs/generated", ...scannerExtraPaths], hand_authored_doc_policy: docPolicy, marker_bounded_hand_authored_docs: phase.markerBoundedHandAuthoredDocs ?? [], next_target: phase.nextTarget, generated_at: generatedAt })]
 ]);
-
 for (const [file, content] of Object.entries(phase.standaloneDocs ?? {})) outputs.set(file, content.endsWith("\n") ? content : `${content}\n`);
 for (const [file, content] of Object.entries(phase.llmContextUpdates ?? {})) outputs.set(file, content.endsWith("\n") ? content : `${content}\n`);
 
@@ -53,14 +53,17 @@ function applyMarkerUpdate(existing, markerContent) {
   if (begin >= 0 && end >= begin) return `${existing.slice(0, begin).trimEnd()}\n\n${block}\n${existing.slice(end + endMarker.length).replace(/^\n+/, "")}`;
   return `${existing.trimEnd()}\n\n${block}\n`;
 }
-
+async function currentGeneratedBuild() {
+  const file = path.resolve(root, "docs/generated/build-state.json");
+  if (!existsSync(file)) return phase.build;
+  try { return JSON.parse(await readFile(file, "utf8")).build ?? phase.build; } catch { return phase.build; }
+}
 const unsafePatterns = [
   { id: "non_public_endpoint", regex: /https?:\/\/(?:localhost|127\.0\.0\.1|10\.|172\.(?:1[6-9]|2\d|3[0-1])\.|192\.168\.|[^\s/]*\.internal|[^\s/]*\.corp)/i },
   { id: "customer_data_marker", regex: /customer[_ -]?(?:ssn|social security|card number|production data)/i },
   { id: "enabled_live_claim", regex: /\b(?:enabled|supports|runs|executes)\s+(?:real\s+|live\s+)?(?:browser automation|replay execution|tool execution)\b/i },
   { id: "enabled_high_impact_claim", regex: /\b(?:credentialed browsing|money movement|production mutation|durable ledger|production artifact storage)\s+(?:is\s+)?(?:enabled|supported|available)\b/i }
 ];
-
 async function scan(files) {
   const findings = [];
   for (const file of files) {
@@ -71,7 +74,6 @@ async function scan(files) {
   }
   return findings;
 }
-
 async function checkHandAuthoredDocMarkers(files) {
   const findings = [];
   for (const file of files ?? []) {
@@ -86,17 +88,17 @@ async function checkHandAuthoredDocMarkers(files) {
   }
   return findings;
 }
-
 async function checkRequiredFiles(files) {
   const findings = [];
   for (const file of files ?? []) if (!existsSync(path.resolve(root, file))) findings.push({ file, pattern: "required_file_missing" });
   return findings;
 }
-
 const summary = { created: [], updated: [], skipped: [], checked: [] };
 let failed = false;
 if (checkMode) {
-  const filesToCheck = strictGeneratedSync ? [...outputs.keys()] : phase.generatedArtifacts;
+  const currentBuild = await currentGeneratedBuild();
+  const strictFiles = [...outputs.keys()].filter((file) => currentBuild <= phase.build || !sharedGeneratedFiles.has(file));
+  const filesToCheck = strictGeneratedSync ? strictFiles : phase.generatedArtifacts;
   for (const file of filesToCheck) {
     summary.checked.push(file);
     const absolute = path.resolve(root, file);

@@ -1,18 +1,19 @@
 {
   "schema_version": "stealtheye-build-state.v1",
-  "build": 12,
-  "title": "Memory Graph Foundations",
-  "branch": "agent/memory-graph-foundation-v2",
+  "build": 13,
+  "title": "Live CodeOps Branch-Write Path through Guard + Receipts",
+  "branch": "agent/live-codeops-branch-write",
   "generated_artifacts_current": true,
   "safety_scanner_scope": [
     "docs/generated",
-    "packages/memory-graph/src/fixtures.ts",
-    "packages/memory-graph/test/memory-graph.test.ts",
-    "packages/mcp-runtime/src/memory-graph-adapter.ts",
-    "docs/MEMORY_GRAPH.md"
+    "packages/codeops/src/write-fixtures.ts",
+    "packages/codeops/test/codeops-branch-write.test.ts",
+    "packages/mcp-runtime/src/codeops-write-adapter.ts",
+    "packages/mcp-runtime/test/mcp-runtime.test.ts",
+    "docs/CODEOPS_LIVE_WRITE.md"
   ],
-  "hand_authored_doc_policy": "Build 12 preserves README.md, AGENTS.md, and docs/ARCHITECTURE.md unchanged. Generated sync writes only declared generated files and standalone Build 12 docs.",
+  "hand_authored_doc_policy": "Build 13 preserves README.md, AGENTS.md, and docs/ARCHITECTURE.md unchanged. Generated sync writes only declared generated files and standalone Build 13 docs.",
   "marker_bounded_hand_authored_docs": [],
-  "next_target": "Build 13 — Live CodeOps Branch-Write Path through Guard + Receipts",
+  "next_target": "Build 14 — Official MCP Server Transport / SDK Alignment",
   "generated_at": "2026-01-01T00:00:00.000Z"
 }

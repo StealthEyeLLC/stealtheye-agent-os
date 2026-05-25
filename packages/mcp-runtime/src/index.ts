@@ -1,4 +1,5 @@
 export * from "./app-host-adapter";
+export * from "./codeops-write-adapter";
 export * from "./dev-mode";
 export * from "./fixtures";
 export * from "./memory-graph-adapter";

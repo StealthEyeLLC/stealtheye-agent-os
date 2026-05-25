@@ -11,6 +11,7 @@
   },
   "dependencies": {
     "@stealtheye/app-host": "workspace:*",
+    "@stealtheye/codeops": "workspace:*",
     "@stealtheye/memory-graph": "workspace:*",
     "@stealtheye/receipts-replay": "workspace:*",
     "@stealtheye/repo-status": "workspace:*",

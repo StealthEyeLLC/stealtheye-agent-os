@@ -1,0 +1,6 @@
+{
+  "fixtureOnly": true,
+  "liveWrite": false,
+  "build": 13,
+  "summary": "Public-safe fixture artifact for guarded CodeOps branch-write tests."
+}
