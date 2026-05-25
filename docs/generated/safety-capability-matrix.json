@@ -1,27 +1,39 @@
 {
   "schema_version": "stealtheye-safety-capability-matrix.v1",
-  "build": 13,
+  "build": 14,
   "capabilities": [
     {
-      "capability": "codeops_branch_write_policy",
-      "status": "implemented_fixture_and_dry_run",
+      "capability": "official_mcp_server_wrapper",
+      "status": "implemented_sdk_aligned_adapter_boundary",
       "guard_required": true,
       "live_enabled": false
     },
     {
-      "capability": "codeops_fixture_branch_writer",
-      "status": "implemented_fixture_only",
+      "capability": "in_process_transport",
+      "status": "implemented_local_dev_only",
       "guard_required": true,
       "live_enabled": false
     },
     {
-      "capability": "optional_github_branch_writer",
-      "status": "modeled_config_required_disabled_by_default",
+      "capability": "stdio_dev_transport",
+      "status": "implemented_local_dev_only",
       "guard_required": true,
       "live_enabled": false
     },
     {
-      "capability": "unrestricted_live_repo_write",
+      "capability": "http_dev_preview_transport",
+      "status": "modeled_future_no_public_endpoint",
+      "guard_required": true,
+      "live_enabled": false
+    },
+    {
+      "capability": "hosted_public_app_transport",
+      "status": "future_work_not_deployed",
+      "guard_required": true,
+      "live_enabled": false
+    },
+    {
+      "capability": "unrestricted_live_write_tools",
       "status": "blocked",
       "guard_required": true,
       "live_enabled": false
