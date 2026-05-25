@@ -18,7 +18,15 @@
     "llms.txt",
     "llms-full.txt",
     "docs/MEMORY_GRAPH.md",
-    "docs/DECISIONS/0014-memory-graph-foundation.md"
+    "docs/DECISIONS/0014-memory-graph-foundation.md",
+    "README.md",
+    "AGENTS.md",
+    "docs/ARCHITECTURE.md",
+    "docs/MCP_RUNTIME.md",
+    "docs/RECEIPTS.md",
+    "docs/REPLAY.md",
+    "docs/BUILD_PROMPTS.md",
+    "docs/SECURITY.md"
   ],
   "tests_evals_added": [
     "memory graph package tests",
@@ -59,7 +67,16 @@
   ],
   "next_target": "Build 13 — Live CodeOps Branch-Write Path through Guard + Receipts",
   "hand_authored_doc_policy": "Preserve hand-authored docs. Build 12 predictable standalone docs, LLM context, and generated state are declared in this phase spec.",
-  "marker_bounded_hand_authored_docs": [],
+  "marker_bounded_hand_authored_docs": [
+    "README.md",
+    "AGENTS.md",
+    "docs/ARCHITECTURE.md",
+    "docs/MCP_RUNTIME.md",
+    "docs/RECEIPTS.md",
+    "docs/REPLAY.md",
+    "docs/BUILD_PROMPTS.md",
+    "docs/SECURITY.md"
+  ],
   "generated_at": "2026-01-01T00:00:00.000Z",
   "public_safe": true,
   "live_execution_enabled": false
