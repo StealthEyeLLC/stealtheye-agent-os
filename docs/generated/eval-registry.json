@@ -1,46 +1,116 @@
 {
   "schema_version": "stealtheye-eval-registry.v1",
-  "build": 13,
+  "build": 14,
   "evals": [
     {
-      "eval_id": "build-013-eval-01",
-      "name": "branch-write schemas validate",
-      "location": "packages/codeops/test/codeops-branch-write.test.ts"
+      "eval_id": "build-014-eval-01",
+      "name": "server metadata validates",
+      "location": "packages/mcp-server/test/mcp-server.test.ts"
     },
     {
-      "eval_id": "build-013-eval-02",
-      "name": "branch-write policy deny and allow matrix",
-      "location": "packages/codeops/test/codeops-branch-write.test.ts"
+      "eval_id": "build-014-eval-02",
+      "name": "protocol/version metadata validates",
+      "location": "packages/mcp-server/test/mcp-server.test.ts"
     },
     {
-      "eval_id": "build-013-eval-03",
-      "name": "Guard integration for safe and unsafe branch-write plans",
-      "location": "packages/codeops/test/codeops-branch-write.test.ts"
+      "eval_id": "build-014-eval-03",
+      "name": "transport mode schemas validate",
+      "location": "packages/mcp-server/test/mcp-server.test.ts"
     },
     {
-      "eval_id": "build-013-eval-04",
-      "name": "branch-write receipt previews",
-      "location": "packages/codeops/test/codeops-branch-write.test.ts"
+      "eval_id": "build-014-eval-04",
+      "name": "tool registry lists existing runtime tools",
+      "location": "packages/mcp-server/test/mcp-server.test.ts"
     },
     {
-      "eval_id": "build-013-eval-05",
-      "name": "fixture writer preview and execute results",
-      "location": "packages/codeops/test/codeops-branch-write.test.ts"
+      "eval_id": "build-014-eval-05",
+      "name": "resource registry lists resources",
+      "location": "packages/mcp-server/test/mcp-server.test.ts"
     },
     {
-      "eval_id": "build-013-eval-06",
-      "name": "runtime lists and calls CodeOps write tools",
-      "location": "packages/mcp-runtime/test/mcp-runtime.test.ts"
+      "eval_id": "build-014-eval-06",
+      "name": "duplicate tool names rejected",
+      "location": "packages/mcp-server/test/mcp-server.test.ts"
     },
     {
-      "eval_id": "build-013-eval-07",
+      "eval_id": "build-014-eval-07",
+      "name": "unsafe descriptor rejected",
+      "location": "packages/mcp-server/test/mcp-server.test.ts"
+    },
+    {
+      "eval_id": "build-014-eval-08",
+      "name": "App Host tools are exposed safely",
+      "location": "packages/mcp-server/test/mcp-server.test.ts"
+    },
+    {
+      "eval_id": "build-014-eval-09",
+      "name": "repo/status tools remain read-only",
+      "location": "packages/mcp-server/test/mcp-server.test.ts"
+    },
+    {
+      "eval_id": "build-014-eval-10",
+      "name": "memory graph tools remain preview/fixture-only",
+      "location": "packages/mcp-server/test/mcp-server.test.ts"
+    },
+    {
+      "eval_id": "build-014-eval-11",
+      "name": "CodeOps write preview tools remain preview-only",
+      "location": "packages/mcp-server/test/mcp-server.test.ts"
+    },
+    {
+      "eval_id": "build-014-eval-12",
+      "name": "CodeOps fixture tool remains fixture-only and non-destructive",
+      "location": "packages/mcp-server/test/mcp-server.test.ts"
+    },
+    {
+      "eval_id": "build-014-eval-13",
+      "name": "no unrestricted live write or destructive tools are exposed",
+      "location": "packages/mcp-server/test/mcp-server.test.ts"
+    },
+    {
+      "eval_id": "build-014-eval-14",
+      "name": "tool call receipt preview generated",
+      "location": "packages/mcp-server/test/mcp-server.test.ts"
+    },
+    {
+      "eval_id": "build-014-eval-15",
+      "name": "health helper works",
+      "location": "packages/mcp-server/test/mcp-server.test.ts"
+    },
+    {
+      "eval_id": "build-014-eval-16",
+      "name": "capabilities summary works",
+      "location": "packages/mcp-server/test/mcp-server.test.ts"
+    },
+    {
+      "eval_id": "build-014-eval-17",
+      "name": "transport diagnostics work",
+      "location": "packages/mcp-server/test/mcp-server.test.ts"
+    },
+    {
+      "eval_id": "build-014-eval-18",
+      "name": "dev connection manifest contains no secret material or production endpoints",
+      "location": "packages/mcp-server/test/mcp-server.test.ts"
+    },
+    {
+      "eval_id": "build-014-eval-19",
+      "name": "official SDK adapter boundary is covered",
+      "location": "packages/mcp-server/test/mcp-server.test.ts"
+    },
+    {
+      "eval_id": "build-014-eval-20",
+      "name": "Build 14 strict generated sync check",
+      "location": "scripts/phases/build-014-official-mcp-server-transport.mjs"
+    },
+    {
+      "eval_id": "build-014-eval-21",
       "name": "protected docs unchanged",
-      "location": "packages/codeops/test/codeops-branch-write.test.ts"
+      "location": ".github/workflows/build-014-official-mcp-server-transport.yml"
     },
     {
-      "eval_id": "build-013-eval-08",
-      "name": "Build 13 strict generated sync check",
-      "location": "scripts/phases/build-013-live-codeops-branch-write.mjs"
+      "eval_id": "build-014-eval-22",
+      "name": "sensitive-string guard covers fixtures and docs",
+      "location": ".github/workflows/build-014-official-mcp-server-transport.yml"
     }
   ]
 }
