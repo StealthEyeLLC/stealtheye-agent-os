@@ -36,6 +36,7 @@ export default {
   "strictGeneratedSync": true,
   "packageSummary": "Fixture-only in-memory Memory Graph package and MCP runtime preview tools.",
   "projectMemorySummary": "Build 12 adds fixture-only Memory Graph foundations without durable storage, embeddings, live writes, private ingestion, or secret storage.",
+  "handoffSummary": "Build 12 adds fixture-only Memory Graph foundations and MCP runtime preview tools.",
   "foundationPackages": ["@stealtheye/memory-graph", "@stealtheye/mcp-runtime"],
   "importantFiles": ["packages/memory-graph/src/schemas.ts", "packages/memory-graph/test/memory-graph.test.ts", "packages/mcp-runtime/src/memory-graph-adapter.ts", "scripts/phases/build-012-memory-graph.mjs"],
   "docsUpdated": ["docs/MEMORY_GRAPH.md", "docs/DECISIONS/0014-memory-graph-foundation.md", "docs/generated/build-012-manifest.json", "docs/generated/build-012-acceptance.md", "docs/generated/build-012-handoff.md", "docs/generated/build-012-receipt.json", "docs/generated/project-memory.json", "docs/generated/known-gaps.json", "docs/generated/safety-capability-matrix.json", "docs/generated/eval-registry.json", "docs/generated/tool-inventory.json", "docs/generated/build-state.json"],
