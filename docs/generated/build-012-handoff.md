@@ -1,6 +1,6 @@
 # Build 12 handoff: Memory Graph Foundations
 
-Build 12 adds Memory Graph foundations and strict generated sync.
+Build 12 adds `@stealtheye/memory-graph` defines fixture-only, deterministic, in-memory Memory Graph schemas, helpers, fixtures, tests, and preview-only runtime tools.
 
 ## New package
 
