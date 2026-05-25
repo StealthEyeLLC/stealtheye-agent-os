@@ -74,3 +74,23 @@ node scripts/stealtheye-build.mjs scripts/phases/build-011-live-readonly-repo-st
 Next target: **Build 12 — Memory Graph**.
 
 <!-- END BUILD 11 ADDITIVE UPDATE -->
+
+<!-- BEGIN BUILD 12 ADDITIVE UPDATE -->
+
+## Build 12 prompt outcome
+
+Build 12 implements Memory Graph Foundations in `@stealtheye/memory-graph` and integrates preview-only memory tools into `@stealtheye/mcp-runtime`.
+
+The accepted Build 12 scope is fixture-only and in-memory: typed memory nodes, relationships, provenance refs, evidence refs, receipt refs, confidence, recency, retention hints, deterministic query helpers, compaction helpers, retention reports, public-safe context summaries, and strict generated sync.
+
+Build 12 does not add durable memory storage, vector search, embeddings, private knowledge ingestion, live memory service, live writes, production mutation, or sensitive-material storage.
+
+Additional Build 12 generated-state check:
+
+```bash
+node scripts/stealtheye-build.mjs scripts/phases/build-012-memory-graph.mjs --check
+```
+
+Next target: **Build 13 — Live CodeOps Branch-Write Path through Guard + Receipts**.
+
+<!-- END BUILD 12 ADDITIVE UPDATE -->
