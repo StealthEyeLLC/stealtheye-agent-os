@@ -74,3 +74,15 @@ Public repo content may contain architecture, public specs, schemas, mock data, 
 ## Security evidence
 
 Receipts should capture denials, approvals, policy decisions, mission ids, authority envelopes, app-host previews, worker task events, leases, retries, idempotency records, CodeOps patch plans, file-change contracts, verification plans, CI summaries, CI repair plans, PR evidence, manifest identities, manifest digests, registry decisions, Guard decisions, matched capability tokens, policy checks, hard stops, tool calls, redactions, auth scopes, CI/security check results, and incident-relevant artifacts.
+
+<!-- BEGIN BUILD 11 ADDITIVE UPDATE -->
+
+## Build 11 additive update: public repo/status read boundary
+
+Build 11 adds `@stealtheye/repo-status` and MCP runtime repo/status tools for read-only public GitHub observation. The implementation uses deterministic read policy, Guard decisions, and public-safe receipt previews.
+
+Allowed reads are public repository metadata, branch metadata, PR/issue metadata, workflow/check summaries, and public-safe file metadata/content. The optional REST client uses no credentials, GET only, `https://api.github.com` only, and an explicit public repository allowlist. CI uses fixtures and mocked fetch.
+
+Build 11 does not add private repository access, raw credential exposure, branch creation, file writes, commits, PR/issue mutation, CI reruns, workflow dispatch, deployment, money movement, browser execution, production mutation, or customer-data workflows.
+
+<!-- END BUILD 11 ADDITIVE UPDATE -->
