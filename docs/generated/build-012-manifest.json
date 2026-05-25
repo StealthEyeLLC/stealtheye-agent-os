@@ -1,1 +1,71 @@
-{"schema_version":"stealtheye-build-manifest.v1","build":12,"build_title":"Memory Graph Foundations","branch":"agent/memory-graph-foundation-v2","package_name":"@stealtheye/memory-graph","files_created_or_updated":["packages/memory-graph/src/schemas.ts","packages/memory-graph/test/memory-graph.test.ts","packages/mcp-runtime/src/memory-graph-adapter.ts","scripts/phases/build-012-memory-graph.mjs"],"docs_updated":["docs/MEMORY_GRAPH.md","docs/DECISIONS/0014-memory-graph-foundation.md","docs/generated/build-012-manifest.json","docs/generated/build-012-acceptance.md","docs/generated/build-012-handoff.md","docs/generated/build-012-receipt.json","docs/generated/project-memory.json","docs/generated/known-gaps.json","docs/generated/safety-capability-matrix.json","docs/generated/eval-registry.json","docs/generated/tool-inventory.json","docs/generated/build-state.json"],"tests_evals_added":["memory graph package tests","runtime memory preview tests","Build 12 strict generated sync check"],"adr_added":"docs/DECISIONS/0014-memory-graph-foundation.md","ci_required_files":["pnpm install --no-frozen-lockfile","pnpm typecheck","pnpm test","node scripts/stealtheye-build.mjs scripts/phases/build-008-browserops.mjs --check","node scripts/stealtheye-build.mjs scripts/phases/build-009-receipts-replay.mjs --check","node scripts/stealtheye-build.mjs scripts/phases/build-010-mcp-runtime-devmode.mjs --check","node scripts/stealtheye-build.mjs scripts/phases/build-011-live-readonly-repo-status.mjs --check","node scripts/stealtheye-build.mjs scripts/phases/build-012-memory-graph.mjs --check"],"safety_boundaries":["No production database, vector database, embeddings provider, cloud storage, durable memory, live memory service, production mutation, live writes, private ingestion, or secret storage is added.","Runtime memory tools are read-only, preview-only, fixture-only, non-destructive, side-effect-free, and live-write disabled.","Retention helpers report only and never delete records."],"generated_artifacts":["docs/generated/build-012-manifest.json","docs/generated/build-012-acceptance.md","docs/generated/build-012-handoff.md","docs/generated/build-012-receipt.json","docs/generated/project-memory.json","docs/generated/known-gaps.json","docs/generated/safety-capability-matrix.json","docs/generated/eval-registry.json","docs/generated/tool-inventory.json","docs/generated/build-state.json"],"known_gaps":["No durable persistence is included.","No vector database or embedding provider is included.","No private ingestion or live memory service is included."],"next_target":"Build 13 \u2014 Live CodeOps Branch-Write Path through Guard + Receipts","hand_authored_doc_policy":"Build 12 preserves README.md, AGENTS.md, and docs/ARCHITECTURE.md unchanged. Generated sync writes only declared generated files and standalone Build 12 docs.","marker_bounded_hand_authored_docs":[],"generated_at":"2026-01-01T00:00:00.000Z","public_safe":true,"live_execution_enabled":false}
+{
+  "schema_version": "stealtheye-build-manifest.v1",
+  "build": 12,
+  "build_title": "Memory Graph Foundations",
+  "branch": "agent/memory-graph-foundation-v2",
+  "package_name": "@stealtheye/memory-graph",
+  "files_created_or_updated": [
+    "packages/memory-graph/src/schemas.ts",
+    "packages/memory-graph/test/memory-graph.test.ts",
+    "packages/mcp-runtime/src/memory-graph-adapter.ts",
+    "scripts/phases/build-012-memory-graph.mjs"
+  ],
+  "docs_updated": [
+    "docs/MEMORY_GRAPH.md",
+    "docs/DECISIONS/0014-memory-graph-foundation.md",
+    "docs/generated/build-012-manifest.json",
+    "docs/generated/build-012-acceptance.md",
+    "docs/generated/build-012-handoff.md",
+    "docs/generated/build-012-receipt.json",
+    "docs/generated/project-memory.json",
+    "docs/generated/known-gaps.json",
+    "docs/generated/safety-capability-matrix.json",
+    "docs/generated/eval-registry.json",
+    "docs/generated/tool-inventory.json",
+    "docs/generated/build-state.json"
+  ],
+  "tests_evals_added": [
+    "memory graph package tests",
+    "runtime memory preview tests",
+    "Build 12 strict generated sync check"
+  ],
+  "adr_added": "docs/DECISIONS/0014-memory-graph-foundation.md",
+  "ci_required_files": [
+    "pnpm install --no-frozen-lockfile",
+    "pnpm typecheck",
+    "pnpm test",
+    "node scripts/stealtheye-build.mjs scripts/phases/build-008-browserops.mjs --check",
+    "node scripts/stealtheye-build.mjs scripts/phases/build-009-receipts-replay.mjs --check",
+    "node scripts/stealtheye-build.mjs scripts/phases/build-010-mcp-runtime-devmode.mjs --check",
+    "node scripts/stealtheye-build.mjs scripts/phases/build-011-live-readonly-repo-status.mjs --check",
+    "node scripts/stealtheye-build.mjs scripts/phases/build-012-memory-graph.mjs --check"
+  ],
+  "safety_boundaries": [
+    "No production database, vector database, embeddings provider, cloud storage, durable memory, live memory service, production mutation, live writes, private ingestion, or secret storage is added.",
+    "Runtime memory tools are read-only, preview-only, fixture-only, non-destructive, side-effect-free, and live-write disabled.",
+    "Retention helpers report only and never delete records."
+  ],
+  "generated_artifacts": [
+    "docs/generated/build-012-manifest.json",
+    "docs/generated/build-012-acceptance.md",
+    "docs/generated/build-012-handoff.md",
+    "docs/generated/build-012-receipt.json",
+    "docs/generated/project-memory.json",
+    "docs/generated/known-gaps.json",
+    "docs/generated/safety-capability-matrix.json",
+    "docs/generated/eval-registry.json",
+    "docs/generated/tool-inventory.json",
+    "docs/generated/build-state.json"
+  ],
+  "known_gaps": [
+    "No durable persistence is included.",
+    "No vector database or embedding provider is included.",
+    "No private ingestion or live memory service is included."
+  ],
+  "next_target": "Build 13 — Live CodeOps Branch-Write Path through Guard + Receipts",
+  "hand_authored_doc_policy": "Build 12 preserves README.md, AGENTS.md, and docs/ARCHITECTURE.md unchanged. Generated sync writes only declared generated files and standalone Build 12 docs.",
+  "marker_bounded_hand_authored_docs": [],
+  "generated_at": "2026-01-01T00:00:00.000Z",
+  "public_safe": true,
+  "live_execution_enabled": false
+}
