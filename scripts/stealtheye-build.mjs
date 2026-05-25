@@ -46,12 +46,21 @@ for (const [file, content] of Object.entries(phase.llmContextUpdates ?? {})) out
 
 const beginMarker = `<!-- BEGIN BUILD ${phase.build} ADDITIVE UPDATE -->`;
 const endMarker = `<!-- END BUILD ${phase.build} ADDITIVE UPDATE -->`;
+const markerDocSet = new Set(phase.markerBoundedHandAuthoredDocs ?? []);
 function applyMarkerUpdate(existing, markerContent) {
   const block = `${beginMarker}\n\n${markerContent.trim()}\n\n${endMarker}`;
   const begin = existing.indexOf(beginMarker);
   const end = existing.indexOf(endMarker);
   if (begin >= 0 && end >= begin) return `${existing.slice(0, begin).trimEnd()}\n\n${block}\n${existing.slice(end + endMarker.length).replace(/^\n+/, "")}`;
   return `${existing.trimEnd()}\n\n${block}\n`;
+}
+
+function markerSlice(file, content) {
+  if (!markerDocSet.has(file)) return content;
+  const begin = content.indexOf(beginMarker);
+  const end = content.indexOf(endMarker);
+  if (begin < 0 || end < begin) return "";
+  return content.slice(begin, end + endMarker.length);
 }
 
 const unsafePatterns = [
@@ -66,7 +75,7 @@ async function scan(files) {
   for (const file of files) {
     const absolute = path.resolve(root, file);
     if (!existsSync(absolute)) continue;
-    const content = await readFile(absolute, "utf8");
+    const content = markerSlice(file, await readFile(absolute, "utf8"));
     for (const pattern of unsafePatterns) if (pattern.regex.test(content)) findings.push({ file, pattern: pattern.id });
   }
   return findings;
