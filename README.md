@@ -23,6 +23,48 @@ node scripts/stealtheye-build.mjs scripts/phases/build-012-memory-graph.mjs --ch
 - Use [llms.txt](llms.txt) for a concise LLM index and [llms-full.txt](llms-full.txt) for expanded non-sensitive project context.
 - Read `docs/ARCHITECTURE.md`, `docs/MCP_RUNTIME.md`, `docs/RECEIPTS.md`, `docs/REPLAY.md`, `docs/MEMORY_GRAPH.md`, and `docs/SECURITY.md` before implementation work.
 
+<!-- BEGIN BUILD 8 ADDITIVE UPDATE -->
+
+## Build 8 additive update: BrowserOps and build automation
+
+Build 8 adds `@stealtheye/browserops` as a fixture-only package for browser sessions, page observations, evidence references, action policies, action plans, Guard preflight, and Worker Fleet task templates. It also adds generated build-state checks under `docs/generated/`.
+
+Additional verification for Build 8:
+
+```bash
+node scripts/stealtheye-build.mjs scripts/phases/build-008-browserops.mjs --check
+```
+
+<!-- END BUILD 8 ADDITIVE UPDATE -->
+
+<!-- BEGIN BUILD 9 ADDITIVE UPDATE -->
+
+## Build 9 additive update: Receipts + Replay
+
+Build 9 adds `@stealtheye/receipts-replay` as a foundation package for receipt events, evidence references, receipt bundles, deterministic mission timelines, descriptive replay packets, verification packets, final-report packets, and receipt-bundle integrity digests.
+
+Additional verification for Build 9:
+
+```bash
+node scripts/stealtheye-build.mjs scripts/phases/build-009-receipts-replay.mjs --check
+```
+
+<!-- END BUILD 9 ADDITIVE UPDATE -->
+
+<!-- BEGIN BUILD 11 ADDITIVE UPDATE -->
+
+## Build 11 additive update: live read-only repo/status tools
+
+Build 11 adds `@stealtheye/repo-status` and integrates read-only repo/status tools into `@stealtheye/mcp-runtime`.
+
+Additional verification for Build 11:
+
+```bash
+node scripts/stealtheye-build.mjs scripts/phases/build-011-live-readonly-repo-status.mjs --check
+```
+
+<!-- END BUILD 11 ADDITIVE UPDATE -->
+
 <!-- BEGIN BUILD 12 ADDITIVE UPDATE -->
 
 ## Build 12 additive update: Memory Graph Foundations
