@@ -1,41 +1,21 @@
 {
   "schema_version": "stealtheye-eval-registry.v1",
-  "build": 11,
+  "build": 12,
   "evals": [
     {
-      "eval_id": "build-011-eval-01",
-      "name": "repo/status schemas validate live capability status",
-      "location": "packages/repo-status/test/repo-status.test.ts"
+      "eval_id": "build-012-eval-01",
+      "name": "memory graph package tests",
+      "location": "packages/memory-graph/test/memory-graph.test.ts"
     },
     {
-      "eval_id": "build-011-eval-02",
-      "name": "read-only policy allows public reads and denies unsafe effects",
-      "location": "packages/repo-status/test/repo-status.test.ts"
+      "eval_id": "build-012-eval-02",
+      "name": "runtime memory preview tests",
+      "location": "packages/memory-graph/test/memory-graph.test.ts"
     },
     {
-      "eval_id": "build-011-eval-03",
-      "name": "fixture client returns repo branch PR issue workflow and file summaries",
-      "location": "packages/repo-status/test/repo-status.test.ts"
-    },
-    {
-      "eval_id": "build-011-eval-04",
-      "name": "Guard adapter allows public reads and denies untrusted registry requests",
-      "location": "packages/repo-status/test/repo-status.test.ts"
-    },
-    {
-      "eval_id": "build-011-eval-05",
-      "name": "receipt previews cover every read category",
-      "location": "packages/repo-status/test/repo-status.test.ts"
-    },
-    {
-      "eval_id": "build-011-eval-06",
-      "name": "runtime lists and calls repo read-only tools and rejects unsafe names",
-      "location": "packages/mcp-runtime/test/mcp-runtime.test.ts"
-    },
-    {
-      "eval_id": "build-011-eval-07",
-      "name": "mocked public REST client uses GET only and api.github.com only",
-      "location": "packages/repo-status/test/repo-status.test.ts"
+      "eval_id": "build-012-eval-03",
+      "name": "Build 12 strict generated sync check",
+      "location": "packages/memory-graph/test/memory-graph.test.ts"
     }
   ]
 }
