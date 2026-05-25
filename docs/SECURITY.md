@@ -5,9 +5,9 @@ Security is a first-class control layer, not a post-hoc review step.
 ## Hard stops
 
 - deletion/destruction
-- raw secrets/credentials
+- unmasked auth material
 - money/refunds/purchases/billing/subscriptions
-- production deployment or production data mutation
+- production deployment or production-state mutation
 - production-impacting DB migrations
 - auth/security-critical changes
 - direct protected branch mutation
@@ -15,74 +15,36 @@ Security is a first-class control layer, not a post-hoc review step.
 - weakening CI/tests/security controls to pass
 - material external sends as Jamie/company
 - legal commitments/contracts
-- platform/OpenAI-required confirmations
+- platform-required confirmations
 
-## Build 2 signing posture
+## Build security posture
 
-Agent cards and tool manifests are verified over canonical unsigned payloads with SHA-256 digests and Ed25519 signatures. The repo contains no real private keys. Test fixtures generate local in-memory test keys and are labeled as public test fixtures. Future production signing should be backed by private KMS/HSM or equivalent private systems.
-
-## Build 3 Guard posture
-
-Guard capability tokens are delegated-authority records, not credential storage and not production auth tokens. They encode mission-scoped authority, target constraints, tool/manifest constraints, time windows, usage budgets, evidence requirements, receipt requirements, escalation requirements, and lifecycle status.
-
-Guard policy evaluation must never silently allow hard stops. Build 3 maps hard stops to deny or escalate decisions and records matched hard stops and reason codes in Guard decision receipts. Registry trust summaries are consumed as enforcement input; a valid signed manifest is necessary for trusted operation but is not sufficient authority by itself.
-
-## Build 4 Mission OS posture
-
-Mission OS turns user intent into typed mission structures, authority envelopes, plan steps, status summaries, receipt references, and Guard-compatible action templates. Mission OS does not issue production credentials, store secrets, bypass Guard, or execute workers. Hard-stop missions may appear as fixtures to verify escalation behavior, not as enabled production actions.
-
-## Build 5 App Host posture
-
-App Host exposes only read-only, fixture-only, or preview-only tools. It can validate, compile, preview, summarize, and produce fixture-backed Guard/Registry/Mission outputs, but it cannot mutate repositories, create branches, commit, open PRs, rerun CI, automate browsers, deploy, delete, access secrets, move money, send external messages, access customer data, or execute workers.
-
-## Build 6 Worker Fleet posture
-
-Worker Fleet defines durable execution contracts for worker tasks, leases, fencing tokens, idempotency, retry state, artifacts, receipts, Mission OS plan handoff, and Guard preflight. It must not execute live actions, mutate repositories, run browsers, deploy, access raw secrets, store customer data, move money, or connect to live queues in this build.
-
-Action-bearing worker tasks must pass Guard preflight before any future executor can run them. Deny decisions block the task; escalate decisions wait/block for escalation; allowed decisions only move the task toward readiness. Worker fixtures are fake, local, public-safe, and include no live queue credentials, storage buckets, production endpoints, or real account identifiers.
-
-## Build 7 CodeOps and CI Repair posture
-
-CodeOps and CI Repair define contracts and deterministic helpers only. CodeOps models repository targets, branch/path policy, patch plans, file-change contracts, verification plans, PR evidence, Guard requested actions, and Worker Fleet task templates. CI Repair models CI/check summaries, short public-safe log excerpts, failure categories, repair plans, rerun eligibility, and verification loops.
-
-Build 7 must not create branches, write commits, open PRs through a live adapter, mutate protected branches, force push, rewrite history, weaken CI/tests/security, fetch raw secrets, rerun live jobs, dispatch workflows, deploy, access customer data, move money, or perform production mutations. Protected branch mutation, force push/history rewrite, and CI/test/security weakening are deny paths. Destructive delete is blocked or escalated and not performed.
-
-## Secrets broker
-
-Secrets must remain in private systems. A Secrets Broker may provide brokered operations, scoped environment injection, or signing/delegation without returning raw secret values to agents, logs, receipts, or public repo files.
-
-## Semantic firewall
-
-The Semantic Firewall treats repo content, logs, browser pages, documents, issue comments, model outputs, Mission Language input, app-host input, worker artifacts/receipts, CodeOps diffs, CI logs, and tool outputs as potentially malicious. It detects prompt injection, data exfiltration attempts, authority confusion, and instruction smuggling.
-
-## Prompt injection and tool poisoning
-
-Threats include malicious README files, CI logs, web pages, browser DOM content, issue comments, generated manifests, Mission Language documents, app-host tool inputs, worker artifacts/receipts, CodeOps file-change summaries, CI repair excerpts, and remote MCP tool descriptions. Tool outputs must not override system, developer, repo, mission, worker, CodeOps, CI Repair, or Guard policy.
-
-Signed manifests reduce tool poisoning risk but do not remove the need for Guard checks. A valid signature proves provenance and integrity for a signed payload; it does not prove a tool call is authorized for a mission.
-
-## MCP authorization requirements
-
-Protected HTTP MCP servers should align toward OAuth 2.1 practices: protected resource metadata, authorization server metadata discovery, controlled client registration, auth discovery, audience-bound tokens, scope enforcement per tool and mission, no token passthrough, exact redirect URI validation, PKCE where relevant, and confused-deputy defense.
-
-Build 5 does not implement OAuth or production MCP authorization. Build 6 does not implement production worker authorization or live queue credentials. Build 7 does not implement production GitHub App writes or live CI rerun credentials.
+Agent Registry verifies signed agent/tool metadata. Guard enforces authority boundaries and hard stops. Mission OS, App Host, Worker Fleet, CodeOps, BrowserOps, Receipts + Replay, MCP Runtime, Repo Status, and Memory Graph remain foundation-first and public-safe in this repo.
 
 ## Public/private boundary
 
-Public repo content may contain architecture, public specs, schemas, mock data, eval templates, app-host descriptors, worker-fleet contracts, CodeOps/CI Repair contracts, preview fixtures, and governance docs. Private systems contain secrets, credentials, production endpoints, customer data, internal OAuth clients, cloud/account details, sensitive runbooks, production signing keys, production capability issuance systems, production Mission OS state, deployed app-host runtime configuration, live queue credentials, live GitHub App credentials, CI write credentials, and worker infrastructure.
+Public repo files may contain architecture, public schemas, mock data, fixture contracts, generated build state, and governance docs. Private systems hold sensitive operational material and deployed runtime configuration.
 
 ## Security evidence
 
-Receipts should capture denials, approvals, policy decisions, mission ids, authority envelopes, app-host previews, worker task events, leases, retries, idempotency records, CodeOps patch plans, file-change contracts, verification plans, CI summaries, CI repair plans, PR evidence, manifest identities, manifest digests, registry decisions, Guard decisions, matched capability tokens, policy checks, hard stops, tool calls, redactions, auth scopes, CI/security check results, and incident-relevant artifacts.
+Receipts should capture denials, approvals, policy decisions, mission ids, authority envelopes, app-host previews, worker task events, idempotency records, CodeOps patch plans, verification plans, CI summaries, PR evidence, manifest identities, registry decisions, Guard decisions, policy checks, hard stops, tool calls, redactions, and final-report references.
 
-<!-- BEGIN BUILD 11 ADDITIVE UPDATE -->
+<!-- BEGIN BUILD 12 ADDITIVE UPDATE -->
 
-## Build 11 additive update: public repo/status read boundary
+## Build 12 additive update: Memory Graph Foundations
 
-Build 11 adds `@stealtheye/repo-status` and MCP runtime repo/status tools for read-only public GitHub observation. The implementation uses deterministic read policy, Guard decisions, and public-safe receipt previews.
+Build 12 adds `@stealtheye/memory-graph` as a fixture-only, deterministic, in-memory foundation for typed memory nodes, typed relationships, provenance/source refs, evidence and receipt refs, confidence, recency, retention hints, query helpers, compaction helpers, retention reports, and public-safe context summaries.
 
-Allowed reads are public repository metadata, branch metadata, PR/issue metadata, workflow/check summaries, and public-safe file metadata/content. The optional REST client uses no credentials, GET only, `https://api.github.com` only, and an explicit public repository allowlist. CI uses fixtures and mocked fetch.
+Build 12 also exposes MCP Runtime preview tools for `memory.graph.preview`, `memory.node.search.preview`, `memory.context.preview`, and `memory.retention.preview`. These tools are read-only, preview-only, fixture-only, non-destructive, no-storage, no-embeddings, and no-live-write.
 
-Build 11 does not add private repository access, raw credential exposure, branch creation, file writes, commits, PR/issue mutation, CI reruns, workflow dispatch, deployment, money movement, browser execution, production mutation, or customer-data workflows.
+The Build 12 phase spec sets `strictGeneratedSync: true`, and CI must run:
 
-<!-- END BUILD 11 ADDITIVE UPDATE -->
+```bash
+node scripts/stealtheye-build.mjs scripts/phases/build-012-memory-graph.mjs --check
+```
+
+Build 12 remains fixture-only and in-memory. It does not add durable storage, vector search, embeddings, private ingestion, live memory service, live writes, or production changes.
+
+Next target after Build 12: **Build 13 — Live CodeOps Branch-Write Path through Guard + Receipts**.
+
+<!-- END BUILD 12 ADDITIVE UPDATE -->
