@@ -1,1 +1,21 @@
-{"schema_version":"stealtheye-eval-registry.v1","build":12,"evals":[{"eval_id":"build-012-eval-01","name":"memory graph package tests","location":"packages/memory-graph/test/memory-graph.test.ts"},{"eval_id":"build-012-eval-02","name":"runtime memory preview tests","location":"packages/memory-graph/test/memory-graph.test.ts"},{"eval_id":"build-012-eval-03","name":"Build 12 strict generated sync check","location":"packages/memory-graph/test/memory-graph.test.ts"}]}
+{
+  "schema_version": "stealtheye-eval-registry.v1",
+  "build": 12,
+  "evals": [
+    {
+      "eval_id": "build-012-eval-01",
+      "name": "memory graph package tests",
+      "location": "packages/memory-graph/test/memory-graph.test.ts"
+    },
+    {
+      "eval_id": "build-012-eval-02",
+      "name": "runtime memory preview tests",
+      "location": "packages/memory-graph/test/memory-graph.test.ts"
+    },
+    {
+      "eval_id": "build-012-eval-03",
+      "name": "Build 12 strict generated sync check",
+      "location": "packages/memory-graph/test/memory-graph.test.ts"
+    }
+  ]
+}

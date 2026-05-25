@@ -1,1 +1,12 @@
-{"schema_version":"stealtheye-tool-inventory.v1","build":12,"tools":[{"name":"Memory Graph preview tools","package":"@stealtheye/mcp-runtime","mode":"fixture_only_preview","live_external_effects":false}]}
+{
+  "schema_version": "stealtheye-tool-inventory.v1",
+  "build": 12,
+  "tools": [
+    {
+      "name": "Memory Graph preview tools",
+      "package": "@stealtheye/mcp-runtime",
+      "mode": "fixture_only_preview",
+      "live_external_effects": false
+    }
+  ]
+}

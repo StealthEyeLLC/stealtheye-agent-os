@@ -1,1 +1,18 @@
-{"schema_version":"stealtheye-safety-capability-matrix.v1","build":12,"capabilities":[{"capability":"memory_graph_foundation","status":"implemented_fixture_only","guard_required":true,"live_enabled":false},{"capability":"live_memory_service","status":"blocked_future_work","guard_required":true,"live_enabled":false}]}
+{
+  "schema_version": "stealtheye-safety-capability-matrix.v1",
+  "build": 12,
+  "capabilities": [
+    {
+      "capability": "memory_graph_foundation",
+      "status": "implemented_fixture_only",
+      "guard_required": true,
+      "live_enabled": false
+    },
+    {
+      "capability": "live_memory_service",
+      "status": "blocked_future_work",
+      "guard_required": true,
+      "live_enabled": false
+    }
+  ]
+}
