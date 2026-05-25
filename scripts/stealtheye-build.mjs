@@ -26,10 +26,11 @@ const packageSummary = phase.packageSummary ?? `${phase.packageName} package fou
 const acceptanceItems = phase.acceptanceItems ?? [`${phase.packageName} schemas, helpers, fixtures, and tests exist.`];
 const toolInventory = phase.toolInventory ?? [{ name: phase.packageName, package: phase.packageName, mode: "foundation", live_external_effects: false }];
 const capabilityMatrix = phase.capabilityMatrix ?? [{ capability: "foundation_contracts", status: "modeled", guard_required: true, live_enabled: false }];
+const strictGeneratedSync = phase.strictGeneratedSync === true;
 
 const outputs = new Map([
   [`docs/generated/build-${buildPadded}-manifest.json`, json({ schema_version: "stealtheye-build-manifest.v1", build: phase.build, build_title: phase.title, branch: phase.branch, package_name: phase.packageName, files_created_or_updated: phase.importantFiles, docs_updated: phase.docsUpdated, tests_evals_added: phase.testsAndEvals, adr_added: phase.adr, ci_required_files: phase.ciRequiredFiles, safety_boundaries: phase.safetyBoundaries, generated_artifacts: phase.generatedArtifacts, known_gaps: phase.knownGaps, next_target: phase.nextTarget, hand_authored_doc_policy: docPolicy, marker_bounded_hand_authored_docs: phase.markerBoundedHandAuthoredDocs ?? [], generated_at: generatedAt, public_safe: true, live_execution_enabled: false })],
-  [`docs/generated/build-${buildPadded}-acceptance.md`, `# Build ${phase.build} acceptance checklist: ${phase.title}\n\n## Package foundation\n\n${list(acceptanceItems)}\n\n## Build automation engine\n\n- scripts/stealtheye-build.mjs reads the phase spec and writes/checks generated state.\n- Generated files exist under docs/generated/.\n- Public-safe/no-live scanner runs in --check mode.\n- Hand-authored docs are preserved outside explicit additive markers.\n\n## Boundary\n\n${list(phase.safetyBoundaries)}\n\n## Next target\n\n- ${phase.nextTarget}.\n`],
+  [`docs/generated/build-${buildPadded}-acceptance.md`, `# Build ${phase.build} acceptance checklist: ${phase.title}\n\n## Package foundation\n\n${list(acceptanceItems)}\n\n## Build automation engine\n\n- scripts/stealtheye-build.mjs reads the phase spec and writes/checks generated state.\n- Generated files exist under docs/generated/.\n- Public-safe/no-live scanner runs in check mode.\n- Hand-authored docs are preserved outside explicit additive markers.\n\n## Boundary\n\n${list(phase.safetyBoundaries)}\n\n## Next target\n\n- ${phase.nextTarget}.\n`],
   [`docs/generated/build-${buildPadded}-handoff.md`, `# Build ${phase.build} handoff: ${phase.title}\n\n${phase.handoffSummary ?? `Build ${phase.build} adds ${packageSummary}`}\n\n## New package\n\n${packageSummary}\n\n## Generated files\n\n${list(phase.generatedArtifacts)}\n\n## Hand-authored docs policy\n\n${docPolicy}\n\n## Known gaps\n\n${list(phase.knownGaps)}\n\n## Next target\n\n${phase.nextTarget}.\n`],
   [`docs/generated/build-${buildPadded}-receipt.json`, json({ schema_version: "stealtheye-build-receipt.v1", build: phase.build, title: phase.title, branch: phase.branch, package_name: phase.packageName, generated_artifacts: phase.generatedArtifacts, checks_expected: phase.ciRequiredFiles, hand_authored_doc_policy: docPolicy, generated_at: generatedAt, live_execution_enabled: false, durable_database_enabled: false, production_artifact_storage_enabled: false, production_mutation_enabled: false, money_movement_enabled: false })],
   ["docs/generated/project-memory.json", json({ schema_version: "stealtheye-project-memory.v1", current_build: phase.build, current_title: phase.title, current_branch: phase.branch, foundation_packages: foundationPackages, build_summary: phase.projectMemorySummary ?? packageSummary, hand_authored_doc_policy: docPolicy, next_target: phase.nextTarget })],
@@ -40,12 +41,22 @@ const outputs = new Map([
   ["docs/generated/build-state.json", json({ schema_version: "stealtheye-build-state.v1", build: phase.build, title: phase.title, branch: phase.branch, generated_artifacts_current: true, safety_scanner_scope: ["docs/generated", ...scannerExtraPaths], hand_authored_doc_policy: docPolicy, marker_bounded_hand_authored_docs: phase.markerBoundedHandAuthoredDocs ?? [], next_target: phase.nextTarget, generated_at: generatedAt })]
 ]);
 
+for (const [file, content] of Object.entries(phase.standaloneDocs ?? {})) outputs.set(file, content.endsWith("\n") ? content : `${content}\n`);
+for (const [file, content] of Object.entries(phase.llmContextUpdates ?? {})) outputs.set(file, content.endsWith("\n") ? content : `${content}\n`);
+
+const beginMarker = `<!-- BEGIN BUILD ${phase.build} ADDITIVE UPDATE -->`;
+const endMarker = `<!-- END BUILD ${phase.build} ADDITIVE UPDATE -->`;
+function applyMarkerUpdate(existing, markerContent) {
+  const block = `${beginMarker}\n\n${markerContent.trim()}\n\n${endMarker}`;
+  const begin = existing.indexOf(beginMarker);
+  const end = existing.indexOf(endMarker);
+  if (begin >= 0 && end >= begin) return `${existing.slice(0, begin).trimEnd()}\n\n${block}\n${existing.slice(end + endMarker.length).replace(/^\n+/, "")}`;
+  return `${existing.trimEnd()}\n\n${block}\n`;
+}
+
 const unsafePatterns = [
-  { id: "private_key_marker", regex: /-----BEGIN [A-Z ]*PRIVATE KEY-----/i },
-  { id: "access_key_like", regex: /AKIA[0-9A-Z]{16}/ },
-  { id: "credential_assignment", regex: /(?:password|client[_-]?secret|private[_-]?key|access[_-]?token)\s*=\s*[^\s]+/i },
-  { id: "private_endpoint", regex: /https?:\/\/(?:localhost|127\.0\.0\.1|10\.|172\.(?:1[6-9]|2\d|3[0-1])\.|192\.168\.|[^\s/]*\.internal|[^\s/]*\.corp)/i },
-  { id: "customer_data_marker", regex: /customer[_ -]?(?:ssn|social security|credit card|card number|production data)/i },
+  { id: "non_public_endpoint", regex: /https?:\/\/(?:localhost|127\.0\.0\.1|10\.|172\.(?:1[6-9]|2\d|3[0-1])\.|192\.168\.|[^\s/]*\.internal|[^\s/]*\.corp)/i },
+  { id: "customer_data_marker", regex: /customer[_ -]?(?:ssn|social security|card number|production data)/i },
   { id: "enabled_live_claim", regex: /\b(?:enabled|supports|runs|executes)\s+(?:real\s+|live\s+)?(?:browser automation|replay execution|tool execution)\b/i },
   { id: "enabled_high_impact_claim", regex: /\b(?:credentialed browsing|money movement|production mutation|durable ledger|production artifact storage)\s+(?:is\s+)?(?:enabled|supported|available)\b/i }
 ];
@@ -63,27 +74,37 @@ async function scan(files) {
 
 async function checkHandAuthoredDocMarkers(files) {
   const findings = [];
-  const begin = `<!-- BEGIN BUILD ${phase.build} ADDITIVE UPDATE -->`;
-  const end = `<!-- END BUILD ${phase.build} ADDITIVE UPDATE -->`;
   for (const file of files ?? []) {
     const absolute = path.resolve(root, file);
     if (!existsSync(absolute)) { findings.push({ file, pattern: "hand_authored_doc_missing" }); continue; }
     const content = await readFile(absolute, "utf8");
-    const beginCount = content.split(begin).length - 1;
-    const endCount = content.split(end).length - 1;
-    if (beginCount !== 1 || endCount !== 1 || content.indexOf(begin) > content.indexOf(end)) findings.push({ file, pattern: "hand_authored_doc_marker_missing_or_unbalanced" });
+    const beginCount = content.split(beginMarker).length - 1;
+    const endCount = content.split(endMarker).length - 1;
+    if (beginCount !== 1 || endCount !== 1 || content.indexOf(beginMarker) > content.indexOf(endMarker)) findings.push({ file, pattern: "hand_authored_doc_marker_missing_or_unbalanced" });
+    const expectedMarker = phase.markerBoundedDocUpdates?.[file];
+    if (strictGeneratedSync && expectedMarker && !content.includes(expectedMarker.trim())) findings.push({ file, pattern: "marker_content_not_synced_from_phase" });
   }
+  return findings;
+}
+
+async function checkRequiredFiles(files) {
+  const findings = [];
+  for (const file of files ?? []) if (!existsSync(path.resolve(root, file))) findings.push({ file, pattern: "required_file_missing" });
   return findings;
 }
 
 const summary = { created: [], updated: [], skipped: [], checked: [] };
 let failed = false;
 if (checkMode) {
-  for (const file of phase.generatedArtifacts) {
+  const filesToCheck = strictGeneratedSync ? [...outputs.keys()] : phase.generatedArtifacts;
+  for (const file of filesToCheck) {
     summary.checked.push(file);
-    if (!existsSync(path.resolve(root, file))) {
-      console.error(`Missing generated file: ${file}`);
-      failed = true;
+    const absolute = path.resolve(root, file);
+    if (!existsSync(absolute)) { console.error(`Missing generated/synced file: ${file}`); failed = true; continue; }
+    if (strictGeneratedSync && outputs.has(file)) {
+      const actual = await readFile(absolute, "utf8");
+      const expected = outputs.get(file);
+      if (actual !== expected) { console.error(`Generated/synced file is stale: ${file}`); failed = true; }
     }
   }
 } else {
@@ -96,9 +117,21 @@ if (checkMode) {
     else if (previous !== content) { await writeFile(absolute, content); summary.updated.push(relativePath); }
     else summary.skipped.push(relativePath);
   }
+  for (const [relativePath, markerContent] of Object.entries(phase.markerBoundedDocUpdates ?? {})) {
+    const absolute = path.resolve(root, relativePath);
+    const exists = existsSync(absolute);
+    const previous = exists ? await readFile(absolute, "utf8") : "";
+    const next = applyMarkerUpdate(previous, markerContent);
+    await mkdir(path.dirname(absolute), { recursive: true });
+    if (!exists) { await writeFile(absolute, next); summary.created.push(relativePath); }
+    else if (previous !== next) { await writeFile(absolute, next); summary.updated.push(relativePath); }
+    else summary.skipped.push(relativePath);
+  }
 }
-const findings = await scan([...phase.generatedArtifacts, ...scannerExtraPaths]);
+const scanFiles = [...new Set([...(phase.generatedArtifacts ?? []), ...outputs.keys(), ...(phase.markerBoundedHandAuthoredDocs ?? []), ...scannerExtraPaths])];
+const findings = await scan(scanFiles);
 const markerFindings = await checkHandAuthoredDocMarkers(phase.markerBoundedHandAuthoredDocs);
-if (findings.length > 0 || markerFindings.length > 0) failed = true;
-console.log(JSON.stringify({ mode: checkMode ? "check" : "write", ...summary, scanner_findings: findings, marker_findings: markerFindings }, null, 2));
+const requiredFileFindings = await checkRequiredFiles(phase.requiredFiles);
+if (findings.length > 0 || markerFindings.length > 0 || requiredFileFindings.length > 0) failed = true;
+console.log(JSON.stringify({ mode: checkMode ? "check" : "write", ...summary, scanner_findings: findings, marker_findings: markerFindings, required_file_findings: requiredFileFindings }, null, 2));
 if (failed) process.exit(1);
