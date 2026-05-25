@@ -87,3 +87,23 @@ Build 9 remains foundation-only. It does not add a durable database, production 
 Next target after Build 9: **Build 10 — Memory Graph**.
 
 <!-- END BUILD 9 ADDITIVE UPDATE -->
+
+<!-- BEGIN BUILD 11 ADDITIVE UPDATE -->
+
+## Build 11 additive update: live read-only repo/status tools
+
+Build 11 adds `@stealtheye/repo-status` and integrates read-only repo/status tools into `@stealtheye/mcp-runtime`.
+
+The new surface can observe public GitHub repository metadata, branch metadata, pull request metadata, issue metadata, workflow/check summaries, and public-safe file metadata/content when configured. Test coverage remains fixture-backed or mocked.
+
+The runtime exposes only read-only repo/status tools. It does not add credentials, private repository access, branch creation, file writes, commits, pull request mutation, issue mutation, CI reruns, workflow dispatch, deployment, money movement, browser execution, production mutation, or customer-data workflows.
+
+Additional verification for Build 11:
+
+```bash
+node scripts/stealtheye-build.mjs scripts/phases/build-011-live-readonly-repo-status.mjs --check
+```
+
+Next target after Build 11: **Build 12 — Memory Graph**.
+
+<!-- END BUILD 11 ADDITIVE UPDATE -->

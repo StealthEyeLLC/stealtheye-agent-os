@@ -1,9 +1,21 @@
 {
   "schema_version": "stealtheye-project-memory.v1",
-  "current_build": 10,
-  "current_title": "MCP Runtime + ChatGPT App Dev-Mode Connection",
-  "current_branch": "agent/mcp-runtime-devmode-connection",
-  "foundation_packages": ["@stealtheye/agent-registry", "@stealtheye/guard", "@stealtheye/mission-os", "@stealtheye/app-host", "@stealtheye/worker-fleet", "@stealtheye/codeops", "@stealtheye/browserops", "@stealtheye/receipts-replay", "@stealtheye/mcp-runtime"],
-  "build_summary": "Build 10 adds a local/dev MCP-style runtime surface for safe App Host tools and moves Memory Graph after the first runtime/app connection.",
-  "next_target": "Build 11 — Live Read-Only Repo/Status Tools through Guard + Receipts"
+  "current_build": 11,
+  "current_title": "Live Read-Only Repo/Status Tools through Guard + Receipts",
+  "current_branch": "agent/live-readonly-repo-status-tools",
+  "foundation_packages": [
+    "@stealtheye/agent-registry",
+    "@stealtheye/guard",
+    "@stealtheye/mission-os",
+    "@stealtheye/app-host",
+    "@stealtheye/worker-fleet",
+    "@stealtheye/codeops",
+    "@stealtheye/browserops",
+    "@stealtheye/receipts-replay",
+    "@stealtheye/mcp-runtime",
+    "@stealtheye/repo-status"
+  ],
+  "build_summary": "Build 11 adds Guard and receipt wrapped public GitHub repository/status observation through read-only MCP runtime tools. CI remains fixture-backed or mocked, and no write, private repository, credentialed, browser, production, money, or customer-data workflow is included.",
+  "hand_authored_doc_policy": "Preserve accumulated hand-authored docs. Build 11 updates are additive and marker-bounded where listed.",
+  "next_target": "Build 12 — Memory Graph"
 }

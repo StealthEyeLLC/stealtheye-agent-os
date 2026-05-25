@@ -27,3 +27,13 @@ Each app contributes a bounded capability surface to the agent OS. Tool descript
 | StealthEye Semantic Firewall | content and prompt boundary layer | injection detection, data classification, sanitization | filters malicious repo/log/browser/doc content | cannot be bypassed by tool output claims |
 | StealthEye Workflow Compiler | mission-to-DAG compiler | workflow blueprints, dependency graphs, retries | turns intent into executable durable workflows | must encode idempotency and approvals |
 | StealthEye Agent Arena | agent eval and competition harness | task suites, scoreboards, adversarial runs | selects stronger agents/tool policies empirically | no production authority in arena runs |
+
+<!-- BEGIN BUILD 11 ADDITIVE UPDATE -->
+
+## Build 11 additive update: Repo Status app surface
+
+Build 11 adds Repo Status as a read-only app/tool surface. It contributes public GitHub repository/status observation through Guard and receipts and is exposed through MCP Runtime repo tools.
+
+Allowed observations are public repo metadata, branch metadata, PR/issue metadata, workflow/check summaries, and public-safe file metadata/content. It uses no credentials, no private repo access, and no write/mutation paths.
+
+<!-- END BUILD 11 ADDITIVE UPDATE -->

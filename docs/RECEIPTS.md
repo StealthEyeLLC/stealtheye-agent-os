@@ -69,3 +69,13 @@ Build 9 evidence refs are reference-only and public-safe. They use fixture/gener
 Build 9 replay packets are descriptive. They preserve event order, index public-safe evidence refs, identify omitted sensitive refs, and explicitly mark replay steps as side-effect-free.
 
 <!-- END BUILD 9 ADDITIVE UPDATE -->
+
+<!-- BEGIN BUILD 11 ADDITIVE UPDATE -->
+
+## Build 11 additive update: repo/status read receipts
+
+Build 11 adds public-safe receipt previews for repo/status reads. Each read result includes the tool name, target repository, applicable ref/PR/issue/check/file target, timestamp, Guard decision or read-policy reference, public-safe input summary, public-safe output summary, and a no-write/no-side-effect statement.
+
+Repo/status receipt previews cover repository metadata, branch reads, PR reads/lists, issue reads/lists, workflow/check status reads, public-safe file metadata/content reads, and repository status summaries. Build 11 returns these receipts with tool results only and does not add a durable receipt ledger.
+
+<!-- END BUILD 11 ADDITIVE UPDATE -->

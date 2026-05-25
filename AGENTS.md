@@ -82,3 +82,21 @@ node scripts/stealtheye-build.mjs scripts/phases/build-009-receipts-replay.mjs -
 ```
 
 <!-- END BUILD 9 ADDITIVE UPDATE -->
+
+<!-- BEGIN BUILD 11 ADDITIVE UPDATE -->
+
+## Build 11 additive update
+
+Build 11 adds `@stealtheye/repo-status` for Guard-gated public GitHub repository/status observation and exposes read-only repo/status tools through `@stealtheye/mcp-runtime`.
+
+Repo/status tools may read public repository metadata, branch metadata, pull request metadata, issue metadata, workflow/check summaries, and public-safe file metadata/content when configured. CI coverage remains fixture-backed or mocked.
+
+Do not add credentials, private repository access, branch creation, file writes, commits, pull request mutation, issue mutation, CI reruns, workflow dispatch, deployment, money movement, browser execution, production mutation, or customer-data workflows for Build 11.
+
+Additional Build 11 CI check:
+
+```bash
+node scripts/stealtheye-build.mjs scripts/phases/build-011-live-readonly-repo-status.mjs --check
+```
+
+<!-- END BUILD 11 ADDITIVE UPDATE -->

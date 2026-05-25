@@ -1,5 +1,5 @@
 {
-  "name": "@stealtheye/mcp-runtime",
+  "name": "@stealtheye/repo-status",
   "version": "0.1.0",
   "private": true,
   "type": "module",
@@ -10,9 +10,8 @@
     "test": "vitest run"
   },
   "dependencies": {
-    "@stealtheye/app-host": "workspace:*",
+    "@stealtheye/guard": "workspace:*",
     "@stealtheye/receipts-replay": "workspace:*",
-    "@stealtheye/repo-status": "workspace:*",
     "zod": "^3.24.1"
   }
 }

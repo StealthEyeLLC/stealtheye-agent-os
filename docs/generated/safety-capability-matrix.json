@@ -1,11 +1,42 @@
 {
   "schema_version": "stealtheye-safety-capability-matrix.v1",
-  "build": 10,
+  "build": 11,
   "capabilities": [
-    { "capability": "mcp_style_list_tools", "status": "implemented_local_dev", "guard_required": false, "live_enabled": false },
-    { "capability": "mcp_style_call_tool", "status": "implemented_preview_only", "guard_required": true, "live_enabled": false },
-    { "capability": "runtime_resources", "status": "implemented_fixture_only", "guard_required": false, "live_enabled": false },
-    { "capability": "dev_mode_connection_metadata", "status": "implemented_fixture_only", "guard_required": false, "live_enabled": false },
-    { "capability": "live_write_tools", "status": "blocked", "guard_required": true, "live_enabled": false }
+    {
+      "capability": "public_repo_metadata_read",
+      "status": "implemented_read_only_live_capable",
+      "guard_required": true,
+      "live_enabled": true
+    },
+    {
+      "capability": "public_branch_metadata_read",
+      "status": "implemented_read_only_live_capable",
+      "guard_required": true,
+      "live_enabled": true
+    },
+    {
+      "capability": "public_pr_issue_metadata_read",
+      "status": "implemented_read_only_live_capable",
+      "guard_required": true,
+      "live_enabled": true
+    },
+    {
+      "capability": "public_workflow_status_read",
+      "status": "implemented_read_only_live_capable",
+      "guard_required": true,
+      "live_enabled": true
+    },
+    {
+      "capability": "public_file_metadata_content_read",
+      "status": "implemented_read_only_live_capable",
+      "guard_required": true,
+      "live_enabled": true
+    },
+    {
+      "capability": "repo_write_or_mutation",
+      "status": "blocked",
+      "guard_required": true,
+      "live_enabled": false
+    }
   ]
 }

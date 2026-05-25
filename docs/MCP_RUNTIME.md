@@ -30,3 +30,21 @@ pnpm typecheck
 pnpm test
 node scripts/stealtheye-build.mjs scripts/phases/build-010-mcp-runtime-devmode.mjs --check
 ```
+
+<!-- BEGIN BUILD 11 ADDITIVE UPDATE -->
+
+## Build 11 additive update: repo/status runtime tools
+
+Build 11 adds read-only repo/status tools to `@stealtheye/mcp-runtime` through `packages/mcp-runtime/src/repo-status-adapter.ts`.
+
+The runtime now lists and calls `repo.status.summary`, `repo.metadata.read`, `repo.branch.read`, `repo.pr.list`, `repo.pr.read`, `repo.issue.list`, `repo.issue.read`, `repo.workflow.status.read`, `repo.file.metadata.read`, and `repo.file.content.read`.
+
+These tools are read-only, non-destructive, `liveWrite: false`, and return Guard/policy-backed receipt previews. They do not expose branch creation, file writes, commits, PR or issue mutation, CI reruns, workflow dispatch, browser execution, credentials, deployment, money movement, production mutation, private repository access, or customer-data workflows.
+
+Additional Build 11 verification:
+
+```bash
+node scripts/stealtheye-build.mjs scripts/phases/build-011-live-readonly-repo-status.mjs --check
+```
+
+<!-- END BUILD 11 ADDITIVE UPDATE -->
