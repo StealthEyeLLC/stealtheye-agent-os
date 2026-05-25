@@ -102,3 +102,15 @@ Replay in Build 9 is descriptive only. It reconstructs mission narratives from r
 The next architecture target is **Build 10 — Memory Graph**.
 
 <!-- END BUILD 9 ADDITIVE UPDATE -->
+
+<!-- BEGIN BUILD 11 ADDITIVE UPDATE -->
+
+## Build 11 additive update: repo/status observation layer
+
+Build 11 adds `@stealtheye/repo-status` as a bounded observation layer for public GitHub repository/status reads. It adds schemas, read-only policy, Guard adapter integration, public-safe receipt previews, a fixture client, and an optional unauthenticated public REST client constrained to GET requests against `https://api.github.com` for an explicit allowlist.
+
+The MCP runtime now includes repo/status read-only tools next to the existing App Host preview surface. The architecture still blocks repository writes, branch creation, commits, PR or issue mutation, CI reruns, workflow dispatch, private repository access, credentials, browser execution, deployment, money movement, production mutation, and customer-data workflows.
+
+The next architecture target is **Build 12 — Memory Graph**.
+
+<!-- END BUILD 11 ADDITIVE UPDATE -->
