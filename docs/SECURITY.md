@@ -29,6 +29,16 @@ Public repo files may contain architecture, public schemas, mock data, fixture c
 
 Receipts should capture denials, approvals, policy decisions, mission ids, authority envelopes, app-host previews, worker task events, idempotency records, CodeOps patch plans, verification plans, CI summaries, PR evidence, manifest identities, registry decisions, Guard decisions, policy checks, hard stops, tool calls, redactions, and final-report references.
 
+<!-- BEGIN BUILD 11 ADDITIVE UPDATE -->
+
+## Build 11 additive update: public repo/status read boundary
+
+Build 11 adds `@stealtheye/repo-status` and MCP runtime repo/status tools for read-only public GitHub observation. The implementation uses deterministic read policy, Guard decisions, and public-safe receipt previews.
+
+Allowed reads are public repository metadata, branch metadata, PR/issue metadata, workflow/check summaries, and public-safe file metadata/content. CI uses fixtures and mocked fetch.
+
+<!-- END BUILD 11 ADDITIVE UPDATE -->
+
 <!-- BEGIN BUILD 12 ADDITIVE UPDATE -->
 
 ## Build 12 additive update: Memory Graph Foundations
