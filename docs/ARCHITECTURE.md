@@ -19,6 +19,38 @@ StealthEye Agent OS is organized as mission, control, tool, worker, evidence, me
 
 Mission request -> App Host preview -> Mission OS compiler -> authority envelope -> Worker Fleet contract -> Guard preflight -> future runtime executors -> receipts/artifacts -> Memory Graph context packets -> eval and final report.
 
+<!-- BEGIN BUILD 8 ADDITIVE UPDATE -->
+
+## Build 8 additive update: fixture-only BrowserOps and generated build state
+
+Build 8 implements the BrowserOps foundation as contracts and deterministic helpers only. `@stealtheye/browserops` models browser sessions, page observations, browser evidence refs, action categories/kinds, action plans, Guard requested-action conversion, Guard preflight summaries, and Worker Fleet `future_browserops` task templates.
+
+The next architecture target is **Build 9 — Receipts + Replay**.
+
+<!-- END BUILD 8 ADDITIVE UPDATE -->
+
+<!-- BEGIN BUILD 9 ADDITIVE UPDATE -->
+
+## Build 9 additive update: receipts, replay, and final reports
+
+Build 9 implements `@stealtheye/receipts-replay` as the foundation evidence layer. It adds typed receipt events, evidence refs, receipt bundles, deterministic mission timeline assembly, side-effect-free replay packets, verification packets, final-report packets, subsystem adapters, and receipt-bundle integrity digests.
+
+The next architecture target is **Build 10 — Memory Graph**.
+
+<!-- END BUILD 9 ADDITIVE UPDATE -->
+
+<!-- BEGIN BUILD 11 ADDITIVE UPDATE -->
+
+## Build 11 additive update: repo/status observation layer
+
+Build 11 adds `@stealtheye/repo-status` as a bounded observation layer for public GitHub repository/status reads. It adds schemas, read-only policy, Guard adapter integration, public-safe receipt previews, a fixture client, and public read-only runtime tools.
+
+The MCP runtime now includes repo/status read-only tools next to the existing App Host preview surface.
+
+The next architecture target is **Build 12 — Memory Graph**.
+
+<!-- END BUILD 11 ADDITIVE UPDATE -->
+
 <!-- BEGIN BUILD 12 ADDITIVE UPDATE -->
 
 ## Build 12 additive update: Memory Graph Foundations
