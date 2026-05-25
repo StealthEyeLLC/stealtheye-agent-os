@@ -1,0 +1,2 @@
+import { MemoryEdgeSchema, type MemoryEdge, type MemoryEdgeType } from "./schemas";
+export function createMemoryEdge(input: { edge_id: string; from_node_id: string; to_node_id: string; edge_type: MemoryEdgeType; summary: string; now: string; confidence?: number; evidence_refs?: string[]; receipt_refs?: string[] }): MemoryEdge { return MemoryEdgeSchema.parse({ schema_version: "stealtheye-memory-edge.v1", confidence: 1, evidence_refs: [], receipt_refs: [], created_at: input.now, updated_at: input.now, ...input }); }
