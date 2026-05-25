@@ -1,1 +1,18 @@
-{"schema_version":"stealtheye-build-state.v1","build":12,"title":"Memory Graph Foundations","branch":"agent/memory-graph-foundation-v2","generated_artifacts_current":true,"safety_scanner_scope":["docs/generated","packages/memory-graph/src/fixtures.ts","packages/memory-graph/test/memory-graph.test.ts","packages/mcp-runtime/src/memory-graph-adapter.ts","docs/MEMORY_GRAPH.md"],"hand_authored_doc_policy":"Build 12 preserves README.md, AGENTS.md, and docs/ARCHITECTURE.md unchanged. Generated sync writes only declared generated files and standalone Build 12 docs.","marker_bounded_hand_authored_docs":[],"next_target":"Build 13 \u2014 Live CodeOps Branch-Write Path through Guard + Receipts","generated_at":"2026-01-01T00:00:00.000Z"}
+{
+  "schema_version": "stealtheye-build-state.v1",
+  "build": 12,
+  "title": "Memory Graph Foundations",
+  "branch": "agent/memory-graph-foundation-v2",
+  "generated_artifacts_current": true,
+  "safety_scanner_scope": [
+    "docs/generated",
+    "packages/memory-graph/src/fixtures.ts",
+    "packages/memory-graph/test/memory-graph.test.ts",
+    "packages/mcp-runtime/src/memory-graph-adapter.ts",
+    "docs/MEMORY_GRAPH.md"
+  ],
+  "hand_authored_doc_policy": "Build 12 preserves README.md, AGENTS.md, and docs/ARCHITECTURE.md unchanged. Generated sync writes only declared generated files and standalone Build 12 docs.",
+  "marker_bounded_hand_authored_docs": [],
+  "next_target": "Build 13 — Live CodeOps Branch-Write Path through Guard + Receipts",
+  "generated_at": "2026-01-01T00:00:00.000Z"
+}

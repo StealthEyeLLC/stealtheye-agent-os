@@ -1,1 +1,22 @@
-{"schema_version":"stealtheye-known-gaps.v1","build":12,"gaps":[{"gap_id":"build-012-gap-01","summary":"No durable persistence is included.","status":"open"},{"gap_id":"build-012-gap-02","summary":"No vector database or embedding provider is included.","status":"open"},{"gap_id":"build-012-gap-03","summary":"No private ingestion or live memory service is included.","status":"open"}],"next_target":"Build 13 \u2014 Live CodeOps Branch-Write Path through Guard + Receipts"}
+{
+  "schema_version": "stealtheye-known-gaps.v1",
+  "build": 12,
+  "gaps": [
+    {
+      "gap_id": "build-012-gap-01",
+      "summary": "No durable persistence is included.",
+      "status": "open"
+    },
+    {
+      "gap_id": "build-012-gap-02",
+      "summary": "No vector database or embedding provider is included.",
+      "status": "open"
+    },
+    {
+      "gap_id": "build-012-gap-03",
+      "summary": "No private ingestion or live memory service is included.",
+      "status": "open"
+    }
+  ],
+  "next_target": "Build 13 — Live CodeOps Branch-Write Path through Guard + Receipts"
+}
