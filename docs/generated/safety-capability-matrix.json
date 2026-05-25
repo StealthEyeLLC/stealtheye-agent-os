@@ -1,16 +1,28 @@
 {
   "schema_version": "stealtheye-safety-capability-matrix.v1",
-  "build": 12,
+  "build": 13,
   "capabilities": [
     {
-      "capability": "memory_graph_foundation",
+      "capability": "codeops_branch_write_policy",
+      "status": "implemented_fixture_and_dry_run",
+      "guard_required": true,
+      "live_enabled": false
+    },
+    {
+      "capability": "codeops_fixture_branch_writer",
       "status": "implemented_fixture_only",
       "guard_required": true,
       "live_enabled": false
     },
     {
-      "capability": "live_memory_service",
-      "status": "blocked_future_work",
+      "capability": "optional_github_branch_writer",
+      "status": "modeled_config_required_disabled_by_default",
+      "guard_required": true,
+      "live_enabled": false
+    },
+    {
+      "capability": "unrestricted_live_repo_write",
+      "status": "blocked",
       "guard_required": true,
       "live_enabled": false
     }
