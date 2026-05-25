@@ -1,17 +1,35 @@
 {
   "schema_version": "stealtheye-tool-inventory.v1",
-  "build": 13,
+  "build": 14,
   "tools": [
     {
-      "name": "CodeOps branch-write package",
-      "package": "@stealtheye/codeops",
-      "mode": "fixture_and_dry_run_guarded",
+      "name": "MCP server official transport adapter",
+      "package": "@stealtheye/mcp-server",
+      "mode": "sdk_aligned_adapter_boundary_local_dev",
       "live_external_effects": false
     },
     {
-      "name": "CodeOps MCP write preview tools",
-      "package": "@stealtheye/mcp-runtime",
+      "name": "App Host safe tools via MCP server",
+      "package": "@stealtheye/app-host",
+      "mode": "read_only_preview_fixture",
+      "live_external_effects": false
+    },
+    {
+      "name": "repo/status read-only tools via MCP server",
+      "package": "@stealtheye/repo-status",
+      "mode": "read_only_live_public_safe",
+      "live_external_effects": false
+    },
+    {
+      "name": "Memory Graph preview tools via MCP server",
+      "package": "@stealtheye/memory-graph",
       "mode": "preview_and_fixture_only",
+      "live_external_effects": false
+    },
+    {
+      "name": "CodeOps write preview and fixture tools via MCP server",
+      "package": "@stealtheye/codeops",
+      "mode": "preview_and_fixture_only_no_unrestricted_live_write",
       "live_external_effects": false
     }
   ]
