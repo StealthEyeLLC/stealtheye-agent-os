@@ -1,33 +1,27 @@
 {
   "schema_version": "stealtheye-tool-inventory.v1",
-  "build": 20,
+  "build": 21,
   "tools": [
     {
-      "name": "mcp_server.list_ui_resources",
+      "name": "mcp_server.controlled_localhost_preview_readiness",
       "package": "@stealtheye/mcp-server",
-      "mode": "static_fixture_resource_listing",
+      "mode": "readonly_command_readiness_metadata",
       "live_external_effects": false
     },
     {
-      "name": "mcp_server.read_ui_resource",
+      "name": "mcp_server.controlled_localhost_preview_plan",
       "package": "@stealtheye/mcp-server",
-      "mode": "static_fixture_resource_read",
+      "mode": "dry_run_fixture_plan",
       "live_external_effects": false
     },
     {
-      "name": "mcp_server.read_rendered_shell_resource",
+      "name": "mcp_server.developer_mode_resource_connection_manifest",
       "package": "@stealtheye/mcp-server",
-      "mode": "deterministic_static_html_render_read",
+      "mode": "readonly_config_required_connection_metadata",
       "live_external_effects": false
     },
     {
-      "name": "mcp_server.localhost_preview_metadata",
-      "package": "@stealtheye/mcp-server",
-      "mode": "readonly_config_required_metadata",
-      "live_external_effects": false
-    },
-    {
-      "name": "mcp_server.resource_read_receipt_preview",
+      "name": "mcp_server.command_plan_receipt_preview",
       "package": "@stealtheye/mcp-server",
       "mode": "fixture_receipt_preview",
       "live_external_effects": false
