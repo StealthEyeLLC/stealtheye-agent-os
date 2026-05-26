@@ -1,39 +1,39 @@
 {
   "schema_version": "stealtheye-safety-capability-matrix.v1",
-  "build": 20,
+  "build": 21,
   "capabilities": [
     {
-      "capability": "mcp_ui_resource_listing",
+      "capability": "controlled_localhost_preview_command_model",
       "status": "implemented",
       "guard_required": true,
       "live_enabled": false
     },
     {
-      "capability": "mcp_ui_resource_reading",
+      "capability": "developer_mode_resource_connection_metadata",
       "status": "implemented",
       "guard_required": true,
       "live_enabled": false
     },
     {
-      "capability": "deterministic_render_resource_reading",
+      "capability": "dry_run_plan_mode",
       "status": "implemented",
       "guard_required": true,
       "live_enabled": false
     },
     {
-      "capability": "localhost_preview_disabled_metadata",
+      "capability": "static_fixture_preview_mode",
       "status": "implemented",
       "guard_required": true,
       "live_enabled": false
     },
     {
-      "capability": "localhost_config_required_metadata",
+      "capability": "localhost_config_required_mode",
       "status": "implemented",
       "guard_required": true,
       "live_enabled": false
     },
     {
-      "capability": "localhost_bound_preview",
+      "capability": "localhost_command_future",
       "status": "blocked",
       "guard_required": true,
       "live_enabled": false
@@ -45,19 +45,19 @@
       "live_enabled": false
     },
     {
-      "capability": "production_frontend_deployment",
+      "capability": "server_binding_by_default",
+      "status": "blocked",
+      "guard_required": true,
+      "live_enabled": false
+    },
+    {
+      "capability": "process_start_in_ci_or_default_mode",
       "status": "blocked",
       "guard_required": true,
       "live_enabled": false
     },
     {
       "capability": "remote_scripts_styles_assets",
-      "status": "blocked",
-      "guard_required": true,
-      "live_enabled": false
-    },
-    {
-      "capability": "external_network_access",
       "status": "blocked",
       "guard_required": true,
       "live_enabled": false
