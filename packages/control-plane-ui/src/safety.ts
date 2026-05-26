@@ -35,7 +35,11 @@ export const createControlPlaneUiSafetyPolicy = (): ControlPlaneUiSafetyPolicy =
   ]
 });
 
-export type ControlPlaneUiSafetyInput = Partial<ControlPlaneUiComponent> & Partial<ControlPlaneUiResource> & {
+type ComponentSafetyFields = Omit<Partial<ControlPlaneUiComponent>, "schema_version">;
+type ResourceSafetyFields = Omit<Partial<ControlPlaneUiResource>, "schema_version">;
+
+export type ControlPlaneUiSafetyInput = ComponentSafetyFields & ResourceSafetyFields & {
+  schema_version?: string;
   productionDeployment?: boolean;
   publicAppSubmission?: boolean;
   realOAuthClient?: boolean;
