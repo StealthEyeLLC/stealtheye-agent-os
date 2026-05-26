@@ -1,0 +1,75 @@
+name: Build 22 Safe Local Preview Runner
+
+on:
+  pull_request:
+  push:
+    branches:
+      - main
+      - agent/safe-local-preview-runner
+
+permissions:
+  contents: read
+
+jobs:
+  safe-local-preview-runner:
+    name: Safe local preview runner checks
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - name: Set up pnpm
+        uses: pnpm/action-setup@v4
+        with:
+          version: 9.15.4
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 22
+      - name: Install dependencies
+        run: pnpm install --no-frozen-lockfile
+      - name: Typecheck packages
+        run: pnpm typecheck
+      - name: Run tests
+        run: pnpm test
+      - name: Check generated build state
+        run: |
+          node scripts/stealtheye-build.mjs scripts/phases/build-008-browserops.mjs --check
+          node scripts/stealtheye-build.mjs scripts/phases/build-009-receipts-replay.mjs --check
+          node scripts/stealtheye-build.mjs scripts/phases/build-010-mcp-runtime-devmode.mjs --check
+          node scripts/stealtheye-build.mjs scripts/phases/build-011-live-readonly-repo-status.mjs --check
+          node scripts/stealtheye-build.mjs scripts/phases/build-012-memory-graph.mjs --check
+          node scripts/stealtheye-build.mjs scripts/phases/build-013-live-codeops-branch-write.mjs --check
+          node scripts/stealtheye-build.mjs scripts/phases/build-014-official-mcp-server-transport.mjs --check
+          node scripts/stealtheye-build.mjs scripts/phases/build-015-reachable-dev-deployment-endpoint.mjs --check
+          node scripts/stealtheye-build.mjs scripts/phases/build-016-chatgpt-developer-mode-connection.mjs --check
+          node scripts/stealtheye-build.mjs scripts/phases/build-017-core-control-plane-app.mjs --check
+          node scripts/stealtheye-build.mjs scripts/phases/build-018-control-plane-ui-components.mjs --check
+          node scripts/stealtheye-build.mjs scripts/phases/build-019-local-dev-ui-shell.mjs --check
+          node scripts/stealtheye-build.mjs scripts/phases/build-020-mcp-resource-wiring-localhost-preview.mjs --check
+          node scripts/stealtheye-build.mjs scripts/phases/build-021-controlled-localhost-preview-command.mjs --check
+          node scripts/stealtheye-build.mjs scripts/phases/build-022-safe-local-preview-runner.mjs --check
+      - name: Verify Build 22 required files exist
+        shell: bash
+        run: |
+          set -euo pipefail
+          required=(packages/mcp-server/src/safe-local-preview-runner.ts packages/mcp-server/src/manual-developer-mode-checklist.ts packages/mcp-server/src/resource-registry.ts packages/mcp-server/src/index.ts packages/mcp-server/test/safe-local-preview-runner.test.ts scripts/phases/build-022-safe-local-preview-runner.mjs docs/SAFE_LOCAL_PREVIEW_RUNNER.md docs/DECISIONS/0024-safe-local-preview-runner.md docs/generated/build-022-manifest.json docs/generated/build-022-acceptance.md docs/generated/build-022-handoff.md docs/generated/build-022-receipt.json docs/generated/project-memory.json docs/generated/known-gaps.json docs/generated/safety-capability-matrix.json docs/generated/eval-registry.json docs/generated/tool-inventory.json docs/generated/build-state.json .github/workflows/build-022-safe-local-preview-runner.yml)
+          for path in "${required[@]}"; do test -f "$path" || { echo "Missing required file: $path"; exit 1; }; done
+      - name: Verify protected docs are unchanged
+        shell: bash
+        run: |
+          set -euo pipefail
+          git fetch origin main --depth=1
+          changed="$(git diff --name-only origin/main...HEAD -- README.md AGENTS.md docs/ARCHITECTURE.md || true)"
+          if [ -n "$changed" ]; then echo "$changed"; exit 1; fi
+      - name: Guard Build 22 implementation and generated state
+        shell: bash
+        run: |
+          set -euo pipefail
+          scan_paths=(packages/mcp-server/src/safe-local-preview-runner.ts packages/mcp-server/src/manual-developer-mode-checklist.ts packages/mcp-server/src/resource-registry.ts docs/generated/build-022-manifest.json docs/generated/build-022-receipt.json docs/generated/project-memory.json docs/generated/known-gaps.json docs/generated/safety-capability-matrix.json docs/generated/eval-registry.json docs/generated/tool-inventory.json docs/generated/build-state.json)
+          pass_word="$(printf '\x70\x61\x73\x73\x77\x6f\x72\x64')"
+          secret_word="$(printf '\x73\x65\x63\x72\x65\x74')"
+          private_word="$(printf '\x70\x72\x69\x76\x61\x74\x65')"
+          key_word="$(printf '\x6b\x65\x79')"
+          if grep -RInE "${pass_word}=|client_${secret_word}=|${private_word}_${key_word}=|https?://|<script[[:space:]][^>]*src=|<link[[:space:]][^>]*href=|cdn\.|bind_by_default:[[:space:]]*true|bind_by_default\": true|server\.listen|listen\(|child_process|spawn\(|execFile\(|exec\(|0\.0\.0\.0|trycloudflare|ngrok|cloudflared|app_id=|oauth_client=|tunnel_token=|cloud_account=|\"public_url\": \"" "${scan_paths[@]}"; then exit 1; fi
