@@ -21,5 +21,5 @@
   ],
   "build_summary": "Build 16 adds @stealtheye/chatgpt-dev-connection as a fixture/planning package for future manual ChatGPT developer-mode connection around the MCP server and dev endpoint.",
   "hand_authored_doc_policy": "Build 16 preserves README.md, AGENTS.md, and docs/ARCHITECTURE.md unchanged. Generated sync writes only declared generated files and standalone Build 16 docs.",
-  "next_target": "Build 17 \u2014 Core Control Plane App"
+  "next_target": "Build 17 — Core Control Plane App"
 }

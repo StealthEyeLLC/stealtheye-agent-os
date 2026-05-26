@@ -107,7 +107,7 @@
     "Future manual connection remains blocked until a safe reachable dev endpoint exists and verifier approval is granted.",
     "No durable developer-mode connection receipt ledger is added."
   ],
-  "next_target": "Build 17 \u2014 Core Control Plane App",
+  "next_target": "Build 17 — Core Control Plane App",
   "hand_authored_doc_policy": "Build 16 preserves README.md, AGENTS.md, and docs/ARCHITECTURE.md unchanged. Generated sync writes only declared generated files and standalone Build 16 docs.",
   "marker_bounded_hand_authored_docs": [],
   "generated_at": "2026-01-01T00:00:00.000Z",

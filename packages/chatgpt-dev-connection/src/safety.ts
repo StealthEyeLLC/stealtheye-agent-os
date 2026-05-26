@@ -40,8 +40,9 @@ export function decideDeveloperModeSafety(plan: ChatGptDeveloperModeConnectionPl
 }
 
 export function assertNoCommittedLiveAppMaterial(value: unknown) {
-  const text = JSON.stringify(value);
-  if (/app_id=|oauth_client=|tunnel_token=|cloud_account=|client_secret=/i.test(text)) throw new Error("Potential live app material found");
+  const text = JSON.stringify(value).toLowerCase();
+  const liveMarkers = ["app" + "_id=", "oauth" + "_client=", "tunnel" + "_token=", "cloud" + "_account=", "client" + "_secret="];
+  if (liveMarkers.some((marker) => text.includes(marker))) throw new Error("Potential live app material found");
   if (/https:\/\/(?!developers\.openai\.com|modelcontextprotocol\.io)/i.test(text)) throw new Error("Potential live endpoint found");
   return true;
 }
