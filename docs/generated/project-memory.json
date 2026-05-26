@@ -1,8 +1,8 @@
 {
   "schema_version": "stealtheye-project-memory.v1",
-  "current_build": 19,
-  "current_title": "Local Dev UI Shell / Resource Rendering",
-  "current_branch": "agent/local-dev-ui-shell",
+  "current_build": 20,
+  "current_title": "MCP Server Resource Wiring / Controlled Localhost Preview",
+  "current_branch": "agent/mcp-resource-wiring-localhost-preview",
   "foundation_packages": [
     "@stealtheye/agent-registry",
     "@stealtheye/guard",
@@ -22,7 +22,7 @@
     "@stealtheye/control-plane-ui",
     "@stealtheye/local-dev-ui-shell"
   ],
-  "build_summary": "Local Dev UI Shell package that renders @stealtheye/control-plane-ui static fixture resources into deterministic HTML/resource previews, readiness summaries, hydration summaries, and receipt previews without binding a server by default or adding remote assets.",
-  "hand_authored_doc_policy": "Build 19 preserves README.md, AGENTS.md, and docs/ARCHITECTURE.md unchanged. Generated sync writes only declared generated files and standalone Build 19 docs.",
-  "next_target": "Build 20 - MCP Server Resource Wiring / Controlled Localhost Preview"
+  "build_summary": "MCP Server Resource Wiring package extension that lists and reads Control Plane UI resources, deterministic Local Dev UI Shell render resources, and controlled localhost-preview metadata through @stealtheye/mcp-server without binding a server by default or adding remote assets.",
+  "hand_authored_doc_policy": "Build 20 preserves README.md, AGENTS.md, and docs/ARCHITECTURE.md unchanged. Generated sync writes only declared generated files and standalone Build 20 docs.",
+  "next_target": "Build 21 - Controlled Localhost Preview Command / Developer-Mode Resource Connection"
 }

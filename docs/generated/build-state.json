@@ -1,19 +1,18 @@
 {
   "schema_version": "stealtheye-build-state.v1",
-  "build": 19,
-  "title": "Local Dev UI Shell / Resource Rendering",
-  "branch": "agent/local-dev-ui-shell",
+  "build": 20,
+  "title": "MCP Server Resource Wiring / Controlled Localhost Preview",
+  "branch": "agent/mcp-resource-wiring-localhost-preview",
   "generated_artifacts_current": true,
   "safety_scanner_scope": [
     "docs/generated",
-    "packages/local-dev-ui-shell/src/safety.ts",
-    "packages/local-dev-ui-shell/src/routes.ts",
-    "packages/local-dev-ui-shell/src/renderer.ts",
-    "packages/local-dev-ui-shell/src/static-assets.ts",
-    "packages/local-dev-ui-shell/test/local-dev-ui-shell.test.ts"
+    "packages/mcp-server/src/ui-resource-adapter.ts",
+    "packages/mcp-server/src/localhost-preview.ts",
+    "packages/mcp-server/src/resource-registry.ts",
+    "packages/mcp-server/test/mcp-server-resource-wiring.test.ts"
   ],
-  "hand_authored_doc_policy": "Build 19 preserves README.md, AGENTS.md, and docs/ARCHITECTURE.md unchanged. Generated sync writes only declared generated files and standalone Build 19 docs.",
+  "hand_authored_doc_policy": "Build 20 preserves README.md, AGENTS.md, and docs/ARCHITECTURE.md unchanged. Generated sync writes only declared generated files and standalone Build 20 docs.",
   "marker_bounded_hand_authored_docs": [],
-  "next_target": "Build 20 - MCP Server Resource Wiring / Controlled Localhost Preview",
+  "next_target": "Build 21 - Controlled Localhost Preview Command / Developer-Mode Resource Connection",
   "generated_at": "2026-01-01T00:00:00.000Z"
 }
