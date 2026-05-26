@@ -26,7 +26,7 @@ const actionMap: Array<[ControlPlaneActionName, string, ControlPlaneViewId, stri
 ];
 
 export function createControlPlaneActions(): ControlPlaneAction[] {
-  return actionMap.map(([name, label, view, panel, category]) => ControlPlaneActionSchema.parse({ name, label, view, panel, category, fixture_only: true, preview_only: true, read_only: category !== "fixture_preview" ? true : false }));
+  return actionMap.map(([name, label, view, panel, category]) => ControlPlaneActionSchema.parse({ name, label, view, panel, category, fixture_only: true, preview_only: true, read_only: true }));
 }
 
 export function findControlPlaneAction(name: ControlPlaneActionName) {
