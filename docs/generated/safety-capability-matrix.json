@@ -1,45 +1,45 @@
 {
   "schema_version": "stealtheye-safety-capability-matrix.v1",
-  "build": 19,
+  "build": 20,
   "capabilities": [
     {
-      "capability": "static_fixture_ui_shell",
+      "capability": "mcp_ui_resource_listing",
       "status": "implemented",
       "guard_required": true,
       "live_enabled": false
     },
     {
-      "capability": "deterministic_resource_rendering",
+      "capability": "mcp_ui_resource_reading",
       "status": "implemented",
       "guard_required": true,
       "live_enabled": false
     },
     {
-      "capability": "fixture_only_hydration_summary",
+      "capability": "deterministic_render_resource_reading",
       "status": "implemented",
       "guard_required": true,
       "live_enabled": false
     },
     {
-      "capability": "local_app_safe_resource_loading",
+      "capability": "localhost_preview_disabled_metadata",
       "status": "implemented",
       "guard_required": true,
       "live_enabled": false
     },
     {
-      "capability": "receipt_preview_generation",
+      "capability": "localhost_config_required_metadata",
       "status": "implemented",
       "guard_required": true,
       "live_enabled": false
     },
     {
-      "capability": "localhost_dev_preview",
-      "status": "modeled_future",
+      "capability": "localhost_bound_preview",
+      "status": "blocked",
       "guard_required": true,
       "live_enabled": false
     },
     {
-      "capability": "hosted_future",
+      "capability": "hosted_public_preview",
       "status": "blocked",
       "guard_required": true,
       "live_enabled": false
@@ -51,13 +51,13 @@
       "live_enabled": false
     },
     {
-      "capability": "public_app_submission",
+      "capability": "remote_scripts_styles_assets",
       "status": "blocked",
       "guard_required": true,
       "live_enabled": false
     },
     {
-      "capability": "remote_scripts_styles_assets",
+      "capability": "external_network_access",
       "status": "blocked",
       "guard_required": true,
       "live_enabled": false

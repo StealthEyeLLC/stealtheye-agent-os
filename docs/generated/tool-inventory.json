@@ -1,34 +1,34 @@
 {
   "schema_version": "stealtheye-tool-inventory.v1",
-  "build": 19,
+  "build": 20,
   "tools": [
     {
-      "name": "local_dev_ui_shell.list_routes",
-      "package": "@stealtheye/local-dev-ui-shell",
-      "mode": "static_fixture_route_listing",
+      "name": "mcp_server.list_ui_resources",
+      "package": "@stealtheye/mcp-server",
+      "mode": "static_fixture_resource_listing",
       "live_external_effects": false
     },
     {
-      "name": "local_dev_ui_shell.load_resource",
-      "package": "@stealtheye/local-dev-ui-shell",
-      "mode": "static_fixture_resource_load",
+      "name": "mcp_server.read_ui_resource",
+      "package": "@stealtheye/mcp-server",
+      "mode": "static_fixture_resource_read",
       "live_external_effects": false
     },
     {
-      "name": "local_dev_ui_shell.render_resource",
-      "package": "@stealtheye/local-dev-ui-shell",
-      "mode": "deterministic_static_html_render",
+      "name": "mcp_server.read_rendered_shell_resource",
+      "package": "@stealtheye/mcp-server",
+      "mode": "deterministic_static_html_render_read",
       "live_external_effects": false
     },
     {
-      "name": "local_dev_ui_shell.hydrate_resource",
-      "package": "@stealtheye/local-dev-ui-shell",
-      "mode": "readonly_fixture_hydration",
+      "name": "mcp_server.localhost_preview_metadata",
+      "package": "@stealtheye/mcp-server",
+      "mode": "readonly_config_required_metadata",
       "live_external_effects": false
     },
     {
-      "name": "local_dev_ui_shell.receipt_preview",
-      "package": "@stealtheye/local-dev-ui-shell",
+      "name": "mcp_server.resource_read_receipt_preview",
+      "package": "@stealtheye/mcp-server",
       "mode": "fixture_receipt_preview",
       "live_external_effects": false
     }

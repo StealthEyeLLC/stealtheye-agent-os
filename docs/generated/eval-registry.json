@@ -1,226 +1,221 @@
 {
   "schema_version": "stealtheye-eval-registry.v1",
-  "build": 19,
+  "build": 20,
   "evals": [
     {
-      "eval_id": "build-019-eval-01",
-      "name": "shell schema validates",
-      "location": "packages/local-dev-ui-shell/test"
+      "eval_id": "build-020-eval-01",
+      "name": "MCP server lists UI resources",
+      "location": "packages/mcp-server/test"
     },
     {
-      "eval_id": "build-019-eval-02",
-      "name": "route schema validates",
-      "location": "packages/local-dev-ui-shell/test"
+      "eval_id": "build-020-eval-02",
+      "name": "MCP server reads UI resources",
+      "location": "packages/mcp-server/test"
     },
     {
-      "eval_id": "build-019-eval-03",
-      "name": "render request schema validates",
-      "location": "packages/local-dev-ui-shell/test"
+      "eval_id": "build-020-eval-03",
+      "name": "MCP server lists render resources",
+      "location": "packages/mcp-server/test"
     },
     {
-      "eval_id": "build-019-eval-04",
-      "name": "render result schema validates",
-      "location": "packages/local-dev-ui-shell/test"
+      "eval_id": "build-020-eval-04",
+      "name": "MCP server reads rendered shell resources",
+      "location": "packages/mcp-server/test"
     },
     {
-      "eval_id": "build-019-eval-05",
-      "name": "static asset schema validates",
-      "location": "packages/local-dev-ui-shell/test"
+      "eval_id": "build-020-eval-05",
+      "name": "rendered resource contains deterministic static HTML",
+      "location": "packages/mcp-server/test"
     },
     {
-      "eval_id": "build-019-eval-06",
-      "name": "resource load schema validates",
-      "location": "packages/local-dev-ui-shell/test"
+      "eval_id": "build-020-eval-06",
+      "name": "rendered resource includes boundary banner",
+      "location": "packages/mcp-server/test"
     },
     {
-      "eval_id": "build-019-eval-07",
-      "name": "hydration result schema validates",
-      "location": "packages/local-dev-ui-shell/test"
+      "eval_id": "build-020-eval-07",
+      "name": "rendered resource includes receipt preview",
+      "location": "packages/mcp-server/test"
     },
     {
-      "eval_id": "build-019-eval-08",
-      "name": "fixture bundle validates",
-      "location": "packages/local-dev-ui-shell/test"
+      "eval_id": "build-020-eval-08",
+      "name": "localhost preview metadata schema validates",
+      "location": "packages/mcp-server/test"
     },
     {
-      "eval_id": "build-019-eval-09",
-      "name": "all required routes exist",
-      "location": "packages/local-dev-ui-shell/test"
+      "eval_id": "build-020-eval-09",
+      "name": "disabled preview mode allowed",
+      "location": "packages/mcp-server/test"
     },
     {
-      "eval_id": "build-019-eval-10",
-      "name": "routes map to allowed ui://stealtheye/control-plane/... resources",
-      "location": "packages/local-dev-ui-shell/test"
+      "eval_id": "build-020-eval-10",
+      "name": "static fixture preview mode allowed",
+      "location": "packages/mcp-server/test"
     },
     {
-      "eval_id": "build-019-eval-11",
-      "name": "no production URL routes/resources/assets",
-      "location": "packages/local-dev-ui-shell/test"
+      "eval_id": "build-020-eval-11",
+      "name": "localhost config-required mode allowed",
+      "location": "packages/mcp-server/test"
     },
     {
-      "eval_id": "build-019-eval-12",
-      "name": "no public domain routes/resources/assets",
-      "location": "packages/local-dev-ui-shell/test"
+      "eval_id": "build-020-eval-12",
+      "name": "localhost bound future blocked",
+      "location": "packages/mcp-server/test"
     },
     {
-      "eval_id": "build-019-eval-13",
-      "name": "no external CDN/script/style asset",
-      "location": "packages/local-dev-ui-shell/test"
+      "eval_id": "build-020-eval-13",
+      "name": "hosted future blocked",
+      "location": "packages/mcp-server/test"
     },
     {
-      "eval_id": "build-019-eval-14",
-      "name": "safety policy allows static fixture rendering",
-      "location": "packages/local-dev-ui-shell/test"
-    },
-    {
-      "eval_id": "build-019-eval-15",
+      "eval_id": "build-020-eval-14",
       "name": "production deployment denied",
-      "location": "packages/local-dev-ui-shell/test"
+      "location": "packages/mcp-server/test"
     },
     {
-      "eval_id": "build-019-eval-16",
+      "eval_id": "build-020-eval-15",
       "name": "public app submission denied",
-      "location": "packages/local-dev-ui-shell/test"
+      "location": "packages/mcp-server/test"
     },
     {
-      "eval_id": "build-019-eval-17",
+      "eval_id": "build-020-eval-16",
       "name": "real OAuth client denied",
-      "location": "packages/local-dev-ui-shell/test"
+      "location": "packages/mcp-server/test"
     },
     {
-      "eval_id": "build-019-eval-18",
+      "eval_id": "build-020-eval-17",
       "name": "real app ID denied",
-      "location": "packages/local-dev-ui-shell/test"
+      "location": "packages/mcp-server/test"
     },
     {
-      "eval_id": "build-019-eval-19",
+      "eval_id": "build-020-eval-18",
       "name": "production domain denied",
-      "location": "packages/local-dev-ui-shell/test"
+      "location": "packages/mcp-server/test"
     },
     {
-      "eval_id": "build-019-eval-20",
+      "eval_id": "build-020-eval-19",
       "name": "real public endpoint denied",
-      "location": "packages/local-dev-ui-shell/test"
+      "location": "packages/mcp-server/test"
     },
     {
-      "eval_id": "build-019-eval-21",
+      "eval_id": "build-020-eval-20",
       "name": "unrestricted live write denied",
-      "location": "packages/local-dev-ui-shell/test"
+      "location": "packages/mcp-server/test"
     },
     {
-      "eval_id": "build-019-eval-22",
+      "eval_id": "build-020-eval-21",
       "name": "protected branch mutation denied",
-      "location": "packages/local-dev-ui-shell/test"
+      "location": "packages/mcp-server/test"
     },
     {
-      "eval_id": "build-019-eval-23",
+      "eval_id": "build-020-eval-22",
       "name": "destructive action denied",
-      "location": "packages/local-dev-ui-shell/test"
+      "location": "packages/mcp-server/test"
     },
     {
-      "eval_id": "build-019-eval-24",
+      "eval_id": "build-020-eval-23",
       "name": "production mutation denied",
-      "location": "packages/local-dev-ui-shell/test"
+      "location": "packages/mcp-server/test"
     },
     {
-      "eval_id": "build-019-eval-25",
+      "eval_id": "build-020-eval-24",
       "name": "customer/private data denied",
-      "location": "packages/local-dev-ui-shell/test"
+      "location": "packages/mcp-server/test"
     },
     {
-      "eval_id": "build-019-eval-26",
+      "eval_id": "build-020-eval-25",
       "name": "money movement denied",
-      "location": "packages/local-dev-ui-shell/test"
+      "location": "packages/mcp-server/test"
     },
     {
-      "eval_id": "build-019-eval-27",
+      "eval_id": "build-020-eval-26",
       "name": "material external send denied",
-      "location": "packages/local-dev-ui-shell/test"
+      "location": "packages/mcp-server/test"
     },
     {
-      "eval_id": "build-019-eval-28",
+      "eval_id": "build-020-eval-27",
       "name": "credential entry/storage denied",
-      "location": "packages/local-dev-ui-shell/test"
+      "location": "packages/mcp-server/test"
     },
     {
-      "eval_id": "build-019-eval-29",
+      "eval_id": "build-020-eval-28",
       "name": "external side effects denied",
-      "location": "packages/local-dev-ui-shell/test"
+      "location": "packages/mcp-server/test"
     },
     {
-      "eval_id": "build-019-eval-30",
-      "name": "unsafe route path denied",
-      "location": "packages/local-dev-ui-shell/test"
-    },
-    {
-      "eval_id": "build-019-eval-31",
+      "eval_id": "build-020-eval-29",
       "name": "unsafe resource URI scheme denied",
-      "location": "packages/local-dev-ui-shell/test"
+      "location": "packages/mcp-server/test"
     },
     {
-      "eval_id": "build-019-eval-32",
+      "eval_id": "build-020-eval-30",
       "name": "remote asset denied",
-      "location": "packages/local-dev-ui-shell/test"
+      "location": "packages/mcp-server/test"
     },
     {
-      "eval_id": "build-019-eval-33",
+      "eval_id": "build-020-eval-31",
       "name": "server binding by default denied",
-      "location": "packages/local-dev-ui-shell/test"
+      "location": "packages/mcp-server/test"
     },
     {
-      "eval_id": "build-019-eval-34",
+      "eval_id": "build-020-eval-32",
+      "name": "external network access denied",
+      "location": "packages/mcp-server/test"
+    },
+    {
+      "eval_id": "build-020-eval-33",
+      "name": "tunnel provider live enablement denied",
+      "location": "packages/mcp-server/test"
+    },
+    {
+      "eval_id": "build-020-eval-34",
       "name": "missing fixture/preview/read-only flags denied",
-      "location": "packages/local-dev-ui-shell/test"
+      "location": "packages/mcp-server/test"
     },
     {
-      "eval_id": "build-019-eval-35",
+      "eval_id": "build-020-eval-35",
       "name": "missing receipt refs denied",
-      "location": "packages/local-dev-ui-shell/test"
+      "location": "packages/mcp-server/test"
     },
     {
-      "eval_id": "build-019-eval-36",
-      "name": "unknown route/component/resource type denied",
-      "location": "packages/local-dev-ui-shell/test"
+      "eval_id": "build-020-eval-36",
+      "name": "unknown resource/preview mode denied",
+      "location": "packages/mcp-server/test"
     },
     {
-      "eval_id": "build-019-eval-37",
-      "name": "resource loader reads Control Plane UI resources",
-      "location": "packages/local-dev-ui-shell/test"
+      "eval_id": "build-020-eval-37",
+      "name": "resource read receipt preview generated",
+      "location": "packages/mcp-server/test"
     },
     {
-      "eval_id": "build-019-eval-38",
-      "name": "renderer produces deterministic static HTML",
-      "location": "packages/local-dev-ui-shell/test"
+      "eval_id": "build-020-eval-38",
+      "name": "existing MCP server resources still list/read",
+      "location": "packages/mcp-server/test"
     },
     {
-      "eval_id": "build-019-eval-39",
-      "name": "render output includes boundary banner",
-      "location": "packages/local-dev-ui-shell/test"
-    },
-    {
-      "eval_id": "build-019-eval-40",
-      "name": "render output includes receipt preview",
-      "location": "packages/local-dev-ui-shell/test"
-    },
-    {
-      "eval_id": "build-019-eval-41",
-      "name": "hydration payload includes control-plane state snapshot",
-      "location": "packages/local-dev-ui-shell/test"
-    },
-    {
-      "eval_id": "build-019-eval-42",
+      "eval_id": "build-020-eval-39",
       "name": "generated state strict sync passes",
-      "location": "packages/local-dev-ui-shell/test"
+      "location": "packages/mcp-server/test"
     },
     {
-      "eval_id": "build-019-eval-43",
+      "eval_id": "build-020-eval-40",
       "name": "protected docs unchanged",
-      "location": "packages/local-dev-ui-shell/test"
+      "location": "packages/mcp-server/test"
     },
     {
-      "eval_id": "build-019-eval-44",
+      "eval_id": "build-020-eval-41",
       "name": "no tokens/customer data/private endpoints in fixtures/docs",
-      "location": "packages/local-dev-ui-shell/test"
+      "location": "packages/mcp-server/test"
+    },
+    {
+      "eval_id": "build-020-eval-42",
+      "name": "no remote asset/script/style material",
+      "location": "packages/mcp-server/test"
+    },
+    {
+      "eval_id": "build-020-eval-43",
+      "name": "no default server binding",
+      "location": "packages/mcp-server/test"
     }
   ]
 }

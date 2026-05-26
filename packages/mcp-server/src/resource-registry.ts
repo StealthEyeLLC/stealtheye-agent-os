@@ -4,6 +4,7 @@ import { McpServerSchemaVersion, McpServerResourceDescriptorSchema, type McpServ
 import { createSafetyInventory } from "./tool-registry";
 import { createDevConnectionManifest, getMcpServerCapabilities, getMcpServerHealth, getProtocolMetadata, getServerMetadata } from "./server";
 import { getTransportDiagnostics } from "./transport";
+import { isMcpUiResourceUri, listMcpUiResourceDescriptors, readMcpUiResource } from "./ui-resource-adapter";
 
 export function listServerResources(): McpServerResourceDescriptor[] {
   const runtimeResources = listRuntimeResources().map((resource) => McpServerResourceDescriptorSchema.parse({
@@ -33,12 +34,13 @@ export function listServerResources(): McpServerResourceDescriptor[] {
     public_safe: true,
     sourcePackage: "@stealtheye/mcp-server"
   }));
-  return [...runtimeResources, ...serverResources];
+  return [...runtimeResources, ...serverResources, ...listMcpUiResourceDescriptors()];
 }
 
 export function readServerResource(uri: string) {
   const known = listServerResources().find((resource) => resource.uri === uri);
   if (!known) throw new Error(`Unknown MCP server resource URI: ${uri}`);
+  if (isMcpUiResourceUri(uri)) return readMcpUiResource(uri);
   let contents: unknown;
   if (uri === MCP_SERVER_RESOURCE_URIS.metadata) contents = getServerMetadata();
   else if (uri === MCP_SERVER_RESOURCE_URIS.health) contents = getMcpServerHealth();

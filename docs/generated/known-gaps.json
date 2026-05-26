@@ -1,32 +1,32 @@
 {
   "schema_version": "stealtheye-known-gaps.v1",
-  "build": 19,
+  "build": 20,
   "gaps": [
     {
-      "gap_id": "build-019-gap-01",
-      "summary": "No production frontend, hosted app, real app auth, public app submission, production OAuth, real app IDs, production domains, or real public endpoints exist.",
+      "gap_id": "build-020-gap-01",
+      "summary": "No production frontend, hosted app, real app auth, public app submission, production OAuth, real app IDs, production domains, real public endpoints, or tunnel credentials exist.",
       "status": "open"
     },
     {
-      "gap_id": "build-019-gap-02",
-      "summary": "No customer data workflow, unrestricted live write path, protected branch mutation path, destructive action path, production mutation path, material external send path, credential entry path, external side effect path, remote asset path, default server binding path, or money movement path exists.",
+      "gap_id": "build-020-gap-02",
+      "summary": "No customer data workflow, unrestricted live write path, protected branch mutation path, destructive action path, production mutation path, material external send path, credential entry path, external side effect path, remote asset path, external network path, default server binding path, tunnel live enablement path, or money movement path exists.",
       "status": "open"
     },
     {
-      "gap_id": "build-019-gap-03",
-      "summary": "No MCP server or dev endpoint resource-serving integration is added in Build 19.",
+      "gap_id": "build-020-gap-03",
+      "summary": "No explicit controlled localhost preview command is added yet.",
       "status": "open"
     },
     {
-      "gap_id": "build-019-gap-04",
-      "summary": "No controlled localhost preview command is added yet.",
+      "gap_id": "build-020-gap-04",
+      "summary": "No developer-mode resource connection command is added yet.",
       "status": "open"
     },
     {
-      "gap_id": "build-019-gap-05",
+      "gap_id": "build-020-gap-05",
       "summary": "No durable UI receipt ledger is added.",
       "status": "open"
     }
   ],
-  "next_target": "Build 20 - MCP Server Resource Wiring / Controlled Localhost Preview"
+  "next_target": "Build 21 - Controlled Localhost Preview Command / Developer-Mode Resource Connection"
 }
