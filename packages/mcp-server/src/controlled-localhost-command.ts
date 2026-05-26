@@ -118,7 +118,10 @@ export const ControlledLocalhostPreviewReadinessReportSchema = z.object({
 });
 export type ControlledLocalhostPreviewReadinessReport = z.infer<typeof ControlledLocalhostPreviewReadinessReportSchema>;
 
-type SafetyInput = Partial<ControlledLocalhostPreviewConfig> & {
+type SafetyInput = Omit<Partial<ControlledLocalhostPreviewConfig>, "bind_by_default" | "starts_process" | "external_network_access"> & {
+  bind_by_default?: boolean;
+  starts_process?: boolean;
+  external_network_access?: boolean;
   command_mode?: string;
   productionDeployment?: boolean;
   publicAppSubmission?: boolean;
