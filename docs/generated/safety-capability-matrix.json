@@ -1,27 +1,27 @@
 {
   "schema_version": "stealtheye-safety-capability-matrix.v1",
-  "build": 17,
+  "build": 18,
   "capabilities": [
     {
-      "capability": "control_plane_navigation",
+      "capability": "apps_sdk_style_component_resource_descriptors",
       "status": "modeled",
       "guard_required": true,
       "live_enabled": false
     },
     {
-      "capability": "fixture_preview_actions",
+      "capability": "fixture_only_hydration_payload",
       "status": "modeled",
       "guard_required": true,
       "live_enabled": false
     },
     {
-      "capability": "state_snapshot_display",
+      "capability": "read_only_preview_panels",
       "status": "modeled",
       "guard_required": true,
       "live_enabled": false
     },
     {
-      "capability": "receipt_preview_generation",
+      "capability": "receipt_preview_display",
       "status": "modeled",
       "guard_required": true,
       "live_enabled": false
@@ -34,6 +34,12 @@
     },
     {
       "capability": "public_app_submission",
+      "status": "blocked",
+      "guard_required": true,
+      "live_enabled": false
+    },
+    {
+      "capability": "unrestricted_live_write_tools",
       "status": "blocked",
       "guard_required": true,
       "live_enabled": false
