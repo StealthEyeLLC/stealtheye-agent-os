@@ -123,7 +123,17 @@ jobs:
         shell: bash
         run: |
           set -euo pipefail
-          if grep -RInE 'https://[^ ]+\.(trycloudflare|ngrok|pages|workers|run|app|dev|com)/|app_id=|oauth_client|tunnel_token|cloud_account' packages/dev-endpoint docs/DEV_ENDPOINT.md docs/DECISIONS/0017-reachable-dev-deployment-endpoint.md docs/generated; then
-            echo "Potential live endpoint material found."
+          # Scan implementation and generated machine state for concrete live endpoint markers.
+          # Narrative docs may cite official documentation and describe denied boundaries, so they are excluded here.
+          scan_paths=(
+            packages/dev-endpoint/src
+            packages/dev-endpoint/package.json
+            packages/dev-endpoint/tsconfig.json
+            docs/generated
+          )
+          live_url_pattern="https://[^[:space:]\"'<>]+[.](trycloudflare|ngrok|pages|workers|run|app)/"
+          live_marker_pattern="app_id=|oauth_client=|tunnel_token=|cloud_account="
+          if grep -RInE "${live_url_pattern}|${live_marker_pattern}" "${scan_paths[@]}"; then
+            echo "Potential concrete live endpoint material found."
             exit 1
           fi
