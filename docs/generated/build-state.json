@@ -1,18 +1,18 @@
 {
   "schema_version": "stealtheye-build-state.v1",
-  "build": 20,
-  "title": "MCP Server Resource Wiring / Controlled Localhost Preview",
-  "branch": "agent/mcp-resource-wiring-localhost-preview",
+  "build": 21,
+  "title": "Controlled Localhost Preview Command / Developer-Mode Resource Connection",
+  "branch": "agent/controlled-localhost-preview-command",
   "generated_artifacts_current": true,
   "safety_scanner_scope": [
     "docs/generated",
-    "packages/mcp-server/src/ui-resource-adapter.ts",
-    "packages/mcp-server/src/localhost-preview.ts",
+    "packages/mcp-server/src/controlled-localhost-command.ts",
+    "packages/mcp-server/src/developer-mode-resource-connection.ts",
     "packages/mcp-server/src/resource-registry.ts",
-    "packages/mcp-server/test/mcp-server-resource-wiring.test.ts"
+    "packages/mcp-server/test/controlled-localhost-command.test.ts"
   ],
-  "hand_authored_doc_policy": "Build 20 preserves README.md, AGENTS.md, and docs/ARCHITECTURE.md unchanged. Generated sync writes only declared generated files and standalone Build 20 docs.",
+  "hand_authored_doc_policy": "Build 21 preserves README.md, AGENTS.md, and docs/ARCHITECTURE.md unchanged. Generated sync writes only declared generated files and standalone Build 21 docs.",
   "marker_bounded_hand_authored_docs": [],
-  "next_target": "Build 21 - Controlled Localhost Preview Command / Developer-Mode Resource Connection",
+  "next_target": "Build 22 - Safe Local Preview Runner / Manual Developer-Mode Connection Checklist",
   "generated_at": "2026-01-01T00:00:00.000Z"
 }
