@@ -108,7 +108,7 @@ export function createDevConnectionManifest() {
       "No public ChatGPT app is submitted.",
       "No production OAuth client or credential material is added.",
       "No unrestricted live write tool is exposed.",
-      "No protected branch mutation, destructive deletion, production mutation, customer data, or money movement is available."
+      "No protected branch mutation, destructive deletion, production mutation, customer data, or money movement path is exposed."
     ],
     known_gaps: [
       "Official SDK package is not added in Build 14; an SDK-aligned adapter boundary is implemented instead.",
