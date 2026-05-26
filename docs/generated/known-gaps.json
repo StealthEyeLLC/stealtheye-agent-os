@@ -1,27 +1,27 @@
 {
   "schema_version": "stealtheye-known-gaps.v1",
-  "build": 14,
+  "build": 15,
   "gaps": [
     {
-      "gap_id": "build-014-gap-01",
-      "summary": "Official SDK package was not added in Build 14; the package implements an SDK-aligned adapter boundary pending dependency compatibility verification.",
+      "gap_id": "build-015-gap-01",
+      "summary": "No real tunnel provider is enabled; all tunnel providers remain future/config-required.",
       "status": "open"
     },
     {
-      "gap_id": "build-014-gap-02",
-      "summary": "HTTP/dev preview transport is modeled but not bound to a public endpoint.",
+      "gap_id": "build-015-gap-02",
+      "summary": "No public endpoint, real tunnel URL, production domain, production OAuth app, app submission, or cloud deployment is added.",
       "status": "open"
     },
     {
-      "gap_id": "build-014-gap-03",
-      "summary": "Hosted/public ChatGPT app deployment, public app submission, production OAuth clients, and production domains remain future work.",
+      "gap_id": "build-015-gap-03",
+      "summary": "ChatGPT developer-mode connection is documented as a future Build 16 target after a safe reachable dev endpoint exists.",
       "status": "open"
     },
     {
-      "gap_id": "build-014-gap-04",
-      "summary": "No durable receipt ledger is added.",
+      "gap_id": "build-015-gap-04",
+      "summary": "No durable endpoint receipt ledger is added.",
       "status": "open"
     }
   ],
-  "next_target": "Build 15 — Reachable Dev Deployment / Tunnel / Endpoint"
+  "next_target": "Build 16 — Connect from ChatGPT Developer Mode"
 }

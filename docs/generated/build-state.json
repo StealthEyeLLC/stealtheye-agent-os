@@ -1,20 +1,17 @@
 {
   "schema_version": "stealtheye-build-state.v1",
-  "build": 14,
-  "title": "Official MCP Server Transport / SDK Alignment",
-  "branch": "agent/official-mcp-server-transport",
+  "build": 15,
+  "title": "Reachable Dev Deployment / Tunnel / Endpoint",
+  "branch": "agent/reachable-dev-deployment-endpoint",
   "generated_artifacts_current": true,
   "safety_scanner_scope": [
     "docs/generated",
-    "packages/mcp-server/src/fixtures.ts",
-    "packages/mcp-server/src/server.ts",
-    "packages/mcp-server/src/transport.ts",
-    "packages/mcp-server/test/mcp-server.test.ts",
-    "docs/MCP_SERVER_TRANSPORT.md",
-    "docs/DECISIONS/0016-official-mcp-server-transport.md"
+    "packages/dev-endpoint/src/safety.ts",
+    "packages/dev-endpoint/src/endpoint.ts",
+    "packages/dev-endpoint/test/dev-endpoint.test.ts"
   ],
-  "hand_authored_doc_policy": "Build 14 preserves README.md, AGENTS.md, and docs/ARCHITECTURE.md unchanged. Generated sync writes only declared generated files and standalone Build 14 docs.",
+  "hand_authored_doc_policy": "Build 15 preserves README.md, AGENTS.md, and docs/ARCHITECTURE.md unchanged. Generated sync writes only declared generated files and standalone Build 15 docs.",
   "marker_bounded_hand_authored_docs": [],
-  "next_target": "Build 15 — Reachable Dev Deployment / Tunnel / Endpoint",
+  "next_target": "Build 16 — Connect from ChatGPT Developer Mode",
   "generated_at": "2026-01-01T00:00:00.000Z"
 }
