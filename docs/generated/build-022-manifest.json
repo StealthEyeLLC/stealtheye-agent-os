@@ -1,0 +1,10 @@
+{
+  "schema_version": "stealtheye-build-manifest.v1",
+  "build": 22,
+  "build_title": "Safe Local Preview Runner / Manual Developer-Mode Connection Checklist",
+  "branch": "agent/safe-local-preview-runner",
+  "package_name": "@stealtheye/mcp-server",
+  "generated_at": "2026-01-01T00:00:00.000Z",
+  "public_safe": true,
+  "live_execution_enabled": false
+}
