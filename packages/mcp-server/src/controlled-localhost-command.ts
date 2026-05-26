@@ -155,47 +155,8 @@ export const createControlledLocalhostPreviewSafetyPolicy = (): ControlledLocalh
   schema_version: "stealtheye-controlled-localhost-preview-safety-policy.v1",
   allowed_hosts: ["localhost", "127.0.0.1"],
   allowed_command_modes: ["disabled", "dry_run_plan", "static_fixture_preview", "localhost_config_required"],
-  denies: [
-    "production_deployment",
-    "public_app_submission",
-    "real_oauth_clients_or_secrets",
-    "real_app_ids",
-    "production_domains",
-    "real_public_endpoints",
-    "unrestricted_live_write_actions",
-    "protected_branch_mutation_actions",
-    "destructive_actions",
-    "production_mutation_actions",
-    "customer_private_data_actions",
-    "money_movement_actions",
-    "material_external_sends",
-    "credential_entry_or_storage",
-    "external_side_effects",
-    "unsafe_command_strings",
-    "unsafe_working_directories",
-    "unsafe_host",
-    "unsafe_port",
-    "unsafe_resource_uri_schemes",
-    "remote_scripts_styles_assets",
-    "server_binding_by_default",
-    "starts_process_in_ci_or_default_mode",
-    "external_network_access",
-    "tunnel_provider_live_enablement",
-    "hosted_public_mode",
-    "missing_read_only_preview_fixture_flags",
-    "missing_receipt_references",
-    "unknown_command_or_connection_mode"
-  ],
-  allows: [
-    "dry_run_command_plan",
-    "fixture_preview_plan",
-    "static_fixture_resource_reading",
-    "local_app_safe_ui_render_resource_uris",
-    "localhost_config_required_metadata",
-    "developer_mode_manual_connection_checklist",
-    "receipt_preview_display",
-    "safe_settings_summary_display"
-  ]
+  denies: ["production_deployment", "public_app_submission", "real_oauth_clients_or_secrets", "real_app_ids", "production_domains", "real_public_endpoints", "unrestricted_live_write_actions", "protected_branch_mutation_actions", "destructive_actions", "production_mutation_actions", "customer_private_data_actions", "money_movement_actions", "material_external_sends", "credential_entry_or_storage", "external_side_effects", "unsafe_command_strings", "unsafe_working_directories", "unsafe_host", "unsafe_port", "unsafe_resource_uri_schemes", "remote_scripts_styles_assets", "server_binding_by_default", "starts_process_in_ci_or_default_mode", "external_network_access", "tunnel_provider_live_enablement", "hosted_public_mode", "missing_read_only_preview_fixture_flags", "missing_receipt_references", "unknown_command_or_connection_mode"],
+  allows: ["dry_run_command_plan", "fixture_preview_plan", "static_fixture_resource_reading", "local_app_safe_ui_render_resource_uris", "localhost_config_required_metadata", "developer_mode_manual_connection_checklist", "receipt_preview_display", "safe_settings_summary_display"]
 });
 
 export const createControlledLocalhostPreviewConfig = (mode: ControlledLocalhostPreviewCommandMode = "disabled"): ControlledLocalhostPreviewConfig => ControlledLocalhostPreviewConfigSchema.parse({
@@ -252,98 +213,24 @@ export const decideControlledLocalhostPreviewSafety = (input: SafetyInput): Cont
   if (input.fixture_only !== undefined && input.fixture_only !== true) reasons.push("missing read-only/preview/fixture flags denied");
   if (input.receipt_refs !== undefined && input.receipt_refs.length === 0) reasons.push("missing receipt refs denied");
   if (!implementedModes.includes(mode) && !blockedModes.includes(mode)) reasons.push("unknown command/connection mode denied");
-  return ControlledLocalhostPreviewSafetyDecisionSchema.parse({
-    schema_version: "stealtheye-controlled-localhost-preview-safety-decision.v1",
-    allowed: reasons.length === 0,
-    command_mode: mode,
-    reasons: reasons.length === 0 ? ["controlled localhost preview command metadata allowed"] : reasons
-  });
+  return ControlledLocalhostPreviewSafetyDecisionSchema.parse({ schema_version: "stealtheye-controlled-localhost-preview-safety-decision.v1", allowed: reasons.length === 0, command_mode: mode, reasons: reasons.length === 0 ? ["controlled localhost preview command metadata allowed"] : reasons });
 };
 
 export const createControlledLocalhostPreviewCommand = (mode: ControlledLocalhostPreviewCommandMode = "disabled"): ControlledLocalhostPreviewCommand => {
   const config = createControlledLocalhostPreviewConfig(mode);
-  return ControlledLocalhostPreviewCommandSchema.parse({
-    schema_version: "stealtheye-controlled-localhost-preview-command.v1",
-    command_id: `build21-controlled-localhost-preview-${mode.replace(/_/g, "-")}`,
-    mode,
-    config,
-    requested_by: "developer-mode-resource-connection",
-    read_only: true,
-    fixture_only: true,
-    preview_only: true
-  });
+  return ControlledLocalhostPreviewCommandSchema.parse({ schema_version: "stealtheye-controlled-localhost-preview-command.v1", command_id: `build21-controlled-localhost-preview-${mode.replace(/_/g, "-")}`, mode, config, requested_by: "developer-mode-resource-connection", read_only: true, fixture_only: true, preview_only: true });
 };
 
 const createReceiptPreview = (command: ControlledLocalhostPreviewCommand, safetyDecision: ControlledLocalhostPreviewSafetyDecision): ControlledLocalhostPreviewReceiptPreview => {
-  const replayEvent = ReceiptEventSchema.parse({
-    schema_version: "receipts-replay-event.v1",
-    event_id: `build21-controlled-localhost-preview-${command.mode}`,
-    mission_id: "build-021-controlled-localhost-preview-command",
-    source_subsystem: "app_host",
-    event_type: "artifact_recorded",
-    actor_id: "@stealtheye/mcp-server",
-    subject_id: command.command_id,
-    action_id: "controlled_localhost_preview_command_plan",
-    timestamp: "2026-01-01T00:00:00.000Z",
-    status_before: null,
-    status_after: safetyDecision.allowed ? "planned" : "blocked",
-    summary: `Controlled localhost preview command plan for ${command.mode}.",
-    reason_codes: safetyDecision.reasons,
-    evidence_refs: [],
-    artifact_refs: ["receipt://fixture/build-021/controlled-localhost-preview-command"],
-    receipt_refs: command.config.receipt_refs,
-    related_event_ids: [],
-    public_private_boundary: "public_safe",
-    sensitivity: "public",
-    retention_hint: "generated Build 21 fixture receipt preview"
-  });
-  return ControlledLocalhostPreviewReceiptPreviewSchema.parse({
-    schema_version: "stealtheye-controlled-localhost-preview-receipt-preview.v1",
-    command_mode: command.mode,
-    config_summary: {
-      host: command.config.host,
-      port: command.config.port,
-      command: command.config.command,
-      bind_by_default: false,
-      starts_process: false,
-      external_network_access: false,
-      public_url: null,
-      tunnel_provider: command.config.tunnel_provider
-    },
-    resource_inventory_summary: {
-      mcp_server_package: "@stealtheye/mcp-server",
-      ui_resources: "available as static fixture resource metadata",
-      render_resources: "available as deterministic fixture render metadata",
-      localhost_preview: command.mode
-    },
-    developer_mode_connection_stage: command.mode === "localhost_config_required" ? "manual local endpoint configuration required" : "fixture metadata only",
-    safety_decision: safetyDecision,
-    read_only: true,
-    fixture_only: true,
-    preview_only: true,
-    no_secret_statement: "No secrets, credentials, tokens, private keys, OAuth secrets, tunnel tokens, or credential material are required or stored.",
-    no_production_statement: "No production frontend, production deployment, production mutation, production endpoint, or production domain is created.",
-    no_public_submission_statement: "No public app submission, real app ID, production OAuth client, or hosted public mode is added.",
-    no_money_statement: "No money movement, billing mutation, purchase, subscription, or refund occurs.",
-    result_status: safetyDecision.allowed ? "ok" : "blocked",
-    replay_receipt_event_preview: replayEvent
-  });
+  const replayEvent = ReceiptEventSchema.parse({ schema_version: "receipts-replay-event.v1", event_id: `build21-controlled-localhost-preview-${command.mode}`, mission_id: "build-021-controlled-localhost-preview-command", source_subsystem: "app_host", event_type: "artifact_recorded", actor_id: "@stealtheye/mcp-server", subject_id: command.command_id, action_id: "controlled_localhost_preview_command_plan", timestamp: "2026-01-01T00:00:00.000Z", status_before: null, status_after: safetyDecision.allowed ? "planned" : "blocked", summary: `Controlled localhost preview command plan for ${command.mode}.`, reason_codes: safetyDecision.reasons, evidence_refs: [], artifact_refs: ["receipt://fixture/build-021/controlled-localhost-preview-command"], receipt_refs: command.config.receipt_refs, related_event_ids: [], public_private_boundary: "public_safe", sensitivity: "public", retention_hint: "generated Build 21 fixture receipt preview" });
+  return ControlledLocalhostPreviewReceiptPreviewSchema.parse({ schema_version: "stealtheye-controlled-localhost-preview-receipt-preview.v1", command_mode: command.mode, config_summary: { host: command.config.host, port: command.config.port, command: command.config.command, bind_by_default: false, starts_process: false, external_network_access: false, public_url: null, tunnel_provider: command.config.tunnel_provider }, resource_inventory_summary: { mcp_server_package: "@stealtheye/mcp-server", ui_resources: "available as static fixture resource metadata", render_resources: "available as deterministic fixture render metadata", localhost_preview: command.mode }, developer_mode_connection_stage: command.mode === "localhost_config_required" ? "manual local endpoint configuration required" : "fixture metadata only", safety_decision: safetyDecision, read_only: true, fixture_only: true, preview_only: true, no_secret_statement: "No secrets, credentials, tokens, private keys, OAuth secrets, tunnel tokens, or credential material are required or stored.", no_production_statement: "No production frontend, production deployment, production mutation, production endpoint, or production domain is created.", no_public_submission_statement: "No public app submission, real app ID, production OAuth client, or hosted public mode is added.", no_money_statement: "No money movement, billing mutation, purchase, subscription, or refund occurs.", result_status: safetyDecision.allowed ? "ok" : "blocked", replay_receipt_event_preview: replayEvent });
 };
 
 export const createControlledLocalhostPreviewPlan = (mode: ControlledLocalhostPreviewCommandMode = "disabled"): ControlledLocalhostPreviewPlan => {
   const command = createControlledLocalhostPreviewCommand(mode);
   const safetyDecision = decideControlledLocalhostPreviewSafety({ command_mode: mode, ...command.config });
   const blocked = !safetyDecision.allowed;
-  return ControlledLocalhostPreviewPlanSchema.parse({
-    schema_version: "stealtheye-controlled-localhost-preview-plan.v1",
-    command,
-    implemented: implementedModes.includes(mode),
-    blocked,
-    manual_steps: mode === "localhost_config_required" ? ["Choose an explicit safe localhost host and port in a future build.", "Manually run only a safe local preview runner after explicit configuration exists."] : ["Review the dry-run or fixture preview metadata."],
-    future_steps: blocked ? ["Keep live command execution and hosted preview modes blocked until a future safe runner build."] : ["Build 22 may add a controlled local preview runner without default binding."],
-    safety_decision: safetyDecision,
-    receipt_preview: createReceiptPreview(command, safetyDecision)
-  });
+  return ControlledLocalhostPreviewPlanSchema.parse({ schema_version: "stealtheye-controlled-localhost-preview-plan.v1", command, implemented: implementedModes.includes(mode), blocked, manual_steps: mode === "localhost_config_required" ? ["Choose an explicit safe localhost host and port in a future build.", "Manually run only a safe local preview runner after explicit configuration exists."] : ["Review the dry-run or fixture preview metadata."], future_steps: blocked ? ["Keep live command execution and hosted preview modes blocked until a future safe runner build."] : ["Build 22 may add a controlled local preview runner without default binding."], safety_decision: safetyDecision, receipt_preview: createReceiptPreview(command, safetyDecision) });
 };
 
 export const createControlledLocalhostPreviewReadinessReport = (): ControlledLocalhostPreviewReadinessReport => ControlledLocalhostPreviewReadinessReportSchema.parse({
@@ -360,12 +247,5 @@ export const createControlledLocalhostPreviewReadinessReport = (): ControlledLoc
   fixture_only: true,
   preview_only: true,
   safety_policy: createControlledLocalhostPreviewSafetyPolicy(),
-  plans: [
-    createControlledLocalhostPreviewPlan("disabled"),
-    createControlledLocalhostPreviewPlan("dry_run_plan"),
-    createControlledLocalhostPreviewPlan("static_fixture_preview"),
-    createControlledLocalhostPreviewPlan("localhost_config_required"),
-    createControlledLocalhostPreviewPlan("localhost_command_future"),
-    createControlledLocalhostPreviewPlan("hosted_future")
-  ]
+  plans: [createControlledLocalhostPreviewPlan("disabled"), createControlledLocalhostPreviewPlan("dry_run_plan"), createControlledLocalhostPreviewPlan("static_fixture_preview"), createControlledLocalhostPreviewPlan("localhost_config_required"), createControlledLocalhostPreviewPlan("localhost_command_future"), createControlledLocalhostPreviewPlan("hosted_future")]
 });
