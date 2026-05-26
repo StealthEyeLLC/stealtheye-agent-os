@@ -1,27 +1,32 @@
 {
   "schema_version": "stealtheye-known-gaps.v1",
-  "build": 18,
+  "build": 19,
   "gaps": [
     {
-      "gap_id": "build-018-gap-01",
+      "gap_id": "build-019-gap-01",
       "summary": "No production frontend, hosted app, real app auth, public app submission, production OAuth, real app IDs, production domains, or real public endpoints exist.",
       "status": "open"
     },
     {
-      "gap_id": "build-018-gap-02",
-      "summary": "No customer data workflow, unrestricted live write path, protected branch mutation path, destructive action path, production mutation path, material external send path, credential entry path, external side effect path, or money movement path exists.",
+      "gap_id": "build-019-gap-02",
+      "summary": "No customer data workflow, unrestricted live write path, protected branch mutation path, destructive action path, production mutation path, material external send path, credential entry path, external side effect path, remote asset path, default server binding path, or money movement path exists.",
       "status": "open"
     },
     {
-      "gap_id": "build-018-gap-03",
-      "summary": "No local dev UI shell or resource renderer is added in Build 18.",
+      "gap_id": "build-019-gap-03",
+      "summary": "No MCP server or dev endpoint resource-serving integration is added in Build 19.",
       "status": "open"
     },
     {
-      "gap_id": "build-018-gap-04",
+      "gap_id": "build-019-gap-04",
+      "summary": "No controlled localhost preview command is added yet.",
+      "status": "open"
+    },
+    {
+      "gap_id": "build-019-gap-05",
       "summary": "No durable UI receipt ledger is added.",
       "status": "open"
     }
   ],
-  "next_target": "Build 19 — Local Dev UI Shell / Resource Rendering"
+  "next_target": "Build 20 \u2014 MCP Server Resource Wiring / Controlled Localhost Preview"
 }

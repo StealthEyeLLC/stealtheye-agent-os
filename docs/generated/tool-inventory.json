@@ -1,35 +1,35 @@
 {
   "schema_version": "stealtheye-tool-inventory.v1",
-  "build": 18,
+  "build": 19,
   "tools": [
     {
-      "name": "control_plane_ui.list_resources",
-      "package": "@stealtheye/control-plane-ui",
-      "mode": "static_fixture_resource_listing",
+      "name": "local_dev_ui_shell.list_routes",
+      "package": "@stealtheye/local-dev-ui-shell",
+      "mode": "static_fixture_route_listing",
       "live_external_effects": false
     },
     {
-      "name": "control_plane_ui.read_resource",
-      "package": "@stealtheye/control-plane-ui",
-      "mode": "static_fixture_resource_read",
+      "name": "local_dev_ui_shell.load_resource",
+      "package": "@stealtheye/local-dev-ui-shell",
+      "mode": "static_fixture_resource_load",
       "live_external_effects": false
     },
     {
-      "name": "control_plane_ui.render_template_preview",
-      "package": "@stealtheye/control-plane-ui",
-      "mode": "fixture_template_preview",
+      "name": "local_dev_ui_shell.render_resource",
+      "package": "@stealtheye/local-dev-ui-shell",
+      "mode": "deterministic_static_html_render",
       "live_external_effects": false
     },
     {
-      "name": "control_plane_ui.hydration_payload",
-      "package": "@stealtheye/control-plane-ui",
+      "name": "local_dev_ui_shell.hydrate_resource",
+      "package": "@stealtheye/local-dev-ui-shell",
       "mode": "readonly_fixture_hydration",
       "live_external_effects": false
     },
     {
-      "name": "control_plane_ui.safe_settings_summary",
-      "package": "@stealtheye/control-plane-ui",
-      "mode": "readonly_summary",
+      "name": "local_dev_ui_shell.receipt_preview",
+      "package": "@stealtheye/local-dev-ui-shell",
+      "mode": "fixture_receipt_preview",
       "live_external_effects": false
     }
   ]

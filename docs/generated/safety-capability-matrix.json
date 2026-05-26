@@ -1,28 +1,46 @@
 {
   "schema_version": "stealtheye-safety-capability-matrix.v1",
-  "build": 18,
+  "build": 19,
   "capabilities": [
     {
-      "capability": "apps_sdk_style_component_resource_descriptors",
-      "status": "modeled",
+      "capability": "static_fixture_ui_shell",
+      "status": "implemented",
       "guard_required": true,
       "live_enabled": false
     },
     {
-      "capability": "fixture_only_hydration_payload",
-      "status": "modeled",
+      "capability": "deterministic_resource_rendering",
+      "status": "implemented",
       "guard_required": true,
       "live_enabled": false
     },
     {
-      "capability": "read_only_preview_panels",
-      "status": "modeled",
+      "capability": "fixture_only_hydration_summary",
+      "status": "implemented",
       "guard_required": true,
       "live_enabled": false
     },
     {
-      "capability": "receipt_preview_display",
-      "status": "modeled",
+      "capability": "local_app_safe_resource_loading",
+      "status": "implemented",
+      "guard_required": true,
+      "live_enabled": false
+    },
+    {
+      "capability": "receipt_preview_generation",
+      "status": "implemented",
+      "guard_required": true,
+      "live_enabled": false
+    },
+    {
+      "capability": "localhost_dev_preview",
+      "status": "modeled_future",
+      "guard_required": true,
+      "live_enabled": false
+    },
+    {
+      "capability": "hosted_future",
+      "status": "blocked",
       "guard_required": true,
       "live_enabled": false
     },
@@ -39,7 +57,7 @@
       "live_enabled": false
     },
     {
-      "capability": "unrestricted_live_write_tools",
+      "capability": "remote_scripts_styles_assets",
       "status": "blocked",
       "guard_required": true,
       "live_enabled": false
