@@ -1,17 +1,17 @@
 {
   "schema_version": "stealtheye-build-state.v1",
-  "build": 15,
-  "title": "Reachable Dev Deployment / Tunnel / Endpoint",
-  "branch": "agent/reachable-dev-deployment-endpoint",
+  "build": 16,
+  "title": "Connect from ChatGPT Developer Mode",
+  "branch": "agent/chatgpt-developer-mode-connection",
   "generated_artifacts_current": true,
   "safety_scanner_scope": [
     "docs/generated",
-    "packages/dev-endpoint/src/safety.ts",
-    "packages/dev-endpoint/src/endpoint.ts",
-    "packages/dev-endpoint/test/dev-endpoint.test.ts"
+    "packages/chatgpt-dev-connection/src/safety.ts",
+    "packages/chatgpt-dev-connection/src/manifest.ts",
+    "packages/chatgpt-dev-connection/test/chatgpt-dev-connection.test.ts"
   ],
-  "hand_authored_doc_policy": "Build 15 preserves README.md, AGENTS.md, and docs/ARCHITECTURE.md unchanged. Generated sync writes only declared generated files and standalone Build 15 docs.",
+  "hand_authored_doc_policy": "Build 16 preserves README.md, AGENTS.md, and docs/ARCHITECTURE.md unchanged. Generated sync writes only declared generated files and standalone Build 16 docs.",
   "marker_bounded_hand_authored_docs": [],
-  "next_target": "Build 16 — Connect from ChatGPT Developer Mode",
+  "next_target": "Build 17 \u2014 Core Control Plane App",
   "generated_at": "2026-01-01T00:00:00.000Z"
 }
