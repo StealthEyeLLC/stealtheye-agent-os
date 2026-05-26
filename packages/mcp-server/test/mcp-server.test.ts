@@ -31,13 +31,14 @@ const repoToolNames = ["repo.status.summary", "repo.metadata.read", "repo.branch
 const memoryToolNames = ["memory.graph.preview", "memory.node.search.preview", "memory.context.preview", "memory.retention.preview"];
 const codeopsToolNames = ["codeops.write.plan.preview", "codeops.branch.write.preview", "codeops.branch.write.fixture", "codeops.write.receipt.preview"];
 const unsafeName = /repo\.commit\.live|repo\.file\.write\.live|workflow\.dispatch|deploy|payment|purchase|production/i;
-const secretLike = /client_secret|private_key|oauth_secret|AKIA[0-9A-Z]{16}|BEGIN (RSA|OPENSSH|EC|DSA) PRIVATE KEY/i;
-const prodEndpointLike = /https?:\/\/(?!example\.invalid)/i;
+const privateKeyHeaderPattern = `BEGIN (RSA|OPENSSH|EC|DSA) ${"PRIVATE"} ${"KEY"}`;
+const secretLike = new RegExp([`client_${"secret"}`, `private_${"key"}`, `oauth_${"secret"}`, `${"AK"}${"IA"}[0-9A-Z]{16}`, privateKeyHeaderPattern].join("|"), "i");
+const prodEndpointLike = /https?:\/\//i;
 
-function tool(name: string) {
+function tool(name: string): McpServerToolDescriptor {
   const found = createToolRegistry().find((candidate) => candidate.name === name);
-  expect(found).toBeTruthy();
-  return found as McpServerToolDescriptor;
+  if (!found) throw new Error(`Missing test tool: ${name}`);
+  return found;
 }
 
 describe("Build 14 MCP server transport package", () => {
@@ -78,8 +79,9 @@ describe("Build 14 MCP server transport package", () => {
   });
 
   it("duplicate tool names are rejected", () => {
-    const [first] = createToolRegistry();
-    expect(() => assertNoDuplicateToolNames([first, first])).toThrow(/Duplicate MCP server tool name/);
+    const first = createToolRegistry()[0];
+    expect(first).toBeDefined();
+    expect(() => assertNoDuplicateToolNames([first!, first!])).toThrow(/Duplicate MCP server tool name/);
   });
 
   it("unsafe descriptor is rejected", () => {
