@@ -2,7 +2,7 @@
 
 Build 20 wires local UI shell resources into the MCP server resource layer while preserving static/local/fixture/preview-only boundaries and no default server binding.
 
-## New package extension
+## New package
 
 MCP Server Resource Wiring package extension that lists and reads Control Plane UI resources, deterministic Local Dev UI Shell render resources, and controlled localhost-preview metadata through @stealtheye/mcp-server without binding a server by default or adding remote assets.
 

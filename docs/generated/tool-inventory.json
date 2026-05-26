@@ -2,10 +2,35 @@
   "schema_version": "stealtheye-tool-inventory.v1",
   "build": 20,
   "tools": [
-    { "name": "mcp_server.list_ui_resources", "package": "@stealtheye/mcp-server", "mode": "static_fixture_resource_listing", "live_external_effects": false },
-    { "name": "mcp_server.read_ui_resource", "package": "@stealtheye/mcp-server", "mode": "static_fixture_resource_read", "live_external_effects": false },
-    { "name": "mcp_server.read_rendered_shell_resource", "package": "@stealtheye/mcp-server", "mode": "deterministic_static_html_render_read", "live_external_effects": false },
-    { "name": "mcp_server.localhost_preview_metadata", "package": "@stealtheye/mcp-server", "mode": "readonly_config_required_metadata", "live_external_effects": false },
-    { "name": "mcp_server.resource_read_receipt_preview", "package": "@stealtheye/mcp-server", "mode": "fixture_receipt_preview", "live_external_effects": false }
+    {
+      "name": "mcp_server.list_ui_resources",
+      "package": "@stealtheye/mcp-server",
+      "mode": "static_fixture_resource_listing",
+      "live_external_effects": false
+    },
+    {
+      "name": "mcp_server.read_ui_resource",
+      "package": "@stealtheye/mcp-server",
+      "mode": "static_fixture_resource_read",
+      "live_external_effects": false
+    },
+    {
+      "name": "mcp_server.read_rendered_shell_resource",
+      "package": "@stealtheye/mcp-server",
+      "mode": "deterministic_static_html_render_read",
+      "live_external_effects": false
+    },
+    {
+      "name": "mcp_server.localhost_preview_metadata",
+      "package": "@stealtheye/mcp-server",
+      "mode": "readonly_config_required_metadata",
+      "live_external_effects": false
+    },
+    {
+      "name": "mcp_server.resource_read_receipt_preview",
+      "package": "@stealtheye/mcp-server",
+      "mode": "fixture_receipt_preview",
+      "live_external_effects": false
+    }
   ]
 }

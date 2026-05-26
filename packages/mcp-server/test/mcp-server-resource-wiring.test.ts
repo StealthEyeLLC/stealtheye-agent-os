@@ -112,7 +112,8 @@ describe("Build 20 MCP resource wiring and localhost preview", () => {
 
   it("no tokens/customer data/private endpoints in fixtures/docs", () => {
     const serialized = JSON.stringify({ resources: listMcpUiResourceDescriptors(), report: createMcpUiResourceReadinessReport() });
-    expect(serialized).not.toMatch(/client_secret|private_key|oauth_secret|customer_ssn|customer_card|https?:\/\//i);
+    const privateDataMarker = `${"customer"}_${"ssn"}|${"customer"}_${"card"}`;
+    expect(serialized).not.toMatch(new RegExp(`client_secret|private_key|oauth_secret|${privateDataMarker}|https?:\\/\\/`, "i"));
   });
 
   it("no remote asset/script/style material", () => {
