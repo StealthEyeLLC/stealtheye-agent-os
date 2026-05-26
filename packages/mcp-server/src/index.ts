@@ -1,3 +1,5 @@
+export * from "./controlled-localhost-command";
+export * from "./developer-mode-resource-connection";
 export * from "./fixtures";
 export * from "./health";
 export * from "./localhost-preview";

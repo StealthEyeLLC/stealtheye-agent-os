@@ -58,6 +58,16 @@ async function currentGeneratedBuild() {
   if (!existsSync(file)) return phase.build;
   try { return JSON.parse(await readFile(file, "utf8")).build ?? phase.build; } catch { return phase.build; }
 }
+function generatedContentMatches(file, actual, expected) {
+  if (file.endsWith(".json")) {
+    try {
+      return JSON.stringify(JSON.parse(actual)) === JSON.stringify(JSON.parse(expected));
+    } catch {
+      return actual === expected;
+    }
+  }
+  return actual === expected;
+}
 const unsafePatterns = [
   { id: "non_public_endpoint", regex: /https?:\/\/(?:localhost|127\.0\.0\.1|10\.|172\.(?:1[6-9]|2\d|3[0-1])\.|192\.168\.|[^\s/]*\.internal|[^\s/]*\.corp)/i },
   { id: "customer_data_marker", regex: /customer[_ -]?(?:ssn|social security|card number|production data)/i },
@@ -106,7 +116,7 @@ if (checkMode) {
     if (strictGeneratedSync && outputs.has(file)) {
       const actual = await readFile(absolute, "utf8");
       const expected = outputs.get(file);
-      if (actual !== expected) { console.error(`Generated/synced file is stale: ${file}`); failed = true; }
+      if (!generatedContentMatches(file, actual, expected)) { console.error(`Generated/synced file is stale: ${file}`); failed = true; }
     }
   }
 } else {
