@@ -1,0 +1,13 @@
+{
+  "schema_version": "stealtheye-build-receipt.v1",
+  "build": 22,
+  "title": "Safe Local Preview Runner / Manual Developer-Mode Connection Checklist",
+  "branch": "agent/safe-local-preview-runner",
+  "package_name": "@stealtheye/mcp-server",
+  "generated_at": "2026-01-01T00:00:00.000Z",
+  "live_execution_enabled": false,
+  "durable_database_enabled": false,
+  "production_artifact_storage_enabled": false,
+  "production_mutation_enabled": false,
+  "money_movement_enabled": false
+}
