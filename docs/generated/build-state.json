@@ -1,19 +1,19 @@
 {
   "schema_version": "stealtheye-build-state.v1",
-  "build": 18,
-  "title": "Control Plane UI Component Resources",
-  "branch": "agent/control-plane-ui-components",
+  "build": 19,
+  "title": "Local Dev UI Shell / Resource Rendering",
+  "branch": "agent/local-dev-ui-shell",
   "generated_artifacts_current": true,
   "safety_scanner_scope": [
     "docs/generated",
-    "packages/control-plane-ui/src/safety.ts",
-    "packages/control-plane-ui/src/components.ts",
-    "packages/control-plane-ui/src/resources.ts",
-    "packages/control-plane-ui/src/hydration.ts",
-    "packages/control-plane-ui/test/control-plane-ui.test.ts"
+    "packages/local-dev-ui-shell/src/safety.ts",
+    "packages/local-dev-ui-shell/src/routes.ts",
+    "packages/local-dev-ui-shell/src/renderer.ts",
+    "packages/local-dev-ui-shell/src/static-assets.ts",
+    "packages/local-dev-ui-shell/test/local-dev-ui-shell.test.ts"
   ],
-  "hand_authored_doc_policy": "Build 18 preserves README.md, AGENTS.md, and docs/ARCHITECTURE.md unchanged. Generated sync writes only declared generated files and standalone Build 18 docs.",
+  "hand_authored_doc_policy": "Build 19 preserves README.md, AGENTS.md, and docs/ARCHITECTURE.md unchanged. Generated sync writes only declared generated files and standalone Build 19 docs.",
   "marker_bounded_hand_authored_docs": [],
-  "next_target": "Build 19 — Local Dev UI Shell / Resource Rendering",
+  "next_target": "Build 20 - MCP Server Resource Wiring / Controlled Localhost Preview",
   "generated_at": "2026-01-01T00:00:00.000Z"
 }

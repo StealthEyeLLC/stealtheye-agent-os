@@ -1,8 +1,8 @@
 {
   "schema_version": "stealtheye-project-memory.v1",
-  "current_build": 18,
-  "current_title": "Control Plane UI Component Resources",
-  "current_branch": "agent/control-plane-ui-components",
+  "current_build": 19,
+  "current_title": "Local Dev UI Shell / Resource Rendering",
+  "current_branch": "agent/local-dev-ui-shell",
   "foundation_packages": [
     "@stealtheye/agent-registry",
     "@stealtheye/guard",
@@ -19,9 +19,10 @@
     "@stealtheye/dev-endpoint",
     "@stealtheye/chatgpt-dev-connection",
     "@stealtheye/control-plane-app",
-    "@stealtheye/control-plane-ui"
+    "@stealtheye/control-plane-ui",
+    "@stealtheye/local-dev-ui-shell"
   ],
-  "build_summary": "Control Plane UI Component Resources package that models Apps SDK-style static component/resource descriptors, templates, metadata, hydration contracts, fixtures, and UI safety decisions around @stealtheye/control-plane-app without deploying a frontend or adding live app material.",
-  "hand_authored_doc_policy": "Build 18 preserves README.md, AGENTS.md, and docs/ARCHITECTURE.md unchanged. Generated sync writes only declared generated files and standalone Build 18 docs.",
-  "next_target": "Build 19 — Local Dev UI Shell / Resource Rendering"
+  "build_summary": "Local Dev UI Shell package that renders @stealtheye/control-plane-ui static fixture resources into deterministic HTML/resource previews, readiness summaries, hydration summaries, and receipt previews without binding a server by default or adding remote assets.",
+  "hand_authored_doc_policy": "Build 19 preserves README.md, AGENTS.md, and docs/ARCHITECTURE.md unchanged. Generated sync writes only declared generated files and standalone Build 19 docs.",
+  "next_target": "Build 20 - MCP Server Resource Wiring / Controlled Localhost Preview"
 }
