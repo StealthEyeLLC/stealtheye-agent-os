@@ -1,8 +1,8 @@
 {
   "schema_version": "stealtheye-project-memory.v1",
-  "current_build": 13,
-  "current_title": "Live CodeOps Branch-Write Path through Guard + Receipts",
-  "current_branch": "agent/live-codeops-branch-write",
+  "current_build": 14,
+  "current_title": "Official MCP Server Transport / SDK Alignment",
+  "current_branch": "agent/official-mcp-server-transport",
   "foundation_packages": [
     "@stealtheye/agent-registry",
     "@stealtheye/guard",
@@ -14,9 +14,10 @@
     "@stealtheye/receipts-replay",
     "@stealtheye/mcp-runtime",
     "@stealtheye/repo-status",
-    "@stealtheye/memory-graph"
+    "@stealtheye/memory-graph",
+    "@stealtheye/mcp-server"
   ],
-  "build_summary": "Build 13 adds the first guarded branch-write foundation for CodeOps through policy, Guard requested actions, receipt previews, fixture-only execution, and config-required optional GitHub writer modeling. CI remains fixture-backed and no protected branch, workflow, credential, production, or customer-data write path is exposed.",
-  "hand_authored_doc_policy": "Build 13 preserves README.md, AGENTS.md, and docs/ARCHITECTURE.md unchanged. Generated sync writes only declared generated files and standalone Build 13 docs.",
-  "next_target": "Build 14 — Official MCP Server Transport / SDK Alignment"
+  "build_summary": "Build 14 adds @stealtheye/mcp-server as an official-MCP-aligned server wrapper around existing safe MCP runtime surfaces. It models in-process and stdio developer transport, keeps HTTP/dev preview and hosted deployment as future work, preserves read-only, preview-only, and fixture-only safety truth, and does not add credentials, production OAuth clients, production endpoints, public app submission, or unrestricted live write tools.",
+  "hand_authored_doc_policy": "Build 14 preserves README.md, AGENTS.md, and docs/ARCHITECTURE.md unchanged. Generated sync writes only declared generated files and standalone Build 14 docs.",
+  "next_target": "Build 15 — Reachable Dev Deployment / Tunnel / Endpoint"
 }

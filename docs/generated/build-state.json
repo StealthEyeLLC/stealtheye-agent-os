@@ -1,19 +1,20 @@
 {
   "schema_version": "stealtheye-build-state.v1",
-  "build": 13,
-  "title": "Live CodeOps Branch-Write Path through Guard + Receipts",
-  "branch": "agent/live-codeops-branch-write",
+  "build": 14,
+  "title": "Official MCP Server Transport / SDK Alignment",
+  "branch": "agent/official-mcp-server-transport",
   "generated_artifacts_current": true,
   "safety_scanner_scope": [
     "docs/generated",
-    "packages/codeops/src/write-fixtures.ts",
-    "packages/codeops/test/codeops-branch-write.test.ts",
-    "packages/mcp-runtime/src/codeops-write-adapter.ts",
-    "packages/mcp-runtime/test/mcp-runtime.test.ts",
-    "docs/CODEOPS_LIVE_WRITE.md"
+    "packages/mcp-server/src/fixtures.ts",
+    "packages/mcp-server/src/server.ts",
+    "packages/mcp-server/src/transport.ts",
+    "packages/mcp-server/test/mcp-server.test.ts",
+    "docs/MCP_SERVER_TRANSPORT.md",
+    "docs/DECISIONS/0016-official-mcp-server-transport.md"
   ],
-  "hand_authored_doc_policy": "Build 13 preserves README.md, AGENTS.md, and docs/ARCHITECTURE.md unchanged. Generated sync writes only declared generated files and standalone Build 13 docs.",
+  "hand_authored_doc_policy": "Build 14 preserves README.md, AGENTS.md, and docs/ARCHITECTURE.md unchanged. Generated sync writes only declared generated files and standalone Build 14 docs.",
   "marker_bounded_hand_authored_docs": [],
-  "next_target": "Build 14 — Official MCP Server Transport / SDK Alignment",
+  "next_target": "Build 15 — Reachable Dev Deployment / Tunnel / Endpoint",
   "generated_at": "2026-01-01T00:00:00.000Z"
 }
