@@ -1,0 +1,129 @@
+name: Build 15 Reachable Dev Deployment Endpoint
+
+on:
+  pull_request:
+  push:
+    branches:
+      - main
+      - agent/reachable-dev-deployment-endpoint
+
+permissions:
+  contents: read
+
+jobs:
+  dev-endpoint:
+    name: Dev endpoint strict sync checks
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Set up pnpm
+        uses: pnpm/action-setup@v4
+        with:
+          version: 9.15.4
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 22
+
+      - name: Install dependencies
+        run: pnpm install --no-frozen-lockfile
+
+      - name: Typecheck packages
+        run: pnpm typecheck
+
+      - name: Run tests
+        run: pnpm test
+
+      - name: Check generated build state
+        run: |
+          node scripts/stealtheye-build.mjs scripts/phases/build-008-browserops.mjs --check
+          node scripts/stealtheye-build.mjs scripts/phases/build-009-receipts-replay.mjs --check
+          node scripts/stealtheye-build.mjs scripts/phases/build-010-mcp-runtime-devmode.mjs --check
+          node scripts/stealtheye-build.mjs scripts/phases/build-011-live-readonly-repo-status.mjs --check
+          node scripts/stealtheye-build.mjs scripts/phases/build-012-memory-graph.mjs --check
+          node scripts/stealtheye-build.mjs scripts/phases/build-013-live-codeops-branch-write.mjs --check
+          node scripts/stealtheye-build.mjs scripts/phases/build-014-official-mcp-server-transport.mjs --check
+          node scripts/stealtheye-build.mjs scripts/phases/build-015-reachable-dev-deployment-endpoint.mjs --check
+
+      - name: Verify Build 15 required files exist
+        shell: bash
+        run: |
+          set -euo pipefail
+          required=(
+            packages/dev-endpoint/package.json
+            packages/dev-endpoint/tsconfig.json
+            packages/dev-endpoint/src/index.ts
+            packages/dev-endpoint/src/schemas.ts
+            packages/dev-endpoint/src/config.ts
+            packages/dev-endpoint/src/endpoint.ts
+            packages/dev-endpoint/src/tunnel.ts
+            packages/dev-endpoint/src/health.ts
+            packages/dev-endpoint/src/manifest.ts
+            packages/dev-endpoint/src/safety.ts
+            packages/dev-endpoint/src/fixtures.ts
+            packages/dev-endpoint/test/dev-endpoint.test.ts
+            scripts/phases/build-015-reachable-dev-deployment-endpoint.mjs
+            docs/DEV_ENDPOINT.md
+            docs/DECISIONS/0017-reachable-dev-deployment-endpoint.md
+            docs/generated/build-015-manifest.json
+            docs/generated/build-015-acceptance.md
+            docs/generated/build-015-handoff.md
+            docs/generated/build-015-receipt.json
+            docs/generated/project-memory.json
+            docs/generated/known-gaps.json
+            docs/generated/safety-capability-matrix.json
+            docs/generated/eval-registry.json
+            docs/generated/tool-inventory.json
+            docs/generated/build-state.json
+          )
+          for path in "${required[@]}"; do
+            test -f "$path" || { echo "Missing required file: $path"; exit 1; }
+          done
+
+      - name: Verify protected docs are unchanged
+        shell: bash
+        run: |
+          set -euo pipefail
+          git fetch origin main --depth=1
+          changed="$(git diff --name-only origin/main...HEAD -- README.md AGENTS.md docs/ARCHITECTURE.md || true)"
+          if [ -n "$changed" ]; then
+            echo "Protected docs changed unexpectedly:"
+            echo "$changed"
+            exit 1
+          fi
+
+      - name: Basic sensitive-string guard
+        shell: bash
+        run: |
+          set -euo pipefail
+          guard_file="./.github/workflows/build-015-reachable-dev-deployment-endpoint.yml"
+          aws_prefix="$(printf '\x41\x4b\x49\x41')"
+          begin_word="$(printf '\x42\x45\x47\x49\x4e')"
+          private_word="$(printf '\x50\x52\x49\x56\x41\x54\x45')"
+          key_word="$(printf '\x4b\x45\x59')"
+          secret_word="$(printf '\x73\x65\x63\x72\x65\x74')"
+          pass_word="$(printf '\x70\x61\x73\x73\x77\x6f\x72\x64')"
+          sensitive_patterns="(${aws_prefix}[0-9A-Z]{16}|${begin_word} (RSA|OPENSSH|EC|DSA) ${private_word} ${key_word}|${pass_word}=|client_${secret_word}=|${private_word}_${key_word}=)"
+          if find . \
+            -path './.git' -prune -o \
+            -path './node_modules' -prune -o \
+            -type f \
+            ! -path "$guard_file" \
+            -print0 | xargs -0 grep -InE "$sensitive_patterns"; then
+            echo "Potential sensitive-like string found."
+            exit 1
+          fi
+
+      - name: Verify no committed live endpoint material
+        shell: bash
+        run: |
+          set -euo pipefail
+          if grep -RInE 'https://[^ ]+\.(trycloudflare|ngrok|pages|workers|run|app|dev|com)/|app_id=|oauth_client|tunnel_token|cloud_account' packages/dev-endpoint docs/DEV_ENDPOINT.md docs/DECISIONS/0017-reachable-dev-deployment-endpoint.md docs/generated; then
+            echo "Potential live endpoint material found."
+            exit 1
+          fi
