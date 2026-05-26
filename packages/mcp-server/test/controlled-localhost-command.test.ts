@@ -16,7 +16,7 @@ import {
   readServerResource
 } from "../src";
 
-const allowed = (patch: Parameters<typeof decideControlledLocalhostPreviewSafety>[0]) =>
+const allowed = (patch: Record<string, unknown>) =>
   decideControlledLocalhostPreviewSafety({ command_mode: "dry_run_plan", ...createControlledLocalhostPreviewConfig("dry_run_plan"), ...patch }).allowed;
 
 describe("Build 21 controlled localhost preview command", () => {
