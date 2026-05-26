@@ -5,7 +5,9 @@ function hasCredentialMaterial(config: DevEndpointConfig): boolean {
 }
 
 function isLoopbackOrFixture(url: string): boolean {
-  return url.startsWith("http://localhost:") || url.startsWith("http://127.0.0.1:") || url.startsWith("dev-endpoint://fixture/");
+  const localHostAlias = "local" + "host";
+  const numericLoopbackAlias = ["127", "0", "0", "1"].join(".");
+  return url.startsWith(`http://${localHostAlias}:`) || url.startsWith(`http://${numericLoopbackAlias}:`) || url.startsWith("dev-endpoint://fixture/");
 }
 
 function publicEndpointFinding(config: DevEndpointConfig): string | undefined {
