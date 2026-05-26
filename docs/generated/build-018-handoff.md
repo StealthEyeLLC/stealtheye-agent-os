@@ -26,7 +26,7 @@ Build 18 preserves README.md, AGENTS.md, and docs/ARCHITECTURE.md unchanged. Gen
 ## Known gaps
 
 - No production frontend, hosted app, real app auth, public app submission, production OAuth, real app IDs, production domains, or real public endpoints exist.
-- No real user data, customer/private data workflow, unrestricted live write path, protected branch mutation path, destructive action path, production mutation path, material external send path, credential entry path, external side effect path, or money movement path exists.
+- No customer data workflow, unrestricted live write path, protected branch mutation path, destructive action path, production mutation path, material external send path, credential entry path, external side effect path, or money movement path exists.
 - No local dev UI shell or resource renderer is added in Build 18.
 - No durable UI receipt ledger is added.
 
