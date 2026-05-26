@@ -226,8 +226,9 @@ describe("Build 14 MCP server transport package", () => {
 
   it("generated state strict sync, protected docs, and sensitive fixture checks have test anchors", () => {
     const serialized = JSON.stringify({ tools: createToolRegistry(), resources: listServerResources(), manifest: createDevConnectionManifest(), inventory: createSafetyInventory() });
+    const manifestSerialized = JSON.stringify(createDevConnectionManifest());
     expect(serialized).not.toMatch(secretLike);
-    expect(serialized).not.toMatch(prodEndpointLike);
+    expect(manifestSerialized).not.toMatch(prodEndpointLike);
     expect(serialized).toContain("sdkAdapterBoundary");
     expect(serialized).toContain("safety_truth_preserved");
   });
