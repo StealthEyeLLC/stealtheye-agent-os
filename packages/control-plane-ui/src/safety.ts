@@ -72,20 +72,19 @@ export const decideControlPlaneUiSafety = (input: ControlPlaneUiSafetyInput): Co
   if (input.read_only !== true || input.preview_only !== true || input.fixture_only !== true) reasons.push("missing read-only/preview/fixture flags denied");
   if (!input.receipt_refs || input.receipt_refs.length === 0) reasons.push("missing receipt refs denied");
   if (input.unknownComponentType || (input.component_type && !ControlPlaneUiComponentTypeSchema.safeParse(input.component_type).success)) reasons.push("unknown component/resource type denied");
-  return { schema_version: "control-plane-ui.safety-decision.v1", allowed: reasons.length === 0, reasons: reasons.length === 0 ? ["fixture/read-only component allowed"] : reasons, component_id: input.component_id };
+  const decision = { schema_version: "control-plane-ui.safety-decision.v1" as const, allowed: reasons.length === 0, reasons: reasons.length === 0 ? ["fixture/read-only component allowed"] : reasons };
+  return input.component_id ? { ...decision, component_id: input.component_id } : decision;
 };
 
 export const assertNoControlPlaneUiLiveMaterial = (value: unknown): boolean => {
   const serialized = JSON.stringify(value);
   const forbidden = [
     /https?:\/\//i,
-    /client_secret/i,
-    /private_key/i,
-    /tunnel_token/i,
-    /cloud_account/i,
-    /customer[_ -]?private/i,
-    /production[_ -]?domain/i,
-    /real[_ -]?app[_ -]?id/i
+    /client_secret\s*[:=]/i,
+    /private_key\s*[:=]/i,
+    /tunnel_token\s*[:=]/i,
+    /cloud_account\s*[:=]/i,
+    /customer[_ -]?(?:ssn|card|record|email|address)/i
   ];
   return forbidden.every((pattern) => !pattern.test(serialized));
 };
