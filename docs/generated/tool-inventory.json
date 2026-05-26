@@ -1,35 +1,35 @@
 {
   "schema_version": "stealtheye-tool-inventory.v1",
-  "build": 16,
+  "build": 17,
   "tools": [
     {
-      "name": "chatgpt.developer_mode.connection_plan",
-      "package": "@stealtheye/chatgpt-dev-connection",
-      "mode": "fixture_planning",
+      "name": "control_plane.view_navigation",
+      "package": "@stealtheye/control-plane-app",
+      "mode": "navigation_readonly",
       "live_external_effects": false
     },
     {
-      "name": "chatgpt.developer_mode.connection_checklist",
-      "package": "@stealtheye/chatgpt-dev-connection",
-      "mode": "fixture_planning",
+      "name": "control_plane.fixture_preview",
+      "package": "@stealtheye/control-plane-app",
+      "mode": "fixture_preview",
       "live_external_effects": false
     },
     {
-      "name": "chatgpt.developer_mode.connection_manifest",
-      "package": "@stealtheye/chatgpt-dev-connection",
-      "mode": "fixture_planning",
+      "name": "control_plane.state_snapshot",
+      "package": "@stealtheye/control-plane-app",
+      "mode": "readonly_summary",
       "live_external_effects": false
     },
     {
-      "name": "chatgpt.developer_mode.readiness_report",
-      "package": "@stealtheye/chatgpt-dev-connection",
-      "mode": "fixture_planning",
+      "name": "control_plane.receipt_preview",
+      "package": "@stealtheye/control-plane-app",
+      "mode": "fixture_receipt_preview",
       "live_external_effects": false
     },
     {
-      "name": "chatgpt.developer_mode.receipt_preview",
-      "package": "@stealtheye/chatgpt-dev-connection",
-      "mode": "fixture_planning",
+      "name": "control_plane.safe_settings_summary",
+      "package": "@stealtheye/control-plane-app",
+      "mode": "readonly_summary",
       "live_external_effects": false
     }
   ]

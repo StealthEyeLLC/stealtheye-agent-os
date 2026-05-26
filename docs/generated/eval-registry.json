@@ -1,171 +1,186 @@
 {
   "schema_version": "stealtheye-eval-registry.v1",
-  "build": 16,
+  "build": 17,
   "evals": [
     {
-      "eval_id": "build-016-eval-01",
-      "name": "connection plan schema validates",
-      "location": "packages/chatgpt-dev-connection/test"
+      "eval_id": "build-017-eval-01",
+      "name": "control plane app schema validates",
+      "location": "packages/control-plane-app/test"
     },
     {
-      "eval_id": "build-016-eval-02",
-      "name": "connection checklist schema validates",
-      "location": "packages/chatgpt-dev-connection/test"
+      "eval_id": "build-017-eval-02",
+      "name": "navigation schema validates",
+      "location": "packages/control-plane-app/test"
     },
     {
-      "eval_id": "build-016-eval-03",
-      "name": "connection manifest schema validates",
-      "location": "packages/chatgpt-dev-connection/test"
+      "eval_id": "build-017-eval-03",
+      "name": "view schema validates",
+      "location": "packages/control-plane-app/test"
     },
     {
-      "eval_id": "build-016-eval-04",
-      "name": "safety policy allows fixture-only local/dev plan",
-      "location": "packages/chatgpt-dev-connection/test"
+      "eval_id": "build-017-eval-04",
+      "name": "panel schema validates",
+      "location": "packages/control-plane-app/test"
     },
     {
-      "eval_id": "build-016-eval-05",
-      "name": "safety policy allows tunnel-config-required placeholder plan",
-      "location": "packages/chatgpt-dev-connection/test"
+      "eval_id": "build-017-eval-05",
+      "name": "action schema validates",
+      "location": "packages/control-plane-app/test"
     },
     {
-      "eval_id": "build-016-eval-06",
-      "name": "production app submission denied",
-      "location": "packages/chatgpt-dev-connection/test"
+      "eval_id": "build-017-eval-06",
+      "name": "state snapshot schema validates",
+      "location": "packages/control-plane-app/test"
     },
     {
-      "eval_id": "build-016-eval-07",
-      "name": "real app ID denied",
-      "location": "packages/chatgpt-dev-connection/test"
+      "eval_id": "build-017-eval-07",
+      "name": "safety policy allows navigation actions",
+      "location": "packages/control-plane-app/test"
     },
     {
-      "eval_id": "build-016-eval-08",
+      "eval_id": "build-017-eval-08",
+      "name": "safety policy allows fixture preview actions",
+      "location": "packages/control-plane-app/test"
+    },
+    {
+      "eval_id": "build-017-eval-09",
+      "name": "production deployment denied",
+      "location": "packages/control-plane-app/test"
+    },
+    {
+      "eval_id": "build-017-eval-10",
+      "name": "public app submission denied",
+      "location": "packages/control-plane-app/test"
+    },
+    {
+      "eval_id": "build-017-eval-11",
       "name": "real OAuth client denied",
-      "location": "packages/chatgpt-dev-connection/test"
+      "location": "packages/control-plane-app/test"
     },
     {
-      "eval_id": "build-016-eval-09",
+      "eval_id": "build-017-eval-12",
+      "name": "real app ID denied",
+      "location": "packages/control-plane-app/test"
+    },
+    {
+      "eval_id": "build-017-eval-13",
       "name": "production domain denied",
-      "location": "packages/chatgpt-dev-connection/test"
+      "location": "packages/control-plane-app/test"
     },
     {
-      "eval_id": "build-016-eval-10",
+      "eval_id": "build-017-eval-14",
       "name": "real public endpoint denied",
-      "location": "packages/chatgpt-dev-connection/test"
+      "location": "packages/control-plane-app/test"
     },
     {
-      "eval_id": "build-016-eval-11",
-      "name": "tunnel auth value denied",
-      "location": "packages/chatgpt-dev-connection/test"
+      "eval_id": "build-017-eval-15",
+      "name": "unrestricted live write action denied",
+      "location": "packages/control-plane-app/test"
     },
     {
-      "eval_id": "build-016-eval-12",
-      "name": "cloud credential denied",
-      "location": "packages/chatgpt-dev-connection/test"
+      "eval_id": "build-017-eval-16",
+      "name": "protected branch mutation action denied",
+      "location": "packages/control-plane-app/test"
     },
     {
-      "eval_id": "build-016-eval-13",
-      "name": "unrestricted live write inventory denied",
-      "location": "packages/chatgpt-dev-connection/test"
+      "eval_id": "build-017-eval-17",
+      "name": "destructive action denied",
+      "location": "packages/control-plane-app/test"
     },
     {
-      "eval_id": "build-016-eval-14",
-      "name": "destructive tool inventory denied",
-      "location": "packages/chatgpt-dev-connection/test"
+      "eval_id": "build-017-eval-18",
+      "name": "production mutation action denied",
+      "location": "packages/control-plane-app/test"
     },
     {
-      "eval_id": "build-016-eval-15",
-      "name": "production mutation inventory denied",
-      "location": "packages/chatgpt-dev-connection/test"
+      "eval_id": "build-017-eval-19",
+      "name": "customer/private data action denied",
+      "location": "packages/control-plane-app/test"
     },
     {
-      "eval_id": "build-016-eval-16",
-      "name": "protected branch mutation inventory denied",
-      "location": "packages/chatgpt-dev-connection/test"
+      "eval_id": "build-017-eval-20",
+      "name": "money movement action denied",
+      "location": "packages/control-plane-app/test"
     },
     {
-      "eval_id": "build-016-eval-17",
-      "name": "customer/private data inventory denied",
-      "location": "packages/chatgpt-dev-connection/test"
+      "eval_id": "build-017-eval-21",
+      "name": "material external send denied",
+      "location": "packages/control-plane-app/test"
     },
     {
-      "eval_id": "build-016-eval-18",
-      "name": "money movement inventory denied",
-      "location": "packages/chatgpt-dev-connection/test"
+      "eval_id": "build-017-eval-22",
+      "name": "credential entry/storage denied",
+      "location": "packages/control-plane-app/test"
     },
     {
-      "eval_id": "build-016-eval-19",
-      "name": "missing endpoint readiness denied",
-      "location": "packages/chatgpt-dev-connection/test"
+      "eval_id": "build-017-eval-23",
+      "name": "unknown action category denied",
+      "location": "packages/control-plane-app/test"
     },
     {
-      "eval_id": "build-016-eval-20",
-      "name": "missing MCP server safety inventory denied",
-      "location": "packages/chatgpt-dev-connection/test"
-    },
-    {
-      "eval_id": "build-016-eval-21",
-      "name": "manifest contains no secrets",
-      "location": "packages/chatgpt-dev-connection/test"
-    },
-    {
-      "eval_id": "build-016-eval-22",
-      "name": "manifest contains no production endpoint",
-      "location": "packages/chatgpt-dev-connection/test"
-    },
-    {
-      "eval_id": "build-016-eval-23",
-      "name": "manifest contains no real public domain",
-      "location": "packages/chatgpt-dev-connection/test"
-    },
-    {
-      "eval_id": "build-016-eval-24",
-      "name": "manifest contains no real app ID",
-      "location": "packages/chatgpt-dev-connection/test"
-    },
-    {
-      "eval_id": "build-016-eval-25",
-      "name": "readiness report ready_for_local_developer_mode_plan",
-      "location": "packages/chatgpt-dev-connection/test"
-    },
-    {
-      "eval_id": "build-016-eval-26",
-      "name": "readiness report ready_for_manual_chatgpt_dev_connection_later",
-      "location": "packages/chatgpt-dev-connection/test"
-    },
-    {
-      "eval_id": "build-016-eval-27",
-      "name": "readiness report blocked_for_public_submission",
-      "location": "packages/chatgpt-dev-connection/test"
-    },
-    {
-      "eval_id": "build-016-eval-28",
-      "name": "readiness report blocked_for_production",
-      "location": "packages/chatgpt-dev-connection/test"
-    },
-    {
-      "eval_id": "build-016-eval-29",
+      "eval_id": "build-017-eval-24",
       "name": "receipt preview generated",
-      "location": "packages/chatgpt-dev-connection/test"
+      "location": "packages/control-plane-app/test"
     },
     {
-      "eval_id": "build-016-eval-30",
-      "name": "dev endpoint and MCP server integration can produce connection manifest metadata",
-      "location": "packages/chatgpt-dev-connection/test"
+      "eval_id": "build-017-eval-25",
+      "name": "overview view includes major subsystems",
+      "location": "packages/control-plane-app/test"
     },
     {
-      "eval_id": "build-016-eval-31",
+      "eval_id": "build-017-eval-26",
+      "name": "missions view includes Mission OS status",
+      "location": "packages/control-plane-app/test"
+    },
+    {
+      "eval_id": "build-017-eval-27",
+      "name": "guard view includes Guard status",
+      "location": "packages/control-plane-app/test"
+    },
+    {
+      "eval_id": "build-017-eval-28",
+      "name": "memory view includes Memory Graph status",
+      "location": "packages/control-plane-app/test"
+    },
+    {
+      "eval_id": "build-017-eval-29",
+      "name": "repo status view includes Repo Status capability",
+      "location": "packages/control-plane-app/test"
+    },
+    {
+      "eval_id": "build-017-eval-30",
+      "name": "mcp server view includes MCP Server status",
+      "location": "packages/control-plane-app/test"
+    },
+    {
+      "eval_id": "build-017-eval-31",
+      "name": "dev endpoint view includes Dev Endpoint readiness",
+      "location": "packages/control-plane-app/test"
+    },
+    {
+      "eval_id": "build-017-eval-32",
+      "name": "ChatGPT developer-mode view includes connection readiness",
+      "location": "packages/control-plane-app/test"
+    },
+    {
+      "eval_id": "build-017-eval-33",
+      "name": "actions are preview/fixture/read-only only",
+      "location": "packages/control-plane-app/test"
+    },
+    {
+      "eval_id": "build-017-eval-34",
       "name": "generated state strict sync passes",
-      "location": "packages/chatgpt-dev-connection/test"
+      "location": "packages/control-plane-app/test"
     },
     {
-      "eval_id": "build-016-eval-32",
+      "eval_id": "build-017-eval-35",
       "name": "protected docs unchanged",
-      "location": "packages/chatgpt-dev-connection/test"
+      "location": "packages/control-plane-app/test"
     },
     {
-      "eval_id": "build-016-eval-33",
+      "eval_id": "build-017-eval-36",
       "name": "no secrets/tokens/customer data/private endpoints in fixtures/docs",
-      "location": "packages/chatgpt-dev-connection/test"
+      "location": "packages/control-plane-app/test"
     }
   ]
 }
