@@ -19,5 +19,5 @@
   ],
   "build_summary": "Build 14 adds @stealtheye/mcp-server as an official-MCP-aligned server wrapper around existing safe MCP runtime surfaces. It models in-process and stdio developer transport, keeps HTTP/dev preview and hosted deployment as future work, preserves read-only, preview-only, and fixture-only safety truth, and does not add credentials, production OAuth clients, production endpoints, public app submission, or unrestricted live write tools.",
   "hand_authored_doc_policy": "Build 14 preserves README.md, AGENTS.md, and docs/ARCHITECTURE.md unchanged. Generated sync writes only declared generated files and standalone Build 14 docs.",
-  "next_target": "Build 15 \u2014 Reachable Dev Deployment / Tunnel / Endpoint"
+  "next_target": "Build 15 — Reachable Dev Deployment / Tunnel / Endpoint"
 }
