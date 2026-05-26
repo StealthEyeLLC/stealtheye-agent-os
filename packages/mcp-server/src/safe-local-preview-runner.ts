@@ -130,7 +130,47 @@ export const SafeLocalPreviewRunnerReadinessReportSchema = z.object({
 });
 export type SafeLocalPreviewRunnerReadinessReport = z.infer<typeof SafeLocalPreviewRunnerReadinessReportSchema>;
 
-type SafetyInput = Partial<SafeLocalPreviewRunnerConfig> & { runner_mode?: string; connection_mode?: string; productionDeployment?: boolean; publicAppSubmission?: boolean; realOAuthClient?: boolean; realAppId?: boolean; productionDomain?: boolean; realPublicEndpoint?: boolean; unrestrictedLiveWrite?: boolean; protectedBranchMutation?: boolean; destructive?: boolean; productionMutation?: boolean; customerPrivateData?: boolean; moneyMovement?: boolean; materialExternalSend?: boolean; credentialEntryStorage?: boolean; externalSideEffects?: boolean; unsafeCommandString?: boolean; unsafeWorkingDirectory?: boolean; unsafeHost?: boolean; unsafePort?: boolean; unsafeResourceUriScheme?: boolean; remoteAsset?: boolean; serverBindingByDefault?: boolean; startsProcessInDefaultOrCi?: boolean; externalNetworkAccess?: boolean; tunnelProviderLiveEnablement?: boolean; hostedPublicMode?: boolean; productionMode?: boolean; autoStartMode?: boolean; };
+type SafetyInput = Omit<Partial<SafeLocalPreviewRunnerConfig>, "bind_by_default" | "starts_process" | "starts_process_in_ci_or_default_mode" | "external_network_access" | "production_mode" | "read_only" | "fixture_only" | "preview_only" | "manual_run_required"> & {
+  runner_mode?: string;
+  connection_mode?: string;
+  bind_by_default?: boolean;
+  starts_process?: boolean;
+  starts_process_in_ci_or_default_mode?: boolean;
+  external_network_access?: boolean;
+  production_mode?: boolean;
+  read_only?: boolean;
+  fixture_only?: boolean;
+  preview_only?: boolean;
+  manual_run_required?: boolean;
+  productionDeployment?: boolean;
+  publicAppSubmission?: boolean;
+  realOAuthClient?: boolean;
+  realAppId?: boolean;
+  productionDomain?: boolean;
+  realPublicEndpoint?: boolean;
+  unrestrictedLiveWrite?: boolean;
+  protectedBranchMutation?: boolean;
+  destructive?: boolean;
+  productionMutation?: boolean;
+  customerPrivateData?: boolean;
+  moneyMovement?: boolean;
+  materialExternalSend?: boolean;
+  credentialEntryStorage?: boolean;
+  externalSideEffects?: boolean;
+  unsafeCommandString?: boolean;
+  unsafeWorkingDirectory?: boolean;
+  unsafeHost?: boolean;
+  unsafePort?: boolean;
+  unsafeResourceUriScheme?: boolean;
+  remoteAsset?: boolean;
+  serverBindingByDefault?: boolean;
+  startsProcessInDefaultOrCi?: boolean;
+  externalNetworkAccess?: boolean;
+  tunnelProviderLiveEnablement?: boolean;
+  hostedPublicMode?: boolean;
+  productionMode?: boolean;
+  autoStartMode?: boolean;
+};
 
 export const createSafeLocalPreviewRunnerSafetyPolicy = (): SafeLocalPreviewRunnerSafetyPolicy => SafeLocalPreviewRunnerSafetyPolicySchema.parse({
   schema_version: "stealtheye-safe-local-preview-runner-safety-policy.v1",
