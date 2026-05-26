@@ -10,7 +10,7 @@
     "packages/mcp-server/src/developer-mode-resource-connection.ts",
     "packages/mcp-server/src/resource-registry.ts"
   ],
-  "hand_authored_doc_policy": "Build 21 preserves protected hand-authored docs unchanged. Generated sync writes only declared generated files and standalone Build 21 docs.",
+  "hand_authored_doc_policy": "Build 21 preserves README.md, AGENTS.md, and docs/ARCHITECTURE.md unchanged. Generated sync writes only declared generated files and standalone Build 21 docs.",
   "marker_bounded_hand_authored_docs": [],
   "next_target": "Build 22 - Safe Local Preview Runner / Manual Developer-Mode Connection Checklist",
   "generated_at": "2026-01-01T00:00:00.000Z"
