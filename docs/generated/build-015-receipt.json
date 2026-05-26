@@ -1,0 +1,39 @@
+{
+  "schema_version": "stealtheye-build-receipt.v1",
+  "build": 15,
+  "title": "Reachable Dev Deployment / Tunnel / Endpoint",
+  "branch": "agent/reachable-dev-deployment-endpoint",
+  "package_name": "@stealtheye/dev-endpoint",
+  "generated_artifacts": [
+    "docs/generated/build-015-manifest.json",
+    "docs/generated/build-015-acceptance.md",
+    "docs/generated/build-015-handoff.md",
+    "docs/generated/build-015-receipt.json",
+    "docs/generated/project-memory.json",
+    "docs/generated/known-gaps.json",
+    "docs/generated/safety-capability-matrix.json",
+    "docs/generated/eval-registry.json",
+    "docs/generated/tool-inventory.json",
+    "docs/generated/build-state.json"
+  ],
+  "checks_expected": [
+    "pnpm install --no-frozen-lockfile",
+    "pnpm typecheck",
+    "pnpm test",
+    "node scripts/stealtheye-build.mjs scripts/phases/build-008-browserops.mjs --check",
+    "node scripts/stealtheye-build.mjs scripts/phases/build-009-receipts-replay.mjs --check",
+    "node scripts/stealtheye-build.mjs scripts/phases/build-010-mcp-runtime-devmode.mjs --check",
+    "node scripts/stealtheye-build.mjs scripts/phases/build-011-live-readonly-repo-status.mjs --check",
+    "node scripts/stealtheye-build.mjs scripts/phases/build-012-memory-graph.mjs --check",
+    "node scripts/stealtheye-build.mjs scripts/phases/build-013-live-codeops-branch-write.mjs --check",
+    "node scripts/stealtheye-build.mjs scripts/phases/build-014-official-mcp-server-transport.mjs --check",
+    "node scripts/stealtheye-build.mjs scripts/phases/build-015-reachable-dev-deployment-endpoint.mjs --check"
+  ],
+  "hand_authored_doc_policy": "Build 15 preserves README.md, AGENTS.md, and docs/ARCHITECTURE.md unchanged. Generated sync writes only declared generated files and standalone Build 15 docs.",
+  "generated_at": "2026-01-01T00:00:00.000Z",
+  "live_execution_enabled": false,
+  "durable_database_enabled": false,
+  "production_artifact_storage_enabled": false,
+  "production_mutation_enabled": false,
+  "money_movement_enabled": false
+}

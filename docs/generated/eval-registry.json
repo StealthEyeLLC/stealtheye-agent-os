@@ -1,116 +1,146 @@
 {
   "schema_version": "stealtheye-eval-registry.v1",
-  "build": 14,
+  "build": 15,
   "evals": [
     {
-      "eval_id": "build-014-eval-01",
-      "name": "server metadata validates",
-      "location": "packages/mcp-server/test/mcp-server.test.ts"
+      "eval_id": "build-015-eval-01",
+      "name": "endpoint config schemas validate",
+      "location": "packages/dev-endpoint/test/dev-endpoint.test.ts"
     },
     {
-      "eval_id": "build-014-eval-02",
-      "name": "protocol/version metadata validates",
-      "location": "packages/mcp-server/test/mcp-server.test.ts"
+      "eval_id": "build-015-eval-02",
+      "name": "endpoint mode schema validates",
+      "location": "packages/dev-endpoint/test/dev-endpoint.test.ts"
     },
     {
-      "eval_id": "build-014-eval-03",
-      "name": "transport mode schemas validate",
-      "location": "packages/mcp-server/test/mcp-server.test.ts"
+      "eval_id": "build-015-eval-03",
+      "name": "tunnel provider schema validates",
+      "location": "packages/dev-endpoint/test/dev-endpoint.test.ts"
     },
     {
-      "eval_id": "build-014-eval-04",
-      "name": "tool registry lists existing runtime tools",
-      "location": "packages/mcp-server/test/mcp-server.test.ts"
+      "eval_id": "build-015-eval-04",
+      "name": "localhost_only config allowed",
+      "location": "packages/dev-endpoint/test/dev-endpoint.test.ts"
     },
     {
-      "eval_id": "build-014-eval-05",
-      "name": "resource registry lists resources",
-      "location": "packages/mcp-server/test/mcp-server.test.ts"
+      "eval_id": "build-015-eval-05",
+      "name": "disabled config allowed",
+      "location": "packages/dev-endpoint/test/dev-endpoint.test.ts"
     },
     {
-      "eval_id": "build-014-eval-06",
-      "name": "duplicate tool names rejected",
-      "location": "packages/mcp-server/test/mcp-server.test.ts"
+      "eval_id": "build-015-eval-06",
+      "name": "tunnel_config_required config allowed with placeholders only",
+      "location": "packages/dev-endpoint/test/dev-endpoint.test.ts"
     },
     {
-      "eval_id": "build-014-eval-07",
-      "name": "unsafe descriptor rejected",
-      "location": "packages/mcp-server/test/mcp-server.test.ts"
+      "eval_id": "build-015-eval-07",
+      "name": "public production domain denied",
+      "location": "packages/dev-endpoint/test/dev-endpoint.test.ts"
     },
     {
-      "eval_id": "build-014-eval-08",
-      "name": "App Host tools are exposed safely",
-      "location": "packages/mcp-server/test/mcp-server.test.ts"
+      "eval_id": "build-015-eval-08",
+      "name": "real tunnel URL denied",
+      "location": "packages/dev-endpoint/test/dev-endpoint.test.ts"
     },
     {
-      "eval_id": "build-014-eval-09",
-      "name": "repo/status tools remain read-only",
-      "location": "packages/mcp-server/test/mcp-server.test.ts"
+      "eval_id": "build-015-eval-09",
+      "name": "OAuth production client denied",
+      "location": "packages/dev-endpoint/test/dev-endpoint.test.ts"
     },
     {
-      "eval_id": "build-014-eval-10",
-      "name": "memory graph tools remain preview/fixture-only",
-      "location": "packages/mcp-server/test/mcp-server.test.ts"
+      "eval_id": "build-015-eval-10",
+      "name": "tunnel auth value denied",
+      "location": "packages/dev-endpoint/test/dev-endpoint.test.ts"
     },
     {
-      "eval_id": "build-014-eval-11",
-      "name": "CodeOps write preview tools remain preview-only",
-      "location": "packages/mcp-server/test/mcp-server.test.ts"
+      "eval_id": "build-015-eval-11",
+      "name": "cloud credential denied",
+      "location": "packages/dev-endpoint/test/dev-endpoint.test.ts"
     },
     {
-      "eval_id": "build-014-eval-12",
-      "name": "CodeOps fixture tool remains fixture-only and non-destructive",
-      "location": "packages/mcp-server/test/mcp-server.test.ts"
+      "eval_id": "build-015-eval-12",
+      "name": "unrestricted live write inventory denied",
+      "location": "packages/dev-endpoint/test/dev-endpoint.test.ts"
     },
     {
-      "eval_id": "build-014-eval-13",
-      "name": "no unrestricted live write or destructive tools are exposed",
-      "location": "packages/mcp-server/test/mcp-server.test.ts"
+      "eval_id": "build-015-eval-13",
+      "name": "destructive tool inventory denied",
+      "location": "packages/dev-endpoint/test/dev-endpoint.test.ts"
     },
     {
-      "eval_id": "build-014-eval-14",
-      "name": "tool call receipt preview generated",
-      "location": "packages/mcp-server/test/mcp-server.test.ts"
+      "eval_id": "build-015-eval-14",
+      "name": "production mutation inventory denied",
+      "location": "packages/dev-endpoint/test/dev-endpoint.test.ts"
     },
     {
-      "eval_id": "build-014-eval-15",
-      "name": "health helper works",
-      "location": "packages/mcp-server/test/mcp-server.test.ts"
+      "eval_id": "build-015-eval-15",
+      "name": "customer/private data inventory denied",
+      "location": "packages/dev-endpoint/test/dev-endpoint.test.ts"
     },
     {
-      "eval_id": "build-014-eval-16",
-      "name": "capabilities summary works",
-      "location": "packages/mcp-server/test/mcp-server.test.ts"
+      "eval_id": "build-015-eval-16",
+      "name": "money movement inventory denied",
+      "location": "packages/dev-endpoint/test/dev-endpoint.test.ts"
     },
     {
-      "eval_id": "build-014-eval-17",
-      "name": "transport diagnostics work",
-      "location": "packages/mcp-server/test/mcp-server.test.ts"
+      "eval_id": "build-015-eval-17",
+      "name": "manifest contains no secrets",
+      "location": "packages/dev-endpoint/test/dev-endpoint.test.ts"
     },
     {
-      "eval_id": "build-014-eval-18",
-      "name": "dev connection manifest contains no secret material or production endpoints",
-      "location": "packages/mcp-server/test/mcp-server.test.ts"
+      "eval_id": "build-015-eval-18",
+      "name": "manifest contains no production endpoint",
+      "location": "packages/dev-endpoint/test/dev-endpoint.test.ts"
     },
     {
-      "eval_id": "build-014-eval-19",
-      "name": "official SDK adapter boundary is covered",
-      "location": "packages/mcp-server/test/mcp-server.test.ts"
+      "eval_id": "build-015-eval-19",
+      "name": "manifest contains no real public domain",
+      "location": "packages/dev-endpoint/test/dev-endpoint.test.ts"
     },
     {
-      "eval_id": "build-014-eval-20",
-      "name": "Build 14 strict generated sync check",
-      "location": "scripts/phases/build-014-official-mcp-server-transport.mjs"
+      "eval_id": "build-015-eval-20",
+      "name": "readiness report ready_for_local_dev for localhost fixture",
+      "location": "packages/dev-endpoint/test/dev-endpoint.test.ts"
     },
     {
-      "eval_id": "build-014-eval-21",
+      "eval_id": "build-015-eval-21",
+      "name": "readiness report ready_for_tunnel_config for config-required tunnel placeholder",
+      "location": "packages/dev-endpoint/test/dev-endpoint.test.ts"
+    },
+    {
+      "eval_id": "build-015-eval-22",
+      "name": "readiness report blocked_for_public_submission",
+      "location": "packages/dev-endpoint/test/dev-endpoint.test.ts"
+    },
+    {
+      "eval_id": "build-015-eval-23",
+      "name": "readiness report blocked_for_production",
+      "location": "packages/dev-endpoint/test/dev-endpoint.test.ts"
+    },
+    {
+      "eval_id": "build-015-eval-24",
+      "name": "receipt preview generated",
+      "location": "packages/dev-endpoint/test/dev-endpoint.test.ts"
+    },
+    {
+      "eval_id": "build-015-eval-25",
+      "name": "MCP server integration can produce dev endpoint metadata",
+      "location": "packages/dev-endpoint/test/dev-endpoint.test.ts"
+    },
+    {
+      "eval_id": "build-015-eval-26",
+      "name": "generated state strict sync passes",
+      "location": "scripts/phases/build-015-reachable-dev-deployment-endpoint.mjs"
+    },
+    {
+      "eval_id": "build-015-eval-27",
       "name": "protected docs unchanged",
-      "location": ".github/workflows/build-014-official-mcp-server-transport.yml"
+      "location": ".github/workflows/build-015-reachable-dev-deployment-endpoint.yml"
     },
     {
-      "eval_id": "build-014-eval-22",
-      "name": "sensitive-string guard covers fixtures and docs",
-      "location": ".github/workflows/build-014-official-mcp-server-transport.yml"
+      "eval_id": "build-015-eval-28",
+      "name": "no secrets/tokens/customer data/private endpoints in fixtures/docs",
+      "location": ".github/workflows/build-015-reachable-dev-deployment-endpoint.yml"
     }
   ]
 }

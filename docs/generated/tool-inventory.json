@@ -1,35 +1,23 @@
 {
   "schema_version": "stealtheye-tool-inventory.v1",
-  "build": 14,
+  "build": 15,
   "tools": [
     {
-      "name": "MCP server official transport adapter",
+      "name": "Dev endpoint manifest/readiness helpers",
+      "package": "@stealtheye/dev-endpoint",
+      "mode": "fixture_dev_only_no_external_effects",
+      "live_external_effects": false
+    },
+    {
+      "name": "MCP server metadata bridge",
       "package": "@stealtheye/mcp-server",
-      "mode": "sdk_aligned_adapter_boundary_local_dev",
+      "mode": "read_only_metadata_summary",
       "live_external_effects": false
     },
     {
-      "name": "App Host safe tools via MCP server",
-      "package": "@stealtheye/app-host",
-      "mode": "read_only_preview_fixture",
-      "live_external_effects": false
-    },
-    {
-      "name": "repo/status read-only tools via MCP server",
-      "package": "@stealtheye/repo-status",
-      "mode": "read_only_live_public_safe",
-      "live_external_effects": false
-    },
-    {
-      "name": "Memory Graph preview tools via MCP server",
-      "package": "@stealtheye/memory-graph",
-      "mode": "preview_and_fixture_only",
-      "live_external_effects": false
-    },
-    {
-      "name": "CodeOps write preview and fixture tools via MCP server",
-      "package": "@stealtheye/codeops",
-      "mode": "preview_and_fixture_only_no_unrestricted_live_write",
+      "name": "Reachable tunnel provider config",
+      "package": "@stealtheye/dev-endpoint",
+      "mode": "future_config_required_placeholder_only",
       "live_external_effects": false
     }
   ]

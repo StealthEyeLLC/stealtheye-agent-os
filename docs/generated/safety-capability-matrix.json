@@ -1,34 +1,34 @@
 {
   "schema_version": "stealtheye-safety-capability-matrix.v1",
-  "build": 14,
+  "build": 15,
   "capabilities": [
     {
-      "capability": "official_mcp_server_wrapper",
-      "status": "implemented_sdk_aligned_adapter_boundary",
+      "capability": "dev_endpoint_disabled_mode",
+      "status": "implemented_safe",
       "guard_required": true,
       "live_enabled": false
     },
     {
-      "capability": "in_process_transport",
+      "capability": "dev_endpoint_localhost_only_mode",
       "status": "implemented_local_dev_only",
       "guard_required": true,
       "live_enabled": false
     },
     {
-      "capability": "stdio_dev_transport",
-      "status": "implemented_local_dev_only",
+      "capability": "tunnel_config_required_mode",
+      "status": "implemented_placeholder_only",
       "guard_required": true,
       "live_enabled": false
     },
     {
-      "capability": "http_dev_preview_transport",
-      "status": "modeled_future_no_public_endpoint",
+      "capability": "reachable_dev_preview_mode",
+      "status": "modeled_blocked_until_safe_config",
       "guard_required": true,
       "live_enabled": false
     },
     {
-      "capability": "hosted_public_app_transport",
-      "status": "future_work_not_deployed",
+      "capability": "hosted_future_mode",
+      "status": "future_work_blocked_for_production",
       "guard_required": true,
       "live_enabled": false
     },
