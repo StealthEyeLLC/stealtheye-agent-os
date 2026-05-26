@@ -79,7 +79,7 @@
     "hydration payload includes control-plane state snapshot",
     "generated state strict sync passes",
     "protected docs unchanged",
-    "no secrets/tokens/customer data/private endpoints in fixtures/docs"
+    "no tokens/customer data/private endpoints in fixtures/docs"
   ],
   "adr_added": "docs/DECISIONS/0021-local-dev-ui-shell.md",
   "ci_required_files": [
@@ -102,7 +102,7 @@
   "safety_boundaries": [
     "No production frontend deployment is created.",
     "No public app submission is performed.",
-    "No production OAuth credential, real app identifier, production domain, public deployed app URL, real hosted endpoint, tunnel token, cloud credential, private key, or customer/private data workflow is added.",
+    "No production OAuth credential, real app identifier, production domain, public deployed app URL, real hosted endpoint, tunnel token, cloud credential, credential material, or customer/private data workflow is added.",
     "No unrestricted live write, destructive, protected branch mutation, production mutation, customer/private data, material external send, credential entry/storage, external side effect, remote script/style/asset, default server binding, or money movement path is exposed.",
     "The local dev UI shell remains static/local/fixture/preview-only."
   ],
@@ -125,7 +125,7 @@
     "No controlled localhost preview command is added yet.",
     "No durable UI receipt ledger is added."
   ],
-  "next_target": "Build 20 \u2014 MCP Server Resource Wiring / Controlled Localhost Preview",
+  "next_target": "Build 20 - MCP Server Resource Wiring / Controlled Localhost Preview",
   "hand_authored_doc_policy": "Build 19 preserves README.md, AGENTS.md, and docs/ARCHITECTURE.md unchanged. Generated sync writes only declared generated files and standalone Build 19 docs.",
   "marker_bounded_hand_authored_docs": [],
   "generated_at": "2026-01-01T00:00:00.000Z",

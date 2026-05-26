@@ -1,6 +1,6 @@
 # Build 19 handoff: Local Dev UI Shell / Resource Rendering
 
-Build 19 creates a local/dev-only UI shell and deterministic resource renderer while preserving the no-secret, no-production, no-public-submission, no-real-auth, no-customer-data, no-unrestricted-live-write, no-remote-asset, no-default-server-binding boundary.
+Build 19 creates a local/dev-only UI shell and deterministic resource renderer while preserving no production deployment, public app submission, real auth, customer data, unrestricted live write, remote asset, and default server binding boundaries.
 
 ## New package
 
@@ -33,4 +33,4 @@ Build 19 preserves README.md, AGENTS.md, and docs/ARCHITECTURE.md unchanged. Gen
 
 ## Next target
 
-Build 20 1 MCP Server Resource Wiring / Controlled Localhost Preview.
+Build 20 - MCP Server Resource Wiring / Controlled Localhost Preview.

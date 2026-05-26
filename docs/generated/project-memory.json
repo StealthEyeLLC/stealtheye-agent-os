@@ -24,5 +24,5 @@
   ],
   "build_summary": "Local Dev UI Shell package that renders @stealtheye/control-plane-ui static fixture resources into deterministic HTML/resource previews, readiness summaries, hydration summaries, and receipt previews without binding a server by default or adding remote assets.",
   "hand_authored_doc_policy": "Build 19 preserves README.md, AGENTS.md, and docs/ARCHITECTURE.md unchanged. Generated sync writes only declared generated files and standalone Build 19 docs.",
-  "next_target": "Build 20 \u2014 MCP Server Resource Wiring / Controlled Localhost Preview"
+  "next_target": "Build 20 - MCP Server Resource Wiring / Controlled Localhost Preview"
 }

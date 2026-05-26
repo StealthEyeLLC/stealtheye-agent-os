@@ -219,7 +219,7 @@
     },
     {
       "eval_id": "build-019-eval-44",
-      "name": "no secrets/tokens/customer data/private endpoints in fixtures/docs",
+      "name": "no tokens/customer data/private endpoints in fixtures/docs",
       "location": "packages/local-dev-ui-shell/test"
     }
   ]

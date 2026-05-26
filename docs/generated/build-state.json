@@ -14,6 +14,6 @@
   ],
   "hand_authored_doc_policy": "Build 19 preserves README.md, AGENTS.md, and docs/ARCHITECTURE.md unchanged. Generated sync writes only declared generated files and standalone Build 19 docs.",
   "marker_bounded_hand_authored_docs": [],
-  "next_target": "Build 20 \u2014 MCP Server Resource Wiring / Controlled Localhost Preview",
+  "next_target": "Build 20 - MCP Server Resource Wiring / Controlled Localhost Preview",
   "generated_at": "2026-01-01T00:00:00.000Z"
 }
