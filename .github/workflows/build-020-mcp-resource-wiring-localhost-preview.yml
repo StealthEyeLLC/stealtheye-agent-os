@@ -101,7 +101,7 @@ jobs:
         shell: bash
         run: |
           set -euo pipefail
-          scan_paths=(packages/mcp-server/src/ui-resource-adapter.ts packages/mcp-server/src/localhost-preview.ts packages/mcp-server/src/resource-registry.ts docs/generated)
+          scan_paths=(packages/mcp-server/src/ui-resource-adapter.ts packages/mcp-server/src/localhost-preview.ts packages/mcp-server/src/resource-registry.ts docs/generated/build-020-manifest.json docs/generated/build-020-acceptance.md docs/generated/build-020-handoff.md docs/generated/build-020-receipt.json)
           if grep -RInE "trycloudflare|ngrok|workers|pages|app_id=|oauth_client=|tunnel_token=|cloud_account=" "${scan_paths[@]}"; then
             echo "Potential concrete live app material found."
             exit 1
@@ -111,7 +111,7 @@ jobs:
         shell: bash
         run: |
           set -euo pipefail
-          scan_paths=(packages/mcp-server/src/ui-resource-adapter.ts packages/mcp-server/src/localhost-preview.ts docs/generated)
+          scan_paths=(packages/mcp-server/src/ui-resource-adapter.ts packages/mcp-server/src/localhost-preview.ts docs/generated/build-020-manifest.json docs/generated/build-020-acceptance.md docs/generated/build-020-handoff.md docs/generated/build-020-receipt.json)
           if grep -RInE "https?://|<script[[:space:]][^>]*src=|<link[[:space:]][^>]*href=|cdn\." "${scan_paths[@]}"; then
             echo "Potential remote asset/script/style material found."
             exit 1
@@ -121,7 +121,7 @@ jobs:
         shell: bash
         run: |
           set -euo pipefail
-          scan_paths=(packages/mcp-server/src/localhost-preview.ts packages/mcp-server/src/ui-resource-adapter.ts docs/generated)
+          scan_paths=(packages/mcp-server/src/localhost-preview.ts packages/mcp-server/src/ui-resource-adapter.ts docs/generated/build-020-manifest.json docs/generated/build-020-acceptance.md docs/generated/build-020-handoff.md docs/generated/build-020-receipt.json)
           if grep -RInE "bind_by_default:[[:space:]]*true|bind_by_default\": true|listen\(|server\.listen|0\.0\.0\.0" "${scan_paths[@]}"; then
             echo "Potential default server binding material found."
             exit 1
