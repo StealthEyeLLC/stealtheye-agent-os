@@ -17,7 +17,11 @@ import {
 } from "../src";
 
 const allowed = (patch: Record<string, unknown>) =>
-  decideControlledLocalhostPreviewSafety({ command_mode: "dry_run_plan", ...createControlledLocalhostPreviewConfig("dry_run_plan"), ...patch }).allowed;
+  decideControlledLocalhostPreviewSafety({
+    command_mode: "dry_run_plan",
+    ...createControlledLocalhostPreviewConfig("dry_run_plan"),
+    ...patch
+  } as Parameters<typeof decideControlledLocalhostPreviewSafety>[0]).allowed;
 
 describe("Build 21 controlled localhost preview command", () => {
   it("command schema validates", () => expect(ControlledLocalhostPreviewCommandSchema.parse(createControlledLocalhostPreviewCommand("disabled")).mode).toBe("disabled"));
