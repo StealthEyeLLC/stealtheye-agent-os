@@ -1,8 +1,8 @@
 {
   "schema_version": "stealtheye-project-memory.v1",
-  "current_build": 20,
-  "current_title": "MCP Server Resource Wiring / Controlled Localhost Preview",
-  "current_branch": "agent/mcp-resource-wiring-localhost-preview",
+  "current_build": 21,
+  "current_title": "Controlled Localhost Preview Command / Developer-Mode Resource Connection",
+  "current_branch": "agent/controlled-localhost-preview-command",
   "foundation_packages": [
     "@stealtheye/agent-registry",
     "@stealtheye/guard",
@@ -22,7 +22,7 @@
     "@stealtheye/control-plane-ui",
     "@stealtheye/local-dev-ui-shell"
   ],
-  "build_summary": "MCP Server Resource Wiring package extension that lists and reads Control Plane UI resources, deterministic Local Dev UI Shell render resources, and controlled localhost-preview metadata through @stealtheye/mcp-server without binding a server by default or adding remote assets.",
-  "hand_authored_doc_policy": "Build 20 preserves README.md, AGENTS.md, and docs/ARCHITECTURE.md unchanged. Generated sync writes only declared generated files and standalone Build 20 docs.",
-  "next_target": "Build 21 - Controlled Localhost Preview Command / Developer-Mode Resource Connection"
+  "build_summary": "Controlled localhost preview command model and developer-mode resource connection metadata inside @stealtheye/mcp-server. Build 21 adds schema-validated command plans, readiness reports, safety decisions, and receipt previews without binding a server, starting a process, enabling a tunnel, or creating a real ChatGPT app.",
+  "hand_authored_doc_policy": "Build 21 preserves README.md, AGENTS.md, and docs/ARCHITECTURE.md unchanged. Generated sync writes only declared generated files and standalone Build 21 docs.",
+  "next_target": "Build 22 - Safe Local Preview Runner / Manual Developer-Mode Connection Checklist"
 }
