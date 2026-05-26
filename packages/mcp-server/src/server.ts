@@ -6,6 +6,8 @@ import { listServerResources, readServerResource } from "./resource-registry";
 import { getTransportDiagnostics } from "./transport";
 import { createSafetyInventory, createToolRegistry } from "./tool-registry";
 
+export { getMcpServerHealth } from "./health";
+
 function summarize(value: unknown): string {
   if (value && typeof value === "object" && !Array.isArray(value)) return Object.keys(value as Record<string, unknown>).sort().slice(0, 8).join(", ") || "empty object";
   return typeof value;
