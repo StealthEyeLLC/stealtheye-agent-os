@@ -1,39 +1,33 @@
 {
   "schema_version": "stealtheye-safety-capability-matrix.v1",
-  "build": 15,
+  "build": 16,
   "capabilities": [
     {
-      "capability": "dev_endpoint_disabled_mode",
-      "status": "implemented_safe",
+      "capability": "fixture_only_connection_plan",
+      "status": "modeled",
       "guard_required": true,
       "live_enabled": false
     },
     {
-      "capability": "dev_endpoint_localhost_only_mode",
-      "status": "implemented_local_dev_only",
+      "capability": "local_dev_manifest",
+      "status": "modeled",
       "guard_required": true,
       "live_enabled": false
     },
     {
-      "capability": "tunnel_config_required_mode",
-      "status": "implemented_placeholder_only",
+      "capability": "manual_chatgpt_dev_connection_later",
+      "status": "blocked_future",
       "guard_required": true,
       "live_enabled": false
     },
     {
-      "capability": "reachable_dev_preview_mode",
-      "status": "modeled_blocked_until_safe_config",
+      "capability": "public_app_submission",
+      "status": "blocked",
       "guard_required": true,
       "live_enabled": false
     },
     {
-      "capability": "hosted_future_mode",
-      "status": "future_work_blocked_for_production",
-      "guard_required": true,
-      "live_enabled": false
-    },
-    {
-      "capability": "unrestricted_live_write_tools",
+      "capability": "production_deployment",
       "status": "blocked",
       "guard_required": true,
       "live_enabled": false

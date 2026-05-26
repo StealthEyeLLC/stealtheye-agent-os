@@ -1,8 +1,8 @@
 {
   "schema_version": "stealtheye-project-memory.v1",
-  "current_build": 15,
-  "current_title": "Reachable Dev Deployment / Tunnel / Endpoint",
-  "current_branch": "agent/reachable-dev-deployment-endpoint",
+  "current_build": 16,
+  "current_title": "Connect from ChatGPT Developer Mode",
+  "current_branch": "agent/chatgpt-developer-mode-connection",
   "foundation_packages": [
     "@stealtheye/agent-registry",
     "@stealtheye/guard",
@@ -16,9 +16,10 @@
     "@stealtheye/repo-status",
     "@stealtheye/memory-graph",
     "@stealtheye/mcp-server",
-    "@stealtheye/dev-endpoint"
+    "@stealtheye/dev-endpoint",
+    "@stealtheye/chatgpt-dev-connection"
   ],
-  "build_summary": "Build 15 adds @stealtheye/dev-endpoint as a dev-only endpoint and tunnel foundation around @stealtheye/mcp-server. It models disabled, localhost-only, tunnel-config-required, reachable-dev-preview, and hosted-future modes while allowing only disabled, localhost-only, and placeholder-only tunnel config. It blocks production, public endpoints, credential material, production OAuth, tunnel secrets, cloud credentials, unrestricted live write tools, destructive operations, customer/private data, money movement, material external sends, and production deployment.",
-  "hand_authored_doc_policy": "Build 15 preserves README.md, AGENTS.md, and docs/ARCHITECTURE.md unchanged. Generated sync writes only declared generated files and standalone Build 15 docs.",
-  "next_target": "Build 16 — Connect from ChatGPT Developer Mode"
+  "build_summary": "Build 16 adds @stealtheye/chatgpt-dev-connection as a fixture/planning package for future manual ChatGPT developer-mode connection around the MCP server and dev endpoint.",
+  "hand_authored_doc_policy": "Build 16 preserves README.md, AGENTS.md, and docs/ARCHITECTURE.md unchanged. Generated sync writes only declared generated files and standalone Build 16 docs.",
+  "next_target": "Build 17 — Core Control Plane App"
 }

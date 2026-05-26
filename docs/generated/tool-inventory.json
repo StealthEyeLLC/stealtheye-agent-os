@@ -1,23 +1,35 @@
 {
   "schema_version": "stealtheye-tool-inventory.v1",
-  "build": 15,
+  "build": 16,
   "tools": [
     {
-      "name": "Dev endpoint manifest/readiness helpers",
-      "package": "@stealtheye/dev-endpoint",
-      "mode": "fixture_dev_only_no_external_effects",
+      "name": "chatgpt.developer_mode.connection_plan",
+      "package": "@stealtheye/chatgpt-dev-connection",
+      "mode": "fixture_planning",
       "live_external_effects": false
     },
     {
-      "name": "MCP server metadata bridge",
-      "package": "@stealtheye/mcp-server",
-      "mode": "read_only_metadata_summary",
+      "name": "chatgpt.developer_mode.connection_checklist",
+      "package": "@stealtheye/chatgpt-dev-connection",
+      "mode": "fixture_planning",
       "live_external_effects": false
     },
     {
-      "name": "Reachable tunnel provider config",
-      "package": "@stealtheye/dev-endpoint",
-      "mode": "future_config_required_placeholder_only",
+      "name": "chatgpt.developer_mode.connection_manifest",
+      "package": "@stealtheye/chatgpt-dev-connection",
+      "mode": "fixture_planning",
+      "live_external_effects": false
+    },
+    {
+      "name": "chatgpt.developer_mode.readiness_report",
+      "package": "@stealtheye/chatgpt-dev-connection",
+      "mode": "fixture_planning",
+      "live_external_effects": false
+    },
+    {
+      "name": "chatgpt.developer_mode.receipt_preview",
+      "package": "@stealtheye/chatgpt-dev-connection",
+      "mode": "fixture_planning",
       "live_external_effects": false
     }
   ]

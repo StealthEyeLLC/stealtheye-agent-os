@@ -1,0 +1,138 @@
+name: Build 16 ChatGPT Developer Mode Connection
+
+on:
+  pull_request:
+  push:
+    branches:
+      - main
+      - agent/chatgpt-developer-mode-connection
+
+permissions:
+  contents: read
+
+jobs:
+  chatgpt-dev-connection:
+    name: ChatGPT developer-mode connection checks
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Set up pnpm
+        uses: pnpm/action-setup@v4
+        with:
+          version: 9.15.4
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 22
+
+      - name: Install dependencies
+        run: pnpm install --no-frozen-lockfile
+
+      - name: Typecheck packages
+        run: pnpm typecheck
+
+      - name: Run tests
+        run: pnpm test
+
+      - name: Check generated build state
+        run: |
+          node scripts/stealtheye-build.mjs scripts/phases/build-008-browserops.mjs --check
+          node scripts/stealtheye-build.mjs scripts/phases/build-009-receipts-replay.mjs --check
+          node scripts/stealtheye-build.mjs scripts/phases/build-010-mcp-runtime-devmode.mjs --check
+          node scripts/stealtheye-build.mjs scripts/phases/build-011-live-readonly-repo-status.mjs --check
+          node scripts/stealtheye-build.mjs scripts/phases/build-012-memory-graph.mjs --check
+          node scripts/stealtheye-build.mjs scripts/phases/build-013-live-codeops-branch-write.mjs --check
+          node scripts/stealtheye-build.mjs scripts/phases/build-014-official-mcp-server-transport.mjs --check
+          node scripts/stealtheye-build.mjs scripts/phases/build-015-reachable-dev-deployment-endpoint.mjs --check
+          node scripts/stealtheye-build.mjs scripts/phases/build-016-chatgpt-developer-mode-connection.mjs --check
+
+      - name: Verify Build 16 required files exist
+        shell: bash
+        run: |
+          set -euo pipefail
+          required=(
+            packages/chatgpt-dev-connection/package.json
+            packages/chatgpt-dev-connection/tsconfig.json
+            packages/chatgpt-dev-connection/src/index.ts
+            packages/chatgpt-dev-connection/src/schemas.ts
+            packages/chatgpt-dev-connection/src/connection-plan.ts
+            packages/chatgpt-dev-connection/src/checklist.ts
+            packages/chatgpt-dev-connection/src/manifest.ts
+            packages/chatgpt-dev-connection/src/safety.ts
+            packages/chatgpt-dev-connection/src/receipt.ts
+            packages/chatgpt-dev-connection/src/fixtures.ts
+            packages/chatgpt-dev-connection/test/chatgpt-dev-connection.test.ts
+            scripts/phases/build-016-chatgpt-developer-mode-connection.mjs
+            docs/CHATGPT_DEVELOPER_MODE.md
+            docs/DECISIONS/0018-chatgpt-developer-mode-connection.md
+            docs/generated/build-016-manifest.json
+            docs/generated/build-016-acceptance.md
+            docs/generated/build-016-handoff.md
+            docs/generated/build-016-receipt.json
+            docs/generated/project-memory.json
+            docs/generated/known-gaps.json
+            docs/generated/safety-capability-matrix.json
+            docs/generated/eval-registry.json
+            docs/generated/tool-inventory.json
+            docs/generated/build-state.json
+            .github/workflows/build-016-chatgpt-developer-mode-connection.yml
+          )
+          for path in "${required[@]}"; do
+            test -f "$path" || { echo "Missing required file: $path"; exit 1; }
+          done
+
+      - name: Verify protected docs are unchanged
+        shell: bash
+        run: |
+          set -euo pipefail
+          git fetch origin main --depth=1
+          changed="$(git diff --name-only origin/main...HEAD -- README.md AGENTS.md docs/ARCHITECTURE.md || true)"
+          if [ -n "$changed" ]; then
+            echo "Protected docs changed unexpectedly:"
+            echo "$changed"
+            exit 1
+          fi
+
+      - name: Basic sensitive-string guard
+        shell: bash
+        run: |
+          set -euo pipefail
+          guard_file="./.github/workflows/build-016-chatgpt-developer-mode-connection.yml"
+          aws_prefix="$(printf '\x41\x4b\x49\x41')"
+          begin_word="$(printf '\x42\x45\x47\x49\x4e')"
+          private_word="$(printf '\x50\x52\x49\x56\x41\x54\x45')"
+          key_word="$(printf '\x4b\x45\x59')"
+          secret_word="$(printf '\x73\x65\x63\x72\x65\x74')"
+          pass_word="$(printf '\x70\x61\x73\x73\x77\x6f\x72\x64')"
+          sensitive_patterns="(${aws_prefix}[0-9A-Z]{16}|${begin_word} (RSA|OPENSSH|EC|DSA) ${private_word} ${key_word}|${pass_word}=|client_${secret_word}=|${private_word}_${key_word}=)"
+          if find . \
+            -path './.git' -prune -o \
+            -path './node_modules' -prune -o \
+            -type f \
+            ! -path "$guard_file" \
+            -print0 | xargs -0 grep -InE "$sensitive_patterns"; then
+            echo "Potential sensitive-like string found."
+            exit 1
+          fi
+
+      - name: Verify no committed live app material
+        shell: bash
+        run: |
+          set -euo pipefail
+          scan_paths=(
+            packages/chatgpt-dev-connection/src
+            packages/chatgpt-dev-connection/package.json
+            packages/chatgpt-dev-connection/tsconfig.json
+            docs/generated
+          )
+          live_url_pattern="https://[^[:space:]\"'<>]+[.](trycloudflare|ngrok|pages|workers|run|app)/"
+          live_marker_pattern="app_id=|oauth_client=|tunnel_token=|cloud_account="
+          if grep -RInE "${live_url_pattern}|${live_marker_pattern}" "${scan_paths[@]}"; then
+            echo "Potential concrete live app material found."
+            exit 1
+          fi
