@@ -2,12 +2,14 @@ import { describe, expect, it } from "vitest";
 import { ControlPlaneUiComponentSchema, ControlPlaneUiFixtureBundleSchema, ControlPlaneUiHydrationPayloadSchema, ControlPlaneUiMetadataSchema, ControlPlaneUiResourceSchema, ControlPlaneUiTemplateSchema, assertNoControlPlaneUiLiveMaterial, createControlPlaneUiComponents, createControlPlaneUiFixtureBundle, createControlPlaneUiHydrationPayload, createControlPlaneUiMetadata, createControlPlaneUiResources, createControlPlaneUiSafetyPolicy, createControlPlaneUiTemplates, decideControlPlaneUiSafety, readControlPlaneUiResource, requiredControlPlaneUiComponentTypes, type ControlPlaneUiComponent } from "../src";
 
 const baseComponent = (): ControlPlaneUiComponent => createControlPlaneUiComponents()[0] ?? (() => { throw new Error("missing component"); })();
-const deniedWith = (patch: Partial<ControlPlaneUiComponent> & Record<string, unknown>) => decideControlPlaneUiSafety({ ...baseComponent(), ...patch }).allowed;
+const firstResource = () => createControlPlaneUiResources()[0] ?? (() => { throw new Error("missing resource"); })();
+const firstTemplate = () => createControlPlaneUiTemplates()[0] ?? (() => { throw new Error("missing template"); })();
+const deniedWith = (patch: Record<string, unknown>) => decideControlPlaneUiSafety({ ...baseComponent(), ...patch } as Parameters<typeof decideControlPlaneUiSafety>[0]).allowed;
 
 describe("control plane UI component resources", () => {
   it("UI component schema validates", () => expect(ControlPlaneUiComponentSchema.parse(baseComponent()).schema_version).toBe("control-plane-ui.component.v1"));
-  it("UI resource schema validates", () => expect(ControlPlaneUiResourceSchema.parse(createControlPlaneUiResources()[0]).mime_type).toBe("application/vnd.stealtheye.control-plane-ui+json"));
-  it("UI template schema validates", () => expect(ControlPlaneUiTemplateSchema.parse(createControlPlaneUiTemplates()[0]).fixture_only).toBe(true));
+  it("UI resource schema validates", () => expect(ControlPlaneUiResourceSchema.parse(firstResource()).mime_type).toBe("application/vnd.stealtheye.control-plane-ui+json"));
+  it("UI template schema validates", () => expect(ControlPlaneUiTemplateSchema.parse(firstTemplate()).fixture_only).toBe(true));
   it("UI metadata schema validates", () => expect(ControlPlaneUiMetadataSchema.parse(createControlPlaneUiMetadata()).build).toBe(18));
   it("hydration payload schema validates", () => expect(ControlPlaneUiHydrationPayloadSchema.parse(createControlPlaneUiHydrationPayload()).fixture_only).toBe(true));
   it("fixture bundle validates", () => expect(ControlPlaneUiFixtureBundleSchema.parse(createControlPlaneUiFixtureBundle()).components.length).toBe(17));
