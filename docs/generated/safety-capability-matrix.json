@@ -1,33 +1,39 @@
 {
   "schema_version": "stealtheye-safety-capability-matrix.v1",
-  "build": 16,
+  "build": 17,
   "capabilities": [
     {
-      "capability": "fixture_only_connection_plan",
+      "capability": "control_plane_navigation",
       "status": "modeled",
       "guard_required": true,
       "live_enabled": false
     },
     {
-      "capability": "local_dev_manifest",
+      "capability": "fixture_preview_actions",
       "status": "modeled",
       "guard_required": true,
       "live_enabled": false
     },
     {
-      "capability": "manual_chatgpt_dev_connection_later",
-      "status": "blocked_future",
+      "capability": "state_snapshot_display",
+      "status": "modeled",
       "guard_required": true,
       "live_enabled": false
     },
     {
-      "capability": "public_app_submission",
+      "capability": "receipt_preview_generation",
+      "status": "modeled",
+      "guard_required": true,
+      "live_enabled": false
+    },
+    {
+      "capability": "production_frontend_deployment",
       "status": "blocked",
       "guard_required": true,
       "live_enabled": false
     },
     {
-      "capability": "production_deployment",
+      "capability": "public_app_submission",
       "status": "blocked",
       "guard_required": true,
       "live_enabled": false

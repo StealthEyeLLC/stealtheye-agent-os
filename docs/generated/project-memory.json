@@ -1,8 +1,8 @@
 {
   "schema_version": "stealtheye-project-memory.v1",
-  "current_build": 16,
-  "current_title": "Connect from ChatGPT Developer Mode",
-  "current_branch": "agent/chatgpt-developer-mode-connection",
+  "current_build": 17,
+  "current_title": "Core Control Plane App",
+  "current_branch": "agent/core-control-plane-app",
   "foundation_packages": [
     "@stealtheye/agent-registry",
     "@stealtheye/guard",
@@ -17,9 +17,10 @@
     "@stealtheye/memory-graph",
     "@stealtheye/mcp-server",
     "@stealtheye/dev-endpoint",
-    "@stealtheye/chatgpt-dev-connection"
+    "@stealtheye/chatgpt-dev-connection",
+    "@stealtheye/control-plane-app"
   ],
-  "build_summary": "Build 16 adds @stealtheye/chatgpt-dev-connection as a fixture/planning package for future manual ChatGPT developer-mode connection around the MCP server and dev endpoint.",
-  "hand_authored_doc_policy": "Build 16 preserves README.md, AGENTS.md, and docs/ARCHITECTURE.md unchanged. Generated sync writes only declared generated files and standalone Build 16 docs.",
-  "next_target": "Build 17 — Core Control Plane App"
+  "build_summary": "Build 17 adds @stealtheye/control-plane-app as a fixture/preview app model that organizes mission, agent, tool, receipt, replay, memory, repo status, operations, endpoint, and ChatGPT developer-mode readiness into one public-safe control surface.",
+  "hand_authored_doc_policy": "Build 17 preserves README.md, AGENTS.md, and docs/ARCHITECTURE.md unchanged. Generated sync writes only declared generated files and standalone Build 17 docs.",
+  "next_target": "Build 18 — Control Plane UI Component Resources"
 }

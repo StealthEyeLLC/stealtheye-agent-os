@@ -1,27 +1,27 @@
 {
   "schema_version": "stealtheye-known-gaps.v1",
-  "build": 16,
+  "build": 17,
   "gaps": [
     {
-      "gap_id": "build-016-gap-01",
-      "summary": "No real ChatGPT developer-mode connection is performed in Build 16.",
+      "gap_id": "build-017-gap-01",
+      "summary": "No production frontend, hosted app, real app auth, public app submission, or production OAuth exists.",
       "status": "open"
     },
     {
-      "gap_id": "build-016-gap-02",
-      "summary": "No reachable public dev endpoint, tunnel credential, production domain, real app ID, OAuth production client, or public app submission is added.",
+      "gap_id": "build-017-gap-02",
+      "summary": "No real user data, customer/private data workflow, unrestricted live write path, protected branch mutation path, destructive action path, production mutation path, material external send path, or money movement path exists.",
       "status": "open"
     },
     {
-      "gap_id": "build-016-gap-03",
-      "summary": "Future manual connection remains blocked until a safe reachable dev endpoint exists and verifier approval is granted.",
+      "gap_id": "build-017-gap-03",
+      "summary": "First UI/component resources remain future Build 18 work.",
       "status": "open"
     },
     {
-      "gap_id": "build-016-gap-04",
-      "summary": "No durable developer-mode connection receipt ledger is added.",
+      "gap_id": "build-017-gap-04",
+      "summary": "No durable control-plane receipt ledger is added.",
       "status": "open"
     }
   ],
-  "next_target": "Build 17 — Core Control Plane App"
+  "next_target": "Build 18 — Control Plane UI Component Resources"
 }
