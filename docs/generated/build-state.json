@@ -1,18 +1,19 @@
 {
   "schema_version": "stealtheye-build-state.v1",
-  "build": 17,
-  "title": "Core Control Plane App",
-  "branch": "agent/core-control-plane-app",
+  "build": 18,
+  "title": "Control Plane UI Component Resources",
+  "branch": "agent/control-plane-ui-components",
   "generated_artifacts_current": true,
   "safety_scanner_scope": [
     "docs/generated",
-    "packages/control-plane-app/src/safety.ts",
-    "packages/control-plane-app/src/app-model.ts",
-    "packages/control-plane-app/src/state.ts",
-    "packages/control-plane-app/test/control-plane-app.test.ts"
+    "packages/control-plane-ui/src/safety.ts",
+    "packages/control-plane-ui/src/components.ts",
+    "packages/control-plane-ui/src/resources.ts",
+    "packages/control-plane-ui/src/hydration.ts",
+    "packages/control-plane-ui/test/control-plane-ui.test.ts"
   ],
-  "hand_authored_doc_policy": "Build 17 preserves README.md, AGENTS.md, and docs/ARCHITECTURE.md unchanged. Generated sync writes only declared generated files and standalone Build 17 docs.",
+  "hand_authored_doc_policy": "Build 18 preserves README.md, AGENTS.md, and docs/ARCHITECTURE.md unchanged. Generated sync writes only declared generated files and standalone Build 18 docs.",
   "marker_bounded_hand_authored_docs": [],
-  "next_target": "Build 18 — Control Plane UI Component Resources",
+  "next_target": "Build 19 — Local Dev UI Shell / Resource Rendering",
   "generated_at": "2026-01-01T00:00:00.000Z"
 }

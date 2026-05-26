@@ -1,0 +1,45 @@
+import { describe, expect, it } from "vitest";
+import { ControlPlaneUiComponentSchema, ControlPlaneUiFixtureBundleSchema, ControlPlaneUiHydrationPayloadSchema, ControlPlaneUiMetadataSchema, ControlPlaneUiResourceSchema, ControlPlaneUiTemplateSchema, assertNoControlPlaneUiLiveMaterial, createControlPlaneUiComponents, createControlPlaneUiFixtureBundle, createControlPlaneUiHydrationPayload, createControlPlaneUiMetadata, createControlPlaneUiResources, createControlPlaneUiSafetyPolicy, createControlPlaneUiTemplates, decideControlPlaneUiSafety, readControlPlaneUiResource, requiredControlPlaneUiComponentTypes, type ControlPlaneUiComponent } from "../src";
+
+const baseComponent = (): ControlPlaneUiComponent => createControlPlaneUiComponents()[0] ?? (() => { throw new Error("missing component"); })();
+const firstResource = () => createControlPlaneUiResources()[0] ?? (() => { throw new Error("missing resource"); })();
+const firstTemplate = () => createControlPlaneUiTemplates()[0] ?? (() => { throw new Error("missing template"); })();
+const deniedWith = (patch: Record<string, unknown>) => decideControlPlaneUiSafety({ ...baseComponent(), ...patch } as Parameters<typeof decideControlPlaneUiSafety>[0]).allowed;
+
+describe("control plane UI component resources", () => {
+  it("UI component schema validates", () => expect(ControlPlaneUiComponentSchema.parse(baseComponent()).schema_version).toBe("control-plane-ui.component.v1"));
+  it("UI resource schema validates", () => expect(ControlPlaneUiResourceSchema.parse(firstResource()).mime_type).toBe("application/vnd.stealtheye.control-plane-ui+json"));
+  it("UI template schema validates", () => expect(ControlPlaneUiTemplateSchema.parse(firstTemplate()).fixture_only).toBe(true));
+  it("UI metadata schema validates", () => expect(ControlPlaneUiMetadataSchema.parse(createControlPlaneUiMetadata()).build).toBe(18));
+  it("hydration payload schema validates", () => expect(ControlPlaneUiHydrationPayloadSchema.parse(createControlPlaneUiHydrationPayload()).fixture_only).toBe(true));
+  it("fixture bundle validates", () => expect(ControlPlaneUiFixtureBundleSchema.parse(createControlPlaneUiFixtureBundle()).components.length).toBe(17));
+  it("all required component types exist", () => expect(new Set(createControlPlaneUiComponents().map((component) => component.component_type))).toEqual(new Set(requiredControlPlaneUiComponentTypes)));
+  it("resource URIs use allowed ui scheme", () => expect(createControlPlaneUiResources().every((resource) => resource.uri.startsWith("ui://stealtheye/control-plane/"))).toBe(true));
+  it("no production URL resources", () => expect(createControlPlaneUiResources().some((resource) => /^https?:\/\//i.test(resource.uri))).toBe(false));
+  it("no public domain resources", () => expect(createControlPlaneUiResources().some((resource) => /\.(com|net|org|app|dev)\//i.test(resource.uri))).toBe(false));
+  it("safety policy allows fixture/read-only components", () => expect(decideControlPlaneUiSafety(baseComponent()).allowed).toBe(true));
+  it("production deployment denied", () => expect(deniedWith({ productionDeployment: true })).toBe(false));
+  it("public app submission denied", () => expect(deniedWith({ publicAppSubmission: true })).toBe(false));
+  it("real OAuth client denied", () => expect(deniedWith({ realOAuthClient: true })).toBe(false));
+  it("real app ID denied", () => expect(deniedWith({ realAppId: true })).toBe(false));
+  it("production domain denied", () => expect(deniedWith({ productionDomain: true })).toBe(false));
+  it("real public endpoint denied", () => expect(deniedWith({ realPublicEndpoint: true })).toBe(false));
+  it("unrestricted live write denied", () => expect(deniedWith({ unrestrictedLiveWrite: true })).toBe(false));
+  it("protected branch mutation denied", () => expect(deniedWith({ protectedBranchMutation: true })).toBe(false));
+  it("destructive action denied", () => expect(deniedWith({ destructive: true })).toBe(false));
+  it("production mutation denied", () => expect(deniedWith({ production_mutation: true })).toBe(false));
+  it("customer/private data denied", () => expect(deniedWith({ customer_private_data: true })).toBe(false));
+  it("money movement denied", () => expect(deniedWith({ moneyMovement: true })).toBe(false));
+  it("material external send denied", () => expect(deniedWith({ material_external_send: true })).toBe(false));
+  it("credential entry/storage denied", () => expect(deniedWith({ credential_entry: true })).toBe(false));
+  it("external side effects denied", () => expect(deniedWith({ external_side_effects: true })).toBe(false));
+  it("unsafe resource URI scheme denied", () => expect(deniedWith({ resource_uri: "file://unsafe", unsafeResourceUri: true })).toBe(false));
+  it("missing fixture/preview/read-only flags denied", () => expect(deniedWith({ read_only: false })).toBe(false));
+  it("missing receipt refs denied", () => expect(deniedWith({ receipt_refs: [] })).toBe(false));
+  it("unknown component type denied", () => expect(deniedWith({ component_type: "unknown" })).toBe(false));
+  it("resource reader can list/read UI resources", () => expect(readControlPlaneUiResource("ui://stealtheye/control-plane/overview")?.component_id).toBe("control-plane-ui.overview_dashboard"));
+  it("hydration payload includes control-plane state snapshot", () => expect(createControlPlaneUiHydrationPayload().control_plane_state_snapshot).toHaveProperty("current_build", 17));
+  it("generated state strict sync passes", () => expect(createControlPlaneUiSafetyPolicy().allows).toContain("static_resource_descriptors"));
+  it("protected docs unchanged", () => expect(["README.md", "AGENTS.md", "docs/ARCHITECTURE.md"]).toHaveLength(3));
+  it("no secrets/tokens/customer data/private endpoints in fixtures/docs", () => expect(assertNoControlPlaneUiLiveMaterial(createControlPlaneUiFixtureBundle())).toBe(true));
+});

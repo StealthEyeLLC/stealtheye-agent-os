@@ -1,27 +1,27 @@
 {
   "schema_version": "stealtheye-known-gaps.v1",
-  "build": 17,
+  "build": 18,
   "gaps": [
     {
-      "gap_id": "build-017-gap-01",
-      "summary": "No production frontend, hosted app, real app auth, public app submission, or production OAuth exists.",
+      "gap_id": "build-018-gap-01",
+      "summary": "No production frontend, hosted app, real app auth, public app submission, production OAuth, real app IDs, production domains, or real public endpoints exist.",
       "status": "open"
     },
     {
-      "gap_id": "build-017-gap-02",
-      "summary": "No real user data, customer/private data workflow, unrestricted live write path, protected branch mutation path, destructive action path, production mutation path, material external send path, or money movement path exists.",
+      "gap_id": "build-018-gap-02",
+      "summary": "No customer data workflow, unrestricted live write path, protected branch mutation path, destructive action path, production mutation path, material external send path, credential entry path, external side effect path, or money movement path exists.",
       "status": "open"
     },
     {
-      "gap_id": "build-017-gap-03",
-      "summary": "First UI/component resources remain future Build 18 work.",
+      "gap_id": "build-018-gap-03",
+      "summary": "No local dev UI shell or resource renderer is added in Build 18.",
       "status": "open"
     },
     {
-      "gap_id": "build-017-gap-04",
-      "summary": "No durable control-plane receipt ledger is added.",
+      "gap_id": "build-018-gap-04",
+      "summary": "No durable UI receipt ledger is added.",
       "status": "open"
     }
   ],
-  "next_target": "Build 18 — Control Plane UI Component Resources"
+  "next_target": "Build 19 — Local Dev UI Shell / Resource Rendering"
 }
