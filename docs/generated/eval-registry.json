@@ -51,6 +51,121 @@
       "eval_id": "build-016-eval-10",
       "name": "real public endpoint denied",
       "location": "packages/chatgpt-dev-connection/test"
+    },
+    {
+      "eval_id": "build-016-eval-11",
+      "name": "tunnel auth value denied",
+      "location": "packages/chatgpt-dev-connection/test"
+    },
+    {
+      "eval_id": "build-016-eval-12",
+      "name": "cloud credential denied",
+      "location": "packages/chatgpt-dev-connection/test"
+    },
+    {
+      "eval_id": "build-016-eval-13",
+      "name": "unrestricted live write inventory denied",
+      "location": "packages/chatgpt-dev-connection/test"
+    },
+    {
+      "eval_id": "build-016-eval-14",
+      "name": "destructive tool inventory denied",
+      "location": "packages/chatgpt-dev-connection/test"
+    },
+    {
+      "eval_id": "build-016-eval-15",
+      "name": "production mutation inventory denied",
+      "location": "packages/chatgpt-dev-connection/test"
+    },
+    {
+      "eval_id": "build-016-eval-16",
+      "name": "protected branch mutation inventory denied",
+      "location": "packages/chatgpt-dev-connection/test"
+    },
+    {
+      "eval_id": "build-016-eval-17",
+      "name": "customer/private data inventory denied",
+      "location": "packages/chatgpt-dev-connection/test"
+    },
+    {
+      "eval_id": "build-016-eval-18",
+      "name": "money movement inventory denied",
+      "location": "packages/chatgpt-dev-connection/test"
+    },
+    {
+      "eval_id": "build-016-eval-19",
+      "name": "missing endpoint readiness denied",
+      "location": "packages/chatgpt-dev-connection/test"
+    },
+    {
+      "eval_id": "build-016-eval-20",
+      "name": "missing MCP server safety inventory denied",
+      "location": "packages/chatgpt-dev-connection/test"
+    },
+    {
+      "eval_id": "build-016-eval-21",
+      "name": "manifest contains no secrets",
+      "location": "packages/chatgpt-dev-connection/test"
+    },
+    {
+      "eval_id": "build-016-eval-22",
+      "name": "manifest contains no production endpoint",
+      "location": "packages/chatgpt-dev-connection/test"
+    },
+    {
+      "eval_id": "build-016-eval-23",
+      "name": "manifest contains no real public domain",
+      "location": "packages/chatgpt-dev-connection/test"
+    },
+    {
+      "eval_id": "build-016-eval-24",
+      "name": "manifest contains no real app ID",
+      "location": "packages/chatgpt-dev-connection/test"
+    },
+    {
+      "eval_id": "build-016-eval-25",
+      "name": "readiness report ready_for_local_developer_mode_plan",
+      "location": "packages/chatgpt-dev-connection/test"
+    },
+    {
+      "eval_id": "build-016-eval-26",
+      "name": "readiness report ready_for_manual_chatgpt_dev_connection_later",
+      "location": "packages/chatgpt-dev-connection/test"
+    },
+    {
+      "eval_id": "build-016-eval-27",
+      "name": "readiness report blocked_for_public_submission",
+      "location": "packages/chatgpt-dev-connection/test"
+    },
+    {
+      "eval_id": "build-016-eval-28",
+      "name": "readiness report blocked_for_production",
+      "location": "packages/chatgpt-dev-connection/test"
+    },
+    {
+      "eval_id": "build-016-eval-29",
+      "name": "receipt preview generated",
+      "location": "packages/chatgpt-dev-connection/test"
+    },
+    {
+      "eval_id": "build-016-eval-30",
+      "name": "dev endpoint and MCP server integration can produce connection manifest metadata",
+      "location": "packages/chatgpt-dev-connection/test"
+    },
+    {
+      "eval_id": "build-016-eval-31",
+      "name": "generated state strict sync passes",
+      "location": "packages/chatgpt-dev-connection/test"
+    },
+    {
+      "eval_id": "build-016-eval-32",
+      "name": "protected docs unchanged",
+      "location": "packages/chatgpt-dev-connection/test"
+    },
+    {
+      "eval_id": "build-016-eval-33",
+      "name": "no secrets/tokens/customer data/private endpoints in fixtures/docs",
+      "location": "packages/chatgpt-dev-connection/test"
     }
   ]
 }

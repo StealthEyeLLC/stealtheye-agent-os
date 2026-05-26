@@ -1,7 +1,7 @@
 import { createDeveloperModeChecklist } from "./checklist";
-import { ConnectionPlanSchema } from "./schemas";
+import { ConnectionPlanSchema, type ConnectionStage } from "./schemas";
 
-export function createDeveloperModeConnectionPlan(stage: "endpoint_ready" | "app_manifest_ready" | "connect_from_chatgpt" | "test_integration" | "submit_app_future" = "app_manifest_ready") {
+export function createDeveloperModeConnectionPlan(stage: ConnectionStage = "app_manifest_ready") {
   return ConnectionPlanSchema.parse({
     schema_version: "stealtheye-chatgpt-dev-connection-plan.v1",
     app_name: "StealthEye Agent OS Developer Mode Fixture",

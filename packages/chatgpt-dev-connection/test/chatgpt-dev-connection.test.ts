@@ -3,9 +3,10 @@ import { createLocalhostDevEndpointManifest } from "@stealtheye/dev-endpoint";
 import { createMcpServer } from "@stealtheye/mcp-server";
 import { createDeveloperModeChecklist, createDeveloperModeConnectionManifest, createDeveloperModeConnectionPlan, createDeveloperModeReadinessReport, createDeveloperModeReceiptPreview, decideDeveloperModeSafety, ManifestSchema, ChecklistSchema, ConnectionPlanSchema, DEFAULT_CHATGPT_DEV_MODE_SAFETY_POLICY, assertNoCommittedLiveAppMaterial, type InventoryItem } from "../src";
 
-const safeInventory: InventoryItem[] = [{ name: "safe.read", sourcePackage: "@stealtheye/mcp-server", readOnly: true, previewOnly: true, fixtureOnly: true, unrestrictedLiveWrite: false, destructive: false, productionMutation: false, protectedBranchMutation: false, secretAccess: false, customerData: false, moneyMovement: false }];
+const safeTool: InventoryItem = { name: "safe.read", sourcePackage: "@stealtheye/mcp-server", readOnly: true, previewOnly: true, fixtureOnly: true, unrestrictedLiveWrite: false, destructive: false, productionMutation: false, protectedBranchMutation: false, secretAccess: false, customerData: false, moneyMovement: false };
+const safeInventory: InventoryItem[] = [safeTool];
 const plan = () => createDeveloperModeConnectionPlan("app_manifest_ready");
-const deniedWith = (tool: Partial<InventoryItem>) => decideDeveloperModeSafety(plan(), [{ ...safeInventory[0], ...tool }]).allowed;
+const deniedWith = (tool: Partial<InventoryItem>) => decideDeveloperModeSafety(plan(), [{ ...safeTool, ...tool }]).allowed;
 
 describe("chatgpt developer-mode connection", () => {
   it("connection plan schema validates", () => expect(ConnectionPlanSchema.parse(plan()).app_name).toContain("StealthEye"));
