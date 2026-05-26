@@ -175,8 +175,7 @@ const phase = {
   scannerExtraPaths: [
     "packages/mcp-server/src/controlled-localhost-command.ts",
     "packages/mcp-server/src/developer-mode-resource-connection.ts",
-    "packages/mcp-server/src/resource-registry.ts",
-    "packages/mcp-server/test/controlled-localhost-command.test.ts"
+    "packages/mcp-server/src/resource-registry.ts"
   ],
   requiredFiles: [
     ...importantFiles,
