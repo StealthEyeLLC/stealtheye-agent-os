@@ -1,6 +1,7 @@
 import { z } from "zod";
 
 // Build 20 keeps localhost preview metadata read-only and unbound by default.
+// This file models preview readiness only; it never starts a server.
 export const LocalhostPreviewModeSchema = z.enum([
   "disabled",
   "static_fixture_preview",
